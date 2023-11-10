@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>회원가입 페이지</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400%2C700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700"/>
+  <link rel="stylesheet" href="/static/css/user/register.css"/>
+</head>
+<body>
+    <div class="register-box">
+        <div class="register-content">
+            <img class="logo-img" src="/static/img/user/logo.png"/>
+            <div class="about-page">회원가입</div>
+
+            <div class="div-input-list" >
+                <label class="label">이메일</label>
+                <input class="info" placeholder="example@example.com">
+            </div>
+
+            <div class="div-input-list" >
+                <label class="label">비밀번호</label>
+                <input class="info" placeholder="비밀번호 입력">
+            </div>
+
+            <div class="div-input-list" >
+                <label class="label">비밀번호 확인</label>
+                <input class="info" placeholder="비밀번호 확인">
+            </div>
+
+            <div class="div-input-list" >
+                <label class="label">닉네임</label>
+                <input class="info" placeholder="닉네임">
+            </div>
+
+            <div class="div-input-list" >
+                <label class="label">국가</label>
+                <select class="info" required>
+                    <option value="" disabled selected>  --  Select a language  --  </option>
+                    <option value="대한민국">대한민국</option>
+                    <option value="미국">미국</option>
+                    <option value="프랑스">프랑스</option>
+                    <option value="스페인">스페인</option>
+                    <option value="일본">일본</option>
+                    <option value="중국">중국</option>
+                </select>
+            </div>
+            <div class="div-input-list">
+                <label class="label">프로필 이미지</label>
+                <input type="file" class="info">
+            </div>
+        </div>
+        <div><button class="button-register">회원가입</button></div>
+        <div class="social-login">
+            <a><img class="icon" src="/static/img/user/kakao-icon.png"/></a>
+            <a><img class="icon" src="/static/img/user/naver-icon.png"/></a>
+            <a><img class="icon" src="/static/img/user/google-icon.png"/></a>
+        </div>
+        <div>
+            <a class="login">로그인</a>
+            <a class="reset-password">비밀번호 찾기</a>
+        </div>
+    </div>
+    <div class="page-img">
+
+    </div>
+</body>
+</html>
