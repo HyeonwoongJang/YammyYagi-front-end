@@ -1,7 +1,7 @@
-const frontend_base_url = "http://127.0.0.1:5501";
-const backend_base_url = "http://127.0.0.1:8000";
+checkLogin();
 
-//  회원가입
+
+// 회원가입
 async function handleSignin() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -31,6 +31,7 @@ async function handleSignin() {
     return response;
 }
 
+// 회원가입 버튼
 async function handleSigninButton(){
     const response = await handleSignin();
     response_json = await response.json()

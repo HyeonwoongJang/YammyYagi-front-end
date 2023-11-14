@@ -27,6 +27,7 @@ async function fetchUsernameFromDatabase() {
     }
 }
 
+
 // header 적용
 async function injectHeader() {
     fetch("../header.html").then(response=>{
@@ -51,3 +52,13 @@ async function injectHeader() {
 }
 
 injectHeader();
+
+
+// 로그인 체크 (로그인 했으면, 로그인/회원가입 페이지 못가게 하는 기능)
+function checkLogin() {
+    const payload = localStorage.getItem("payload");
+    if (payload) {
+        alert("접근할 수 없습니다")
+        window.location.replace(`${frontend_base_url}/story/`)
+    }
+}

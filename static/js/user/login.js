@@ -1,7 +1,5 @@
-const frontend_base_url = "http://127.0.0.1:5501";
-const backend_base_url = "http://127.0.0.1:8000";
+checkLogin();
 
-console.log("연결됨");
 
 async function handleLogin() {
   const email = document.getElementById("email").value;
