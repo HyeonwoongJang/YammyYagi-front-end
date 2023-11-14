@@ -4,11 +4,11 @@ function storyDetail(story_id) {
 
 // 마이페이지 get api
 function getMyPage() {
-    const accessToken = localStorage.getItem("access");
+    const access_token = localStorage.getItem("access");
     fetch(`${backend_base_url}/user/mypage/`, {
         method: "GET",
         headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${access_token}`,
             "Content-Type": "application/json",
             },
         })
@@ -20,24 +20,23 @@ function getMyPage() {
             document.getElementById("email").textContent = data.email;
             document.getElementById("country").textContent = data.country;
 
+            const user_image = document.getElementById("user-profile");
             if (data.profile_img) {
-            const userImage = document.getElementById("user-profile");
-            userImage.setAttribute("src", `${backend_base_url}${data.profile_img}`);
+            user_image.setAttribute("src", `${backend_base_url}${data.profile_img}`);
             } else {
-                const userImage = document.getElementById("user-profile");
-                userImage.setAttribute("src", `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDmTN6I5GxkyWFu4LJKGD2Uqp8ove-TBI-5g&usqp=CAU`);
+                user_image.setAttribute("src", `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDmTN6I5GxkyWFu4LJKGD2Uqp8ove-TBI-5g&usqp=CAU`);
             }
 
             // 북마크 목록 불러오기
             const bookmarks = data.bookmark_story_list;
-            const bookmarktList = document.getElementById("bookmark-story");
-            bookmarktList.innerHTML = "";
+            const bookmark_list = document.getElementById("bookmark-story");
+            bookmark_list.innerHTML = "";
 
             bookmarks.forEach((bookmark) => {
-                const bookmarkElement = document.createElement("div");
-                bookmarkElement.setAttribute("onclick", `storyDetail(${bookmark.story_id})`);
+                const bookmark_element = document.createElement("div");
+                bookmark_element.setAttribute("onclick", `storyDetail(${bookmark.story_id})`);
 
-                bookmarkElement.innerHTML = `
+                bookmark_element.innerHTML = `
                 <div class="bookmark-card">
                   <img src="${backend_base_url}${bookmark.content.story_image}" width="240px" height="150px";/>
                   <div class="card-text">
@@ -48,30 +47,30 @@ function getMyPage() {
                 </div>
                 `;
 
-                bookmarktList.appendChild(bookmarkElement);
+                bookmark_list.appendChild(bookmark_element);
 
             // 내가 작성한 동화 목록 불러오기
-            const myStories = data.my_story_list;
-            const myStorytList = document.getElementById("my-story");
-            myStorytList.innerHTML = "";
+            const my_stories = data.my_story_list;
+            const my_storytList = document.getElementById("my-story");
+            my_storytList.innerHTML = "";
 
-            myStories.forEach((myStory) => {
-                const myStoryElement = document.createElement("div");
-                myStoryElement.setAttribute("onclick", `storyDetail(${myStory.story_id})`);
+            my_stories.forEach((my_story) => {
+                const my_story_element = document.createElement("div");
+                my_story_element.setAttribute("onclick", `storyDetail(${my_story.story_id})`);
 
-                myStoryElement.innerHTML = `
+                my_story_element.innerHTML = `
                 <div class="my-story-card">
-                          <img src="${backend_base_url}${myStory.content.story_image}" width="240px" height="150px";/>
+                          <img src="${backend_base_url}${my_story.content.story_image}" width="240px" height="150px";/>
                           <div class="card-text">
-                            <p class="title">${myStory.story_title}</p>
-                            <p class="ccontent">${myStory.content.story_first_paragraph}</p>
+                            <p class="title">${my_story.story_title}</p>
+                            <p class="ccontent">${my_story.content.story_first_paragraph}</p>
                             <hr>
-                            <p class="country">${myStory.author_country}</p>
+                            <p class="country">${my_story.author_country}</p>
                           </div>
                       </div>
                   </div>
               `;
-                myStorytList.appendChild(myStoryElement);
+              my_storytList.appendChild(my_story_element);
             });
         });
     });
