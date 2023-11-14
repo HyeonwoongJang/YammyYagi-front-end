@@ -16,20 +16,20 @@
             <div class="text-center">
                 <h4>비밀번호 변경</h4>
             </div>
-            <form class="was-validated">
+            <form>
                 <div class="password-update-div">
                     <label class="label">* 현재 비밀번호</label>
-                    <input type="password" class="form-control" id="current-password" placeholder="현재 비밀번호를 입력해주세요." required>
+                    <input type="password" class="form-control" id="current-password" placeholder="현재 비밀번호를 입력해주세요." >
                     <div id="current-password-error"></div>
                 </div>
                 <div class="password-update-div">
                     <label class="label">* 새 비밀번호</label>
-                    <input type="password" class="form-control" id="new-password" placeholder="새 비밀번호를 입력해주세요." pattern="(?=.*\d)(?=.*[~!@#$%^&amp;*]).{8,20}" required>
+                    <input type="password" class="form-control" id="new-password" placeholder="새 비밀번호를 입력해주세요.">
                     <div id="new-password-error" style="color: gray; font-size: 10px;">비밀번호는 8자 이상 20자 이하 및 숫자와 특수 문자(#?!@$~%^&*-)를 하나씩 포함시켜야 합니다.</div>
                 </div>
                 <div class="password-update-div">
                     <label class="label">* 새 비밀번호 확인</label>
-                    <input type="password" class="form-control" id="new-password-check" placeholder="새 비밀번호를 확인해주세요." required >
+                    <input type="password" class="form-control" id="new-password-check" placeholder="새 비밀번호를 확인해주세요." >
                     <div id="new-password-check-error"></div>
                 </div>
                     <div class="button-container">
@@ -41,51 +41,55 @@
                 <div class="text-center mt-5">
                     <h4>회원정보 수정</h4>
                 </div>
-                <div class="row justify-content-center">
-                    <img id="profile-image" class="w-50 round-image object-fit-scale" src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg">
-                </div> 
-                <div class="mb-3">
-                    <label for="profile-image" class="form-label">프로필 이미지</label>
-                    <input type="file" class="form-control" name="profile-image" id="profile-image">
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">이메일</label>
-                    <input class="form-control" name="email" id="email" readonly="">
-                </div>
-                <div class="mb-3">
-                    <label for="nickname" class="form-label">닉네임</label>
-                    <input type="text" class="form-control" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요">
-                </div>
-                <div class="mb-3">
-                    <label for="country" class="form-label">국가선택</label>
-                    <select type="country" name="country" id="county" class="form-control">
-                        <option class="dropdown-item" disabled selected>국가를 선택해주세요.</option>
-                        <option class="dropdown-item" value="대한민국">대한민국</option>
-                        <option class="dropdown-item" value="미국">미국</option>
-                        <option class="dropdown-item" value="프랑스">프랑스</option>
-                        <option class="dropdown-item" value="스페인">스페인</option>
-                        <option class="dropdown-item" value="일본">일본</option>
-                        <option class="dropdown-item" value="중국">중국</option>
-                    </select>
-                    <div class="button-container">
-                        <button type="button" class="btn btn-secondary" id="open-password-update-modal" onclick="openPasswordUpdateModal()">비밀번호 수정</button>
+                <form>
+                    <div class="row justify-content-center">
+                        <img id="current-profile-img" class="w-50 round-image object-fit-scale" src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg">
+                    </div> 
+                    <div class="mb-3">
+                        <label for="profile-image" class="form-label">프로필 이미지</label>
+                        <input type="file" class="form-control" name="profile-image" id="profile-img">
                     </div>
-                    <div class="button-container">
-                        <button type="button" class="btn btn-secondary" id="update-button" onclick="updateButton()">수정</button>
-                        <button type="button" class="btn btn-secondary" id="open-delete-modal" onclick="openUserDeleteModal()">탈퇴</button>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">이메일</label>
+                        <input class="form-control" name="email" id="email" readonly="">
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="nickname" class="form-label">닉네임</label>
+                        <input type="text" class="form-control" name="nickname" id="nickname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label">국가선택</label>
+                        <select type="country" name="country" id="country" class="form-control">
+                            <option class="dropdown-item" disabled selected>국가를 선택해주세요.</option>
+                            <option class="dropdown-item" value="대한민국">대한민국</option>
+                            <option class="dropdown-item" value="미국">미국</option>
+                            <option class="dropdown-item" value="프랑스">프랑스</option>
+                            <option class="dropdown-item" value="스페인">스페인</option>
+                            <option class="dropdown-item" value="일본">일본</option>
+                            <option class="dropdown-item" value="중국">중국</option>
+                        </select>
+                        <div class="button-container">
+                            <button type="button" class="btn btn-secondary" id="open-password-update-modal" onclick="openPasswordUpdateModal()">비밀번호 수정</button>
+                        </div>
+                        <div class="button-container">
+                            <button type="button" class="btn btn-secondary" id="update-button" onclick="updateButton()">수정</button>
+                            <button type="button" class="btn btn-secondary" id="open-delete-modal" onclick="openUserDeleteModal()">탈퇴</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div id="delete-modal" class="delete-modal" style="display: none;">
                 <div class="text-center">
                     <h4>회원 탈퇴</h4>
                 </div>
                 <span>* 비밀번호</span>
-                <div class="password-input">
-                    <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요.">
-                <div class="button-container">
-                    <button type="button" class="btn btn-secondary" id="delete-button" onclick="userDeleteButton()">탈퇴</button>
-                </div>
+                <form>
+                    <div class="password-input">
+                        <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요.">
+                    <div class="button-container">
+                        <button type="button" class="btn btn-secondary" id="delete-button" onclick="userDeleteButton()">탈퇴</button>
+                    </div>
+                </form>
             </div>
         </div> 
     </div>

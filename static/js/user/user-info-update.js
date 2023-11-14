@@ -21,17 +21,20 @@ async function renderPage() {
             })
         
             const response_json = await response.json()
-            const data = response_json.success
-        
+            const data = response_json.user_info
+
             document.getElementById("current-profile-img").src = `${backend_base_url}/${data["profile_img"]}`
             document.getElementById("email").value = request_user_email
             document.getElementById("nickname").value = data["nickname"]
             
             const my_country = data["country"]
-            const country_options = document.getElementByTagName("option")
-        
-            if (country_options[i].value == my_country) {
-                country_options[i].selected = true;
+            const country_select = document.getElementById("country")
+
+            for (let i = 0; i < country_select.options.length; i++) {
+                if (country_select.options[i].value === my_country) {
+                    country_select.options[i].selected = true;
+                    break;
+                }
             }
         } else {
             alert("잘못된 접근입니다.")
@@ -61,43 +64,54 @@ async function updatePasswordButton() {
     const current_password = document.getElementById("current-password").value
     const new_password =  document.getElementById("new-password").value
     const new_password_check =  document.getElementById("new-password-check").value
+    const password_pattern = /^(?=.*\d)(?=.*[~!@#$%^&amp;*]).{8,20}$/
 
+    if (!current_password|| !new_password || !new_password_check) {
+        alert("모든 필수 정보를 입력해주세요.")
+        return;
+    }
+    if (new_password != new_password_check) {
+        alert("새 비밀번호가 새 비밀번호 확인과 일치하지 않습니다.")
+        return;
+    }
+    if (!password_pattern.test(new_password)) {
+        alert("비밀번호는 8자 이상 20자 이하 및 숫자와 특수 문자(#?!@$~%^&*-)를 하나씩 포함시켜야 합니다.")
+        return;
+    }
     try {
-        if (current_password == "" || new_password == "" || new_password_check == "") {
-            alert("모든 필수 정보를 입력해주세요.")
-        }
-        if (new_password != new_password_check) {
-            alert("새 비밀번호가 새 비밀번호 확인과 일치하지 않습니다.")
-        }
-        if (current_password != "" && new_password == new_password_check) {
-            const response = await fetch(`${backend_base_url}/user/info/`, {
-                method : "PATCH",
-                headers : {
-                    "Authorization" : "Bearer " + localStorage.getItem("access"),
-                    "Content-type" : "application/json",
-                },
-                body : JSON.stringify({
-                    "current_password" : current_password,
-                    "new_password" : new_password,
-                    "new_password_check" : new_password_check
-                })
+        const response = await fetch(`${backend_base_url}/user/info/`, {
+            method : "PATCH",
+            headers : {
+                "Authorization" : "Bearer " + localStorage.getItem("access"),
+                "Content-type" : "application/json",
+            },
+            body : JSON.stringify({
+                "current_password" : current_password,
+                "new_password" : new_password,
+                "new_password_check" : new_password_check
             })
-            const response_json = await response.json()
-            const status = response_json["status"]
+        })
+        const response_json = await response.json()
+        const status = response_json["status"]
 
-            if (status == "200" && response.status == 200) {
-                alert(`${response_json["success"]}`)
-            } else if (status == "400" && response.status == 400 && response_json["error"]["password"]) {
-                alert(`${response_json["error"]["password"]}`)
-            } else if(status == "400" && response.status == 400) {
-                alert(`${response_json["error"]}`)
-            } else if(status == "401" && response.status == 401) {
-                alert(`${response_json["error"]}`)
-            }
+        if (status == "200" && response.status == 200) {
+            alert(`${response_json["success"]}`)
+            openPasswordUpdateModal()           // 수정 성공 시에만 모달 닫기
+            return;
+        } else if (status == "400" && response.status == 400 && response_json["error"]["password"]) {
+            alert(`${response_json["error"]["password"]}`)
+            return;
+        } else if(status == "400" && response.status == 400) {
+            alert(`${response_json["error"]}`)
+            return;
+        } else if(status == "401" && response.status == 401) {
+            alert(`${response_json["error"]}`)
+            return;
         }
     } catch (error) {
         alert("새로고침 후 다시 시도해주세요.");
     }
+
 } 
 
 function openUserDeleteModal() {
@@ -105,11 +119,12 @@ function openUserDeleteModal() {
 
     if (delete_modal.style.display == "none") {
         delete_modal.style.display="block"
-        
+        return;
     } else if (delete_modal.style.display == "block") {
         delete_modal.style.display="none"
 
         document.getElementById("password").value=""
+        return;
     }
 }
 
@@ -133,13 +148,17 @@ async function userDeleteButton() {
             if (status == "204") {
                 alert(`${response_json["success"]}`)
                 window.location.replace(`${frontend_base_url}/story/index.html`)
+                return;
             } else if (status == "400" && response.status == 400) {
                 alert(`${response_json["error"]}`)
+                return;
             } else if(status == "401" && response.status == 401) {
                 alert(`${response_json["error"]}`)
+                return;
             }
         } else {
             alert("비밀번호를 입력해주세요.")
+            return;
         }
     } catch (error) {
         alert("다시 시도해주세요.");
@@ -160,7 +179,7 @@ async function handleUpdate() {
     data.append("nickname", nickname);
     data.append("country", country);
 
-    const profileImageInput = document.getElementById("image");
+    const profileImageInput = document.getElementById("profile-img");
     if (profileImageInput.files.length > 0) {
         data.append("image", profileImageInput.files[0]);
     }
@@ -187,7 +206,7 @@ async function updateButton() {
 
     if (status == "200" && response.status == 200){
         alert(`${response_json["success"]}`)    
-        window.location.replace(`$frontend_base_url}/user-info-update.html`);
+        window.location.replace(`${frontend_base_url}/user/user-info-update.html`);
     } else if (status == "400" && response.status == 400 && response_json["error"]["nickname"]) {
         alert(`${response_json["error"]["nickname"]}`)
     }
