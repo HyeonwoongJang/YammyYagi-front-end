@@ -56,31 +56,33 @@ function getMyPage() {
                 `;
 
                 bookmark_list.appendChild(bookmark_element);
+            });
 
             // 내가 작성한 동화 목록 불러오기
-            const my_stories = data.my_story_list;
-            const my_storytList = document.getElementById("my-story");
-            my_storytList.innerHTML = "";
+            const stories = data.my_story_list;
+            console.log(stories)
+            const storytList = document.getElementById("my-story");
+            storytList.innerHTML = "";
 
-            my_stories.forEach((my_story) => {
-                const my_story_element = document.createElement("div");
-                my_story_element.setAttribute("onclick", `storyDetail(${my_story.story_id})`);
+            stories.forEach((story) => {
+                const story_element = document.createElement("div");
+                story_element.setAttribute("onclick", `storyDetail(${story.story_id})`);
 
-                my_story_element.innerHTML = `
+                story_element.innerHTML = `
                 <div class="my-story-card">
-                          <img src="${backend_base_url}${my_story.content.story_image}" width="240px" height="150px";/>
+                          <img src="${backend_base_url}${story.content.story_image}" width="240px" height="150px";/>
                           <div class="card-text">
-                            <p class="title">${my_story.story_title}</p>
-                            <p class="ccontent">${my_story.content.story_first_paragraph}</p>
+                            <p class="title">${story.story_title}</p>
+                            <p class="ccontent">${story.content.story_first_paragraph}</p>
                             <hr>
-                            <p class="country">${my_story.author_country}</p>
+                            <p class="country">${story.author_country}</p>
                           </div>
                       </div>
                   </div>
               `;
-              my_storytList.appendChild(my_story_element);
+              storytList.appendChild(story_element);
             });
-        });
+        
     });
 }
 
