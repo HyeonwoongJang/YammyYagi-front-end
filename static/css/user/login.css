@@ -105,6 +105,7 @@ input {
     white-space: nowrap;
     background-color: rgba(255, 199, 242, 0.400000006);
     border-radius: 0.4rem;
+    border: solid 0.1rem #dfdfdf;
 }
 .logo-img {
     width: 17.8rem;
@@ -133,6 +134,7 @@ input {
     white-space: nowrap;
     margin: 0px 0px 0px 0px;
     float: right;
+    text-decoration-line:none;
   }
 .reset-password {
     width: 4.5rem;
