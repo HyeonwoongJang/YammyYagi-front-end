@@ -9,60 +9,63 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400%2C700"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700"/>
   <link rel="stylesheet" href="/static/css/user/register.css"/>
+  <script src="/static/js/user/register.js"></script>
 </head>
 <body>
     <div class="register-box">
-        <div class="register-content">
-            <img class="logo-img" src="/static/img/user/logo.png"/>
-            <div class="about-page">회원가입</div>
+        <form enctype="multipart/form-data">
+            <div class="register-content">
+                <a href="/story"><img class="logo-img" src="/static/img/user/logo.png"></a>
+                <div class="about-page">회원가입</div>
 
-            <div class="div-input-list" >
-                <label class="label">이메일</label>
-                <input class="info" placeholder="example@example.com">
-            </div>
+                <div class="div-input-list" >
+                    <label class="label">이메일</label>
+                    <input class="info" id="email" type="email" placeholder="example@example.com">
+                </div>
 
-            <div class="div-input-list" >
-                <label class="label">비밀번호</label>
-                <input class="info" placeholder="비밀번호 입력">
-            </div>
+                <div class="div-input-list" >
+                    <label class="label">비밀번호</label>
+                    <input class="info" type="password" id="password" placeholder="비밀번호 입력">
+                </div>
 
-            <div class="div-input-list" >
-                <label class="label">비밀번호 확인</label>
-                <input class="info" placeholder="비밀번호 확인">
-            </div>
+                <div class="div-input-list" >
+                    <label class="label">비밀번호 확인</label>
+                    <input class="info" type="password" id="password_check" placeholder="비밀번호 확인">
+                </div>
 
-            <div class="div-input-list" >
-                <label class="label">닉네임</label>
-                <input class="info" placeholder="닉네임">
-            </div>
+                <div class="div-input-list" >
+                    <label class="label">닉네임</label>
+                    <input class="info" id="nickname" placeholder="닉네임">
+                </div>
 
-            <div class="div-input-list" >
-                <label class="label">국가</label>
-                <select class="info" required>
-                    <option value="" disabled selected>  --  Select a language  --  </option>
-                    <option value="대한민국">대한민국</option>
-                    <option value="미국">미국</option>
-                    <option value="프랑스">프랑스</option>
-                    <option value="스페인">스페인</option>
-                    <option value="일본">일본</option>
-                    <option value="중국">중국</option>
-                </select>
+                <div class="div-input-list" >
+                    <label class="label">국가</label>
+                    <select class="info" id="country" required>
+                        <option value="" disabled selected>  --  국가를 선택해주세요  --  </option>
+                        <option value="대한민국">대한민국</option>
+                        <option value="미국">미국</option>
+                        <option value="프랑스">프랑스</option>
+                        <option value="스페인">스페인</option>
+                        <option value="일본">일본</option>
+                        <option value="중국">중국</option>
+                    </select>
+                </div>
+                <div class="div-input-list">
+                    <label class="label">프로필 이미지</label>
+                    <input type="file" class="info" id="image">
+                </div>
             </div>
-            <div class="div-input-list">
-                <label class="label">프로필 이미지</label>
-                <input type="file" class="info">
+            <div><button class="button-register" type="button" onclick="handleSigninButton()">회원가입</button></div>
+            <div class="social-login">
+                <a><img class="icon" src="/static/img/user/kakao-icon.png"/></a>
+                <a><img class="icon" src="/static/img/user/naver-icon.png"/></a>
+                <a><img class="icon" src="/static/img/user/google-icon.png"/></a>
             </div>
-        </div>
-        <div><button class="button-register">회원가입</button></div>
-        <div class="social-login">
-            <a><img class="icon" src="/static/img/user/kakao-icon.png"/></a>
-            <a><img class="icon" src="/static/img/user/naver-icon.png"/></a>
-            <a><img class="icon" src="/static/img/user/google-icon.png"/></a>
-        </div>
-        <div>
-            <a class="login">로그인</a>
-            <a class="reset-password">비밀번호 찾기</a>
-        </div>
+            <div>
+                <a class="login" href="/user/login.html">로그인</a>
+                <a class="reset-password">비밀번호 찾기</a>
+            </div>
+        </form>
     </div>
     <div class="page-img">
 
