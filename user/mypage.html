@@ -1,17 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <title>마이페이지</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titan+One%3A400"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A700"/>
-    <link rel="stylesheet" href="/static/css/user/mypage.css"/>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <title>마이페이지</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titan+One%3A400" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A700" />
+        <link rel="stylesheet" href="/static/css/user/mypage.css" />
+        <script src="/static/js/user/mypage.js"></script>
+        <script src="/static/js/header.js"></script>
+    </head>
+    <body>
+        <header></header>
+        <div class="container">
+            <div class="left">
+                <div class="profile">
+                    <h2 id="nickname"></h2>
+                    <img id="user-profile" width="140" height="140" src="" />
+                    <p id="email"></p>
+                    <p id="country"></p>
+                    <button type="button" onclick="getInfoPage()">수정</button>
+                </div>
+            </div>
+            <div class="right">
+                <div class="r-left">
+                    <div class="rl-top">
+                        <p class="mypage-title">📚내 서재</p>
+                        <div id="bookmark-story"></div>
+                    </div>
+                    <hr />
+                    <div class="rl-bottom">
+                        <p class="mypage-title">📖최근 조회한 작품</p>
+                        <div id="latest-story"></div>
+                    </div>
+                </div>
+                <div class="h-line"></div>
+                <div class="r-right">
+                    <p class="mypage-title">📝내가 만든 동화</p>
+                    <div id="my-story"></div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
