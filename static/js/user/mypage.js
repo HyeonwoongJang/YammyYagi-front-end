@@ -1,14 +1,22 @@
+// 로그인 여부 체크
+window.onload = () => { 
+    if (!localStorage.getItem("access")) {
+        alert("잘못된 접근입니다.")
+        window.location.href = `${frontend_base_url}/story/`
+    }
+}
+
 function storyDetail(story_id) {
     window.location.href = `${frontend_base_url}/story_detail.html?story_id=${story_id}`;
 }
 
 // 마이페이지 get api
 function getMyPage() {
-    const accessToken = localStorage.getItem("access");
+    const access_token = localStorage.getItem("access");
     fetch(`${backend_base_url}/user/mypage/`, {
         method: "GET",
         headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${access_token}`,
             "Content-Type": "application/json",
             },
         })
@@ -20,24 +28,23 @@ function getMyPage() {
             document.getElementById("email").textContent = data.email;
             document.getElementById("country").textContent = data.country;
 
+            const user_image = document.getElementById("user-profile");
             if (data.profile_img) {
-            const userImage = document.getElementById("user-profile");
-            userImage.setAttribute("src", `${backend_base_url}${data.profile_img}`);
+            user_image.setAttribute("src", `${backend_base_url}${data.profile_img}`);
             } else {
-                const userImage = document.getElementById("user-profile");
-                userImage.setAttribute("src", `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDmTN6I5GxkyWFu4LJKGD2Uqp8ove-TBI-5g&usqp=CAU`);
+                user_image.setAttribute("src", `${backend_base_url}/media/user/default_profile.jpg`);
             }
 
             // 북마크 목록 불러오기
             const bookmarks = data.bookmark_story_list;
-            const bookmarktList = document.getElementById("bookmark-story");
-            bookmarktList.innerHTML = "";
+            const bookmark_list = document.getElementById("bookmark-story");
+            bookmark_list.innerHTML = "";
 
             bookmarks.forEach((bookmark) => {
-                const bookmarkElement = document.createElement("div");
-                bookmarkElement.setAttribute("onclick", `storyDetail(${bookmark.story_id})`);
+                const bookmark_element = document.createElement("div");
+                bookmark_element.setAttribute("onclick", `storyDetail(${bookmark.story_id})`);
 
-                bookmarkElement.innerHTML = `
+                bookmark_element.innerHTML = `
                 <div class="bookmark-card">
                   <img src="${backend_base_url}${bookmark.content.story_image}" width="240px" height="150px";/>
                   <div class="card-text">
@@ -48,32 +55,34 @@ function getMyPage() {
                 </div>
                 `;
 
-                bookmarktList.appendChild(bookmarkElement);
+                bookmark_list.appendChild(bookmark_element);
+            });
 
             // 내가 작성한 동화 목록 불러오기
-            const myStories = data.my_story_list;
-            const myStorytList = document.getElementById("my-story");
-            myStorytList.innerHTML = "";
+            const stories = data.my_story_list;
+            console.log(stories)
+            const storytList = document.getElementById("my-story");
+            storytList.innerHTML = "";
 
-            myStories.forEach((myStory) => {
-                const myStoryElement = document.createElement("div");
-                myStoryElement.setAttribute("onclick", `storyDetail(${myStory.story_id})`);
+            stories.forEach((story) => {
+                const story_element = document.createElement("div");
+                story_element.setAttribute("onclick", `storyDetail(${story.story_id})`);
 
-                myStoryElement.innerHTML = `
+                story_element.innerHTML = `
                 <div class="my-story-card">
-                          <img src="${backend_base_url}${myStory.content.story_image}" width="240px" height="150px";/>
+                          <img src="${backend_base_url}${story.content.story_image}" width="240px" height="150px";/>
                           <div class="card-text">
-                            <p class="title">${myStory.story_title}</p>
-                            <p class="ccontent">${myStory.content.story_first_paragraph}</p>
+                            <p class="title">${story.story_title}</p>
+                            <p class="ccontent">${story.content.story_first_paragraph}</p>
                             <hr>
-                            <p class="country">${myStory.author_country}</p>
+                            <p class="country">${story.author_country}</p>
                           </div>
                       </div>
                   </div>
               `;
-                myStorytList.appendChild(myStoryElement);
+              storytList.appendChild(story_element);
             });
-        });
+        
     });
 }
 
