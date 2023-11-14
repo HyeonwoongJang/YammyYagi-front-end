@@ -24,7 +24,7 @@ function getMyPage() {
             if (data.profile_img) {
             user_image.setAttribute("src", `${backend_base_url}${data.profile_img}`);
             } else {
-                user_image.setAttribute("src", `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDmTN6I5GxkyWFu4LJKGD2Uqp8ove-TBI-5g&usqp=CAU`);
+                user_image.setAttribute("src", `${backend_base_url}/media/user/default_profile.jpg`);
             }
 
             // 북마크 목록 불러오기
