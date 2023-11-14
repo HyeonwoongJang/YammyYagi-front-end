@@ -8,16 +8,27 @@ async function handleSignin() {
     const password_check = document.getElementById("password_check").value;
     const nickname = document.getElementById("nickname").value;
     const country = document.getElementById("country").value;
-    console.log(country)
+    const password_pattern = /^(?=.*\d)(?=.*[~!@#$%^&amp;*]).{8,20}$/
 
     const formData = new FormData();
+
+    if (email == "" || password == "" || password_check == "" || nickname == "" || country == "") {
+        alert("모든 필수 정보를 입력해주세요.")
+        return;
+    }
+    if (password != password_check) {
+        alert("비밀번호가 일치하지 않습니다.")
+        return;
+    }
+    if (!password_pattern.test(password)) {
+        alert("비밀번호는 8자 이상 20자 이하 및 숫자와 특수 문자(#?!@$~%^&*-)를 하나씩 포함시켜야 합니다.")
+        return;
+    }
     formData.append("email", email);
     formData.append("password", password);
     formData.append("password_check", password_check);
     formData.append("nickname", nickname);
-    if (country !== "") {
-        formData.append("country", country);
-    }
+    formData.append("country", country);
 
     const profileImageInput = document.getElementById("image");
     if (profileImageInput.files.length > 0) {
