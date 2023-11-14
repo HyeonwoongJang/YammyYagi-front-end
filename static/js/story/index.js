@@ -5,7 +5,6 @@ function storyDetail(story_id) {
 // 게시글 리스트 get api
 async function getstories() {
     const response = await fetch(`${backend_base_url}/story/`)
-    console.log(response)
     if (response.status == 200) {
         const response_json = await response.json()
         return response_json
