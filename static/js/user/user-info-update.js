@@ -8,6 +8,7 @@ window.onload = () => {
 
 async function renderPage() {
     try {
+        // 로그인 체크
         if (localStorage.getItem("access")) {
             const payload = localStorage.getItem("payload")
             const payload_parse = JSON.parse(payload)
@@ -45,6 +46,7 @@ async function renderPage() {
     }
 }
 
+// 비밀번호 수정 모달
 function openPasswordUpdateModal() {
     const password_modal=document.getElementById("password-modal")
 
@@ -60,6 +62,7 @@ function openPasswordUpdateModal() {
     }
 }
 
+// 비밀번호 수정
 async function updatePasswordButton() {
     const current_password = document.getElementById("current-password").value
     const new_password =  document.getElementById("new-password").value
@@ -96,7 +99,7 @@ async function updatePasswordButton() {
 
         if (status == "200" && response.status == 200) {
             alert(`${response_json["success"]}`)
-            openPasswordUpdateModal()           // 수정 성공 시에만 모달 닫기
+            openPasswordUpdateModal()                   // 수정 성공 시에만 모달 닫기
             return;
         } else if (status == "400" && response.status == 400 && response_json["error"]["password"]) {
             alert(`${response_json["error"]["password"]}`)
@@ -114,6 +117,7 @@ async function updatePasswordButton() {
 
 } 
 
+// 회원 탈퇴 모달
 function openUserDeleteModal() {
     const delete_modal=document.getElementById("delete-modal")
 
@@ -128,6 +132,7 @@ function openUserDeleteModal() {
     }
 }
 
+// 회원 탈퇴
 async function userDeleteButton() {
     const password = document.getElementById("password").value;
 
@@ -165,6 +170,7 @@ async function userDeleteButton() {
     }
 }
 
+// 회원 정보 수정
 async function handleUpdate() {
     
     const nickname = document.getElementById("nickname").value;
