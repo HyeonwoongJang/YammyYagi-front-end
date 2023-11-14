@@ -1,0 +1,74 @@
+header {
+    justify-content: center;
+    padding: 10px 0px 10px 0px;
+}
+
+.nav-item {
+    float : left;
+    text-align: left;
+    justify-content: left;
+}
+
+.nav-link {
+    float: right;
+    font-size: 60px;
+    margin-right: 30px
+}
+
+.header-logo {
+    width:200px;
+    margin: auto;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-body {
+    text-align: center;
+    border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+}
+
+.modal-footer {
+    text-align: center;
+    justify-content: center;
+    border-top: none;
+}
+
+.modal-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.modal-username {
+    font-size: 50px;
+}
+
+.modal-useremail {
+    font-size: 18px;
+    color:rgb(166, 186, 206)
+}
+
+.modal-body-content {
+    font-size: 28px;
+    margin: 15px 0px 15px 0px;
+}
+
+.modal-body-content > a {
+    text-decoration-line:none;
+    color: #E32AF3;
+}
+
+.modal-footer-content {
+    font-size: 28px;
+}
+
+.modal-content {
+    width: 300px;
+}
+
+.modal-dialog {
+    float: right;
+    margin: 140px 70px 0px 0px
+}
