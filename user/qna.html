@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>작성</title>
+    <link rel="stylesheet" href="/static/css/user/QnA.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/static/js/header.js"></script>
+    <script src="/static/js/user/QnA.js"></script>
+
+</head>
+<body>
+    <header></header>
+    
+    <div class="container w-75" style="margin-top: 20px;">
+        <h5>고객센터</h5>
+    <hr>
+        <!-- <div class="card text-center custom-card"> -->
+            <div class="text-center info-card">
+                안내메시지를 작성해주세요. <br>
+                어떤 메시지를 넣을지는 상의가 필요합니다.
+            </div>
+        <!-- </div> -->
+            <form>
+                <div class="card text-center custom-card">
+                    <textarea class="form-control" id="content" rows="9"></textarea>
+                </div>
+                <div class="button-container mt-2">
+                    <button style="background-color:#fff7f7;" class="btn btn-outline btn-sm btn-block" onclick="createQnA()">건의하기</button>
+                </div>
+            </form>
+    </div>
+</body>
+</html>
