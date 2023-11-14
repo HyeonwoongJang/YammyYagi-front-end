@@ -109,6 +109,7 @@ select option[value=""][disabled] {
     background-color: rgba(255, 199, 242, 0.400000006);
     border-radius: 0.4rem;
     margin-top: 150px;
+    border: solid 0.1rem #dfdfdf;
   }
   .logo-img {
     width: 17.8rem;
@@ -136,6 +137,7 @@ select option[value=""][disabled] {
     white-space: nowrap;
     margin: 150px 0px 0px 0px;
     float: right;
+    text-decoration-line:none;
   }
 .reset-password {
     width: 4.5rem;
