@@ -54,3 +54,13 @@ function updateLoginModal() {
         modalUserEmail.textContent = payload_parse.email;
     }
 }
+
+
+// 로그아웃 (handleLogout()는 navbar.js에 있음)
+function handleLogout() {
+    localStorage.removeItem("access")
+    localStorage.removeItem("refresh")
+    localStorage.removeItem("payload")
+    location.reload()
+    window.location.replace(`${frontend_base_url}/story/`)
+}
