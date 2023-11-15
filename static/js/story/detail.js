@@ -356,3 +356,40 @@ async function likeStory() {
         alert("좋아요 실패")
     }
 }
+
+// 스토리를 싫어요하거나 싫어요를 취소하는 비동기 함수
+async function hateStory() {
+    
+    try {
+        if (localStorage.getItem("access")) {
+            const story_id = storyIdSearch()
+            const response = await fetch(`${backend_base_url}/story/${story_id}/hate/`, {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("access"),
+                    "Content-Type": "application/json",
+                }
+            });
+            const response_json = await response.json();
+            const status = response_json["status"];
+            const hate_count = document.getElementById("hate-count")            // 싫어요 수를 나타내는 엘리먼트
+
+            // 싫어요 성공 시 싫어요 수 업데이트
+            if (status == "200" && response.status == 200) {
+                alert(`${response_json["success"]}`);
+                hate_count.innerText = response_json["hate_count"] + " hates"   // 싫어요 수 업데이트
+                return;
+            } else if (status == "404" && response.status == 404) {
+                alert(`${response_json["error"]}`);
+                return;
+            } else if (status == "401" && response.status == 401) {
+                alert(`${response_json["error"]}`);
+                return;
+            } 
+        } else {
+            alert("로그인 후 이용해주세요.")
+        }
+    } catch (error) {
+        alert("싫어요 실패")
+    }
+}
