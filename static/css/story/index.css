@@ -17,17 +17,17 @@
     object-fit: cover;
     position: relative;
     text-align: center;
-    background-color: #f5f3f3;
+    background-color: #fff7f7;
     overflow: hidden;
 }
 
 .index-container {
-    background-color: #f5f3f3;
+    background-color: #fff7f7;
     margin-top: 20px;
 }
 
 .index-card-container {
-    background-color: #f5f3f3;
+    background-color: #fff7f7;
     width: 1600px;
     margin: auto;
     padding-bottom: 20px;
