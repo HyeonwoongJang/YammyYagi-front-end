@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 페이지</title>
+
+
+    <link rel="stylesheet" href="/static/css/story/detail.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    
+    <script src="/static/js/story/detail.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <div class="first-line">
+            <div>
+                <h1 id="title">제목</h1>
+            </div>
+        </div>
+            <div class="second-line">
+            <div id="tools">
+                <form>
+                    <button type="button" class="btn btn-link" id="copy-link"  onclick="copyLink()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 50 50">
+                            <path d="M30.1 1.7c-4.1 2-6 5.6-4.1 7.8 1.6 1.9 4.4 1.9 6 0 2-2.4 6.7-1.9 8.5.9 1.5 2.2 1.5 2.8.2 5.3-.9 1.6-3.8 5-6.6 7.6-5 4.7-5.2 4.8-10.1 4.1-4.2-.6-5.1-.4-5.6 1.1-1 2.6.8 4.8 4.9 6.2 5.7 1.9 9.3.2 17.6-8.1 6.4-6.5 7.4-7.9 7.8-11.8C49.9 4 39.9-3.1 30.1 1.7z"/><path d="M18 15.1C14.9 16.3 3.4 27.5 1.4 31.2c-4.5 8.5 3.2 19.6 12.8 18.5 5.5-.7 10-4.3 9.6-7.6-.2-2-.9-2.7-2.9-2.9-1.4-.2-3.1.4-3.9 1.2-1.5 1.9-6.1 2.1-7.8.4-2.7-2.7-1.3-6.8 4.2-12.6 5.4-5.6 5.6-5.7 11.3-5.7 5.5 0 5.8-.1 6.1-2.6.2-2.1-.3-2.9-3.1-4.3-3.9-1.8-6.1-1.9-9.7-.5z"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-link" id="share-on-facebook" onclick="shareFacebook()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 24 48">
+                            <path d="M8.4 2.4c-2.4 2-2.8 3.2-3.2 9-.4 6.2-.6 6.6-2.8 6.6-2.2 0-2.4.4-2.4 4.5S.2 27 2.5 27H5v21h11V27h3c3.2 0 3.5-.4 4.4-5.8.5-3.2.5-3.2-3.4-3.2h-4v-4.5c0-4.3.1-4.5 3-4.5s3-.2 3-4.5V0h-5.4c-4.3 0-6.1.5-8.2 2.4z"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-link" id="share-on-kakao" onclick="shareKakao()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 51 48">
+                            <path d="M18 .9C9.9 3.4 4.1 8 1.5 14.2c-3.1 7.5-1.6 13 5.1 19.9 4.5 4.5 4.5 4.7 3.9 9.4l-.8 4.7 5.4-3.6c4.5-3 6.3-3.6 10.6-3.6 16.8 0 29.4-14.3 23.9-27.3-1.9-4.6-9.1-10.5-15-12.2C29.3-.1 22.1-.3 18 .9z"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-link" id="share-on-instagram" onclick="shareTwitter()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 57 57">
+                            <path d="M9.4 1.9c-2.3 1-5.2 3.4-6.5 5.2C.6 10.3.5 11.4.2 27c-.3 15.5-.2 16.8 2 21 1.7 3.3 3.5 5.1 6.8 6.8 4.2 2.2 5.5 2.3 21.1 2 16.3-.3 16.6-.3 20.1-3 6-4.5 7-8.9 6.6-27.4-.3-14.8-.5-16.1-2.6-19.2C49.8 1.1 46 0 28.8 0 16 0 12.8.4 9.4 1.9zm37 10.3c1.3 2.2-1.4 5.4-3.8 4.5-1.6-.6-2.2-4.8-.9-6.1 1.1-1.1 3.5-.3 4.7 1.6zM35.8 16c9.5 5.8 9.5 18.3 0 25.3-6 4.4-16.8 1.4-20.2-5.7C9.3 22.4 23.5 8.5 35.8 16z"/>
+                            <path d="M24 20.3c-5.2 2.6-6.4 11.2-2.1 15.1 2.5 2.3 8.1 3 11.1 1.4 6-3.2 6.4-12.4.7-15.8-3.7-2.3-6.2-2.5-9.7-.7z"/>
+                        </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-link" id="bookmark" onclick="bookmarkStory()">
+                        <div id="bookmarked-icon">
+                            <svg class="bookmark-icon bookmarked" xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 512 512" >
+                                <path d="M97.3 1.5c-13.4 3.6-24.1 12.3-30 24.3l-3.8 7.6-.3 227.5c-.2 250.2-.7 233 5.8 242 3.7 5.1 11.5 9.1 17.7 9.1 5.7 0 13.3-3 19.6-7.8 2.9-2.2 34.7-29 70.7-59.7 36-30.6 66.9-56.4 68.5-57.3 4.2-2.3 18.8-2.3 23 0 1.7.9 32.9 27.2 69.5 58.4 36.6 31.1 68.5 58.2 71 60 14.4 10.6 30.4 7.4 37.4-7.6l2.1-4.5.3-227.5c.3-254.2.9-234-6.8-245.8-6.1-9.5-16.2-16.6-27.1-19.1-2.9-.7-58-1-158.4-1C127.2.1 101.7.4 97.3 1.5z" />
+                            </svg>  
+                        </div>
+                        <div id="not-bookmarked-icon">
+                            <svg class="bookmark-icon not-bookmarked" xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 512 512">
+                                <path d="M69.5 1.4C57.6 4.3 46.2 13.9 41.8 24.8l-2.3 5.7v451l2.3 5.7c6.7 16.5 26.2 27.2 43.8 23.9 8.8-1.6 14.9-4.8 22.5-11.8 3.4-3.2 38-36.3 76.7-73.5 38.8-37.3 70.8-67.8 71.2-67.8.4 0 32.4 30.5 71.2 67.7 85 81.8 82.1 79.1 88.3 81.9 20.7 9.5 46.5-.1 54.7-20.4l2.3-5.7v-451l-2.3-5.7c-2.9-7.1-10.3-15.5-16.9-19.1-11.2-6 .3-5.7-197.8-5.6-138.4.1-182.2.4-186 1.3zM429 253.2v210.2l-8.2-8c-16.6-16-153.5-147.1-159-152.3l-5.8-5.4-5.7 5.4c-5.6 5.2-142.5 136.3-159.1 152.3l-8.2 8V43h346v210.2z" />
+                            </svg>
+                        </div>
+                    </button>
+                    <button type="button" class="btn btn-link" id="like" onclick="likeStory()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.0" viewBox="0 0 62 57">
+                            <path fill="#384970" d="M14.5 6.5c6.026-.824 11.192.842 15.5 5 6.772-5.992 13.939-6.492 21.5-1.5 8.157 8.72 7.99 17.22-.5 25.5-6.364-2.155-11.03-.155-14 6-.684 2.88-.517 5.713.5 8.5-5.226 4.598-10.56 4.598-16 0A254.556 254.556 0 0 1 4 29.5c-2.96-10.74.54-18.406 10.5-23Z" style="opacity:1"/><path fill="#394b73" d="M46.5 36.5c2.413 1.18 3.413 3.18 3 6 1.7-.16 3.366.007 5 .5 1.333 1.333 1.333 2.667 0 4-1.634.493-3.3.66-5 .5.16 1.7-.007 3.366-.5 5-1.333 1.333-2.667 1.333-4 0-.493-1.634-.66-3.3-.5-5-2.477.45-4.477-.218-6-2 1.222-2.478 3.222-3.478 6-3-.248-2.358.42-4.358 2-6Z" style="opacity:1"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-link" id="hate" onclick="hateStory()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" version="1.0" viewBox="0 0 62 57">
+                            <path fill="#384970" d="M13.5 5.5c5.153-.427 9.82.907 14 4 9.192-6.236 17.025-4.903 23.5 4 2 5 2 10 0 15-1.841 3.56-4.508 4.56-8 3-7.834 1.83-10.668 6.663-8.5 14.5-3.478 3.533-7.478 4.2-12 2A255.715 255.715 0 0 1 4 28.5c-3.72-10.7-.554-18.367 9.5-23Z" style="opacity:1"/>
+                            <path fill="#3b5076" d="M35.5 39.5c5.011-.166 10.011 0 15 .5 1.29 2.09.624 3.424-2 4a30.499 30.499 0 0 1-11 0c-1.607-1.049-2.273-2.549-2-4.5Z" style="opacity:.925"/>
+                        </svg>                   
+                    </button>
+                </form>
+            </div>
+            <div id="counts">
+                <p id="like-count"></p>
+                <p id="hate-count"></p>
+            </div>
+            <div id="translator">
+                <select id="" class="form-control">
+                    <option class="dropdown-item" disabled selected>언어를 선택해주세요.</option>
+                    <option class="dropdown-item" value="대한민국">대한민국</option>
+                    <option class="dropdown-item" value="미국">미국</option>
+                    <option class="dropdown-item" value="프랑스">프랑스</option>
+                    <option class="dropdown-item" value="스페인">스페인</option>
+                    <option class="dropdown-item" value="일본">일본</option>
+                    <option class="dropdown-item" value="중국">중국</option>
+                </select>
+                <button type="button" id="translate" class="btn btn-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" version="1.0" viewBox="0 0 62 57">
+                        <path fill="#384970" d="M13.5 5.5c5.153-.427 9.82.907 14 4 9.192-6.236 17.025-4.903 23.5 4 2 5 2 10 0 15-1.841 3.56-4.508 4.56-8 3-7.834 1.83-10.668 6.663-8.5 14.5-3.478 3.533-7.478 4.2-12 2A255.715 255.715 0 0 1 4 28.5c-3.72-10.7-.554-18.367 9.5-23Z" style="opacity:1"/>
+                        <path fill="#3b5076" d="M35.5 39.5c5.011-.166 10.011 0 15 .5 1.29 2.09.624 3.424-2 4a30.499 30.499 0 0 1-11 0c-1.607-1.049-2.273-2.549-2-4.5Z" style="opacity:.925"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="second-line">
+            <div id="content"></div>
+            <div id="comment">
+                <div id="comment-list"></div>
+                <img id="profile"/>
+                <form onsubmit="event.preventDefault(); return false;">
+                    <input type="text" id="comment-input"/>
+                    <button type="button" id="create-comment" onclick="postComment()">등록</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/header.js"></script>
+</body>
+</html>
+
