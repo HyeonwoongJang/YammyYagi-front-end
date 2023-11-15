@@ -7,7 +7,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20%;
+    margin-top: 5%;
 }
 .password-modal{
     float: left;
@@ -63,7 +63,3 @@ html, body {
 #current-profile-img {
     border-radius: 100%;
 }
-
-/* .error-message {
-    color: #d83dbf;
-} */
