@@ -212,8 +212,52 @@ async function shareFacebook() {
         // 페이스북 공유 링크를 새 창으로 열기
         window.open("http://www.facebook.com/sharer/sharer.php?u=" + url);
         alert("페이스북 공유 성공")
-        
+
     } catch (error) {
         alert("페이스북 공유 실패")
+    }
+}
+
+// 카카오톡 공유 링크를 새 창으로 열어주는 비동기 함수
+async function shareKakao() {
+    try {
+        // 데이터를 가져오기 위한 fetch 요청
+        const response = await fetch(`${backend_base_url}/story/kakao/`, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access")
+            },
+        });
+
+        // fetch의 결과를 처리하고 필요한 데이터 추출
+        const response_json = await response.json();
+
+        // kakao api key 가져오기
+        const kakao_api_key = response_json.kakao_api_key
+
+        // Kakao Link 공유
+        window.Kakao.init(kakao_api_key);
+        window.Kakao.Link.sendDefault({
+            objectType: "feed",
+            content: {
+                title: "YummyYagi",                                                 // 공유할 콘텐츠의 제목
+                description: "동화책을 공유합니다.",                                // 공유할 콘텐츠의 설명
+                imageUrl: frontend_base_url + "/static/img/yummy_yagi_logo.jpg",    // 썸네일 이미지 URL
+                link: {
+                    webUrl: window.location.href,                                   // 웹 URL
+                },
+            },
+            buttons: [
+                {
+                    title: "동화책 열람하기",
+                    link: {
+                        webUrl: window.location.href,                              // 버튼 클릭 시 이동할 URL
+                    },
+                },
+            ],
+        });
+    } catch (error) {
+        alert("카카오 공유 실패");
     }
 }
