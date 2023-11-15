@@ -7,6 +7,7 @@ const bottomSection=document.querySelector('.bottom-section')
 const imagegenButton=document.querySelector('#image-gen')
 const storygenButton=document.querySelector('#submit-title')
 const titleInput=document.querySelector('#title')
+const targetLanguage=document.getElementById('language')
 window.onload = () => { 
     if (!localStorage.getItem("access")) {
         alert("잘못된 접근입니다.")
@@ -28,7 +29,7 @@ async function getMessage(){
         },
         body:JSON.stringify({
             subject : inputElement.value,
-            target_language:'KO'
+            target_language : targetLanguage.value
         })
     }
     try{
