@@ -274,3 +274,48 @@ async function shareTwitter() {
         alert("페이스북 공유 실패")
     }
 }
+
+// 스토리를 북마크하거나 북마크를 취소하는 비동기 함수
+async function bookmarkStory() {
+    
+    try {
+        if (localStorage.getItem("access")) {
+            const story_id = storyIdSearch()
+            const response = await fetch(`${backend_base_url}/story/${story_id}/bookmark/`, {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("access"),
+                    "Content-Type": "application/json",
+                }
+            });
+            const response_json = await response.json();
+            const status = response_json["status"];
+            
+            const bookmarked_icon = document.getElementById("bookmarked-icon")          // 북마크된 아이콘
+            const not_bookmarked_icon = document.getElementById("not-bookmarked-icon")  // 북마크되지 않은 아이콘
+
+            // 북마크 상태에 따라 아이콘 표시 변경
+            if (status == "200" && response_json["success"] == "북마크") {
+                alert(`${response_json["success"]}`);
+                bookmarked_icon.style.display = "";
+                not_bookmarked_icon.style.display = "none";
+                return;
+            } else if (status == "200" && response_json["success"] == "북마크 취소") {
+                alert(`${response_json["success"]}`);
+                bookmarked_icon.style.display = "none";
+                not_bookmarked_icon.style.display = "";
+                return;
+            } else if (status == "404" && response.status == 404) {
+                alert(`${response_json["error"]}`);
+                return;
+            } else if (status == "401" && response.status == 401) {
+                alert(`${response_json["error"]}`);
+                return;
+            } 
+        } else {
+            alert("로그인 후 이용해주세요.")
+        }
+    } catch (error) {
+        alert("북마크 실패")
+    }
+}
