@@ -202,3 +202,18 @@ async function copyLink() {
         alert("링크 복사 실패")
     }
 }
+
+// 페이스북 공유 링크를 새 창으로 열어주는 비동기 함수
+async function shareFacebook() {
+    try {
+        // 현재 페이지 URL을 인코딩
+        const url = encodeURI(window.location.href)
+
+        // 페이스북 공유 링크를 새 창으로 열기
+        window.open("http://www.facebook.com/sharer/sharer.php?u=" + url);
+        alert("페이스북 공유 성공")
+        
+    } catch (error) {
+        alert("페이스북 공유 실패")
+    }
+}
