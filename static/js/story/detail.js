@@ -56,7 +56,7 @@ async function renderPage() {
 async function loadComments() {
 
     try {
-        const story_id = storyIdSearch()
+        const story_id = storyIdSearch()    // 현재 스토리의 ID를 가져옴
         const response = await fetch(`${backend_base_url}/story/${story_id}/comment/`, {
             method : "GET"
         })
@@ -117,3 +117,34 @@ async function loadComments() {
     }
 }
 
+// 댓글을 삭제하는 비동기 함수
+async function deleteComment(comment_id) {
+    
+    try {
+        const story_id = storyIdSearch()                            // 현재 스토리의 ID를 가져옴
+        const response = await fetch(`${backend_base_url}/story/${story_id}/comment/${comment_id}/`, {
+            method : "DELETE",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("access")
+            }
+        })
+
+        const response_json = await response.json()
+        const status = response_json["status"]
+
+        if (status == "204") {
+            alert(`${response_json["success"]}`)
+            loadComments(story_id);                                 // 댓글이 삭제되면 업데이트된 댓글 목록을 로드
+            return;
+        } else if(status == "401" && response.status == 401) {
+            alert(`${response_json["error"]}`)                      // 권한이 없는 경우
+            return;
+        } else if(status == "403" && response.status == 403) {      // 금지된 요청인 경우
+            alert(`${response_json["error"]}`)
+            return;
+        }
+    } catch (error) {
+        alert("댓글 삭제 실패")
+    }
+}
