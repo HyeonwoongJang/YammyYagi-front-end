@@ -190,3 +190,15 @@ async function postComment() {
         alert("댓글 생성 실패")
     }
 }
+
+// 현재 페이지 URL을 클립보드에 복사하는 비동기 함수
+async function copyLink() {
+
+    try {
+        // 현재 페이지 URL을 클립보드에 복사
+        await navigator.clipboard.writeText(window.location.href);
+        alert("링크 복사 성공")
+    } catch (error) {
+        alert("링크 복사 실패")
+    }
+}
