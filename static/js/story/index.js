@@ -51,6 +51,7 @@ window.onload = async function loadstories() {
         // first_paragraph
         const newCardParagraph = document.createElement("p")
         newCardParagraph.setAttribute("class", "card-text")
+        newCardParagraph.setAttribute("style", "min-height: 48px;")
         newCardParagraph.innerText = story.content.story_first_paragraph
         newCardBody.appendChild(newCardParagraph)
         // hr
