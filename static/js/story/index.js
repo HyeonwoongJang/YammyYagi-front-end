@@ -1,5 +1,5 @@
 function storyDetail(story_id) {
-    window.location.href = `${frontend_base_url}/story_detail.html?story_id=${story_id}`
+    window.location.href = `${frontend_base_url}/story/detail.html?story_id=${story_id}`
 }
 
 // 게시글 리스트 get api
