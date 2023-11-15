@@ -14,13 +14,39 @@
 <body>
 <header></header>
 <div class="body-container">
+<div class="side-bar">
+    <button class="new-chat">New Chat</button>
+    <div class="history"></div>
+    <nav>
+        <p class="history-text">Generation history</p>
+    </nav>
+</div>
 <section class="main">
-    <h1>Make fairy tales</h1>
+    <div class="information">
+        <h1>안내</h1>
+        <div>안내 메시지 뭐 들어가야 좋을까유</div>
+    </div>
     <div class="output-container"></div>
     <div class="bottom-section">
         <div class="input-container">
+            <select class="info" id="language" required>
+                <option value="" disabled selected>  --  Select Language  --  </option>
+                <option value="hr" disabled> </option>
+                <option value="KO">한국어</option>
+                <option value="hr" disabled>- - - - - - - </option>
+                <option value="EN">English</option>
+                <option value="hr" disabled>- - - - - - - </option>
+                <option value="FR">Français</option>
+                <option value="hr" disabled>- - - - - - - </option>
+                <option value="ES">Español</option>
+                <option value="hr" disabled>- - - - - - - </option>
+                <option value="JA">日本語</option>
+                <option value="hr" disabled>- - - - - - - </option>
+                <option value="ZH">中国人</option>
+                <option value="hr" disabled> </option>
+            </select>
             <input id="prompt" placeholder="예시 : 주제를 입력하세요"/>
-            <div id="submit-theme">➢</div>
+            <div id="submit-theme">📨</div>
         </div>
         <div id="image-gen">이미지 생성</div>
         <div class="input-container">
@@ -28,18 +54,11 @@
             <div id="submit-title">동화 생성</div>
         </div>
     </div>
-    <p class="info">
+    <p class="info-footer">
         Yummy-Yagi 
     </p>
 </section>
 </div>
-<section class="side-bar">
-    <button class="new-chat">New Chat</button>
-    <div class="history"></div>
-    <nav>
-        <p class="history-text">Generation history</p>
-    </nav>
-</section>
 <script src="/static/js/story/create_story.js"></script>
 </body>
 </html>
