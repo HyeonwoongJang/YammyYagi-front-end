@@ -49,12 +49,12 @@ header {
 }
 
 .modal-nickname {
-    font-size: 50px;
+    font-size: 35px;
 }
 
 .modal-useremail {
     font-size: 18px;
-    color:rgb(166, 186, 206)
+    color:rgb(150, 176, 201)
 }
 
 .modal-body-content {
