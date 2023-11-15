@@ -319,3 +319,40 @@ async function bookmarkStory() {
         alert("북마크 실패")
     }
 }
+
+// 스토리를 좋아요하거나 좋아요를 취소하는 비동기 함수
+async function likeStory() {
+    
+    try {
+        if (localStorage.getItem("access")) {
+            const story_id = storyIdSearch()
+            const response = await fetch(`${backend_base_url}/story/${story_id}/like/`, {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("access"),
+                    "Content-Type": "application/json",
+                }
+            });
+            const response_json = await response.json();
+            const status = response_json["status"];
+            const like_count = document.getElementById("like-count")            // 좋아요 수를 나타내는 엘리먼트
+
+            // 좋아요 성공 시 좋아요 수 업데이트
+            if (status == "200" && response.status == 200) {
+                alert(`${response_json["success"]}`);
+                like_count.innerText = response_json["like_count"] + " likes"   // 좋아요 수 업데이트
+                return;
+            } else if (status == "404" && response.status == 404) {
+                alert(`${response_json["error"]}`);
+                return;
+            } else if (status == "401" && response.status == 401) {
+                alert(`${response_json["error"]}`);
+                return;
+            } 
+        } else {
+            alert("로그인 후 이용해주세요.")
+        }
+    } catch (error) {
+        alert("좋아요 실패")
+    }
+}
