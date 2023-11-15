@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+*{
+    color:#000000;
+    font-family: 'Open Sans',sans-serif;
+}
+.body-container {
+    margin:0;
+    padding:0;
+    background-color: #FFFFFF;
+    display:flex;
+}
+h1{
+    font-size:33px;
+    font-weight: 600;
+    padding:200px 0;
+
+}
+.side-bar {
+    background-color: #FFC8F3;
+    width:244px;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    height: 100vh;
+    width:100%;
+}
+.info{
+    color:#FFC8F3;
+    font-size:11px;
+}
+
+input{
+    border:none;
+    background-color:#FFC8F3;
+    width:100%;
+    font-size:20px;
+    padding:12px 15px;
+    border-radius:5px;
+    box-shadow:rgb(0,0,0,0.05) 0 54px 55px,
+    rgb(0,0,0,0.05) 0 -12px 30px,
+    rgb(0,0,0,0.05) 0 4px 6px,
+    rgb(0,0,0,0.05) 0 12px 3px,
+    rgb(0,0,0,0.05) 0 -3px 5px
+}
+.bottom-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+input:focus{
+    outline: none;
+}
+.input-container{
+    position:relative;
+    width:100%;
+    max-width:650px; 
+}
+.input-container #submit-theme{
+    position:absolute;
+    right:0;
+    bottom:15px;
+    cursor:pointer;
+}
+.bottom-section #image-gen{
+    display: none;
+}
+.input-container #title,.input-container #submit-title{
+    display:none;
+}
+button{
+    border:solid 0.5px #000000;
+    background-color:transparent;
+    border-radius: 5px;
+    padding:10px;
+    margin:10px;
+}
+nav{
+    border-top:solid 0.5px rgba(255,255,255,0,5);
+    padding:10px;
+    margin:10px;
+}
+.history{
+    padding:10px;
+    margin:10px;
+    display: flex;
+    flex-direction: column;
+    height:100%;
+}
+.history p{
+    cursor: pointer;
+}
