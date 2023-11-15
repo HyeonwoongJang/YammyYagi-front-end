@@ -148,3 +148,45 @@ async function deleteComment(comment_id) {
         alert("댓글 삭제 실패")
     }
 }
+
+// 댓글을 생성하는 비동기 함수
+async function postComment() {
+    
+    try {
+        if (localStorage.getItem("access")) {                       // 로그인되어 있는 경우에만 댓글을 작성할 수 있도록 확인
+
+            const story_id = storyIdSearch();                       // 현재 스토리의 ID를 가져옴
+            const comment_content = document.getElementById("comment-input").value
+
+            const response = await fetch(`${backend_base_url}/story/${story_id}/comment/`, {
+                method : "POST",
+                headers: {
+                    "content-type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access")
+                },
+                body: JSON.stringify({"content":comment_content})
+            })
+
+            document.getElementById("comment-input").value = ""     // 댓글 작성 후 입력란 비우기
+
+            const response_json = await response.json()
+            const status = response_json["status"]
+
+            if (status == "201" && response.status == 201) {
+                alert(`${response_json["success"]}`)
+                loadComments()                                      // 댓글이 성공적으로 생성되면 업데이트된 댓글 목록을 로드
+                return;
+            } else if(status == "401" && response.status == 401) {
+                alert(`${response_json["error"]}`)
+                return;
+            } else if(status == "403" && response.status == 403) {
+                alert(`${response_json["error"]}`)
+                return;
+            } 
+        } else {
+            alert("로그인 후 이용해주세요.")
+        }
+    } catch (error) {
+        alert("댓글 생성 실패")
+    }
+}
