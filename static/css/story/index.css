@@ -24,13 +24,14 @@
 .index-container {
     background-color: #fff7f7;
     margin-top: 20px;
+    padding-bottom: 30px;
 }
 
 .index-card-container {
     background-color: #fff7f7;
     width: 1600px;
     margin: auto;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
 }
 
 .main-info-content{
@@ -73,4 +74,29 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+}
+
+.pagination {
+    text-align: center;
+    justify-content: center;
+}
+
+.page-link {
+    color: #f480ff;
+    border-color: #f9d9ff;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px 15px 5px 15px
+}
+
+.page-link:hover {
+    color: #ea00ff;
+    border-color: #e04bfa;
+}
+
+.active>.page-link, .page-link.active {
+    border-color: #e04bfa;
+    background-color: rgb(236, 144, 255);
+    color: #ffffff;
+    font-weight: bold;
 }
