@@ -60,9 +60,8 @@ function getMyPage() {
 
             // 내가 작성한 동화 목록 불러오기
             const stories = data.my_story_list;
-            console.log(stories)
-            const storytList = document.getElementById("my-story");
-            storytList.innerHTML = "";
+            const story_list = document.getElementById("my-story");
+            story_list.innerHTML = "";
 
             stories.forEach((story) => {
                 const story_element = document.createElement("div");
@@ -73,17 +72,41 @@ function getMyPage() {
                           <img src="${backend_base_url}${story.content.story_image}" width="240px" height="150px";/>
                           <div class="card-text">
                             <p class="title">${story.story_title}</p>
-                            <p class="ccontent">${story.content.story_first_paragraph}</p>
+                            <p class="content">${story.content.story_first_paragraph}</p>
                             <hr>
                             <p class="country">${story.author_country}</p>
                           </div>
                       </div>
                   </div>
               `;
-              storytList.appendChild(story_element);
+              story_list.appendChild(story_element);
             });
-        
-    });
+
+            // 최근 조회한 글 목록 불러오기
+            console.log(data)
+            const recently_storioes = data.recently_viewed;
+            const recently_story_list = document.getElementById("recently-story");
+            recently_story_list.innerHTML = "";
+
+            recently_storioes.forEach((recently_story) => {
+                const recently_story_element = document.createElement("div");
+                recently_story_element.setAttribute("onclick", `storyDetail(${recently_story.story_id})`);
+
+                recently_story_element.innerHTML = `
+                <div class="recently-card">
+                          <img src="${backend_base_url}${recently_story.content.story_image}" width="240px" height="150px";/>
+                          <div class="card-text">
+                            <p class="title">${recently_story.story_title}</p>
+                            <p class="content">${recently_story.content.story_first_paragraph}</p>
+                            <hr>
+                            <p class="country">${recently_story.author_country}</p>
+                          </div>
+                      </div>
+                  </div>
+              `;
+              recently_story_list.appendChild(recently_story_element);     
+            });
+        });
 }
 
 window.addEventListener("load", getMyPage);
