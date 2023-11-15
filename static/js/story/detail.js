@@ -47,6 +47,46 @@ async function renderPage() {
             page_img.classList.add("page-img")
         })
 
+        // 북마크 상태를 업데이트하고, 현재 사용자의 북마크 여부에 따라 아이콘 표시를 변경
+        const bookmarked_icon = document.getElementById("bookmarked-icon")
+        const not_bookmarked_icon = document.getElementById("not-bookmarked-icon")
+
+        if (localStorage.getItem("access")) {
+            const payload = localStorage.getItem("payload")
+            const payload_parse = JSON.parse(payload)
+            const user_id = payload_parse.user_id
+
+            // 스토리의 북마크된 사용자 목록을 가져와서 사용자 ID 리스트 생성
+            const b_user_list = response_json["detail"].bookmark_user_list
+            const b_user_id_list = []
+
+            b_user_list.forEach(user => {
+                b_user_id_list.push(user["id"])
+            })
+
+            // 현재 사용자의 ID가 북마크된 사용자 리스트에 포함되어 있으면 북마크된 상태로 표시
+            if (b_user_id_list.includes(user_id)) {
+                bookmarked_icon.style.display = "";
+                not_bookmarked_icon.style.display = "none";
+            } else {
+                // 그렇지 않으면 북마크되지 않은 상태로 표시
+                bookmarked_icon.style.display = "none";
+                not_bookmarked_icon.style.display = "";
+            }
+        } else {
+            // 로그인하지 않은 경우 북마크되지 않은 상태로 표시
+            bookmarked_icon.style.display = "none";
+            not_bookmarked_icon.style.display = "";
+        }
+
+        // 좋아요 수 업데이트
+        const like_count = document.getElementById("like-count")
+        like_count.innerText = response_json["detail"].like_user_list.length + ' likes'
+
+        // 싫어요 수 업데이트
+        const hate_count = document.getElementById("hate-count")
+        hate_count.innerText = response_json["detail"].hate_user_list.length + ' hates'
+
     } catch (error) {
         alert("페이지 로드 실패")
     }
