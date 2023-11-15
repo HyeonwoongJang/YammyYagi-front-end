@@ -261,3 +261,16 @@ async function shareKakao() {
         alert("카카오 공유 실패");
     }
 }
+
+// 트위터 공유 링크를 새 창으로 열어주는 비동기 함수
+async function shareTwitter() {
+    try {
+        window.open("https://X.com/intent/tweet"
+			+"?via="                                            // 트위터 계정 추가 (via)
+			+"&text="                                           // 트윗 내용 추가 (text)
+			+"&url="+encodeURIComponent(window.location.href)   // 현재 페이지의 URL을 인코딩하여 추가
+	)
+    } catch (error) {
+        alert("페이스북 공유 실패")
+    }
+}
