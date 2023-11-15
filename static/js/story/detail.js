@@ -6,6 +6,11 @@ function storyIdSearch() {
     return story_id
 }
 
+// HTTP 요청 헤더를 설정하는 객체를 초기화
+let headers = {
+    "Content-Type": "application/json",
+}
+
 // 창이 로드될 때의 이벤트 핸들러
 window.onload = () => {
     renderPage();       // 페이지의 주요 내용을 렌더링
@@ -15,10 +20,16 @@ window.onload = () => {
 // 페이지의 주요 내용을 렌더링하는 비동기 함수
 async function renderPage() {
 
+    // 만약 로그인한 사용자라면, Authorization 헤더에 액세스 토큰을 추가
+    if (localStorage.getItem("access")) {
+        headers["Authorization"] = `Bearer ${localStorage.getItem("access")}`;
+    }
+
     try {
         const story_id = storyIdSearch()
         const response = await fetch(`${backend_base_url}/story/${story_id}/`, {
             method : "GET",
+            headers : headers,      // 로그인되어 있는 경우에만 헤더에"Authorization" 필드가 추가됨.
         })
 
         const response_json = await response.json()
