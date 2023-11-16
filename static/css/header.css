@@ -22,7 +22,7 @@ header {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 50%;
+    top: 5%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -78,4 +78,8 @@ header {
 .modal-dialog {
     float: right;
     margin: 140px 70px 0px 0px
+}
+
+.head-navbar {
+    min-height: 106px;
 }
