@@ -168,7 +168,9 @@ async function createStory(){
         const response = await fetch(`${backend_base_url}/story/`, options);
         const res_json = await response.json();
         if(res_json.status==201){
+            console.log(res_json.story_id)
             window.alert(res_json.success)
+            window.location.reload(`${frontend_base_url}/story/detail.html?story_id=${res_json.story_id}`);
         }
         else{
             window.alert(res_json.error)
