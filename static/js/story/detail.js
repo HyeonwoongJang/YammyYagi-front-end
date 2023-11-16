@@ -310,7 +310,7 @@ async function postComment() {
     }
 }
 
-
+// 스토리를 삭제하는 비동기 함수
 async function deleteStory() {
     try {
         if (localStorage.getItem("access")) {
