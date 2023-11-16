@@ -122,6 +122,7 @@ nav{
 }
 .history p{
     cursor: pointer;
+    text-align: center;
 }
 .history-text{
     text-align: center;
@@ -151,4 +152,8 @@ select option[value=""][disabled] {
 }
 select option {
     color:rgb(117,117,117);
+}
+
+.create-btn {
+    margin: 30px auto 30px auto;
 }

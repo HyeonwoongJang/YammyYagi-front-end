@@ -97,11 +97,21 @@
             </div>
         </div>
         <div class="second-line">
-            <div id="content"></div>
-            <div id="comment">
+            <div id="content">
+                <div style="display:flex;">
+                    <button type="button" id="comment-box" onclick="toggleComments()" style="position: absolute; bottom: 0; right: 0; margin-right: 60px;">
+                        댓글창 열기
+                    </button>
+                    <button type="button" id="story-delete" onclick="deleteStory()" style="position: absolute; bottom: 0; right: 0; margin-right: 10px;">
+                        삭제
+                    </button>
+                </div>
+
+            </div>
+            <div id="comment" style="display:none;">
                 <div id="comment-list"></div>
                 <img id="profile"/>
-                <form onsubmit="event.preventDefault(); return false;">
+                <form onsubmit="event.preventDefault(); return false;" style="display:flex;">
                     <input type="text" id="comment-input"/>
                     <button type="button" id="create-comment" onclick="postComment()">등록</button>
                 </form>

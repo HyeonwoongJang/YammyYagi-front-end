@@ -14,7 +14,6 @@ let headers = {
 // 창이 로드될 때의 이벤트 핸들러
 window.onload = () => {
     renderPage();       // 페이지의 주요 내용을 렌더링
-    loadComments();     // 댓글을 로드하고 표시
 }
 
 // 페이지의 주요 내용을 렌더링하는 비동기 함수
@@ -36,6 +35,19 @@ async function renderPage() {
         const story_data = response_json["detail"]
         const story_paragraph = story_data["story_paragraph_list"]
 
+        // Story 작성자만 댓글 버튼이 보이도록 설정
+        const story_delete_button = document.getElementById("story-delete")
+
+        const payload = localStorage.getItem("payload")
+        const payload_parse = JSON.parse(payload)
+        const story_author_id = payload_parse.user_id
+
+        if (story_data["author_id"] != story_author_id) {
+            story_delete_button.style.display = "none";
+        } else {
+            story_delete_button.style.display = "";
+        }
+        
         // Story 제목 설정
         document.getElementById("title").innerText = story_data["story_title"]
 
@@ -103,9 +115,13 @@ async function renderPage() {
     }
 }
 
-// 댓글을 로드하는 비동기 함수
-async function loadComments() {
+// 댓글창을 열고 닫는 비동기 함수
+async function toggleComments() {
 
+    // 댓글 창의 현재 표시 상태를 확인하고, 토글하여 보이게 하거나 숨김
+    const comment_box = document.getElementById("comment")
+    comment_box.style.display = (comment_box.style.display === 'none' || comment_box.style.display === '') ? 'block' : 'none'
+    
     try {
         const story_id = storyIdSearch()    // 현재 스토리의 ID를 가져옴
         const response = await fetch(`${backend_base_url}/story/${story_id}/comment/`, {
@@ -168,6 +184,71 @@ async function loadComments() {
     }
 }
 
+// 댓글을 로드하는 비동기 함수
+async function loadComments() {
+    
+    try {
+        const story_id = storyIdSearch()    // 현재 스토리의 ID를 가져옴
+        const response = await fetch(`${backend_base_url}/story/${story_id}/comment/`, {
+            method : "GET"
+        })
+
+        const response_json = await response.json()
+
+        const comment_data = response_json["comments"]
+
+        const comment_list = document.getElementById("comment-list")
+        comment_list.innerHTML = "";
+
+        // 각 댓글을 렌더링
+        comment_data.forEach(comment => {
+            const single_comment = document.createElement("div")
+            const author_info = document.createElement("div")
+            const author_profile = document.createElement("img")
+            const author_nickname = document.createElement("p")
+            const delete_button = document.createElement("button")
+            const content = document.createElement("p")
+
+            single_comment.classList.add("single_comment")
+
+            author_info.classList.add("comment_author_info")
+
+            author_profile.src = `${backend_base_url}${comment["author_image"]}`
+            author_profile.classList.add("comment_author_profile")
+            author_nickname.innerText = comment["author_nickname"]
+
+            delete_button.classList.add("btn-close")
+            delete_button.onclick = function() {
+                deleteComment(comment["comment_id"]);
+            };
+            
+            content.innerText = comment["content"]
+            content.classList.add("comment_content")
+
+            author_info.appendChild(author_profile)
+            author_info.appendChild(author_nickname)
+
+             // 현재 사용자가 로그인되어 있고, 댓글 작성자가 현재 사용자인 경우 삭제 버튼 추가
+            if (localStorage.getItem("access")) {
+                const payload = localStorage.getItem("payload")
+                const payload_parse = JSON.parse(payload)
+                const comment_author = payload_parse.nickname
+                if (comment["author_nickname"] == comment_author) {
+                    author_info.appendChild(delete_button)
+                }
+            }
+
+            single_comment.appendChild(author_info)
+            single_comment.appendChild(content)
+            
+            comment_list.appendChild(single_comment)
+        })
+
+    } catch (error) {
+        alert("댓글 로드 실패")
+    }
+}
+
 // 댓글을 삭제하는 비동기 함수
 async function deleteComment(comment_id) {
     
@@ -186,7 +267,7 @@ async function deleteComment(comment_id) {
 
         if (status == "204") {
             alert(`${response_json["success"]}`)
-            loadComments(story_id);                                 // 댓글이 삭제되면 업데이트된 댓글 목록을 로드
+            loadComments();                                         // 댓글이 삭제되면 업데이트된 댓글 목록을 로드
             return;
         } else if(status == "401" && response.status == 401) {
             alert(`${response_json["error"]}`)                      // 권한이 없는 경우
@@ -239,6 +320,41 @@ async function postComment() {
         }
     } catch (error) {
         alert("댓글 생성 실패")
+    }
+}
+
+// 스토리를 삭제하는 비동기 함수
+async function deleteStory() {
+    try {
+        if (localStorage.getItem("access")) {
+            const story_id = storyIdSearch()                            // 현재 스토리의 ID를 가져옴
+            const response = await fetch(`${backend_base_url}/story/${story_id}/`, {
+                method : "DELETE",
+                headers: {
+                    "content-type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access")
+                }
+            })
+
+            const response_json = await response.json()
+            const status = response_json["status"]
+
+            if (status == "204") {
+                alert(`${response_json["success"]}`)
+                window.location.href = `${frontend_base_url}/story/`    // 동화 삭제 후 메인페이지로 이동
+                return;
+            } else if(status == "401" && response.status == 401) {
+                alert(`${response_json["error"]}`)                      // 권한이 없는 경우
+                return;
+            } else if(status == "403" && response.status == 403) {      // 금지된 요청인 경우
+                alert(`${response_json["error"]}`)
+                return;
+            }
+        } else {
+            alert("로그인 후 이용해주세요.")                            // 서버로의 요청을 최소화하기 위해 프론트에서 권한이 없을 경우 삭제 요청을 차단
+        }
+    } catch (error) {
+        alert("스토리 삭제 실패")
     }
 }
 
