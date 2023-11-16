@@ -1,5 +1,6 @@
 .category-container {
     display: flex;
+    position: relative;
     justify-content: center;
     padding: 20px 0px 20px 0px;
 }
@@ -99,4 +100,16 @@
     background-color: rgb(236, 144, 255);
     color: #ffffff;
     font-weight: bold;
+}
+
+.info {
+    border: 0px;
+    border-radius: 5%;
+    background-color: #ffffff;
+    color: rgb(13, 110, 253);
+    font-size: 33px;
+  }
+
+select option[value=""][disabled] {
+      display: none;
 }
