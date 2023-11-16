@@ -310,6 +310,41 @@ async function postComment() {
     }
 }
 
+
+async function deleteStory() {
+    try {
+        if (localStorage.getItem("access")) {
+            const story_id = storyIdSearch()                            // 현재 스토리의 ID를 가져옴
+            const response = await fetch(`${backend_base_url}/story/${story_id}/`, {
+                method : "DELETE",
+                headers: {
+                    "content-type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access")
+                }
+            })
+
+            const response_json = await response.json()
+            const status = response_json["status"]
+
+            if (status == "204") {
+                alert(`${response_json["success"]}`)
+                window.location.href = `${frontend_base_url}/story/`    // 동화 삭제 후 메인페이지로 이동
+                return;
+            } else if(status == "401" && response.status == 401) {
+                alert(`${response_json["error"]}`)                      // 권한이 없는 경우
+                return;
+            } else if(status == "403" && response.status == 403) {      // 금지된 요청인 경우
+                alert(`${response_json["error"]}`)
+                return;
+            }
+        } else {
+            alert("로그인 후 이용해주세요.")                            // 서버로의 요청을 최소화하기 위해 프론트에서 권한이 없을 경우 삭제 요청을 차단
+        }
+    } catch (error) {
+        alert("스토리 삭제 실패")
+    }
+}
+
 // 현재 페이지 URL을 클립보드에 복사하는 비동기 함수
 async function copyLink() {
 
