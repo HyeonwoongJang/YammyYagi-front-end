@@ -35,6 +35,19 @@ async function renderPage() {
         const story_data = response_json["detail"]
         const story_paragraph = story_data["story_paragraph_list"]
 
+        // Story 작성자만 댓글 버튼이 보이도록 설정
+        const story_delete_button = document.getElementById("story-delete")
+
+        const payload = localStorage.getItem("payload")
+        const payload_parse = JSON.parse(payload)
+        const story_author_id = payload_parse.user_id
+
+        if (story_data["author_id"] != story_author_id) {
+            story_delete_button.style.display = "none";
+        } else {
+            story_delete_button.style.display = "";
+        }
+        
         // Story 제목 설정
         document.getElementById("title").innerText = story_data["story_title"]
 
