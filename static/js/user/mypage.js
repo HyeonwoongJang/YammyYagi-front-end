@@ -37,6 +37,7 @@ function getMyPage() {
 
             // 북마크 목록 불러오기
             const bookmarks = data.bookmark_story_list;
+            bookmarks.reverse()
             const bookmark_list = document.getElementById("bookmark-story");
             bookmark_list.innerHTML = "";
 
@@ -60,6 +61,7 @@ function getMyPage() {
 
             // 내가 작성한 동화 목록 불러오기
             const stories = data.my_story_list;
+            stories.reverse()
             const story_list = document.getElementById("my-story");
             story_list.innerHTML = "";
 
@@ -83,28 +85,30 @@ function getMyPage() {
             });
 
             // 최근 조회한 글 목록 불러오기
-            console.log(data)
-            const recently_storioes = data.recently_stories;
-            const recently_story_list = document.getElementById("recently-story");
-            recently_story_list.innerHTML = "";
+            const recent_storioes = data.recent_stories;
+            recent_storioes.reverse()
 
-            recently_storioes.forEach((recently_story) => {
-                const recently_story_element = document.createElement("div");
-                recently_story_element.setAttribute("onclick", `storyDetail(${recently_story.story_id})`);
+            const recent_story_list = document.getElementById("recently-story");
+            recent_story_list.innerHTML = "";
 
-                recently_story_element.innerHTML = `
+            recent_storioes.forEach((recent_story) => {
+                const recent_story_element = document.createElement("div");
+                recent_story_element.setAttribute("onclick", `storyDetail(${recent_story.story_id})`);
+
+                recent_story_element.innerHTML = `
                 <div class="recently-card">
-                          <img src="${backend_base_url}${recently_story.content.story_image}" width="240px" height="150px";/>
+                          <img src="${backend_base_url}${recent_story.content.story_image}" width="240px" height="150px";/>
                           <div class="card-text">
-                            <p class="title">${recently_story.story_title}</p>
-                            <p class="content">${recently_story.content.story_first_paragraph}</p>
+                            <p class="title">${recent_story.story_title}</p>
+                            <p class="content">${recent_story.content.story_first_paragraph}</p>
                             <hr>
-                            <p class="country">${recently_story.author_country}</p>
+                            <p class="country">${recent_story.author_country}</p>
                           </div>
                       </div>
                   </div>
               `;
-              recently_story_list.appendChild(recently_story_element);     
+
+              recent_story_list.appendChild(recent_story_element);
             });
         });
 }
