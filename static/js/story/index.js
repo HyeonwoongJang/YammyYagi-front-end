@@ -68,10 +68,15 @@ async function loadstories(page) {
                 const newCardHr = document.createElement("hr")
                 newCardBody.appendChild(newCardHr)
                 // country
-                const newCardCountry = document.createElement("p")
+                const newCardCountry = document.createElement("div")
                 newCardCountry.setAttribute("class", "card-text")
                 newCardCountry.innerText = story.author_country
                 newCardBody.appendChild(newCardCountry)
+                // card-like-count
+                const newCardLikeCount = document.createElement("div")
+                newCardLikeCount.setAttribute("class", "card-like-count")
+                newCardLikeCount.innerText = `🩷${story.like_user_list.length}`
+                newCardCountry.appendChild(newCardLikeCount)
 
                 story_list.appendChild(newCol)
             });
@@ -175,10 +180,15 @@ async function getlikestories() {
                 const newCardHr = document.createElement("hr")
                 newCardBody.appendChild(newCardHr)
                 // country
-                const newCardCountry = document.createElement("p")
+                const newCardCountry = document.createElement("div")
                 newCardCountry.setAttribute("class", "card-text")
                 newCardCountry.innerText = story.author_country
                 newCardBody.appendChild(newCardCountry)
+                // card-like-count
+                const newCardLikeCount = document.createElement("div")
+                newCardLikeCount.setAttribute("class", "card-like-count")
+                newCardLikeCount.innerText = `🩷${story.like_user_list.length}`
+                newCardCountry.appendChild(newCardLikeCount)
 
                 story_list.appendChild(newCol)
             });
@@ -244,10 +254,15 @@ async function getcountrystories() {
                 const newCardHr = document.createElement("hr")
                 newCardBody.appendChild(newCardHr)
                 // country
-                const newCardCountry = document.createElement("p")
+                const newCardCountry = document.createElement("div")
                 newCardCountry.setAttribute("class", "card-text")
                 newCardCountry.innerText = story.author_country
                 newCardBody.appendChild(newCardCountry)
+                // card-like-count
+                const newCardLikeCount = document.createElement("div")
+                newCardLikeCount.setAttribute("class", "card-like-count")
+                newCardLikeCount.innerText = `🩷${story.like_user_list.length}`
+                newCardCountry.appendChild(newCardLikeCount)
 
                 story_list.appendChild(newCol)
             });
