@@ -91,3 +91,13 @@ html, body {
     display: flex;
     margin: auto 5% auto 0%;
 }
+
+
+#bottom-button {
+    position: absolute;
+    display:flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    bottom: 0;
+    right: 0;
+}
