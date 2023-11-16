@@ -106,11 +106,11 @@ async function renderPage() {
 
         // 좋아요 수 업데이트
         const like_count = document.getElementById("like-count")
-        like_count.innerText = response_json["detail"].like_user_list.length + ' likes'
+        like_count.innerText = response_json["detail"].like_count + ' likes'
 
         // 싫어요 수 업데이트
         const hate_count = document.getElementById("hate-count")
-        hate_count.innerText = response_json["detail"].hate_user_list.length + ' hates'
+        hate_count.innerText = response_json["detail"].hate_count + ' hates'
 
     } catch (error) {
         alert("페이지 로드 실패")
