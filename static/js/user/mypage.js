@@ -7,7 +7,7 @@ window.onload = () => {
 }
 
 function storyDetail(story_id) {
-    window.location.href = `${frontend_base_url}/story_detail.html?story_id=${story_id}`;
+    window.location.href = `${frontend_base_url}/story/detail.html?story_id=${story_id}`;
 }
 
 // 마이페이지 get api
@@ -84,7 +84,7 @@ function getMyPage() {
 
             // 최근 조회한 글 목록 불러오기
             console.log(data)
-            const recently_storioes = data.recently_viewed;
+            const recently_storioes = data.recently_stories;
             const recently_story_list = document.getElementById("recently-story");
             recently_story_list.innerHTML = "";
 
