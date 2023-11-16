@@ -132,7 +132,7 @@ async function loadComments() {
 
             author_info.classList.add("comment_author_info")
 
-            author_profile.src = `${backend_base_url}${comment["author_profile"]}`
+            author_profile.src = `${backend_base_url}${comment["author_image"]}`
             author_profile.classList.add("comment_author_profile")
             author_nickname.innerText = comment["author_nickname"]
 
