@@ -17,12 +17,11 @@ header {
 
 .header-logo {
     width:200px;
-    margin: auto;
+    margin: 55px auto 10px auto;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 5%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
