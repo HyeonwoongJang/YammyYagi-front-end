@@ -35,7 +35,7 @@ async function renderPage() {
         const story_data = response_json["detail"]
         const story_paragraph = story_data["story_paragraph_list"]
 
-        // Story 작성자만 댓글 버튼이 보이도록 설정
+        // 로그인 한 Story 작성자만 댓글 삭제 버튼이 보이도록 설정
 
         if (localStorage.getItem("access")) {
             const payload = localStorage.getItem("payload")
@@ -54,6 +54,7 @@ async function renderPage() {
         document.getElementById("title").innerText = story_data["story_title"]
 
         const story_content = document.getElementById("content")
+        
         
         // 각 페이지를 렌더링
         story_paragraph.forEach(page => {
