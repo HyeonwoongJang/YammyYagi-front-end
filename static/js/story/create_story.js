@@ -167,8 +167,11 @@ async function createStory(){
     try {
         const response = await fetch(`${backend_base_url}/story/`, options);
         const res_json = await response.json();
+        const id=res_json.story_id
         if(res_json.status==201){
+            console.log(id)
             window.alert(res_json.success)
+            window.location.href = `${frontend_base_url}/story/detail.html?story_id=${id}`;
         }
         else{
             window.alert(res_json.error)
