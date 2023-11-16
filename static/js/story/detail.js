@@ -19,7 +19,7 @@ window.onload = async function() {
     const current_page = 1
     const total_content_count = story_data.story_paragraph_list.length
     
-    storyPage(story_data)
+    storyPage(story_data, current_page, total_content_count)
     createPage(story_data, current_page, total_content_count)
 }
 
@@ -42,7 +42,7 @@ async function tempRender(){
         // 서버 응답이 성공인 경우 데이터 반환
         if (response.status == 200) {
             return response_json
-        } else if (response.status == 200) {
+        } else if (response.status == 403) {
             alert(response_json["error"])
             return
         }
@@ -52,7 +52,7 @@ async function tempRender(){
 }
 
 // 페이지의 기본 정보를 랜더링하는 비동기 함수
-async function storyPage(story_data) {
+async function storyPage(story_data, current_page, total_content_count) {
     
     // 로그인 한 Story 작성자만 댓글 삭제 버튼이 보이도록 설정
     if (localStorage.getItem("access")) {
@@ -110,6 +110,11 @@ async function storyPage(story_data) {
     // 싫어요 수 업데이트
     const hate_count = document.getElementById("hate-count")
     hate_count.innerText = story_data.hate_count + ' hates'
+
+    const translator = document.getElementById("translate")
+    translator.onclick = function() {
+        translateStory(story_data, current_page, total_content_count)
+    }
 }
 
 // 페이지의 동화 내용을 랜더링하는 비동기 함수
@@ -205,7 +210,47 @@ async function prePage(data, current_page, total_content_count) {
     createPage(data, current_page, total_content_count)
 }
 
-//-----------------------------------------------------------------------------------
+// 번역 버튼에 연결된 비동기 함수
+async function translateStory(story_data, current_page, total_content_count) {
+    try {
+        // 스토리 데이터에서 스토리 스크립트 및 제목 추출
+        const story_script = story_data["story_paragraph_list"]
+        const story_title = story_data["story_title"]
+
+        // 선택된 언어 가져오기
+        const target_language = document.getElementById('language').value;
+
+        const response = await fetch(`${backend_base_url}/story/translation/`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: "POST",
+            body: JSON.stringify({
+                "story_script": story_script,
+                "target_language": target_language,
+                "story_title": story_title
+            })
+        })
+
+        const response_json = await response.json()
+
+        // 각 문단에 번역된 내용 적용
+        for (let i = 0; i < story_script.length; i++) {
+            story_script[i]["paragraph"] = response_json["translated_scripts"][i]
+        }
+
+        // 서버 응답이 성공인 경우 번역된 제목 적용 및 번역 페이지 생성
+        if (response.status == 200) {
+            document.getElementById("title").innerText = response_json["translated_title"]
+            createPage(story_data, current_page, total_content_count)
+        } else if (response.status ==400) {
+            alert(response_json["error"])
+            return
+        }
+    } catch (error) {
+        alert("번역 요청 실패")
+    }
+}
 
 // 댓글창을 열고 닫는 비동기 함수
 async function toggleComments() {
