@@ -47,7 +47,7 @@ function getMyPage() {
 
                 bookmark_element.innerHTML = `
                 <div class="bookmark-card">
-                  <img src="${backend_base_url}${bookmark.content.story_image}" width="240px" height="150px";/>
+                  <img class="card-img" src="${backend_base_url}${bookmark.content.story_image}" />
                   <div class="card-text">
                   <p class="title">${bookmark.story_title}</p>
                   <p class="content">${bookmark.content.story_first_paragraph}</p>
@@ -78,7 +78,7 @@ function getMyPage() {
 
                 story_element.innerHTML = `
                 <div class="my-story-card">
-                          <img src="${backend_base_url}${story.content.story_image}" width="240px" height="150px";/>
+                          <img class="card-img" src="${backend_base_url}${story.content.story_image}" />
                           <div class="card-text">
                             <p class="title">${story.story_title}</p>
                             <p class="content">${story.content.story_first_paragraph}</p>
@@ -110,7 +110,7 @@ function getMyPage() {
 
                 recent_story_element.innerHTML = `
                 <div class="recently-card">
-                          <img src="${backend_base_url}${recent_story.content.story_image}" width="240px" height="150px";/>
+                          <img class="card-img" src="${backend_base_url}${recent_story.content.story_image}" />
                           <div class="card-text">
                             <p class="title">${recent_story.story_title}</p>
                             <p class="content">${recent_story.content.story_first_paragraph}</p>

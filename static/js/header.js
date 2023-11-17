@@ -1,7 +1,6 @@
 const frontend_base_url = "http://127.0.0.1:5501";
 const backend_base_url = "http://127.0.0.1:8000";
 
-
 // header 적용
 async function injectHeader() {
     fetch("../header.html")
@@ -38,23 +37,37 @@ async function injectHeader() {
 }
 injectHeader();
 
-
 // 로그인 모달 값 가져오기
-function updateLoginModal() {
-    const modalProfileImg = document.getElementById("modalProfileImg");
-    const modalNickname = document.querySelector(".modal-nickname");
-    const modalUserEmail = document.querySelector(".modal-useremail");
+async function updateLoginModal() {
+    try {
+        const response = await fetch(`${backend_base_url}/user/mypage/`, {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("access"),
+                "Content-Type": "application/json",
+                },
+            })
+        if (response.status == 200) {
+            const response_json = await response.json()
 
-    const payload = localStorage.getItem("payload");
-    const payload_parse = JSON.parse(payload);
+            const modalProfileImg = document.getElementById("modalProfileImg");
+            const modalNickname = document.querySelector(".modal-nickname");
+            const modalUserEmail = document.querySelector(".modal-useremail");
+        
+            modalProfileImg.src = `${backend_base_url}` + response_json.my_data.profile_img;
+            modalNickname.textContent = response_json.my_data.nickname;
+            modalUserEmail.textContent = response_json.my_data.email;
 
-    if (payload) {
-        modalProfileImg.src = `${backend_base_url}` + payload_parse.profile_img;
-        modalNickname.textContent = payload_parse.nickname;
-        modalUserEmail.textContent = payload_parse.email;
+            return response_json
+        } else {
+            alert("유저 정보를 불러오는데 실패했습니다")
+        }
+    } catch (error) {
+        alert("새로고침 후 다시 시도해주세요.");
     }
-}
 
+
+}
 
 // 로그아웃 (handleLogout()는 navbar.js에 있음)
 function handleLogout() {
