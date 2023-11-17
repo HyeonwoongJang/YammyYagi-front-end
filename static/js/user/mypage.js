@@ -99,13 +99,12 @@ function getMyPage() {
             });
 
             // 최근 조회한 글 목록 불러오기
-            const recent_storioes = data.recent_stories;
-            recent_storioes.reverse()
+            const story_timestamps = data.story_timestamps;
 
             const recent_story_list = document.getElementById("recently-story");
             recent_story_list.innerHTML = "";
 
-            recent_storioes.forEach((recent_story) => {
+            story_timestamps.forEach((recent_story) => {
                 const recent_story_element = document.createElement("div");
                 recent_story_element.setAttribute("onclick", `storyDetail(${recent_story.story_id})`);
 
@@ -134,8 +133,12 @@ function getMyPage() {
         });
 }
 
-window.addEventListener("load", getMyPage);
-
+window.addEventListener("load", getMyPage)
+window.onpageshow = function(event) {
+    if ( event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0]['type']=='back_forward')) {
+        location.replace(location.href);
+    }
+}
 function getInfoPage() {
     window.location.href = `${frontend_base_url}/user/user-info-update.html`;
 }
