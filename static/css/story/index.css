@@ -60,7 +60,7 @@
 }
 
 .card-body {
-    padding: 15px 5px 15px 5px;
+    padding: 15px 5px 20px 5px;
 }
 
 .card-text {
@@ -119,10 +119,22 @@ select option[value=""][disabled] {
       display: none;
 }
 
-.card-like-count {
+.bi {
     float: right;
     display: flex;
     font-weight: bold;
     font-size: 18px;
-    margin: -4px 3px 0px 0px;
+    margin: 0px 4px 0px 0px;
+    width: 16px;
+    height: 16px;
+    margin: 7px 5px 0px 0px;
+}
+
+.cardlikecount {
+    float: right;
+    display: flex;
+    font-weight: bold;
+    font-size: 18px;
+    width: 16px;
+    height: 16px;
 }
