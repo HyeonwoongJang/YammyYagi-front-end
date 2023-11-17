@@ -1,6 +1,6 @@
 .mypage-container {
-    width: 60%;
-    min-width: 1500px;
+    width: 55%;
+    min-width: 1340px;
     height: 100%;
     margin: 60px auto 60px auto;
     overflow: hidden;
@@ -26,7 +26,6 @@
 
     width: 80%;
     height: 100%;
-    min-width: 1100px;
 
     float: left;
 
@@ -51,7 +50,6 @@
 .r-left {
     width: 48%;
     height: 100%;
-    min-width: 500px;
 
     float: left;
 
@@ -64,7 +62,6 @@
 .r-right {
     width: 48%;
     height: 100%;
-    min-width: 500px;
 
     float: left;
 
