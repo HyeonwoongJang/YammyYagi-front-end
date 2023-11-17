@@ -71,26 +71,38 @@ html, body {
 
 #comment-list {
     width: 20%;
-    margin: 5% auto 5% auto;
-    
+    margin-left:90px;
 }
 
 .single_comment {
+    position: relative;
     display: flex;
     margin: 50px;
-    width: 200px;
+    width: 350px;
     height: 100px;
     background: #ddd;
     border-radius: 10px;
+    flex-direction: column;
     justify-content: center;
+}
+
+.single_comment::after {
+    content : "";
+    border-top: 0px solid transparent;
+    border-left: 25px solid transparent;
+    border-bottom: 16px solid #ddd;
+    border-right: 0px solid transparent;
+    position: absolute;
+    top: 70px;
+    left: -18px;
 }
 
 .comment_author_info{
     display: flex;
     justify-content: flex-star;
     align-items: center;
-    flex-direction: row;
-    margin-right: 5px;
+    margin-left:15px;
+
 }
 
 .comment_author_profile {
@@ -100,8 +112,11 @@ html, body {
     margin-right: 15px;
 }
 
+
+
 .comment_content {    
     overflow: hidden;
+    margin-left: 50px;
 }
 
 #counts {
