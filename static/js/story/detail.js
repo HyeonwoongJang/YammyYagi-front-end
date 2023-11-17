@@ -147,8 +147,11 @@ async function createPage(story_data, current_page, total_content_count){
 
 
     // 페이지 이동 버튼에 현재 페이지 번호를 id 값으로 부여
-    const page_button = document.getElementById("page-button")
-    page_button.innerHTML = ""
+    const pre_page_button = document.getElementById("pre-page-button")
+    const next_page_button = document.getElementById("next-page-button")
+
+    pre_page_button.innerHTML = ""
+    next_page_button.innerHTML = ""
 
     if (current_page == 1 && total_content_count != 1) {
         // 첫 번째 페이지이면서 총 컨텐츠 개수가 1개 이상일 때 다음 버튼 생성
@@ -161,7 +164,7 @@ async function createPage(story_data, current_page, total_content_count){
             nextPage(story_data, next_button.id, total_content_count)
         }
 
-        page_button.appendChild(next_button)
+        next_page_button.appendChild(next_button)
 
     } else if (1 < parseInt(current_page) && parseInt(current_page) < total_content_count) {
         // 첫 번째 페이지가 아니면서 중간 페이지일 때 이전, 다음 버튼 생성
@@ -182,8 +185,8 @@ async function createPage(story_data, current_page, total_content_count){
             nextPage(story_data, next_button.id, total_content_count)
         }
         
-        page_button.appendChild(pre_button)
-        page_button.appendChild(next_button)
+        pre_page_button.appendChild(pre_button)
+        next_page_button.appendChild(next_button)
 
     } else if (1 < parseInt(current_page) && parseInt(current_page) === total_content_count) {
         // 마지막 페이지일 때 이전 버튼 생성
@@ -196,7 +199,7 @@ async function createPage(story_data, current_page, total_content_count){
             prePage(story_data, pre_button.id, total_content_count)
         }
 
-        page_button.appendChild(pre_button)
+        pre_page_button.appendChild(pre_button)
     }
 }
 
@@ -285,7 +288,7 @@ async function toggleComments() {
 
             author_info.classList.add("comment_author_info")
 
-            author_profile.src = `${backend_base_url}${comment["author_profile"]}`
+            author_profile.src = `${backend_base_url}${comment["author_image"]}`
             author_profile.classList.add("comment_author_profile")
             author_nickname.innerText = comment["author_nickname"]
 
@@ -304,8 +307,8 @@ async function toggleComments() {
             if (localStorage.getItem("access")) {
                 const payload = localStorage.getItem("payload")
                 const payload_parse = JSON.parse(payload)
-                const comment_author = payload_parse.nickname
-                if (comment["author_nickname"] == comment_author) {
+                const comment_author = payload_parse.user_id
+                if (comment["author_id"] == comment_author) {
                     author_info.appendChild(delete_button)
                 }
             }
@@ -369,8 +372,8 @@ async function loadComments() {
             if (localStorage.getItem("access")) {
                 const payload = localStorage.getItem("payload")
                 const payload_parse = JSON.parse(payload)
-                const comment_author = payload_parse.nickname
-                if (comment["author_nickname"] == comment_author) {
+                const comment_author = payload_parse.user_id
+                if (comment["author_id"] == comment_author) {
                     author_info.appendChild(delete_button)
                 }
             }
