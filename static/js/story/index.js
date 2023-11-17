@@ -74,9 +74,23 @@ async function loadstories(page) {
                 newCardBody.appendChild(newCardCountry)
                 // card-like-count
                 const newCardLikeCount = document.createElement("div")
-                newCardLikeCount.setAttribute("class", "card-like-count")
-                newCardLikeCount.innerText = `🩷${story.like_user_list.length}`
+                newCardLikeCount.setAttribute("class", "cardlikecount")
+                newCardLikeCount.innerText = `${story.like_user_list.length}`
                 newCardCountry.appendChild(newCardLikeCount)
+
+                const newCardLikeCountDiv = document.createElement("svg");
+                newCardLikeCountDiv.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                newCardLikeCountDiv.setAttribute("fill", "currentColor");
+                newCardLikeCountDiv.setAttribute("class", "bi bi-suit-heart-fill");
+                newCardLikeCountDiv.setAttribute("viewBox", "0 0 16 16");
+
+                const newCardimogi = document.createElement("path");
+                newCardimogi.innerText = `${story.like_user_list.length}`
+                newCardimogi.setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z");
+                newCardLikeCountDiv.appendChild(newCardimogi);
+                const newHTML = newCardLikeCountDiv.outerHTML.replace(/<\/path>/g, '');
+                newCardCountry.appendChild(newCardLikeCountDiv)
+                newCardLikeCountDiv.outerHTML = newHTML;
 
                 story_list.appendChild(newCol)
             });
@@ -186,9 +200,23 @@ async function getlikestories() {
                 newCardBody.appendChild(newCardCountry)
                 // card-like-count
                 const newCardLikeCount = document.createElement("div")
-                newCardLikeCount.setAttribute("class", "card-like-count")
-                newCardLikeCount.innerText = `🩷${story.like_user_list.length}`
+                newCardLikeCount.setAttribute("class", "cardlikecount")
+                newCardLikeCount.innerText = `${story.like_user_list.length}`
                 newCardCountry.appendChild(newCardLikeCount)
+                
+                const newCardLikeCountDiv = document.createElement("svg");
+                newCardLikeCountDiv.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                newCardLikeCountDiv.setAttribute("fill", "currentColor");
+                newCardLikeCountDiv.setAttribute("class", "bi bi-suit-heart-fill");
+                newCardLikeCountDiv.setAttribute("viewBox", "0 0 16 16");
+
+                const newCardimogi = document.createElement("path");
+                newCardimogi.innerText = `${story.like_user_list.length}`
+                newCardimogi.setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z");
+                newCardLikeCountDiv.appendChild(newCardimogi);
+                const newHTML = newCardLikeCountDiv.outerHTML.replace(/<\/path>/g, '');
+                newCardCountry.appendChild(newCardLikeCountDiv)
+                newCardLikeCountDiv.outerHTML = newHTML;
 
                 story_list.appendChild(newCol)
             });
@@ -260,9 +288,23 @@ async function getcountrystories() {
                 newCardBody.appendChild(newCardCountry)
                 // card-like-count
                 const newCardLikeCount = document.createElement("div")
-                newCardLikeCount.setAttribute("class", "card-like-count")
-                newCardLikeCount.innerText = `🩷${story.like_user_list.length}`
+                newCardLikeCount.setAttribute("class", "cardlikecount")
+                newCardLikeCount.innerText = `${story.like_user_list.length}`
                 newCardCountry.appendChild(newCardLikeCount)
+                
+                const newCardLikeCountDiv = document.createElement("svg");
+                newCardLikeCountDiv.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                newCardLikeCountDiv.setAttribute("fill", "currentColor");
+                newCardLikeCountDiv.setAttribute("class", "bi bi-suit-heart-fill");
+                newCardLikeCountDiv.setAttribute("viewBox", "0 0 16 16");
+
+                const newCardimogi = document.createElement("path");
+                newCardimogi.innerText = `${story.like_user_list.length}`
+                newCardimogi.setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z");
+                newCardLikeCountDiv.appendChild(newCardimogi);
+                const newHTML = newCardLikeCountDiv.outerHTML.replace(/<\/path>/g, '');
+                newCardCountry.appendChild(newCardLikeCountDiv)
+                newCardLikeCountDiv.outerHTML = newHTML;
 
                 story_list.appendChild(newCol)
             });
