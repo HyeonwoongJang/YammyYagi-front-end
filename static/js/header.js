@@ -63,7 +63,7 @@ async function updateLoginModal() {
             alert("유저 정보를 불러오는데 실패했습니다")
         }
     } catch (error) {
-        alert("11새로고침 후 다시 시도해주세요.");
+        alert("새로고침 후 다시 시도해주세요.");
     }
 
 
