@@ -27,9 +27,12 @@
             <img src="https://www.doyacart.com/upFolder/doyacart/upFolder/upFile/dy_lecture/courseImageTypedPk_m/1670374005354_courseImageTypedPk_638fe271cce51_0.jpg">
         </div>
         <div class="category-container">
-            <button type="button" class="btn btn-outline-dark" id="new-category" style="margin:0px 180px 0px 0px;" onclick="loadstories()">최신순</button>
-            <button type="button" class="btn btn-outline-danger" id="hot-category" style="margin:0px 0px 0px 0px" onclick="getlikestories()">TOP 8 인기순</button>
-            <form class="category-container" style="margin:0px 0px 0px 100px; left:60px;">
+            <button type="button" class="btn btn-outline-dark" id="new-category" style="margin:auto 180px auto 0px;" onclick="loadstories()">최신순</button>
+            <button type="button" class="btn btn-outline-danger" id="hot-category" style="margin:auto 0px auto 0px" onclick="getlikestories()">TOP 8 인기순</button>
+            <form class="form-container" style="margin:auto 0px auto 100px; left:60px;">
+                <button type="button" class="btn btn-outline-primary" id="country-category" style="margin:0px 0px 0px 0px; left:50px;" onclick="getcountrystories()">
+                    TOP 8
+                </button>
                 <select class="info" id="select-country" required>
                     <option value="" disabled selected>국가선택</option>
                     <option value="대한민국">대한민국</option>
@@ -39,9 +42,6 @@
                     <option value="일본">일본</option>
                     <option value="중국">중국</option>
                 </select>
-                <button type="button" class="btn btn-outline-primary" id="country-category" style="margin:0px 0px 0px 0px; left:50px;" onclick="getcountrystories()">
-                    TOP 8
-                </button>
             </form>
         </div>
         <div class="index-container">
