@@ -51,7 +51,7 @@ function getMyPage() {
                   <div class="card-text">
                   <p class="title">${bookmark.story_title}</p>
                   <p class="content">${bookmark.content.story_first_paragraph}</p>
-                  <hr>
+                  <hr class="card-hr">
                   <div class="card_bottom">
                     <p class="country">${bookmark.author_country}
                     <span class="like">
@@ -82,7 +82,7 @@ function getMyPage() {
                           <div class="card-text">
                             <p class="title">${story.story_title}</p>
                             <p class="content">${story.content.story_first_paragraph}</p>
-                            <hr>
+                            <hr class="card-hr">
                             <div class="card_bottom">
                                 <p class="country">${story.author_country}
                                 <span class="like">
@@ -115,7 +115,7 @@ function getMyPage() {
                           <div class="card-text">
                             <p class="title">${recent_story.story_title}</p>
                             <p class="content">${recent_story.content.story_first_paragraph}</p>
-                            <hr>
+                            <hr class="card-hr">
                             <div class="card_bottom">
                                 <p class="country">${recent_story.author_country}
                                 <span class="like">
