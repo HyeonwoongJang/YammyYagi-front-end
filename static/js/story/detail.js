@@ -11,13 +11,20 @@ let headers = {
     "Content-Type": "application/json",
 }
 
-// 창이 로드될 때의 이벤트 핸들러
-window.onload = () => {
-    renderPage();       // 페이지의 주요 내용을 렌더링
+window.onload = async function() {
+    const data = await tempRender()
+    const story_data = data["detail"]
+
+    // 초기 화면에는 첫 번째 컨텐츠 랜더링
+    const current_page = 1
+    const total_content_count = story_data.story_paragraph_list.length
+    
+    storyPage(story_data, current_page, total_content_count)
+    createPage(story_data, current_page, total_content_count)
 }
 
-// 페이지의 주요 내용을 렌더링하는 비동기 함수
-async function renderPage() {
+// 페이지 GET 요청하는 비동기 함수
+async function tempRender(){
 
     // 만약 로그인한 사용자라면, Authorization 헤더에 액세스 토큰을 추가
     if (localStorage.getItem("access")) {
@@ -30,91 +37,218 @@ async function renderPage() {
             method : "GET",
             headers : headers,      // 로그인되어 있는 경우에만 헤더에"Authorization" 필드가 추가됨.
         })
-
         const response_json = await response.json()
-        const story_data = response_json["detail"]
-        const story_paragraph = story_data["story_paragraph_list"]
 
-        // 로그인 한 Story 작성자만 댓글 삭제 버튼이 보이도록 설정
-
-        if (localStorage.getItem("access")) {
-            const payload = localStorage.getItem("payload")
-            const payload_parse = JSON.parse(payload)
-            const story_author_id = payload_parse.user_id
-            
-            const story_delete_button = document.getElementById("story-delete")
-            if (story_data["author_id"] != story_author_id) {
-                story_delete_button.style.display = "none";
-            } else {
-                story_delete_button.style.display = "";
-            }
+        // 서버 응답이 성공인 경우 데이터 반환
+        if (response.status == 200) {
+            return response_json
+        } else if (response.status == 403) {
+            alert(response_json["error"])
+            return
         }
+    } catch (error) {
+        alert("페이지 요청 실패")
+    }
+}
+
+// 페이지의 기본 정보를 랜더링하는 비동기 함수
+async function storyPage(story_data, current_page, total_content_count) {
+    
+    // 로그인 한 Story 작성자만 댓글 삭제 버튼이 보이도록 설정
+    if (localStorage.getItem("access")) {
+        const payload = localStorage.getItem("payload")
+        const payload_parse = JSON.parse(payload)
+        const story_author_id = payload_parse.user_id
         
-        // Story 제목 설정
-        document.getElementById("title").innerText = story_data["story_title"]
+        const story_delete_button = document.getElementById("story-delete")
+        if (story_data["author_id"] != story_author_id) {
+            story_delete_button.style.display = "none";
+        } else {
+            story_delete_button.style.display = "";
+        }
+    }
 
-        const story_content = document.getElementById("content")
-        
-        
-        // 각 페이지를 렌더링
-        story_paragraph.forEach(page => {
-            const page_div = document.createElement("div")
-            const page_img = document.createElement("img")
-            const page_content = document.createElement("p")
+    // Story 제목 설정
+    document.getElementById("title").innerText = story_data.story_title
 
-            page_img.src = `${backend_base_url}${page["story_image"]}`
-            page_content.innerText = page["paragraph"]
+    // 북마크 상태를 업데이트하고, 현재 사용자의 북마크 여부에 따라 아이콘 표시를 변경
+    const bookmarked_icon = document.getElementById("bookmarked-icon")
+    const not_bookmarked_icon = document.getElementById("not-bookmarked-icon")
 
-            
-            page_div.appendChild(page_img)
-            page_div.appendChild(page_content)
-            story_content.appendChild(page_div)
+    if (localStorage.getItem("access")) {
+        const payload = localStorage.getItem("payload")
+        const payload_parse = JSON.parse(payload)
+        const user_id = payload_parse.user_id
 
-            page_img.classList.add("page-img")
+        // 스토리의 북마크된 사용자 목록을 가져와서 사용자 ID 리스트 생성
+        const b_user_list = story_data.bookmark_user_list
+        const b_user_id_list = []
+
+        b_user_list.forEach(user => {
+            b_user_id_list.push(user["id"])
         })
 
-        // 북마크 상태를 업데이트하고, 현재 사용자의 북마크 여부에 따라 아이콘 표시를 변경
-        const bookmarked_icon = document.getElementById("bookmarked-icon")
-        const not_bookmarked_icon = document.getElementById("not-bookmarked-icon")
-
-        if (localStorage.getItem("access")) {
-            const payload = localStorage.getItem("payload")
-            const payload_parse = JSON.parse(payload)
-            const user_id = payload_parse.user_id
-
-            // 스토리의 북마크된 사용자 목록을 가져와서 사용자 ID 리스트 생성
-            const b_user_list = response_json["detail"].bookmark_user_list
-            const b_user_id_list = []
-
-            b_user_list.forEach(user => {
-                b_user_id_list.push(user["id"])
-            })
-
-            // 현재 사용자의 ID가 북마크된 사용자 리스트에 포함되어 있으면 북마크된 상태로 표시
-            if (b_user_id_list.includes(user_id)) {
-                bookmarked_icon.style.display = "";
-                not_bookmarked_icon.style.display = "none";
-            } else {
-                // 그렇지 않으면 북마크되지 않은 상태로 표시
-                bookmarked_icon.style.display = "none";
-                not_bookmarked_icon.style.display = "";
-            }
+        // 현재 사용자의 ID가 북마크된 사용자 리스트에 포함되어 있으면 북마크된 상태로 표시
+        if (b_user_id_list.includes(user_id)) {
+            bookmarked_icon.style.display = "";
+            not_bookmarked_icon.style.display = "none";
         } else {
-            // 로그인하지 않은 경우 북마크되지 않은 상태로 표시
+            // 그렇지 않으면 북마크되지 않은 상태로 표시
             bookmarked_icon.style.display = "none";
             not_bookmarked_icon.style.display = "";
         }
+    } else {
+        // 로그인하지 않은 경우 북마크되지 않은 상태로 표시
+        bookmarked_icon.style.display = "none";
+        not_bookmarked_icon.style.display = "";
+    }
 
-        // 좋아요 수 업데이트
-        const like_count = document.getElementById("like-count")
-        like_count.innerText = response_json["detail"].like_count + ' likes'
+    // 좋아요 수 업데이트
+    const like_count = document.getElementById("like-count")
+    like_count.innerText = story_data.like_count + ' likes'
 
-        // 싫어요 수 업데이트
-        const hate_count = document.getElementById("hate-count")
-        hate_count.innerText = response_json["detail"].hate_count + ' hates'
+    // 싫어요 수 업데이트
+    const hate_count = document.getElementById("hate-count")
+    hate_count.innerText = story_data.hate_count + ' hates'
 
+    const translator = document.getElementById("translate")
+    translator.onclick = function() {
+        translateStory(story_data, current_page, total_content_count)
+    }
+}
+
+// 페이지의 동화 내용을 랜더링하는 비동기 함수
+async function createPage(story_data, current_page, total_content_count){
+
+    // 현재 페이지에 해당하는 데이터 가져오기
+    const page_data = story_data.story_paragraph_list[parseInt(current_page) - 1]
+
+    // 동화책 페이지 랜더링을 위한 요소
+    const story_content = document.getElementById("content-box")
+    
+    // 랜더링 전에 내용 비워주기
+    story_content.innerHTML=""
+
+    // 페이지의 이미지와 내용을 담을 요소들 생성
+    const page_div = document.createElement("div")
+    const page_img = document.createElement("img")
+    const page_content = document.createElement("p")
+
+    // 이미지와 내용에 데이터 설정
+    page_img.src = `${backend_base_url}${page_data["story_image"]}`
+    page_content.innerText = page_data["paragraph"]
+
+    // 요소들을 조립하여 동화책 페이지에 추가
+    page_div.appendChild(page_img)
+    page_div.appendChild(page_content)
+    story_content.appendChild(page_div)
+
+    page_img.classList.add("page-img")
+
+
+    // 페이지 이동 버튼에 현재 페이지 번호를 id 값으로 부여
+    const page_button = document.getElementById("page-button")
+    page_button.innerHTML = ""
+
+    if (current_page == 1 && total_content_count != 1) {
+        // 첫 번째 페이지이면서 총 컨텐츠 개수가 1개 이상일 때 다음 버튼 생성
+
+        const next_button = document.createElement("button")
+        next_button.type = "button"
+        next_button.innerText=">>"
+        next_button.id = parseInt(current_page) + 1
+        next_button.onclick = function() {
+            nextPage(story_data, next_button.id, total_content_count)
+        }
+
+        page_button.appendChild(next_button)
+
+    } else if (1 < parseInt(current_page) && parseInt(current_page) < total_content_count) {
+        // 첫 번째 페이지가 아니면서 중간 페이지일 때 이전, 다음 버튼 생성
+
+        const pre_button = document.createElement("button")
+        pre_button.type = "button"
+        pre_button.innerText="<<"
+        pre_button.id = parseInt(current_page) - 1
+        pre_button.onclick = function() {
+            prePage(story_data, pre_button.id, total_content_count)
+        }
+
+        const next_button = document.createElement("button")
+        next_button.type = "button"
+        next_button.innerText=">>"
+        next_button.id = parseInt(current_page) + 1
+        next_button.onclick = function() {
+            nextPage(story_data, next_button.id, total_content_count)
+        }
+        
+        page_button.appendChild(pre_button)
+        page_button.appendChild(next_button)
+
+    } else if (1 < parseInt(current_page) && parseInt(current_page) === total_content_count) {
+        // 마지막 페이지일 때 이전 버튼 생성
+
+        const pre_button = document.createElement("button")
+        pre_button.type = "button"
+        pre_button.innerText="<<"
+        pre_button.id = parseInt(current_page) - 1
+        pre_button.onclick = function() {
+            prePage(story_data, pre_button.id, total_content_count)
+        }
+
+        page_button.appendChild(pre_button)
+    }
+}
+
+// 다음 버튼에 연결된 비동기 함수
+async function nextPage(data, current_page, total_content_count){
+    createPage(data, current_page, total_content_count)
+}
+
+// 이전 버튼에 연결된 비동기 함수
+async function prePage(data, current_page, total_content_count) {
+    createPage(data, current_page, total_content_count)
+}
+
+// 번역 버튼에 연결된 비동기 함수
+async function translateStory(story_data, current_page, total_content_count) {
+    try {
+        // 스토리 데이터에서 스토리 스크립트 및 제목 추출
+        const story_script = story_data["story_paragraph_list"]
+        const story_title = story_data["story_title"]
+
+        // 선택된 언어 가져오기
+        const target_language = document.getElementById('language').value;
+
+        const response = await fetch(`${backend_base_url}/story/translation/`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: "POST",
+            body: JSON.stringify({
+                "story_script": story_script,
+                "target_language": target_language,
+                "story_title": story_title
+            })
+        })
+
+        const response_json = await response.json()
+
+        // 각 문단에 번역된 내용 적용
+        for (let i = 0; i < story_script.length; i++) {
+            story_script[i]["paragraph"] = response_json["translated_scripts"][i]
+        }
+
+        // 서버 응답이 성공인 경우 번역된 제목 적용 및 번역 페이지 생성
+        if (response.status == 200) {
+            document.getElementById("title").innerText = response_json["translated_title"]
+            createPage(story_data, current_page, total_content_count)
+        } else if (response.status ==400) {
+            alert(response_json["error"])
+            return
+        }
     } catch (error) {
-        alert("페이지 로드 실패")
+        alert("번역 요청 실패")
     }
 }
 
