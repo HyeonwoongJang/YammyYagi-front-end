@@ -9,15 +9,21 @@ html, body {
     background-color: #fff7f7;
     display: flex;
     margin-top: 10%;
-    height: 100%;
+
+    width: 90%;
+    margin: 5% auto 0px auto;
 }
+
+
 .second-line {
     border-color: #fff7f7;
-    border: 1px solid;
+    border: 3px solid;
     background-color: #fff7f7;
     display: flex;
-    height: 100%; 
+    height: 100%;
+    width: 90%;
 }
+
 #title {
     margin: auto 5% auto 5%;
 }
@@ -25,18 +31,25 @@ html, body {
     margin: auto 5% auto auto;
 }
 
-.second-line {
-    display: flex;
-}
-
 #content {
-    border: 1px solid;
+    border: 2px solid;
     width: 100%;
     height: 600px;
     overflow-y: auto;
-    border: 1px solid #ccc;
+    border: 1px solid #db7878;
     text-align: center;
     position: relative;
+}
+
+#content-box {
+    border: 1px solid;
+    width: 100%;
+    height: 450px;
+    overflow-y: auto;
+    border: 1px solid #0a0808;
+    text-align: center;
+    position: relative;
+    margin: 5% auto 5% auto;
 }
 
 .page-img {
@@ -50,46 +63,59 @@ html, body {
     border: 1px solid;
     width: 50%;
     padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 #comment-list {
-    width: 80%;
+    width: 20%;
     margin: 5% auto 5% auto;
+    
 }
 
 .single_comment {
-    border: 1px solid;
-    width: 80%;
-    height: 80%;
-    margin: 5% 10% 5% 10%;
-    padding: 2% 2% 2% 2%;
+    display: flex;
+    margin: 50px;
+    width: 200px;
+    height: 100px;
+    background: #ddd;
+    border-radius: 10px;
+    justify-content: center;
 }
+
 .comment_author_info{
     display: flex;
+    justify-content: flex-star;
+    align-items: center;
+    flex-direction: row;
+    margin-right: 5px;
 }
 
 .comment_author_profile {
     width: 25px;
     height: 25px;
     border-radius: 100%;
-    margin-right: 5px;
+    margin-right: 15px;
 }
 
-.comment_content {
+.comment_content {    
     overflow: hidden;
 }
 
 #counts {
     width: 14%;
-    margin-right: 10%;
     display: flex;
 }
+
 #counts p {
     margin: auto 10px auto 0px; /* 원하는 간격 설정 */
 }
+
 #translator {
     display: flex;
-    margin: auto 5% auto 0%;
+    margin: auto 0% auto 0%;
 }
 
 
@@ -100,4 +126,9 @@ html, body {
     margin-top: auto;
     bottom: 0;
     right: 0;
+}
+
+.btn-block {
+    width: 15%;
+    margin-left: 10px;
 }
