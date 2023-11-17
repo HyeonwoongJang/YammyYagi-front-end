@@ -87,7 +87,6 @@
 }
 
 .rl-bottom {
-    background-color: rgb(250, 250, 250);
     width: 500px;
     height: 340px;
 
@@ -207,7 +206,11 @@
 
 .short_scroll-container{
     overflow-y: auto; 
-    height: 400px;
+    height: 340px;
 }
 
+.like {
+    margin-left: 50%;
+    font-weight: bold;
+}
 
