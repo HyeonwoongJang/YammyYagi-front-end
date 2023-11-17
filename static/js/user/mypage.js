@@ -52,7 +52,14 @@ function getMyPage() {
                   <p class="title">${bookmark.story_title}</p>
                   <p class="content">${bookmark.content.story_first_paragraph}</p>
                   <hr>
-                  <p class="country">${bookmark.author_country}</p>
+                  <div class="card_bottom">
+                    <p class="country">${bookmark.author_country}
+                    <span class="like">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                    <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                    </svg>${bookmark.like_user_list.length}
+                    </span></p>
+                  </div> 
                 </div>
                 `;
 
@@ -76,7 +83,14 @@ function getMyPage() {
                             <p class="title">${story.story_title}</p>
                             <p class="content">${story.content.story_first_paragraph}</p>
                             <hr>
-                            <p class="country">${story.author_country}</p>
+                            <div class="card_bottom">
+                                <p class="country">${story.author_country}
+                                <span class="like">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                                <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                                </svg>${story.like_user_list.length}
+                                </span></p>
+                            </div>
                           </div>
                       </div>
                   </div>
@@ -102,7 +116,14 @@ function getMyPage() {
                             <p class="title">${recent_story.story_title}</p>
                             <p class="content">${recent_story.content.story_first_paragraph}</p>
                             <hr>
-                            <p class="country">${recent_story.author_country}</p>
+                            <div class="card_bottom">
+                                <p class="country">${recent_story.author_country}
+                                <span class="like">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                                <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                                </svg>${recent_story.like_user_list.length}
+                                </span></p>
+                            </div>
                           </div>
                       </div>
                   </div>

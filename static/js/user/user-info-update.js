@@ -1,6 +1,3 @@
-backend_base_url = "http://127.0.0.1:8000"
-frontend_base_url = "http://127.0.0.1:5501"
-
 window.onload = () => {
     console.log("회원정보 수정 페이지 로드됨.")
     renderPage();
@@ -187,7 +184,7 @@ async function handleUpdate() {
 
     const profileImageInput = document.getElementById("profile-img");
     if (profileImageInput.files.length > 0) {
-        data.append("image", profileImageInput.files[0]);
+        data.append("profile_img", profileImageInput.files[0]);
     }
     
     try {
