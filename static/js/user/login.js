@@ -65,7 +65,36 @@ async function handleLogin() {
     } catch (error) {
       alert("새로고침 후 다시 시도해주세요.");
     }
+}
 
+// 비밀번호 재설정 팝업을 열기 위한 비동기 함수
+async function resetPassword() {
+    // 새 창으로 열기
+    window.open("pop-up.html", "비밀번호 찾기", "width=400, height=300, top=10, left=10")
+}
 
+// 비밀번호 재설정 링크를 이메일로 보내는 비동기 함수
+async function sendEmail() {
 
+    // 이메일 입력 필드에서 이메일 값 가져오기
+    const email = document.getElementById("email-for-pw").value
+
+    const response = await fetch(`${backend_base_url}/user/pwd-reset/`, {
+        headers: {
+            "content-type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+            email: email,
+        }),
+    })
+    const response_json = await response.json();
+    console.log(response_json)
+    if (response_json["status"] == "400") {
+        alert(`${response_json["error"]}`)
+        return;
+    } else if (response_json["status"] == "200") {
+        alert(`${response_json["success"]}`)
+        return;
+    }
 }
