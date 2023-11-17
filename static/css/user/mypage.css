@@ -1,7 +1,8 @@
-.container {
-    width: 100%;
+.mypage-container {
+    width: 60%;
+    min-width: 1500px;
     height: 100%;
-
+    margin: 60px auto 60px auto;
     overflow: hidden;
 }
 
@@ -25,6 +26,7 @@
 
     width: 80%;
     height: 100%;
+    min-width: 1100px;
 
     float: left;
 
@@ -47,8 +49,9 @@
 }
 
 .r-left {
-    width: 49.9%;
+    width: 48%;
     height: 100%;
+    min-width: 500px;
 
     float: left;
 
@@ -59,8 +62,9 @@
 }
 
 .r-right {
-    width: 49.9%;
+    width: 48%;
     height: 100%;
+    min-width: 500px;
 
     float: left;
 
@@ -75,7 +79,7 @@
     border: 1px solid rgb(209, 206, 206);
     margin-top: 1%;
     height: 720px;
-
+    margin: 0px 10px 0px 10px;
     float: left;
 }
 
@@ -160,7 +164,7 @@
 }
 
 .card-text {
-    width: 230px;
+    width: 210px;
     height: 120px;
     margin: 10px 0px 0px 8px;
 }
@@ -177,10 +181,24 @@
 .title {
     font-weight: bold;
     font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    font-size: 13px;
+    max-width: 210px;
 }
 
 .content {
     font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 10px;
+    max-width: 210px;
 }
 
 [type="button"] {
@@ -206,11 +224,21 @@
 
 .short_scroll-container{
     overflow-y: auto; 
-    height: 340px;
+    height: 300px;
+}
+
+
+.card-img {
+    height: 100%;
+    max-height: 150px;
 }
 
 .like {
     margin-left: 50%;
     font-weight: bold;
+    font-size: 10px;
 }
 
+.country {
+    font-size: 10px;
+}
