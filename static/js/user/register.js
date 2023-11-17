@@ -83,7 +83,7 @@ async function handleSigninButton(){
         return;
     }
     else if(response.status == 201){
-        alert("회원가입을 축하드립니다.")
+        alert("YummyYagi 인증 이메일이 발송되었습니다. 이메일을 확인해주세요.")
         window.location.replace(`${frontend_base_url}/user/login.html`)
         return;
     }
