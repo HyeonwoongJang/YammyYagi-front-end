@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
 *{
     color:#000000;
-    font-family: 'Open Sans',sans-serif;
 }
 .body-container {
     margin:0;
@@ -9,13 +8,8 @@
     background-color: #FFFFFF;
     display:flex;
 }
-h1{
-    font-size:33px;
-    font-weight: bolder;
-}
+
 .information{
-    font-size:33px;
-    font-weight: bolder;
     padding:20px;
     position: relative;
     width: 100%;
