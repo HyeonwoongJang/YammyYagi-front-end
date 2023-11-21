@@ -11,7 +11,7 @@ const targetLanguage=document.getElementById('language')
 window.onload = () => { 
     if (!localStorage.getItem("access")) {
         alert("잘못된 접근입니다.")
-        window.location.href = `${frontend_base_url}/story/`
+        window.location.href = `${frontend_base_url}`
     }
 }
 function changeInput(value){
@@ -176,7 +176,7 @@ async function createStory(){
         }
         else{
             window.alert(res_json.error)
-            window.location.reload(`${frontend_base_url}/story/`);
+            window.location.reload(`${frontend_base_url}`);
         }
     }
     catch(error){

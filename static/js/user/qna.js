@@ -16,7 +16,7 @@ async function createQnA() {
 
         if (status == "201" && response.status == 201) {
             alert(`${response_json["success"]}`)
-            window.location.replace(`${frontend_base_url}/story/index.html`)
+            window.location.replace(`${frontend_base_url}/index.html`)
             return;
         } else if (status == "400" && response.status == 400) {
             alert(`${response_json["error"]}`)

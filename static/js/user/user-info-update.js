@@ -36,7 +36,7 @@ async function renderPage() {
             }
         } else {
             alert("잘못된 접근입니다.")
-            window.location.href = `${frontend_base_url}/story/index.html`
+            window.location.href = `${frontend_base_url}/index.html`
         }
     } catch (error) {
         alert("잘못된 접근입니다.");
@@ -149,7 +149,7 @@ async function userDeleteButton() {
 
             if (status == "204") {
                 alert(`${response_json["success"]}`)
-                window.location.replace(`${frontend_base_url}/story/index.html`)
+                window.location.replace(`${frontend_base_url}/index.html`)
                 return;
             } else if (status == "400" && response.status == 400) {
                 alert(`${response_json["error"]}`)

@@ -75,5 +75,5 @@ function handleLogout() {
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
     location.reload()
-    window.location.replace(`${frontend_base_url}/story/`)
+    window.location.replace(`${frontend_base_url}`)
 }

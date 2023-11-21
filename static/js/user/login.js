@@ -6,7 +6,7 @@ window.onload = () => {
 
     if (localStorage.getItem("access")) {
         alert("잘못된 접근입니다.")
-        window.location.href = `${frontend_base_url}/story/`
+        window.location.href = `${frontend_base_url}`
     }
 }
 
@@ -59,7 +59,7 @@ async function handleLogin() {
 
             localStorage.setItem("payload", jsonPayload);
             alert("환영합니다.");
-            window.location.replace(`${frontend_base_url}/story/`);
+            window.location.replace(`${frontend_base_url}`);
             return;
         }
     } catch (error) {
