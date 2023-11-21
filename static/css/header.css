@@ -3,6 +3,10 @@ header {
     padding: 10px 0px 10px 0px;
 }
 
+body {
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
 .nav-item {
     float : left;
     text-align: left;

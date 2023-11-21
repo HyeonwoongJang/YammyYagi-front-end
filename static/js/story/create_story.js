@@ -42,7 +42,7 @@ async function getMessage(){
             window.location.reload();
         }else{
             window.alert(data.message)
-            const defaultMessage=document.querySelector('h1')
+            const defaultMessage=document.querySelector('h3')
             defaultMessage.style.display="none"
 
             let original = data.original.replace(/\n/g, "<br>");
