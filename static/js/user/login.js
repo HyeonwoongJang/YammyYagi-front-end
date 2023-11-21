@@ -1,5 +1,5 @@
-const frontend_base_url = "https://www.yummyyagi.com";
-const backend_base_url = "https://api.yummyyagi.com";
+const frontend_base_url = "http://127.0.0.1:5501";
+const backend_base_url = "http://127.0.0.1:8000";
 
 window.onload = () => {
     console.log("로그인 페이지 로드됨.")
