@@ -6,7 +6,7 @@ const backend_base_url = "http://127.0.0.1:8000";
 window.onload = () => { 
     if (localStorage.getItem("access")) {
         alert("잘못된 접근입니다.")
-        window.location.href = `${frontend_base_url}/story/`
+        window.location.href = `${frontend_base_url}`
     }
 }
 
