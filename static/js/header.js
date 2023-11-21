@@ -77,3 +77,14 @@ function handleLogout() {
     location.reload()
     window.location.replace(`${frontend_base_url}/story/`)
 }
+
+// 1시간 후 자동 로그아웃 설정
+function setAutoLogout() {
+    setTimeout(function () {
+        handleLogout();
+        alert("로그인 1시간 초과로 자동 로그아웃 됐습니다.")
+        window.location.replace(`${frontend_base_url}/story/`)
+    }, 60 * 60 * 1000); // 밀리초 단위로 적어야 함
+}
+
+setAutoLogout();
