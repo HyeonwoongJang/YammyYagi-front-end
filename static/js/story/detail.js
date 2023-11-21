@@ -481,7 +481,7 @@ async function deleteStory() {
 
             if (status == "204") {
                 alert(`${response_json["success"]}`)
-                window.location.href = `${frontend_base_url}`    // 동화 삭제 후 메인페이지로 이동
+                window.location.href = `${frontend_base_url}/index.html`    // 동화 삭제 후 메인페이지로 이동
                 return;
             } else if(status == "401" && response.status == 401) {
                 alert(`${response_json["error"]}`)                      // 권한이 없는 경우

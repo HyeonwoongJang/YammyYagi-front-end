@@ -2,7 +2,7 @@
 window.onload = () => { 
     if (!localStorage.getItem("access")) {
         alert("잘못된 접근입니다.")
-        window.location.href = `${frontend_base_url}`
+        window.location.href = `${frontend_base_url}/index.html`
     }
 }
 

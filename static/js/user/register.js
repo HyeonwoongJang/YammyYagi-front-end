@@ -1,12 +1,12 @@
-const frontend_base_url = "http://www.yummyyagi.com";
-const backend_base_url = "http://api.yummyyagi.com";
+const frontend_base_url = "http://127.0.0.1:5501";
+const backend_base_url = "http://127.0.0.1:8000";
 
 
 // 로그인 체크
 window.onload = () => { 
     if (localStorage.getItem("access")) {
         alert("잘못된 접근입니다.")
-        window.location.href = `${frontend_base_url}`
+        window.location.href = `${frontend_base_url}/index.html`
     }
 }
 

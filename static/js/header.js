@@ -1,5 +1,5 @@
-const frontend_base_url = "http://www.yummyyagi.com";
-const backend_base_url = "http://api.yummyyagi.com";
+const frontend_base_url = "http://127.0.0.1:5501";
+const backend_base_url = "http://127.0.0.1:8000";
 
 // header 적용
 async function injectHeader() {
@@ -75,5 +75,5 @@ function handleLogout() {
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
     location.reload()
-    window.location.replace(`${frontend_base_url}/`)
+    window.location.replace(`${frontend_base_url}/index.html`)
 }
