@@ -149,6 +149,9 @@ async function userDeleteButton() {
 
             if (status == "204") {
                 alert(`${response_json["success"]}`)
+                localStorage.removeItem("access")
+                localStorage.removeItem("refresh")
+                localStorage.removeItem("payload")
                 window.location.replace(`${frontend_base_url}/index.html`)
                 return;
             } else if (status == "400" && response.status == 400) {
