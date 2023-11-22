@@ -1,13 +1,13 @@
 const submitButton = document.querySelector('#submit-theme')
 const outPutElement = document.querySelector('.output-container')
 const inputElement=document.querySelector('input#prompt')
-const historyElement=document.querySelector('.history')
-const buttonElement=document.querySelector('button')
 const bottomSection=document.querySelector('.bottom-section')
 const imagegenButton=document.querySelector('#image-gen')
 const storygenButton=document.querySelector('#submit-title')
 const titleInput=document.querySelector('#title')
 const targetLanguage=document.getElementById('language')
+const first_input_container=document.getElementById('first-input-container')
+
 window.onload = () => { 
     if (!localStorage.getItem("access")) {
         alert("잘못된 접근입니다.")
@@ -60,12 +60,13 @@ async function getMessage(){
             outPutElement.appendChild(translatedText)
 
             imagegenButton.style.display="block"
+            first_input_container.style.display="none"
+            outPutElement.style.display="block"
             
             if (data.translation&&inputElement.value){
                 const pElement=document.createElement('p')
                 pElement.textContent=inputElement.value
                 pElement.addEventListener('click',()=>changeInput(pElement.textContent))
-                historyElement.append(pElement)
             }
         }
     }catch (error){
@@ -77,8 +78,6 @@ function clearInput(){
     inputElement.value=''
 }
 submitButton.addEventListener('click',getMessage)
-
-buttonElement.addEventListener('click',clearInput)
 
 async function getImage(){
     console.log('image generated...')

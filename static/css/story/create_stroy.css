@@ -4,7 +4,7 @@
 }
 .body-container {
     margin:0;
-    padding:30px;
+    padding:50px;
     background-color: #FFFFFF;
     display:flex;
 }
@@ -15,7 +15,7 @@
     width: 100%;
     max-width: 1000px;
     background-color: #fff7fd;
-    margin-bottom: 40px;
+    margin-bottom: 100px;
 }
 
 .main {
@@ -28,9 +28,9 @@
     width: 100%;
 }
 .info-footer{
-    color:#FFC8F3;
-    font-size:11px;
-    margin:25px 0px 20px 0px
+    color:#ffbff2;
+    font-size:14px;
+    margin:30px 0px 20px 0px;
 }
 
 input{
@@ -69,21 +69,39 @@ input:focus{
     margin-right:10px;
     font-size: 30px;
 }
+
 .bottom-section #image-gen{
     display: none;
 }
-.input-container #title,.input-container #submit-title{
+
+.input-container #title {
     display:none;
+    margin-top: 50px;
+    width:81%;
 }
+
+.input-container #submit-title {
+    display:none;
+    margin-top: -48px;
+    border:none;
+    background-color:#FFC8F3;
+    padding:12px 15px;
+    border-radius:5px;
+    box-shadow:rgb(0,0,0,0.05) 0 54px 55px,
+    rgb(0,0,0,0.05) 0 -12px 30px,
+    rgb(0,0,0,0.05) 0 4px 6px,
+    rgb(0,0,0,0.05) 0 12px 3px,
+    rgb(0,0,0,0.05) 0 -3px 5px;
+    position: relative;
+    width: 110px;
+    max-width: 650px;
+    float: right;
+}
+
 button{
     border:solid 0.5px #000000;
     background-color:transparent;
     border-radius: 5px;
-    padding:10px;
-    margin:10px;
-}
-nav{
-    border-top:solid 0.5px rgba(255,255,255,0,5);
     padding:10px;
     margin:10px;
 }
@@ -92,6 +110,8 @@ nav{
     max-width: 50%;
     background-color: #fff6fd;
     margin-bottom: 30px;
+    padding:20px;
+    display: none;
 }
 
 .info {
@@ -115,9 +135,34 @@ select option {
 }
 
 .create-btn {
-    margin: 30px auto 30px auto;
+    border:none;
+    background-color:#FFC8F3;
+    font-size:20px;
+    padding:12px 15px;
+    border-radius:5px;
+    box-shadow:rgb(0,0,0,0.05) 0 54px 55px,
+    rgb(0,0,0,0.05) 0 -12px 30px,
+    rgb(0,0,0,0.05) 0 4px 6px,
+    rgb(0,0,0,0.05) 0 12px 3px,
+    rgb(0,0,0,0.05) 0 -3px 5px;
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+}
+
+.create-btn-div {
+    font-size: 14px;
+    color: rgb(109, 109, 109);
 }
 
 .original-script-box {
     display: none;
+}
+
+.translated-script-box {
+    margin-bottom:30px;
+}
+
+.text-of-paragraph {
+    margin: 20px 0px 20px 0px;
 }

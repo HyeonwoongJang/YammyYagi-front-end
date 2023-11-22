@@ -21,7 +21,7 @@
     </div>
     <div class="output-container"></div>
     <div class="bottom-section">
-        <div class="input-container">
+        <div class="input-container" id="first-input-container">
             <select class="info" id="language" required>
                 <option value="" disabled selected>  --  Select Language  --  </option>
                 <option value="hr" disabled> </option>
@@ -41,10 +41,15 @@
             <input id="prompt" placeholder="예시 : 주제를 입력하세요"/>
             <div id="submit-theme">📨</div>
         </div>
-        <div class="create-btn" id="image-gen">이미지 생성</div>
+        <div class="create-btn" id="image-gen">
+            이미지 생성
+            <div class="create-btn-div">(이미지를 새로 생성하고 싶으시면 다시 클릭하세요)</div>
+        </div>
         <div class="input-container">
-            <input id="title" placeholder="동화의 제목을 정해주세요"/>
-            <div class="create-btn" id="submit-title">동화 생성</div>
+            <div>
+                <input id="title" placeholder="동화의 제목을 정해주세요"/>
+                <div id="submit-title">동화 생성</div>
+            </div>
         </div>
     </div>
     <p class="info-footer">
