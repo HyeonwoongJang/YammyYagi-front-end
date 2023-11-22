@@ -42,7 +42,7 @@ async function getMessage(){
             window.location.reload();
         }else{
             window.alert(data.message)
-            const defaultMessage=document.querySelector('h3')
+            const defaultMessage=document.getElementById('information')
             defaultMessage.style.display="none"
 
             let original = data.original.replace(/\n/g, "<br>");
@@ -151,37 +151,44 @@ async function createStory(){
         const textBox=page.querySelector('.text-of-paragraph p')
         paragraph_list.push(textBox.innerText)
     })
-    const access_token = localStorage.getItem("access");
-    const options={
-        method:'POST',
-        headers:{
-            'Authorization':`Bearer ${access_token}`,
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify({
-            paragraph_list : paragraph_list,
-            image_url_list : image_url_list,
-            title : titleInput.value
-        })
-    }
-    try {
+
+    if (!titleInput.value) {
+        alert("동화의 제목을 입력해주세요.")
+        return;
+    } else {
+        const access_token = localStorage.getItem("access");
+        const options={
+            method:'POST',
+            headers:{
+                'Authorization':`Bearer ${access_token}`,
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                paragraph_list : paragraph_list,
+                image_url_list : image_url_list,
+                title : titleInput.value
+            })
+        }
         const response = await fetch(`${backend_base_url}/story/`, options);
         const res_json = await response.json();
-        const id=res_json.story_id
-        if(res_json.status==201){
-            console.log(id)
-            window.alert(res_json.success)
-            window.location.href = `${frontend_base_url}/story/detail.html?story_id=${id}`;
-
+    
+        try {
+            const id=res_json.story_id
+            if(res_json.status==201){
+                console.log(id)
+                window.alert(res_json.success)
+                window.location.href = `${frontend_base_url}/story/detail.html?story_id=${id}`;
+    
+            }
+            else{
+            alert(`동화 작성 실패 : ${res_json['error']}`)
+            console.error(error)
+            }
         }
-        else{
-            window.alert(res_json.error)
-            window.location.reload(`${frontend_base_url}`);
+        catch(error){
+            alert(`동화 작성 실패 : ${res_json['error']}`)
+            console.error(error)
         }
     }
-    catch(error){
-        console.error(error)
-    }
-
 }
 storygenButton.addEventListener('click',createStory)
