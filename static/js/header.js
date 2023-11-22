@@ -1,5 +1,5 @@
-const frontend_base_url = "http://www.yummyyagi.com";
-const backend_base_url = "http://api.yummyyagi.com";
+const frontend_base_url = "https://www.yummyyagi.com";
+const backend_base_url = "https://api.yummyyagi.com";
 
 // header 적용
 async function injectHeader() {
