@@ -151,3 +151,7 @@ select option {
 .create-btn {
     margin: 30px auto 30px auto;
 }
+
+.original-script-box {
+    display: none;
+}
