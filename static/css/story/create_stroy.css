@@ -17,25 +17,6 @@
     background-color: #fff7fd;
     margin-bottom: 40px;
 }
-.side-bar {
-    position: sticky;
-    top: 100px;
-    background-color: #FFC8F3;
-    width:200px;
-    height:100%;
-    min-height: 800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: rgb(0,0,0,0.05) 0px 0px 40px 50px, rgb(0,0,0,0.05) 0 -12px 30px, rgb(0,0,0,0.05) 0 4px 6px, rgb(0,0,0,0.05) 0 12px 3px, rgb(0,0,0,0.05) 0 -3px 5px;
-}
-.new-chat {
-    border-color:#b398ad;
-    margin:15px
-}
-.new-chat:hover {
-    background-color: #fb99e6;
-}
 
 .main {
     display: flex;
@@ -105,20 +86,6 @@ nav{
     border-top:solid 0.5px rgba(255,255,255,0,5);
     padding:10px;
     margin:10px;
-}
-.history{
-    padding:10px;
-    margin:10px;
-    display: flex;
-    flex-direction: column;
-    height:100%;
-}
-.history p{
-    cursor: pointer;
-    text-align: center;
-}
-.history-text{
-    text-align: center;
 }
 
 .output-container{
