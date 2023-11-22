@@ -41,14 +41,44 @@
             <input id="prompt" placeholder="예시 : 주제를 입력하세요"/>
             <div id="submit-theme">📨</div>
         </div>
+        <div class="first-spinner" id="first-spinner">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-message">
+                    이야기를 생성중입니다. 약 1분 소요됩니다.
+                </div>
+            </div>
+        </div>
         <div class="create-btn" id="image-gen">
             이미지 생성
-            <div class="create-btn-div">(이미지를 새로 생성하고 싶으시면 다시 클릭하세요)</div>
+            <div class="create-btn-msg" id="create-btn-msg">(이미지를 새로 생성하고 싶으시면 다시 클릭하세요)</div>
+        </div>
+        <div class="second-spinner" id="second-spinner">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-message">
+                    스토리에 맞는 이미지를 생성중입니다. 약 3분 소요됩니다.
+                </div>
+            </div>
         </div>
         <div class="input-container">
             <div>
                 <input id="title" placeholder="동화의 제목을 정해주세요"/>
                 <div id="submit-title">동화 생성</div>
+            </div>
+        </div>
+        <div class="third-spinner" id="third-spinner">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-message">
+                    동화책을 만들고 있습니다. 약 30초 소요됩니다.
+                </div>
             </div>
         </div>
     </div>

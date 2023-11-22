@@ -7,6 +7,10 @@ const storygenButton=document.querySelector('#submit-title')
 const titleInput=document.querySelector('#title')
 const targetLanguage=document.getElementById('language')
 const first_input_container=document.getElementById('first-input-container')
+const first_spinner=document.getElementById('first-spinner')
+const second_spinner=document.getElementById('second-spinner')
+const third_spinner=document.getElementById('third-spinner')
+const create_btn_msg=document.getElementById('create-btn-msg')
 
 window.onload = () => { 
     if (!localStorage.getItem("access")) {
@@ -33,6 +37,7 @@ async function getMessage(){
         })
     }
     try{
+        first_spinner.style.display="block"
         const response = await fetch(`${backend_base_url}/story/fairytail_gpt/`,options)
         const data = await response.json()
         console.log(data)
@@ -59,6 +64,7 @@ async function getMessage(){
             translatedText.innerHTML = translation
             outPutElement.appendChild(translatedText)
 
+            first_spinner.style.display="none"
             imagegenButton.style.display="block"
             first_input_container.style.display="none"
             outPutElement.style.display="block"
@@ -81,6 +87,7 @@ submitButton.addEventListener('click',getMessage)
 
 async function getImage(){
     console.log('image generated...')
+    second_spinner.style.display="block"
     const original_script=document.querySelector("#original-script")
     const translated_script=document.querySelector("#translated-script")
     const access_token = localStorage.getItem("access");
@@ -107,13 +114,17 @@ async function getImage(){
             results.forEach(result => {
                 const newPage = document.createElement("div");
                 newPage.setAttribute("class", "page");
+
+                const newHr = document.createElement("hr");
+                newHr.setAttribute("class", "hr-of-paragraph");
     
                 const newImageBox = document.createElement("div");
                 newImageBox.setAttribute("class", "image-of-paragraph");
     
                 const newTextBox = document.createElement("div");
                 newTextBox.setAttribute("class", "text-of-paragraph");
-    
+                
+                newPage.appendChild(newHr);
                 newPage.appendChild(newImageBox);
                 newPage.appendChild(newTextBox);
     
@@ -127,8 +138,10 @@ async function getImage(){
 
                 pagebox.appendChild(newPage)
             });
+            second_spinner.style.display="none"
             titleInput.style.display="block"
             storygenButton.style.display="block"
+            create_btn_msg.style.display="block"
         } else {
             console.log('results is not an array');
         }
@@ -152,9 +165,10 @@ async function createStory(){
     })
 
     if (!titleInput.value) {
-        alert("동화의 제목을 입력해주세요.")
+        alert("동화책 출판 실패. 제목을 입력해주세요.")
         return;
     } else {
+        third_spinner.style.display="block"
         const access_token = localStorage.getItem("access");
         const options={
             method:'POST',
@@ -170,6 +184,7 @@ async function createStory(){
         }
         const response = await fetch(`${backend_base_url}/story/`, options);
         const res_json = await response.json();
+        third_spinner.style.display="none"
     
         try {
             const id=res_json.story_id

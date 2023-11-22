@@ -150,9 +150,10 @@ select option {
     max-width: 650px;
 }
 
-.create-btn-div {
+.create-btn-msg {
     font-size: 14px;
     color: rgb(109, 109, 109);
+    display: none;
 }
 
 .original-script-box {
@@ -165,4 +166,28 @@ select option {
 
 .text-of-paragraph {
     margin: 20px 0px 20px 0px;
+}
+
+.spinner-message {
+    margin-left: 15px;
+    font-size: 22px;
+}
+
+.first-spinner {
+    margin-top:30px;
+    display: none;
+}
+
+.second-spinner {
+    margin-top:30px;
+    display: none;
+}
+
+.third-spinner {
+    margin-top:30px;
+    display: none;
+}
+
+.hr-of-paragraph {
+    margin: 20px;
 }
