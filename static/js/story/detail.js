@@ -55,12 +55,14 @@ async function tempRender(){
 async function storyPage(story_data, current_page, total_content_count) {
     
     // 로그인 한 Story 작성자만 댓글 삭제 버튼이 보이도록 설정
-    if (localStorage.getItem("access")) {
+    const story_delete_button = document.getElementById("story-delete")
+    if (!localStorage.getItem("access")) {
+        story_delete_button.style.display = "none";
+    } else {
         const payload = localStorage.getItem("payload")
         const payload_parse = JSON.parse(payload)
         const story_author_id = payload_parse.user_id
-        
-        const story_delete_button = document.getElementById("story-delete")
+
         if (story_data["author_id"] != story_author_id) {
             story_delete_button.style.display = "none";
         } else {
