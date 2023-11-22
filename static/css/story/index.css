@@ -2,7 +2,7 @@
     display: flex;
     position: relative;
     justify-content: center;
-    padding: 10px 0px 10px 0px;
+    padding: 0px 0px 0px 0px;
 }
 
 .category-container > button {
@@ -27,7 +27,7 @@
 }
 
 .main-img {
-    max-height: 500px;
+    max-height: 400px;
     height:100%;
     width: auto;
     object-fit: cover;
@@ -46,7 +46,7 @@
 
 .index-card-container {
     background-color: #fff7f7;
-    width: 1600px;
+    width: 1240px;
     margin: auto;
     padding-bottom: 25px;
 }
@@ -60,6 +60,7 @@
 
 .col {
     padding: 0px;
+    width:25%;
 }
 
 .card {
