@@ -38,8 +38,31 @@ async function renderPage() {
             alert("잘못된 접근입니다.")
             window.location.href = `${frontend_base_url}/index.html`
         }
+        // 프로필사진 미리보기
+        const profile_img_input = document.getElementById("profile-img");
+        profile_img_input.addEventListener("change", handleImagePreview);
     } catch (error) {
         alert("잘못된 접근입니다.");
+    }
+}
+
+// 프로필사진 미리보기
+function handleImagePreview() {
+    const profile_img_input = document.getElementById("profile-img");
+    const preview_img = document.getElementById("current-profile-img");
+    const payload = localStorage.getItem("payload");
+    const payload_parse = JSON.parse(payload);    
+
+    if (profile_img_input.files && profile_img_input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = ({ target }) => {
+            preview_img.src = target.result;
+        };
+        reader.readAsDataURL(profile_img_input.files[0]);
+    }
+    // '선택된 파일 없음'일 때, 현재 프로필사진
+    else {
+        preview_img.src = `${backend_base_url}` + payload_parse.profile_img;
     }
 }
 
@@ -149,6 +172,9 @@ async function userDeleteButton() {
 
             if (status == "204") {
                 alert(`${response_json["success"]}`)
+                localStorage.removeItem("access")
+                localStorage.removeItem("refresh")
+                localStorage.removeItem("payload")
                 window.location.replace(`${frontend_base_url}/index.html`)
                 return;
             } else if (status == "400" && response.status == 400) {
