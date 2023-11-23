@@ -14,21 +14,14 @@
 <body>
 <header></header>
 <div class="body-container">
-<div class="side-bar">
-    <button class="new-chat">New Chat</button>
-    <div class="history"></div>
-    <nav>
-        <p class="history-text">Generation history</p>
-    </nav>
-</div>
 <section class="main">
-    <div class="information">
+    <div class="information" id="information">
         <h3>동심에 위배되는 키워드로는 동화가 제작되지 않습니다</h3>
         <h3>언어 선택 후 키워드를 입력하고 버튼을 누르면 동화가 생성됩니다</h3>
     </div>
     <div class="output-container"></div>
     <div class="bottom-section">
-        <div class="input-container">
+        <div class="input-container" id="first-input-container">
             <select class="info" id="language" required>
                 <option value="" disabled selected>  --  Select Language  --  </option>
                 <option value="hr" disabled> </option>
@@ -48,10 +41,45 @@
             <input id="prompt" placeholder="예시 : 주제를 입력하세요"/>
             <div id="submit-theme">📨</div>
         </div>
-        <div class="create-btn" id="image-gen">이미지 생성</div>
+        <div class="first-spinner" id="first-spinner">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-message">
+                    이야기를 생성중입니다. 약 1분 소요됩니다.
+                </div>
+            </div>
+        </div>
+        <div class="create-btn" id="image-gen">
+            이미지 생성
+            <div class="create-btn-msg" id="create-btn-msg">(이미지를 새로 생성하고 싶으시면 다시 클릭하세요)</div>
+        </div>
+        <div class="second-spinner" id="second-spinner">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-message">
+                    스토리에 맞는 이미지를 생성중입니다. 약 3분 소요됩니다.
+                </div>
+            </div>
+        </div>
         <div class="input-container">
-            <input id="title" placeholder="동화의 제목을 정해주세요"/>
-            <div class="create-btn" id="submit-title">동화 생성</div>
+            <div>
+                <input id="title" placeholder="동화의 제목을 정해주세요"/>
+                <div id="submit-title">동화 생성</div>
+            </div>
+        </div>
+        <div class="third-spinner" id="third-spinner">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-message">
+                    동화책을 만들고 있습니다. 약 30초 소요됩니다.
+                </div>
+            </div>
         </div>
     </div>
     <p class="info-footer">
