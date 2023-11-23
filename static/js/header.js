@@ -1,5 +1,5 @@
-const frontend_base_url = "https://127.0.0.1:5501";
-const backend_base_url = "https://127.0.0.1:80";
+const frontend_base_url = "https://www.yummyyagi.com";
+const backend_base_url = "https://api.yummyyagi.com";
 
 // header 적용
 async function injectHeader() {
@@ -83,7 +83,7 @@ function setAutoLogout() {
     setTimeout(function () {
         handleLogout();
         alert("로그인 1시간 초과로 자동 로그아웃 됐습니다.")
-        window.location.replace(`${frontend_base_url}/`)
+        window.location.replace(`${frontend_base_url}/index.html`)
     }, 60 * 60 * 1000); // 밀리초 단위로 적어야 함
 }
 
