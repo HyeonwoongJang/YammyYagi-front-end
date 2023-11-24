@@ -44,7 +44,7 @@ async function handleSignin() {
     
         const profileImageInput = document.getElementById("image");
         if (profileImageInput.files.length > 0) {
-            formData.append("image", profileImageInput.files[0]);
+            formData.append("profile_img", profileImageInput.files[0]);
         }
         const response = await fetch(`${backend_base_url}/user/register/`, {
             method: "POST",
