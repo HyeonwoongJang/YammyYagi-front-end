@@ -74,6 +74,7 @@ function handleLogout() {
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
+    localStorage.removeItem("code")
     location.reload()
     window.location.replace(`${frontend_base_url}/`)
 }
