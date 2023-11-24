@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700" />
         <link rel="stylesheet" href="/static/css/user/login.css" />
         <script src="/static/js/user/login.js"></script>
+        <script src="/static/js/user/social-login.js"></script>
     </head>
     <body>
         <div class="login-box">
@@ -30,9 +31,9 @@
                 <div><button type="button" class="button-login" onclick="handleLogin()">로그인</button></div>
             </form>
             <div class="social-login">
-                <a><img class="icon" src="/static/img/user/kakao-icon.png" /></a>
-                <a><img class="icon" src="/static/img/user/naver-icon.png" /></a>
-                <a><img class="icon" src="/static/img/user/google-icon.png" /></a>
+                <button type="button" id="icon" onclick="kakaoLogin()"><img class="icon" src="/static/img/user/kakao-icon.png"></button>
+                <button type="button" id="icon"><img class="icon" src="/static/img/user/naver-icon.png" /></button>
+                <button type="button" id="icon"><img class="icon" src="/static/img/user/google-icon.png" /></button>
             </div>
             <div>
                 <a class="register" href="/user/register.html">회원가입</a>

@@ -3,12 +3,13 @@ const backend_base_url = "http://127.0.0.1:8000";
 
 
 // 로그인 체크
-window.onload = () => { 
-    if (localStorage.getItem("access")) {
-        alert("잘못된 접근입니다.")
-        window.location.href = `${frontend_base_url}`
+function checkLogin() {
+    const payload = localStorage.getItem("payload");
+    if (payload) {
+        window.location.replace(`${frontend_base_url}/`)
     }
 }
+checkLogin()
 
 
 // 회원가입

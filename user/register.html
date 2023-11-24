@@ -38,7 +38,7 @@
                     <input class="info" id="nickname" placeholder="닉네임">
                 </div>
 
-                <div class="div-input-list" >
+                <div class="div-input-list" ></div>
                     <label class="label">국가</label>
                     <select class="info" id="country" required>
                         <option value="" disabled selected>  --  국가를 선택해주세요  --  </option>
@@ -57,9 +57,9 @@
             </div>
             <div><button class="button-register" type="button" onclick="handleSigninButton()">회원가입</button></div>
             <div class="social-login">
-                <a><img class="icon" src="/static/img/user/kakao-icon.png"/></a>
-                <a><img class="icon" src="/static/img/user/naver-icon.png"/></a>
-                <a><img class="icon" src="/static/img/user/google-icon.png"/></a>
+                <button type="button" id="icon" onclick="kakaoLogin()"><img class="icon" src="/static/img/user/kakao-icon.png"></button>
+                <button type="button" id="icon"><img class="icon" src="/static/img/user/naver-icon.png" /></button>
+                <button type="button" id="icon"><img class="icon" src="/static/img/user/google-icon.png" /></button>
             </div>
         </form>
         <div>
@@ -67,7 +67,7 @@
         </div>
     </div>
     <div class="page-img">
-
     </div>
+    <script src="/static/js/user/social-login.js"></script>
 </body>
 </html>
