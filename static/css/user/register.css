@@ -89,7 +89,7 @@ select option[value=""][disabled] {
   flex-shrink: 0;
   cursor: pointer;
 }
-#icon{
+.social{
   border: none;
   background-color: #fff7f7;
 }
