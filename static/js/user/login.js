@@ -1,14 +1,14 @@
 const frontend_base_url = "http://127.0.0.1:5501";
 const backend_base_url = "http://127.0.0.1:8000";
 
-window.onload = () => {
-    console.log("로그인 페이지 로드됨.")
-
-    if (localStorage.getItem("access")) {
-        alert("잘못된 접근입니다.")
-        window.location.href = `${frontend_base_url}`
+// 로그인 체크
+function checkLogin() {
+    const payload = localStorage.getItem("payload");
+    if (payload) {
+        window.location.replace(`${frontend_base_url}/`)
     }
 }
+checkLogin()
 
 async function handleLogin() {
     const email = document.getElementById("email").value;
