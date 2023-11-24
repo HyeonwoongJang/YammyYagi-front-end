@@ -82,10 +82,18 @@ function handleLogout() {
 // 1시간 후 자동 로그아웃 설정
 function setAutoLogout() {
     setTimeout(function () {
-        handleLogout();
         alert("로그인 1시간 초과로 자동 로그아웃 됐습니다.")
-        window.location.replace(`${frontend_base_url}/`)
+        handleLogout();
     }, 60 * 60 * 1000); // 밀리초 단위로 적어야 함
 }
-
 setAutoLogout();
+
+// 소셜로그인 체크
+function checkLogin() {
+    const payload = localStorage.getItem("payload");
+    const social_code = localStorage.getItem("code");
+    if (!payload && social_code) {
+        window.location.replace(`${frontend_base_url}/user/social-register.html`)
+    }
+}
+checkLogin()

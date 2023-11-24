@@ -175,6 +175,7 @@ async function userDeleteButton() {
                 localStorage.removeItem("access")
                 localStorage.removeItem("refresh")
                 localStorage.removeItem("payload")
+                localStorage.removeItem("code")
                 window.location.replace(`${frontend_base_url}/index.html`)
                 return;
             } else if (status == "400" && response.status == 400) {
