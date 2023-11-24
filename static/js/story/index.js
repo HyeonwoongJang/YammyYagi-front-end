@@ -13,7 +13,7 @@ async function getstories() {
             alert("불러오는데 실패했습니다")
         }
     } catch (error) {
-        alert("새로고침 후 다시 시도해주세요.");
+        console.log(error)
     }
 }
 
@@ -98,8 +98,8 @@ async function loadstories(page) {
         } else {
             alert("불러오는데 실패했습니다");
         }
-    } catch {
-        alert("새로고침 후 다시 시도해주세요.");
+    } catch (error) {
+        console.log(error)
     }
 }
 
@@ -225,7 +225,6 @@ async function getlikestories() {
         }
     } catch (error) {
         console.log(error)
-        alert("새로고침 후 다시 시도해주세요.");
     }
 }
 
@@ -313,7 +312,6 @@ async function getcountrystories() {
         }
     } catch (error) {
         console.log(error)
-        alert("새로고침 후 다시 시도해주세요.");
     }
 }
 
