@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멤버쉽 구매 페이지</title>
+    <link rel="stylesheet" href="/static/css/user/payment.css">
+    <script src="/static/js/user/payment.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+</head>
+<body>
+<div id="ticket-page">
+    <h2>티켓 결제 페이지</h2>
+    <hr>
+    <div>
+        <input type="checkbox" id="golden-check-box" onchange="goldenCheckBox()">
+        <label>Golden Ticket :  </label>
+        <input type="number" id="golden-input" value="0" min="0" disabled oninput="updateGoldenP()">
+        <p id="golden-p">0 Won</p>
+    </div>
+    <div>
+        <input type="checkbox" id="silver-check-box" onchange="silverCheckBox()">
+        <label>Silver Ticket :  </label>
+        <input type="number" id="silver-input" value="0" min="0" disabled oninput="updateSilverP()">
+        <p id="silver-p">0 Won</p>
+    </div>
+    <div>
+        <input type="checkbox" id="pink-check-box" onchange="pinkCheckBox()">
+        <label>Pink Ticket :  </label>
+        <input type="number" id="pink-input" value="0" min="0" disabled oninput="updatePinkP()">
+        <p id="pink-p">0 Won</p>
+    </div>
+    <button id="3-ticket" onclick="buyTicket()">구매</button>
+</div>
+<div id="payment-page" style="display:none;">
+    <button id="back-btn" onclick="backButton()">뒤로가기</button>
+    <hr>
+    <p id="merchant-uid"></p>
+    <p id="amount"></p>
+    <p id="name"></p>
+    <p id="buyer-email"></p>
+    <p id="buyer-name"></p>
+    <button id="kakaopay">KakaoPay</button>
+    <button id="tosspay">TossPay</button>
+</div>
+</body>
+</html>

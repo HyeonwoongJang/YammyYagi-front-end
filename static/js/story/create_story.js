@@ -254,7 +254,23 @@ async function getImage(script, imageId) {
             paragraphs[imageId] = script
             editPage[imageId] = script
             renderPage(imageId+1)
-        } else if (response.status == 201) {
+        } 
+
+        if (response.status == 402) {
+            // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
+            alert(res_json["error"])
+            second_spinner.style.display = "none";
+
+            // 해당 티켓 소진 시, 티켓 결제 페이지를 새 창으로 띄움
+            window.open("../user/payment.html", "티켓 결제 페이지", "width=700, height=500, top=50%, left=50%, transform=translate(-50%, -50%)")
+
+            // 이미지 생성에 실패한 페이지의 내용을 수정된 내용으로 갱신하고 해당 페이지를 다시 렌더링
+            paragraphs[imageId] = script
+            editPage[imageId] = script
+            renderPage(imageId+1)
+        }
+        
+        if (response.status == 201) {
             // 이미지 URL 가져오기
             const image_url = res_json.image_url;
 
