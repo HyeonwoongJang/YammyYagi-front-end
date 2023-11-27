@@ -29,7 +29,7 @@ async function kakaoLoginApi(code) {
       window.location.href = `${frontend_base_url}`;
     }
   } catch {
-    window.location.href = `${frontend_base_url}/user/social-register.html`;
+    window.location.href = `${frontend_base_url}/user/register.html`;
   }
 }
 
@@ -64,7 +64,7 @@ async function naverLoginApi(code) {
       window.location.href = `${frontend_base_url}`;
     }
   } catch {
-    window.location.href = `${frontend_base_url}/user/social-register.html`;
+    window.location.href = `${frontend_base_url}/user/register.html`;
   }
 }
 
