@@ -107,11 +107,19 @@ button{
 }
 
 .output-container{
-    max-width: 50%;
+    max-width: 600px;
     background-color: #fff6fd;
     margin-bottom: 30px;
     padding:20px;
     display: none;
+}
+
+textarea {
+    max-width: 500px;
+    width: 500px;
+    height: 200px; 
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .info {
@@ -154,14 +162,6 @@ select option {
     font-size: 14px;
     color: rgb(109, 109, 109);
     display: none;
-}
-
-.original-script-box {
-    display: none;
-}
-
-.translated-script-box {
-    margin-bottom:30px;
 }
 
 .text-of-paragraph {
