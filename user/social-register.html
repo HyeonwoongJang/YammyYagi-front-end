@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700" />
     <link rel="stylesheet" href="/static/css/user/register.css" />
     <script src="/static/js/user/social-register.js"></script>
+    <script src="/static/js/user/social-login.js"></script>
   </head>
   <body>
-    <div class="register-box">
+    <div class="register-box"></div>
       <form enctype="multipart/form-data">
         <div class="register-content">
           <a href="/index.html"><img class="logo-img" src="/static/img/user/logo.png" /></a>
@@ -60,8 +61,12 @@
           <button type="button" class="social" onclick="kakaoLogin()">
             <img class="icon" src="/static/img/user/kakao-icon.png" />
           </button>
-          <button type="button" class="social"><img class="icon" src="/static/img/user/naver-icon.png" /></button>
-          <button type="button" class="social"><img class="icon" src="/static/img/user/google-icon.png" /></button>
+          <button type="button" class="social" onclick="naverLogin()">
+            <img class="icon" src="/static/img/user/naver-icon.png" />
+          </button>
+          <button type="button" class="social" onclick="googleLogin()">
+            <img class="icon" src="/static/img/user/google-icon.png" />
+          </button>
         </div>
       </form>
       <div>
@@ -69,6 +74,5 @@
       </div>
     </div>
     <div class="page-img"></div>
-    <script src="/static/js/user/kakao-login.js"></script>
   </body>
 </html>
