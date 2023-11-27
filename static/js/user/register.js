@@ -1,6 +1,3 @@
-const frontend_base_url = "http://127.0.0.1:5501";
-const backend_base_url = "http://127.0.0.1:8000";
-
 // 로그인 체크
 function checkLogin() {
   const payload = localStorage.getItem("payload");
@@ -67,7 +64,7 @@ async function handleSignin() {
 
 // 회원가입 버튼
 async function handleSigninButton() {
-  const social_code = localStorage.getItem("code");
+  const code = localStorage.getItem("code");
   const response = await handleSignin();
   response_json = await response.json();
 
@@ -87,14 +84,16 @@ async function handleSigninButton() {
     alert(response_json["error"]);
     return;
   } else if (response.status == 201) {
-    if (social_code) {
-      alert("회원가입이 완료되었습니다.");
+    if (code) {
+      alert("회원가입이 완료되었습니다. 소셜 로그인과 연동되었습니다.");
       window.location.replace(`${frontend_base_url}/user/login.html`);
       return;
     } else {
-      alert("YummyYagi 인증 이메일이 발송되었습니다. 이메일을 확인해주세요.");
+      alert("가입한 이메일로 인증 이메일이 발송되었습니다. 이메일을 확인해주세요.");
       window.location.replace(`${frontend_base_url}/user/login.html`);
       return;
     }
   }
 }
+
+startSocialLogin();
