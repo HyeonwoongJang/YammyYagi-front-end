@@ -42,7 +42,7 @@ function changeInput(value) {
     inputElement.value = value;
 }
 
-// 백엔드에서 메시지를 가져오기 위한 비동기 함수
+// 백엔드에서 GPT 동화를 가져오기 위한 비동기 함수
 async function getMessage() {
     console.log('clicked');
 
@@ -63,46 +63,46 @@ async function getMessage() {
         first_spinner.style.display = "block";
         const response = await fetch(`${backend_base_url}/story/fairytail_gpt/`, options);
         const data = await response.json();
-
-        const script = data.script.replace(/\n\n/g, "<br><br>");
-
-        // paragraphs 및 imageUrls 배열 초기화
-        paragraphs.length = 0;
-        imageUrls.length = 0;
-
-        // 스크립트를 두 문단씩 나누어 paragraphs 배열에 추가
-        const scriptParagraphs = script.split("<br><br>");
-        for (let i = 0; i < scriptParagraphs.length; i += 2) {
-            const pair = scriptParagraphs.slice(i, i + 2);
-            paragraphs.push(pair.join("<br><br>"));
-        }
-
-        const error = data.error_message;
-        if (error == 'toxicity_detected') {
-            window.alert(data.message);
+        console.log(data)
+        if (response.status == 400) {
+            alert(data.error);
             window.location.reload();
-        } else {
-            window.alert(data.message);
-            const defaultMessage = document.getElementById('information');
-            defaultMessage.style.display = "none";
+        } else if (response.status == 201) {
+            alert(data.success);
 
-            // 전체 페이지 수 설정 및 현재 페이지 렌더링
-            total_page = paragraphs.length;
-            renderPage(current_page);
+            const script = data.script.replace(/\n\n/g, "<br><br>");
 
-            // 로딩 스피너 숨기고 이미지 생성 버튼 표시
-            first_spinner.style.display = "none";
-            imageTypeContainer.style.display="block";
-            imagegenButton.style.display = "block";
-            first_input_container.style.display = "none";
-            outPutElement.style.display = "block";
+            // paragraphs 및 imageUrls 배열 초기화
+            paragraphs.length = 0;
+            imageUrls.length = 0;
 
-            // 번역 및 입력 값이 있는 경우 클릭 가능한 단락 생성
-            if (data.translation && inputElement.value) {
-                const pElement = document.createElement('p');
-                pElement.textContent = inputElement.value;
-                pElement.addEventListener('click', () => changeInput(pElement.textContent));
+            // 스크립트를 두 문단씩 나누어 paragraphs 배열에 추가
+            const scriptParagraphs = script.split("<br><br>");
+            for (let i = 0; i < scriptParagraphs.length; i += 2) {
+                const pair = scriptParagraphs.slice(i, i + 2);
+                paragraphs.push(pair.join("<br><br>"));
             }
+                
+                const defaultMessage = document.getElementById('information');
+                defaultMessage.style.display = "none";
+
+                // 전체 페이지 수 설정 및 현재 페이지 렌더링
+                total_page = paragraphs.length;
+                renderPage(current_page);
+
+                // 로딩 스피너 숨기고 이미지 생성 버튼 표시
+                first_spinner.style.display = "none";
+                imageTypeContainer.style.display="block";
+                imagegenButton.style.display = "block";
+                first_input_container.style.display = "none";
+                outPutElement.style.display = "block";
+
+                // 번역 및 입력 값이 있는 경우 클릭 가능한 단락 생성
+                if (data.translation && inputElement.value) {
+                    const pElement = document.createElement('p');
+                    pElement.textContent = inputElement.value;
+                    pElement.addEventListener('click', () => changeInput(pElement.textContent));
+                }
         }
     } catch (error) {
         console.error(error);
