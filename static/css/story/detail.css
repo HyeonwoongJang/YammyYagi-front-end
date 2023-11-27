@@ -1,149 +1,178 @@
-html, body {
-    width: 100%;
-    height: 100%;
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 .first-line {
-    border-color: #fff7f7;
-    border: 1px solid;
-    background-color: #fff7f7;
-    display: flex;
-    margin-top: 10%;
-
-    width: 90%;
-    margin: 5% auto 0px auto;
+  border-color: #fff7f7;
+  border: 1px solid rgb(253, 203, 224);
+  background-color: #fff7f7;
+  display: flex;
+  width: 90%;
+  margin: 10px auto 0px auto;
 }
 
-
 .second-line {
-    border-color: #fff7f7;
-    border: 3px solid;
-    background-color: #fff7f7;
-    display: flex;
-    height: 100%;
-    width: 90%;
+  border-color: #fff7f7;
+  background-color: #fff7f7;
+  display: flex;
+  height: 100%;
+  width: 90%;
+  margin: 5% auto 0px auto;
+  margin-top: 10px;
+}
+
+#title_div {
+  width: 40%;
+  display: flex;
+  text-align: center;
+  align-items: center;
 }
 
 #title {
-    margin: auto 5% auto 5%;
+  font-size: 3vw;
+  margin: auto auto auto auto;
 }
+
 #tools {
-    margin: auto 5% auto auto;
-}
-
-#content {
-    border: 2px solid;
-    width: 100%;
-    height: 600px;
-    overflow-y: auto;
-    border: 1px solid #db7878;
-    text-align: center;
-    position: relative;
-}
-
-#content-box {
-    border: 1px solid;
-    width: 100%;
-    height: 450px;
-    overflow-y: auto;
-    border: 1px solid #0a0808;
-    text-align: center;
-    position: relative;
-    margin: 5% auto 5% auto;
-}
-
-.page-img {
-    width: 50%;
-    height: 50%;
-}
-
-#comment {
-    height: 600px;
-    overflow-y: auto;
-    border: 1px solid;
-    width: 50%;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-#comment-list {
-    width: 20%;
-    margin-left:90px;
-}
-
-.single_comment {
-    position: relative;
-    display: flex;
-    margin: 50px;
-    width: 350px;
-    height: 100px;
-    background: #ddd;
-    border-radius: 10px;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.single_comment::after {
-    content : "";
-    border-top: 0px solid transparent;
-    border-left: 25px solid transparent;
-    border-bottom: 16px solid #ddd;
-    border-right: 0px solid transparent;
-    position: absolute;
-    top: 70px;
-    left: -18px;
-}
-
-.comment_author_info{
-    display: flex;
-    justify-content: flex-star;
-    align-items: center;
-    margin-left:15px;
-
-}
-
-.comment_author_profile {
-    width: 25px;
-    height: 25px;
-    border-radius: 100%;
-    margin-right: 15px;
-}
-
-
-
-.comment_content {    
-    overflow: hidden;
-    margin-left: 50px;
+  width: 30%;
+  margin: auto 5% auto auto;
 }
 
 #counts {
-    width: 14%;
-    display: flex;
+  width: 14%;
+  display: flex;
 }
 
 #counts p {
-    margin: auto 10px auto 0px; /* 원하는 간격 설정 */
+  margin: auto 10px auto 0px; /* 원하는 간격 설정 */
 }
 
 #translator {
-    display: flex;
-    margin: auto 0% auto 0%;
+  display: flex;
+  margin: auto 0% auto 0%;
 }
 
+#content {
+  border: 1px solid rgb(253, 203, 224);
+  width: 100%;
+  height: 600px;
+  overflow-y: auto;
+  text-align: center;
+  position: relative;
+  margin-top: 0px;
+}
+
+#content-box {
+  width: 100%;
+  height: 550px;
+  overflow-y: auto;
+  text-align: center;
+  position: relative;
+  margin: 5% auto 5% auto;
+  margin-top: 0px;
+}
+
+.pagebutton {
+  background-color: rgb(253, 203, 224);
+  border: 1px solid rgb(253, 203, 224);
+}
+
+#content-box::-webkit-scrollbar {
+  display: none; /* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+}
+
+#content-box {
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+  border: 1px solid rgb(253, 203, 224);
+}
+
+.page-img {
+  width: 50%;
+  height: 50%;
+}
+
+#comment {
+  height: 600px;
+  overflow-y: auto;
+  border: 1px solid rgb(253, 203, 224);
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  margin: 0px auto;
+}
+
+#comment-list {
+  width: 20%;
+  margin-left: 90px;
+}
+
+.single_comment {
+  position: relative;
+  display: flex;
+  margin: 50px;
+  width: 350px;
+  height: 100px;
+  background: #ddd;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.single_comment::after {
+  content: "";
+  border-top: 0px solid transparent;
+  border-left: 25px solid transparent;
+  border-bottom: 16px solid #ddd;
+  border-right: 0px solid transparent;
+  position: absolute;
+  top: 70px;
+  left: -18px;
+}
+
+.comment_author_info {
+  display: flex;
+  justify-content: flex-star;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.comment_author_profile {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  margin-right: 15px;
+}
+
+.comment_content {
+  overflow: hidden;
+  margin-left: 50px;
+}
 
 #bottom-button {
-    position: absolute;
-    display:flex;
-    justify-content: flex-end;
-    margin-top: auto;
-    bottom: 0;
-    right: 0;
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0px;
+  height: 40px;
+  bottom: 0;
+  right: 0;
 }
 
 .btn-block {
-    width: 15%;
-    margin-left: 10px;
+  width: 15%;
+  margin-left: 10px;
+}
+
+#story-delete {
+  max-height: 32px;
+}
+#comment-box {
+  max-height: 32px;
 }
