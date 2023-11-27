@@ -93,7 +93,7 @@ function checkLogin() {
     const payload = localStorage.getItem("payload");
     const social_code = localStorage.getItem("code");
     if (!payload && social_code) {
-        window.location.replace(`${frontend_base_url}/user/social-register.html`)
+        alert("소셜로그인이 완료되지 않았습니다. 회원가입을 해주세요.");
     }
 }
 checkLogin()
