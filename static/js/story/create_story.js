@@ -54,8 +54,8 @@ async function getMessage() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            subject: inputElement.value,
-            target_language: targetLanguage.value,
+            "subject": inputElement.value,
+            "target_language": targetLanguage.value,
         }),
     };
     try {
