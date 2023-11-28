@@ -4,13 +4,19 @@ body {
   height: 100%;
 }
 
+.title_div {
+  width: 100%;
+  margin: 50px auto 50px auto;
+}
+
 .first-line {
-  border-color: #fff7f7;
-  border: 1px solid rgb(253, 203, 224);
-  background-color: #fff7f7;
+  /* border-color: #fff7f7; */
+  /* border: 1px solid rgb(253, 203, 224); */
+  /* background-color: #fff7f7; */
   display: flex;
-  width: 90%;
-  margin: 10px auto 0px auto;
+  width: 80%;
+  margin: 30px auto 30px auto;
+  justify-content: flex-end;
 }
 
 .second-line {
@@ -23,25 +29,29 @@ body {
   margin-top: 10px;
 }
 
-#title_div {
-  width: 40%;
-  display: flex;
-  text-align: center;
-  align-items: center;
+#hr {
+  width: 78%;
+  border: 1px solid #000;
+  margin: 20px auto;
 }
 
 #title {
+  /* width: 40%; */
+  display: flex;
+  text-align: center;
+  align-items: center;
   font-size: 3vw;
-  margin: auto auto auto auto;
+  margin: 8% auto auto 12%;
 }
 
 #tools {
-  width: 30%;
-  margin: auto 5% auto auto;
+  width: 40%;
+  margin: auto 5% auto 10%;
+  justify-content: flex-end;
 }
 
 #counts {
-  width: 14%;
+  width: 15%;
   display: flex;
 }
 
