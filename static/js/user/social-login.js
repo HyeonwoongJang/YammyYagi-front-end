@@ -6,6 +6,8 @@ const currentUrl = location.href;
 async function socialLoginAPI(code) {
   if (currentUrl.includes("state")) {
     naverLoginApi(code);
+  } else if (currentUrl.includes("scope")) {
+    googleLoginApi(code);
   } else {
     kakaoLoginApi(code);
   }
@@ -37,6 +39,28 @@ async function kakaoLoginApi(code) {
 async function naverLoginApi(code) {
   try {
     const response = await fetch(`${backend_base_url}/user/naver/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code: code }),
+    });
+    response_json = await response.json();
+    if (!response.ok) {
+      alert(response_json["error"]);
+      window.location.href = `${frontend_base_url}`;
+      return;
+    }
+    saveToken(response_json);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// 구글 로그인 데이터 서버로 전송
+async function googleLoginApi(code) {
+  try {
+    const response = await fetch(`${backend_base_url}/user/google/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
