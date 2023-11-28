@@ -1,6 +1,3 @@
-const frontend_base_url = "https://www.yummyyagi.com";
-const backend_base_url = "https://api.yummyyagi.com";
-
 // 소셜 로그인
 const currentUrl = location.href;
 async function socialLoginAPI(code) {
