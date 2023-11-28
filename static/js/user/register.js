@@ -1,3 +1,6 @@
+const frontend_base_url = "http://127.0.0.1:5501";
+const backend_base_url = "http://127.0.0.1:8000";
+
 // 로그인 체크
 function checkLogin() {
   const payload = localStorage.getItem("payload");
