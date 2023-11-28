@@ -1,5 +1,5 @@
-const frontend_base_url = "http://127.0.0.1:5501";
-const backend_base_url = "http://127.0.0.1:8000";
+const frontend_base_url = "https://www.yummyyagi.com";
+const backend_base_url = "https://api.yummyyagi.com";
 
 // 결제 페이지 로드에 필요한 데이터를 Response 받는 함수
 async function orderData(amount, name) {
