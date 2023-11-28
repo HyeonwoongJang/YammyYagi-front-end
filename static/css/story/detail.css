@@ -10,13 +10,10 @@ body {
 }
 
 .first-line {
-  /* border-color: #fff7f7; */
-  /* border: 1px solid rgb(253, 203, 224); */
-  /* background-color: #fff7f7; */
   display: flex;
-  width: 80%;
+  width: 70%;
   margin: 30px auto 30px auto;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .second-line {
@@ -25,8 +22,7 @@ body {
   display: flex;
   height: 100%;
   width: 90%;
-  margin: 5% auto 0px auto;
-  margin-top: 10px;
+  margin: 5% auto 5px auto;
 }
 
 #hr {
@@ -36,7 +32,6 @@ body {
 }
 
 #title {
-  /* width: 40%; */
   display: flex;
   text-align: center;
   align-items: center;
@@ -45,9 +40,9 @@ body {
 }
 
 #tools {
-  width: 40%;
-  margin: auto 5% auto 10%;
-  justify-content: flex-end;
+  width: 35%;
+  margin: 0% 5% auto 0px;
+  justify-content: flex-start;
 }
 
 #counts {
@@ -56,18 +51,19 @@ body {
 }
 
 #counts p {
-  margin: auto 10px auto 0px; /* 원하는 간격 설정 */
+  margin: auto 10px auto 15px; /* 원하는 간격 설정 */
 }
 
 #translator {
+  width: 23%;
   display: flex;
-  margin: auto 0% auto 0%;
+  margin: auto 0% auto 7%;
 }
 
 #content {
   border: 1px solid rgb(253, 203, 224);
   width: 100%;
-  height: 600px;
+  height: 950px;
   overflow-y: auto;
   text-align: center;
   position: relative;
@@ -76,7 +72,7 @@ body {
 
 #content-box {
   width: 100%;
-  height: 550px;
+  height: 100%;
   overflow-y: auto;
   text-align: center;
   position: relative;
@@ -84,9 +80,23 @@ body {
   margin-top: 0px;
 }
 
+.content-img {
+  margin: 8% auto 0% auto;
+  width: 60%;
+  max-width: 500px;
+  height: auto;
+}
+
+.content-text {
+  margin: 5% auto 5% auto;
+  text-align: center;
+  width: 45%;
+}
+
 .pagebutton {
-  background-color: rgb(253, 203, 224);
-  border: 1px solid rgb(253, 203, 224);
+  background-color: white;
+  border: 1px solid rgb(190, 120, 149);
+  color: rgb(190, 120, 149);
 }
 
 #content-box::-webkit-scrollbar {
@@ -97,6 +107,7 @@ body {
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none; /* 파이어폭스 */
   border: 1px solid rgb(253, 203, 224);
+  height: 100%;
 }
 
 .page-img {
@@ -105,31 +116,30 @@ body {
 }
 
 #comment {
-  height: 600px;
+  height: 950px;
   overflow-y: auto;
   border: 1px solid rgb(253, 203, 224);
-  width: 50%;
-  padding: 10px;
+  width: 40%;
+  padding-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex-direction: row;
-  margin: 0px auto;
 }
 
 #comment-list {
   width: 20%;
-  margin-left: 90px;
+  margin-left: 20px;
 }
 
 .single_comment {
   position: relative;
   display: flex;
-  margin: 50px;
-  width: 350px;
+  margin: 20px;
+  width: 250px;
   height: 100px;
-  background: #ddd;
+  background: #f8dbdb;
   border-radius: 10px;
   flex-direction: column;
   justify-content: center;
@@ -139,7 +149,7 @@ body {
   content: "";
   border-top: 0px solid transparent;
   border-left: 25px solid transparent;
-  border-bottom: 16px solid #ddd;
+  border-bottom: 16px solid #f8dbdb;
   border-right: 0px solid transparent;
   position: absolute;
   top: 70px;
@@ -162,11 +172,12 @@ body {
 
 .comment_content {
   overflow: hidden;
-  margin-left: 50px;
+  text-align: left;
+  margin-left: 25px;
 }
 
 #bottom-button {
-  position: absolute;
+  width: 15%;
   display: flex;
   justify-content: flex-end;
   margin-top: 0px;
@@ -183,6 +194,47 @@ body {
 #story-delete {
   max-height: 32px;
 }
+
 #comment-box {
   max-height: 32px;
+}
+
+.comment-button {
+  border: none;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 25px 10px 0px 10px;
+}
+
+#create-comment {
+  border: 1px solid rgb(253, 203, 224);
+  border-radius: 5px;
+
+  background-color: #fff7f7;
+  margin-left: 10px;
+
+  color: rgb(245, 137, 182);
+}
+
+#create-comment:hover {
+  border: 1px solid rgb(245, 137, 182);
+  border-radius: 5px;
+
+  background-color: #fff7f7;
+  margin-left: 10px;
+
+  color: rgb(245, 137, 182);
+}
+
+#comment-input {
+  border: 1px solid rgb(245, 137, 182);
+}
+
+.btn-close {
+  margin-left: 120px;
+}
+
+.container {
+  padding-bottom: 50px;
 }
