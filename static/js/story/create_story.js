@@ -241,10 +241,10 @@ async function getImage(script, imageId) {
     const response = await fetch(`${backend_base_url}/story/image_dall-e/`, options);
     const res_json = await response.json();
 
-    if (response.status == 400) {
-      // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
-      alert(res_json["error"]);
-      second_spinner.style.display = "none";
+        if (response.status == 400 || response.status == 429 || response.status == 500) {
+            // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
+            alert(res_json["error"])
+            second_spinner.style.display = "none";
 
       // 이미지 생성에 실패한 페이지의 내용을 수정된 내용으로 갱신하고 해당 페이지를 다시 렌더링
       paragraphs[imageId] = script;
