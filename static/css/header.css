@@ -1,88 +1,88 @@
 header {
-    justify-content: center;
-    padding: 10px 0px 10px 0px;
+  justify-content: center;
+  padding: 10px 0px 10px 0px;
 }
 
 body {
-    font-family: 'Gowun Dodum', sans-serif;
+  font-family: "Gowun Dodum", sans-serif;
 }
 
 .nav-item {
-    float : left;
-    text-align: left;
-    justify-content: left;
+  float: left;
+  text-align: left;
+  justify-content: left;
 }
 
 .nav-link {
-    float: right;
-    font-size: 60px;
-    margin-right: 30px
+  float: right;
+  font-size: 60px;
+  margin-right: 30px;
 }
 
 .header-logo {
-    width:200px;
-    margin: 55px auto 10px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  width: 200px;
+  margin: 55px auto 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal-header {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .modal-body {
-    text-align: center;
-    border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+  text-align: center;
+  border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
 }
 
 .modal-footer {
-    text-align: center;
-    justify-content: center;
-    border-top: none;
+  text-align: center;
+  justify-content: center;
+  border-top: none;
 }
 
 .modal-img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
 
 .modal-nickname {
-    font-size: 35px;
+  font-size: 35px;
 }
 
 .modal-useremail {
-    font-size: 18px;
-    color:rgb(150, 176, 201)
+  font-size: 18px;
+  color: rgb(150, 176, 201);
 }
 
 .modal-body-content {
-    font-size: 28px;
-    margin: 15px 0px 15px 0px;
+  font-size: 28px;
+  margin: 15px 0px 15px 0px;
 }
 
 .modal-body-content > a {
-    text-decoration-line:none;
-    color: #E32AF3;
+  text-decoration-line: none;
+  color: #e32af3;
 }
 
 .modal-footer-content {
-    font-size: 28px;
+  font-size: 28px;
 }
 
 .modal-content {
-    width: 300px;
+  width: 300px;
 }
 
 .modal-dialog {
-    float: right;
-    margin: 140px 70px 0px 0px
+  float: right;
+  margin: 140px 70px 0px 0px;
 }
 
 .head-navbar {
-    min-height: 106px;
+  min-height: 106px;
 }
