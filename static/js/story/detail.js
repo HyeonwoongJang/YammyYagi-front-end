@@ -126,8 +126,11 @@ async function createPage(story_data, current_page, total_content_count) {
 
   // 페이지의 이미지와 내용을 담을 요소들 생성
   const page_div = document.createElement("div");
+  page_div.className = "content-div";
   const page_img = document.createElement("img");
+  page_img.className = "content-img";
   const page_content = document.createElement("p");
+  page_content.className = "content-text";
 
   // 이미지와 내용에 데이터 설정
   page_img.src = `${backend_base_url}${page_data["story_image"]}`;
@@ -174,6 +177,7 @@ async function createPage(story_data, current_page, total_content_count) {
 
     const next_button = document.createElement("button");
     next_button.type = "button";
+    next_button.className = "pagebutton";
     next_button.innerText = ">>";
     next_button.id = parseInt(current_page) + 1;
     next_button.onclick = function () {

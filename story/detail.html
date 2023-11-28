@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEB56YBWDJ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-MEB56YBWDJ');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>상세 페이지</title>
@@ -184,86 +176,78 @@
           </svg>
         </button>
       </div>
+      <div id="bottom-button">
+        <button type="button" id="story-delete" class="btn btn-link" onclick="deleteStory()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 64 64"
+            style="
+              shape-rendering: geometricPrecision;
+              text-rendering: geometricPrecision;
+              image-rendering: optimizeQuality;
+              fill-rule: evenodd;
+              clip-rule: evenodd;
+            "
+          >
+            <path
+              d="M23.5.5c5.344-.166 10.677 0 16 .5 1.814 2.481 2.48 5.315 2 8.5h15v6h-50v-6h15c-.435-3.338.232-6.338 2-9Zm4 6h8v3h-8v-3Z"
+              style="fill: black"
+            />
+            <path
+              d="M10.5 17.5h42c.167 14.337 0 28.67-.5 43L50.5 62a361.232 361.232 0 0 1-38 0L11 60.5a924.92 924.92 0 0 1-.5-43Zm6 6h30v33h-30v-33Z"
+              style="fill: black"
+            />
+            <path d="M19.5 25.5h6v27h-6v-27ZM28.5 25.5h6v27h-6v-27ZM37.5 25.5h6v27h-6v-27Z" style="fill: black" />
+          </svg>
+        </button>
+        <button type="button" id="comment-box" class="btn btn-link" onclick="toggleComments()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 64 64"
+            style="
+              shape-rendering: geometricPrecision;
+              text-rendering: geometricPrecision;
+              image-rendering: optimizeQuality;
+              fill-rule: evenodd;
+              clip-rule: evenodd;
+            "
+          >
+            <path
+              d="M5.5 11.5h52v40a180.95 180.95 0 0 0-19 .5 64.271 64.271 0 0 1-7 6.5 64.271 64.271 0 0 1-7-6.5 180.95 180.95 0 0 0-19-.5v-40Zm4 4h44v32c-6.01-.166-12.01 0-18 .5a19.894 19.894 0 0 1-4 3.5 19.894 19.894 0 0 1-4-3.5c-5.99-.5-11.99-.666-18-.5v-32Z"
+              style="opacity: 0.979"
+            />
+            <path d="M17.5 21.5h28v4h-28v-4ZM17.5 29.5h28v4h-28v-4ZM17.5 37.5h20v4h-20v-4Z" style="opacity: 1" />
+          </svg>
+        </button>
+      </div>
     </div>
-    <div class="container">
+    <div class="container" style="margin-bottom: 40px">
       <div class="second-line">
         <div id="pre-page-button" style="display: flex"></div>
         <div id="content">
           <div id="content-box" style="position: absolute"></div>
-
-          <div id="bottom-button">
-            <div>
-              <button type="button" id="story-delete" class="btn btn-link" onclick="deleteStory()" style="display:none;">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 64 64"
-                  style="
-                    shape-rendering: geometricPrecision;
-                    text-rendering: geometricPrecision;
-                    image-rendering: optimizeQuality;
-                    fill-rule: evenodd;
-                    clip-rule: evenodd;
-                  "
-                >
-                  <path
-                    d="M23.5.5c5.344-.166 10.677 0 16 .5 1.814 2.481 2.48 5.315 2 8.5h15v6h-50v-6h15c-.435-3.338.232-6.338 2-9Zm4 6h8v3h-8v-3Z"
-                    style="fill: black"
-                  />
-                  <path
-                    d="M10.5 17.5h42c.167 14.337 0 28.67-.5 43L50.5 62a361.232 361.232 0 0 1-38 0L11 60.5a924.92 924.92 0 0 1-.5-43Zm6 6h30v33h-30v-33Z"
-                    style="fill: black"
-                  />
-                  <path d="M19.5 25.5h6v27h-6v-27ZM28.5 25.5h6v27h-6v-27ZM37.5 25.5h6v27h-6v-27Z" style="fill: black" />
-                </svg>
-              </button>
-            </div>
-            <div>
-              <button type="button" id="comment-box" class="btn btn-link" onclick="toggleComments()">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 64 64"
-                  style="
-                    shape-rendering: geometricPrecision;
-                    text-rendering: geometricPrecision;
-                    image-rendering: optimizeQuality;
-                    fill-rule: evenodd;
-                    clip-rule: evenodd;
-                  "
-                >
-                  <path
-                    d="M5.5 11.5h52v40a180.95 180.95 0 0 0-19 .5 64.271 64.271 0 0 1-7 6.5 64.271 64.271 0 0 1-7-6.5 180.95 180.95 0 0 0-19-.5v-40Zm4 4h44v32c-6.01-.166-12.01 0-18 .5a19.894 19.894 0 0 1-4 3.5 19.894 19.894 0 0 1-4-3.5c-5.99-.5-11.99-.666-18-.5v-32Z"
-                    style="opacity: 0.979"
-                  />
-                  <path d="M17.5 21.5h28v4h-28v-4ZM17.5 29.5h28v4h-28v-4ZM17.5 37.5h20v4h-20v-4Z" style="opacity: 1" />
-                </svg>
-              </button>
-            </div>
-          </div>
         </div>
         <div id="next-page-button" style="display: flex"></div>
-      </div>
-      <div id="comment" style="display: none">
-        <div id="comment-list"></div>
-        <img id="profile" />
-        <div>
-          <form onsubmit="event.preventDefault(); return false;" style="display: flex; justify-content: center">
-            <input
-              type="text"
-              placeholder="댓글을 입력해주세요."
-              style="width: 200px"
-              class="form-control"
-              id="comment-input"
-            />
-            <button type="button" id="create-comment" class="btn btn-outline-primary btn-block" onclick="postComment()">
-              등록
-            </button>
-          </form>
+        <div id="comment" style="display: none">
+          <div id="comment-list"></div>
+          <img id="profile" />
+          <div>
+            <form onsubmit="event.preventDefault(); return false;" style="display: flex; justify-content: center">
+              <input
+                type="text"
+                placeholder="댓글을 입력해주세요."
+                style="width: 200px"
+                class="form-control"
+                id="comment-input"
+              />
+              <button type="button" id="create-comment" onclick="postComment()">등록</button>
+            </form>
+          </div>
         </div>
-        `
       </div>
     </div>
     <script src="/static/js/header.js"></script>
