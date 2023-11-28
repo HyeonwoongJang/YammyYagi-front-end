@@ -1,65 +1,68 @@
-html, body {
-    width: 100%;
-    height: 100%;
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
 }
-.page{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5%;
-}
-.password-modal{
-    float: left;
-    width: 35%;
-    height: 45%;
-    text-align: left;
-    color: #d83dbf;
-    border-radius: 30px;
-    padding: 5%;
 
-    background-color: #fff7f7;
+.password-modal {
+  float: left;
+  width: 35%;
+  height: 45%;
+  text-align: left;
+  color: #d83dbf;
+  border-radius: 30px;
+  padding: 5%;
+
+  background-color: #fff7f7;
 }
+
 .password-update-div {
-    margin: 20px auto 10px auto;
+  margin: 20px auto 10px auto;
 }
 
 .info-box {
-    float: left;
-    width: 80%;
-    max-width: 500px;
-    height: 70%;
-    text-align: left;
-    color: #d83dbf;
-    border-radius: 10px;
-    padding: 20px 20px 20px 20px;
-    margin: 0px 30px 0px 30px;
-    background-color: #fff7f7;
+  float: left;
+  width: 80%;
+  max-width: 500px;
+  height: 70%;
+  text-align: left;
+  color: #d83dbf;
+  border-radius: 10px;
+  padding: 20px 20px 20px 20px;
+  margin: 0px 30px 0px 30px;
+  background-color: #fff7f7;
 }
 
-.open-delete-modal{
-    margin-top: 10px;
+.open-delete-modal {
+  margin-top: 10px;
 }
 
 .delete-modal {
-    float: left;
-    width: 30%;
-    height: 15%;
-    text-align: left;
-    color: #d83dbf;
-    border-radius: 30px;
-    padding: 20px;
-    background-color: #fff7f7;
+  float: left;
+  width: 30%;
+  height: 15%;
+  text-align: left;
+  color: #d83dbf;
+  border-radius: 30px;
+  padding: 20px;
+  background-color: #fff7f7;
 }
 
 .button-container {
-    margin-top: 10px;
-    margin-bottom: 10;
-    margin-left: 5;
-    margin-right: 5;
-    text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10;
+  margin-left: 5;
+  margin-right: 5;
+  text-align: center;
 }
 
 #current-profile-img {
-    border-radius: 100%;
+  border-radius: 100%;
 }

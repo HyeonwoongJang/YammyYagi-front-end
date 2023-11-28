@@ -1,59 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>상세 페이지</title>
 
-
-    <link rel="stylesheet" href="/static/css/story/detail.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/story/detail.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
     <script src="/static/js/story/detail.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header></header>
     <div class="first-line">
-        <div id="title_div">
-            <h1 id="title" style="width: 100%;">제목</h1>
-        </div>
-        <div id="tools">
-            <form>
-                <button type="button" class="btn btn-link" id="copy-link" onclick="copyLink()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 50 50">
-                        <path
-                            d="M30.1 1.7c-4.1 2-6 5.6-4.1 7.8 1.6 1.9 4.4 1.9 6 0 2-2.4 6.7-1.9 8.5.9 1.5 2.2 1.5 2.8.2 5.3-.9 1.6-3.8 5-6.6 7.6-5 4.7-5.2 4.8-10.1 4.1-4.2-.6-5.1-.4-5.6 1.1-1 2.6.8 4.8 4.9 6.2 5.7 1.9 9.3.2 17.6-8.1 6.4-6.5 7.4-7.9 7.8-11.8C49.9 4 39.9-3.1 30.1 1.7z" />
-                        <path
-                            d="M18 15.1C14.9 16.3 3.4 27.5 1.4 31.2c-4.5 8.5 3.2 19.6 12.8 18.5 5.5-.7 10-4.3 9.6-7.6-.2-2-.9-2.7-2.9-2.9-1.4-.2-3.1.4-3.9 1.2-1.5 1.9-6.1 2.1-7.8.4-2.7-2.7-1.3-6.8 4.2-12.6 5.4-5.6 5.6-5.7 11.3-5.7 5.5 0 5.8-.1 6.1-2.6.2-2.1-.3-2.9-3.1-4.3-3.9-1.8-6.1-1.9-9.7-.5z" />
-                    </svg>
-                </button>
-                <button type="button" class="btn btn-link" id="share-on-facebook" onclick="shareFacebook()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 24 48">
-                        <path
-                            d="M8.4 2.4c-2.4 2-2.8 3.2-3.2 9-.4 6.2-.6 6.6-2.8 6.6-2.2 0-2.4.4-2.4 4.5S.2 27 2.5 27H5v21h11V27h3c3.2 0 3.5-.4 4.4-5.8.5-3.2.5-3.2-3.4-3.2h-4v-4.5c0-4.3.1-4.5 3-4.5s3-.2 3-4.5V0h-5.4c-4.3 0-6.1.5-8.2 2.4z" />
-                    </svg>
-                </button>
-                <button type="button" class="btn btn-link" id="share-on-kakao" onclick="shareKakao()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 51 48">
-                        <path
-                            d="M18 .9C9.9 3.4 4.1 8 1.5 14.2c-3.1 7.5-1.6 13 5.1 19.9 4.5 4.5 4.5 4.7 3.9 9.4l-.8 4.7 5.4-3.6c4.5-3 6.3-3.6 10.6-3.6 16.8 0 29.4-14.3 23.9-27.3-1.9-4.6-9.1-10.5-15-12.2C29.3-.1 22.1-.3 18 .9z" />
-                    </svg>
-                </button>
-                <button type="button" class="btn btn-link" id="share-on-instagram" onclick="shareTwitter()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" version="1.0" viewBox="0 0 57 57"
-                        style="margin-bottom: -4px;">
-                        <image
-                            xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAuCAQAAAAyntd/AAAAIGNIUk0AAHomAACAhAAA+gAAAIDo AAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAAGMQAABjEBhEOMlgAA AAd0SU1FB+cLEAIxOA2HjFYAAANASURBVFjD7Zjdb4xZHMe/5+k8dGjRDkE3fVFGSYWE2kTadKVW 3Sx/
+      <div id="title_div">
+        <h1 id="title" style="width: 100%">제목</h1>
+      </div>
+      <div id="tools">
+        <form>
+          <button type="button" class="btn btn-link" id="copy-link" onclick="copyLink()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 50 50">
+              <path
+                d="M30.1 1.7c-4.1 2-6 5.6-4.1 7.8 1.6 1.9 4.4 1.9 6 0 2-2.4 6.7-1.9 8.5.9 1.5 2.2 1.5 2.8.2 5.3-.9 1.6-3.8 5-6.6 7.6-5 4.7-5.2 4.8-10.1 4.1-4.2-.6-5.1-.4-5.6 1.1-1 2.6.8 4.8 4.9 6.2 5.7 1.9 9.3.2 17.6-8.1 6.4-6.5 7.4-7.9 7.8-11.8C49.9 4 39.9-3.1 30.1 1.7z"
+              />
+              <path
+                d="M18 15.1C14.9 16.3 3.4 27.5 1.4 31.2c-4.5 8.5 3.2 19.6 12.8 18.5 5.5-.7 10-4.3 9.6-7.6-.2-2-.9-2.7-2.9-2.9-1.4-.2-3.1.4-3.9 1.2-1.5 1.9-6.1 2.1-7.8.4-2.7-2.7-1.3-6.8 4.2-12.6 5.4-5.6 5.6-5.7 11.3-5.7 5.5 0 5.8-.1 6.1-2.6.2-2.1-.3-2.9-3.1-4.3-3.9-1.8-6.1-1.9-9.7-.5z"
+              />
+            </svg>
+          </button>
+          <button type="button" class="btn btn-link" id="share-on-facebook" onclick="shareFacebook()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 24 48">
+              <path
+                d="M8.4 2.4c-2.4 2-2.8 3.2-3.2 9-.4 6.2-.6 6.6-2.8 6.6-2.2 0-2.4.4-2.4 4.5S.2 27 2.5 27H5v21h11V27h3c3.2 0 3.5-.4 4.4-5.8.5-3.2.5-3.2-3.4-3.2h-4v-4.5c0-4.3.1-4.5 3-4.5s3-.2 3-4.5V0h-5.4c-4.3 0-6.1.5-8.2 2.4z"
+              />
+            </svg>
+          </button>
+          <button type="button" class="btn btn-link" id="share-on-kakao" onclick="shareKakao()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.0" viewBox="0 0 51 48">
+              <path
+                d="M18 .9C9.9 3.4 4.1 8 1.5 14.2c-3.1 7.5-1.6 13 5.1 19.9 4.5 4.5 4.5 4.7 3.9 9.4l-.8 4.7 5.4-3.6c4.5-3 6.3-3.6 10.6-3.6 16.8 0 29.4-14.3 23.9-27.3-1.9-4.6-9.1-10.5-15-12.2C29.3-.1 22.1-.3 18 .9z"
+              />
+            </svg>
+          </button>
+          <button type="button" class="btn btn-link" id="share-on-instagram" onclick="shareTwitter()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              version="1.0"
+              viewBox="0 0 57 57"
+              style="margin-bottom: -4px"
+            >
+              <image
+                xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAuCAQAAAAyntd/AAAAIGNIUk0AAHomAACAhAAA+gAAAIDo AAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAAGMQAABjEBhEOMlgAA AAd0SU1FB+cLEAIxOA2HjFYAAANASURBVFjD7Zjdb4xZHMe/5+k8dGjRDkE3fVFGSYWE2kTadKVW 3Sx/
                         QSWyGxIhIl4iaUK4kV64EZEgyEqw9mKTTTaR2ItKWJvVLablptJY66Udoi+MTqXox4VBq888 03lmpi70+7uZec6Z53zO9/zO75yMNK5xjesLyyTqUCl/
                         dqg8Om2yldyLXzMwEGwPdRzT5lT4yrRy ZuCEr8f0m1dJRr+J5twoq5UWeh9+vqrtvKMW8hwT7xYumO0dYI6CQfuh9+GFIb/efQyfW2OvrFmD +aksIeorlnBJNVeA55I1mDBNR8qIj5+trBQcGLpJcrVVxUJGRkb3dUQRh/626lShM2oaNaxvtB0j 
                         imiDjB5rULYCiurwkHnGZqtNOqgLakveNGdZyvpO0Q8Jlc1xIvzEDIo4TZjVI1Kujm5+IW/YM/9J jQD1CCAKuc4t5iJKucl1CocNtZZO/qDgM6i0AogaOjhLDuJ7nvEzk4a0PKCRohGupBlAbKGPXQiL nUTYhkGI5bRxk3KHSpB2gEmcJEwtIodzhKlGLCbEbZY6lqK0A4himrjBHEQpIf6hiiv8R2WcWpgB ALGKJ5xnMmINYTq5z5q4xTgjAIbtvGA7wmI3bzmKNbYAIoczdFKDmMpvPKJqrAFEKc00U4KYRyt/ 
@@ -61,137 +75,188 @@
                         3AUy7RQAPX gMNDMiERwKjvhH79KFtb1OjYelGHtF4FkgbVogpV6rLXWQ93wProgI8AU2PXD6ewyScQi+nkpscB W9JA7Odv1OUK+1rdjs9JkACuZ0GhSl7Y/al4aOSLuPdwBbA14Z6vNRWArJeBPycm/g8gnvZLClb7 2+KvvHvY0YKG1dkVCTxy1Q7tM8sW9K6LzrN9yexmo7fQk9+44nJf9GIqAO/luZB4N39cX5HeAQMa qtupqlu5AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTExLTE2VDAyOjQ5OjU2KzAwOjAwVPYEVgAA 
                         ACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0xMS0xNlQwMjo0OTo1NiswMDowMCWrvOoAAAAodEVYdGRh dGU6dGltZXN0YW1wADIwMjMtMTEtMTZUMDI6NDk6NTYrMDA6MDByvp01AAAAIHRFWHRzb2Z0d2Fy ZQBodHRwczovL2ltYWdlbWFnaWNrLm9yZ7zPHZ0AAAAYdEVYdFRodW1iOjpEb2N1bWVudDo6UGFn ZXMAMaf/uy8AAAAYdEVYdFRodW1iOjpJbWFnZTo6SGVpZ2h0ADUxMo+NU4EAAAAXdEVYdFRodW1i 
                         OjpJbWFnZTo6V2lkdGgANzAw6O2H3wAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+y Vk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNjkxNDAwMDI5a0z3zAAAABN0RVh0VGh1bWI6OlNpemUA MTcyOTVCQgkfilIAAABXdEVYdFRodW1iOjpVUkkAZmlsZTovLy4vdXBsb2Fkcy81Ni9hMFhSdnFI LzQwMjkvdHdpdHRlcl94X25ld19sb2dvX3NxdWFyZV94X2ljb25fMjU2MDc1LnBuZ8Ml0vsAAAAA SUVORK5CYII="
-                            width="64" height="46" />
-                    </svg>
-                </button>
+                width="64"
+                height="46"
+              />
+            </svg>
+          </button>
 
-                <button type="button" class="btn btn-link" id="bookmark" onclick="bookmarkStory()">
-                    <div id="bookmarked-icon">
-                        <svg class="bookmark-icon bookmarked" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            version="1.0" viewBox="0 0 512 512">
-                            <path
-                                d="M97.3 1.5c-13.4 3.6-24.1 12.3-30 24.3l-3.8 7.6-.3 227.5c-.2 250.2-.7 233 5.8 242 3.7 5.1 11.5 9.1 17.7 9.1 5.7 0 13.3-3 19.6-7.8 2.9-2.2 34.7-29 70.7-59.7 36-30.6 66.9-56.4 68.5-57.3 4.2-2.3 18.8-2.3 23 0 1.7.9 32.9 27.2 69.5 58.4 36.6 31.1 68.5 58.2 71 60 14.4 10.6 30.4 7.4 37.4-7.6l2.1-4.5.3-227.5c.3-254.2.9-234-6.8-245.8-6.1-9.5-16.2-16.6-27.1-19.1-2.9-.7-58-1-158.4-1C127.2.1 101.7.4 97.3 1.5z" />
-                        </svg>
-                    </div>
-                    <div id="not-bookmarked-icon">
-                        <svg class="bookmark-icon not-bookmarked" xmlns="http://www.w3.org/2000/svg" width="16"
-                            height="16" version="1.0" viewBox="0 0 512 512">
-                            <path
-                                d="M69.5 1.4C57.6 4.3 46.2 13.9 41.8 24.8l-2.3 5.7v451l2.3 5.7c6.7 16.5 26.2 27.2 43.8 23.9 8.8-1.6 14.9-4.8 22.5-11.8 3.4-3.2 38-36.3 76.7-73.5 38.8-37.3 70.8-67.8 71.2-67.8.4 0 32.4 30.5 71.2 67.7 85 81.8 82.1 79.1 88.3 81.9 20.7 9.5 46.5-.1 54.7-20.4l2.3-5.7v-451l-2.3-5.7c-2.9-7.1-10.3-15.5-16.9-19.1-11.2-6 .3-5.7-197.8-5.6-138.4.1-182.2.4-186 1.3zM429 253.2v210.2l-8.2-8c-16.6-16-153.5-147.1-159-152.3l-5.8-5.4-5.7 5.4c-5.6 5.2-142.5 136.3-159.1 152.3l-8.2 8V43h346v210.2z" />
-                        </svg>
-                    </div>
-                </button>
-                <button type="button" class="btn btn-link" id="like" onclick="likeStory()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.0" viewBox="0 0 62 57">
-                        <path fill="#384970"
-                            d="M14.5 6.5c6.026-.824 11.192.842 15.5 5 6.772-5.992 13.939-6.492 21.5-1.5 8.157 8.72 7.99 17.22-.5 25.5-6.364-2.155-11.03-.155-14 6-.684 2.88-.517 5.713.5 8.5-5.226 4.598-10.56 4.598-16 0A254.556 254.556 0 0 1 4 29.5c-2.96-10.74.54-18.406 10.5-23Z"
-                            style="opacity:1" />
-                        <path fill="#394b73"
-                            d="M46.5 36.5c2.413 1.18 3.413 3.18 3 6 1.7-.16 3.366.007 5 .5 1.333 1.333 1.333 2.667 0 4-1.634.493-3.3.66-5 .5.16 1.7-.007 3.366-.5 5-1.333 1.333-2.667 1.333-4 0-.493-1.634-.66-3.3-.5-5-2.477.45-4.477-.218-6-2 1.222-2.478 3.222-3.478 6-3-.248-2.358.42-4.358 2-6Z"
-                            style="opacity:1" />
-                    </svg>
-                </button>
-                <button type="button" class="btn btn-link" id="hate" onclick="hateStory()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" version="1.0" viewBox="0 0 62 57">
-                        <path fill="#384970"
-                            d="M13.5 5.5c5.153-.427 9.82.907 14 4 9.192-6.236 17.025-4.903 23.5 4 2 5 2 10 0 15-1.841 3.56-4.508 4.56-8 3-7.834 1.83-10.668 6.663-8.5 14.5-3.478 3.533-7.478 4.2-12 2A255.715 255.715 0 0 1 4 28.5c-3.72-10.7-.554-18.367 9.5-23Z"
-                            style="opacity:1" />
-                        <path fill="#3b5076"
-                            d="M35.5 39.5c5.011-.166 10.011 0 15 .5 1.29 2.09.624 3.424-2 4a30.499 30.499 0 0 1-11 0c-1.607-1.049-2.273-2.549-2-4.5Z"
-                            style="opacity:.925" />
-                    </svg>
-                </button>
-            </form>
-        </div>
-        <div id="counts">
-            <p id="like-count"></p>
-            <p id="hate-count"></p>
-        </div>
-        <div id="translator">
-            <select class="form-control" id="language">
-                <option value="" disabled selected> -- Select Language -- </option>
-                <option value="hr" disabled> </option>
-                <option value="KO">한국어</option>
-                <option value="hr" disabled>- - - - - - - </option>
-                <option value="EN-US">English</option>
-                <option value="hr" disabled>- - - - - - - </option>
-                <option value="FR">Français</option>
-                <option value="hr" disabled>- - - - - - - </option>
-                <option value="ES">Español</option>
-                <option value="hr" disabled>- - - - - - - </option>
-                <option value="JA">日本語</option>
-                <option value="hr" disabled>- - - - - - - </option>
-                <option value="ZH">中国人</option>
-                <option value="hr" disabled> </option>
-            </select>
-            <button type="button" id="translate" class="btn btn-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" version="1.0" viewBox="0 0 62 57">
-                    <path
-                        d="M25.5-.5h5c2.679 2.1 5.512 4.1 8.5 6 .667 1 .667 2 0 3a66.612 66.612 0 0 1-12 7c-1.735-1.182-2.735-2.848-3-5-13.843 6.852-17.843 17.518-12 32l7.5 9.5c-.598 2.048-1.931 3.215-4 3.5C5.71 49.252 1.21 40.252 2 28.5c2.27-12.765 9.436-21.432 21.5-26a7.466 7.466 0 0 0 2-3Z"
-                        style="opacity:.767" />
-                    <path
-                        d="M37.5 63.5h-5a105.27 105.27 0 0 0-8.5-6c-.667-1-.667-2 0-3a107.92 107.92 0 0 1 12-7c1.735 1.182 2.735 2.849 3 5 13.443-6.983 17.443-17.65 12-32a81.696 81.696 0 0 1-6.5-9c.285-2.069 1.452-3.402 3.5-4 9.424 6.516 13.758 15.516 13 27-2.099 12.766-9.266 21.266-21.5 25.5a18.492 18.492 0 0 0-2 3.5Z"
-                        style="opacity:.768" />
-                </svg>
-            </button>
-        </div>
+          <button type="button" class="btn btn-link" id="bookmark" onclick="bookmarkStory()">
+            <div id="bookmarked-icon">
+              <svg
+                class="bookmark-icon bookmarked"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                version="1.0"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M97.3 1.5c-13.4 3.6-24.1 12.3-30 24.3l-3.8 7.6-.3 227.5c-.2 250.2-.7 233 5.8 242 3.7 5.1 11.5 9.1 17.7 9.1 5.7 0 13.3-3 19.6-7.8 2.9-2.2 34.7-29 70.7-59.7 36-30.6 66.9-56.4 68.5-57.3 4.2-2.3 18.8-2.3 23 0 1.7.9 32.9 27.2 69.5 58.4 36.6 31.1 68.5 58.2 71 60 14.4 10.6 30.4 7.4 37.4-7.6l2.1-4.5.3-227.5c.3-254.2.9-234-6.8-245.8-6.1-9.5-16.2-16.6-27.1-19.1-2.9-.7-58-1-158.4-1C127.2.1 101.7.4 97.3 1.5z"
+                />
+              </svg>
+            </div>
+            <div id="not-bookmarked-icon">
+              <svg
+                class="bookmark-icon not-bookmarked"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                version="1.0"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M69.5 1.4C57.6 4.3 46.2 13.9 41.8 24.8l-2.3 5.7v451l2.3 5.7c6.7 16.5 26.2 27.2 43.8 23.9 8.8-1.6 14.9-4.8 22.5-11.8 3.4-3.2 38-36.3 76.7-73.5 38.8-37.3 70.8-67.8 71.2-67.8.4 0 32.4 30.5 71.2 67.7 85 81.8 82.1 79.1 88.3 81.9 20.7 9.5 46.5-.1 54.7-20.4l2.3-5.7v-451l-2.3-5.7c-2.9-7.1-10.3-15.5-16.9-19.1-11.2-6 .3-5.7-197.8-5.6-138.4.1-182.2.4-186 1.3zM429 253.2v210.2l-8.2-8c-16.6-16-153.5-147.1-159-152.3l-5.8-5.4-5.7 5.4c-5.6 5.2-142.5 136.3-159.1 152.3l-8.2 8V43h346v210.2z"
+                />
+              </svg>
+            </div>
+          </button>
+          <button type="button" class="btn btn-link" id="like" onclick="likeStory()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.0" viewBox="0 0 62 57">
+              <path
+                fill="#384970"
+                d="M14.5 6.5c6.026-.824 11.192.842 15.5 5 6.772-5.992 13.939-6.492 21.5-1.5 8.157 8.72 7.99 17.22-.5 25.5-6.364-2.155-11.03-.155-14 6-.684 2.88-.517 5.713.5 8.5-5.226 4.598-10.56 4.598-16 0A254.556 254.556 0 0 1 4 29.5c-2.96-10.74.54-18.406 10.5-23Z"
+                style="opacity: 1"
+              />
+              <path
+                fill="#394b73"
+                d="M46.5 36.5c2.413 1.18 3.413 3.18 3 6 1.7-.16 3.366.007 5 .5 1.333 1.333 1.333 2.667 0 4-1.634.493-3.3.66-5 .5.16 1.7-.007 3.366-.5 5-1.333 1.333-2.667 1.333-4 0-.493-1.634-.66-3.3-.5-5-2.477.45-4.477-.218-6-2 1.222-2.478 3.222-3.478 6-3-.248-2.358.42-4.358 2-6Z"
+                style="opacity: 1"
+              />
+            </svg>
+          </button>
+          <button type="button" class="btn btn-link" id="hate" onclick="hateStory()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" version="1.0" viewBox="0 0 62 57">
+              <path
+                fill="#384970"
+                d="M13.5 5.5c5.153-.427 9.82.907 14 4 9.192-6.236 17.025-4.903 23.5 4 2 5 2 10 0 15-1.841 3.56-4.508 4.56-8 3-7.834 1.83-10.668 6.663-8.5 14.5-3.478 3.533-7.478 4.2-12 2A255.715 255.715 0 0 1 4 28.5c-3.72-10.7-.554-18.367 9.5-23Z"
+                style="opacity: 1"
+              />
+              <path
+                fill="#3b5076"
+                d="M35.5 39.5c5.011-.166 10.011 0 15 .5 1.29 2.09.624 3.424-2 4a30.499 30.499 0 0 1-11 0c-1.607-1.049-2.273-2.549-2-4.5Z"
+                style="opacity: 0.925"
+              />
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div id="counts">
+        <p id="like-count"></p>
+        <p id="hate-count"></p>
+      </div>
+      <div id="translator">
+        <select class="form-control" id="language">
+          <option value="" disabled selected>-- Select Language --</option>
+          <option value="hr" disabled></option>
+          <option value="KO">한국어</option>
+          <option value="hr" disabled>- - - - - - -</option>
+          <option value="EN-US">English</option>
+          <option value="hr" disabled>- - - - - - -</option>
+          <option value="FR">Français</option>
+          <option value="hr" disabled>- - - - - - -</option>
+          <option value="ES">Español</option>
+          <option value="hr" disabled>- - - - - - -</option>
+          <option value="JA">日本語</option>
+          <option value="hr" disabled>- - - - - - -</option>
+          <option value="ZH">中国人</option>
+          <option value="hr" disabled></option>
+        </select>
+        <button type="button" id="translate" class="btn btn-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" version="1.0" viewBox="0 0 62 57">
+            <path
+              d="M25.5-.5h5c2.679 2.1 5.512 4.1 8.5 6 .667 1 .667 2 0 3a66.612 66.612 0 0 1-12 7c-1.735-1.182-2.735-2.848-3-5-13.843 6.852-17.843 17.518-12 32l7.5 9.5c-.598 2.048-1.931 3.215-4 3.5C5.71 49.252 1.21 40.252 2 28.5c2.27-12.765 9.436-21.432 21.5-26a7.466 7.466 0 0 0 2-3Z"
+              style="opacity: 0.767"
+            />
+            <path
+              d="M37.5 63.5h-5a105.27 105.27 0 0 0-8.5-6c-.667-1-.667-2 0-3a107.92 107.92 0 0 1 12-7c1.735 1.182 2.735 2.849 3 5 13.443-6.983 17.443-17.65 12-32a81.696 81.696 0 0 1-6.5-9c.285-2.069 1.452-3.402 3.5-4 9.424 6.516 13.758 15.516 13 27-2.099 12.766-9.266 21.266-21.5 25.5a18.492 18.492 0 0 0-2 3.5Z"
+              style="opacity: 0.768"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
     <div class="container">
-        <div class="second-line">
-            <div id="pre-page-button" style="display: flex;">
-            </div>
-            <div id="content">
-                <div id="content-box" style="position:absolute;">
+      <div class="second-line">
+        <div id="pre-page-button" style="display: flex"></div>
+        <div id="content">
+          <div id="content-box" style="position: absolute"></div>
 
-                </div>
-
-                <div id="bottom-button">
-                    <div>
-                        <button type="button" id="story-delete" class="btn btn-link" onclick="deleteStory()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 64 64"
-                                style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;fill-rule:evenodd;clip-rule:evenodd">
-                                <path
-                                    d="M23.5.5c5.344-.166 10.677 0 16 .5 1.814 2.481 2.48 5.315 2 8.5h15v6h-50v-6h15c-.435-3.338.232-6.338 2-9Zm4 6h8v3h-8v-3Z"
-                                    style="fill: black" />
-                                <path
-                                    d="M10.5 17.5h42c.167 14.337 0 28.67-.5 43L50.5 62a361.232 361.232 0 0 1-38 0L11 60.5a924.92 924.92 0 0 1-.5-43Zm6 6h30v33h-30v-33Z"
-                                    style="fill: black" />
-                                <path d="M19.5 25.5h6v27h-6v-27ZM28.5 25.5h6v27h-6v-27ZM37.5 25.5h6v27h-6v-27Z"
-                                    style="fill: black" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div>
-                        <button type="button" id="comment-box" class="btn btn-link" onclick="toggleComments()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 64 64"
-                                style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;fill-rule:evenodd;clip-rule:evenodd">
-                                <path
-                                    d="M5.5 11.5h52v40a180.95 180.95 0 0 0-19 .5 64.271 64.271 0 0 1-7 6.5 64.271 64.271 0 0 1-7-6.5 180.95 180.95 0 0 0-19-.5v-40Zm4 4h44v32c-6.01-.166-12.01 0-18 .5a19.894 19.894 0 0 1-4 3.5 19.894 19.894 0 0 1-4-3.5c-5.99-.5-11.99-.666-18-.5v-32Z"
-                                    style="opacity:.979" />
-                                <path d="M17.5 21.5h28v4h-28v-4ZM17.5 29.5h28v4h-28v-4ZM17.5 37.5h20v4h-20v-4Z"
-                                    style="opacity:1" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div id="next-page-button" style="display: flex;">
-            </div>
-        </div>
-        <div id="comment" style="display:none;">
-            <div id="comment-list"></div>
-            <img id="profile" />
+          <div id="bottom-button">
             <div>
-                <form onsubmit="event.preventDefault(); return false;" style="display: flex; justify-content: center;">
-                    <input type="text" placeholder="댓글을 입력해주세요." style="width: 200px;" class="form-control"
-                        id="comment-input" />
-                    <button type="button" id="create-comment" class="btn btn-outline-primary btn-block"
-                        onclick="postComment()">등록</button>
-                </form>
-            </div>`
+              <button type="button" id="story-delete" class="btn btn-link" onclick="deleteStory()">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 64 64"
+                  style="
+                    shape-rendering: geometricPrecision;
+                    text-rendering: geometricPrecision;
+                    image-rendering: optimizeQuality;
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                  "
+                >
+                  <path
+                    d="M23.5.5c5.344-.166 10.677 0 16 .5 1.814 2.481 2.48 5.315 2 8.5h15v6h-50v-6h15c-.435-3.338.232-6.338 2-9Zm4 6h8v3h-8v-3Z"
+                    style="fill: black"
+                  />
+                  <path
+                    d="M10.5 17.5h42c.167 14.337 0 28.67-.5 43L50.5 62a361.232 361.232 0 0 1-38 0L11 60.5a924.92 924.92 0 0 1-.5-43Zm6 6h30v33h-30v-33Z"
+                    style="fill: black"
+                  />
+                  <path d="M19.5 25.5h6v27h-6v-27ZM28.5 25.5h6v27h-6v-27ZM37.5 25.5h6v27h-6v-27Z" style="fill: black" />
+                </svg>
+              </button>
+            </div>
+            <div>
+              <button type="button" id="comment-box" class="btn btn-link" onclick="toggleComments()">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 64 64"
+                  style="
+                    shape-rendering: geometricPrecision;
+                    text-rendering: geometricPrecision;
+                    image-rendering: optimizeQuality;
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                  "
+                >
+                  <path
+                    d="M5.5 11.5h52v40a180.95 180.95 0 0 0-19 .5 64.271 64.271 0 0 1-7 6.5 64.271 64.271 0 0 1-7-6.5 180.95 180.95 0 0 0-19-.5v-40Zm4 4h44v32c-6.01-.166-12.01 0-18 .5a19.894 19.894 0 0 1-4 3.5 19.894 19.894 0 0 1-4-3.5c-5.99-.5-11.99-.666-18-.5v-32Z"
+                    style="opacity: 0.979"
+                  />
+                  <path d="M17.5 21.5h28v4h-28v-4ZM17.5 29.5h28v4h-28v-4ZM17.5 37.5h20v4h-20v-4Z" style="opacity: 1" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
+        <div id="next-page-button" style="display: flex"></div>
+      </div>
+      <div id="comment" style="display: none">
+        <div id="comment-list"></div>
+        <img id="profile" />
+        <div>
+          <form onsubmit="event.preventDefault(); return false;" style="display: flex; justify-content: center">
+            <input
+              type="text"
+              placeholder="댓글을 입력해주세요."
+              style="width: 200px"
+              class="form-control"
+              id="comment-input"
+            />
+            <button type="button" id="create-comment" class="btn btn-outline-primary btn-block" onclick="postComment()">
+              등록
+            </button>
+          </form>
+        </div>
+        `
+      </div>
     </div>
     <script src="/static/js/header.js"></script>
-</body>
-
+  </body>
 </html>

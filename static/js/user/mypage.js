@@ -1,51 +1,51 @@
 // 로그인 여부 체크
-window.onload = () => { 
-    if (!localStorage.getItem("access")) {
-        alert("잘못된 접근입니다.")
-        window.location.href = `${frontend_base_url}`
-    }
-}
+window.onload = () => {
+  if (!localStorage.getItem("access")) {
+    alert("잘못된 접근입니다.");
+    window.location.href = `${frontend_base_url}`;
+  }
+};
 
 function storyDetail(story_id) {
-    window.location.href = `${frontend_base_url}/story/detail.html?story_id=${story_id}`;
+  window.location.href = `${frontend_base_url}/story/detail.html?story_id=${story_id}`;
 }
 
 // 마이페이지 get api
 function getMyPage() {
-    const access_token = localStorage.getItem("access");
-    fetch(`${backend_base_url}/user/mypage/`, {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${access_token}`,
-            "Content-Type": "application/json",
-            },
-        })
-        .then((response) => response.json())
-        .then((user) => {
-            // user 정보 가져오기
-            const data = user.my_data;
-            document.getElementById("nickname").textContent = data.nickname;
-            document.getElementById("email").textContent = data.email;
-            document.getElementById("country").textContent = data.country;
+  const access_token = localStorage.getItem("access");
+  fetch(`${backend_base_url}/user/mypage/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((user) => {
+      // user 정보 가져오기
+      const data = user.my_data;
+      document.getElementById("nickname").textContent = data.nickname;
+      document.getElementById("email").textContent = data.email;
+      document.getElementById("country").textContent = data.country;
 
-            const user_image = document.getElementById("user-profile");
-            if (data.profile_img) {
-            user_image.setAttribute("src", `${backend_base_url}${data.profile_img}`);
-            } else {
-                user_image.setAttribute("src", `${backend_base_url}/media/user/default_profile.jpg`);
-            }
+      const user_image = document.getElementById("user-profile");
+      if (data.profile_img) {
+        user_image.setAttribute("src", `${backend_base_url}${data.profile_img}`);
+      } else {
+        user_image.setAttribute("src", `${backend_base_url}/media/user/default_profile.jpg`);
+      }
 
-            // 북마크 목록 불러오기
-            const bookmarks = data.bookmark_story_list;
-            bookmarks.reverse()
-            const bookmark_list = document.getElementById("bookmark-story");
-            bookmark_list.innerHTML = "";
+      // 북마크 목록 불러오기
+      const bookmarks = data.bookmark_story_list;
+      bookmarks.reverse();
+      const bookmark_list = document.getElementById("bookmark-story");
+      bookmark_list.innerHTML = "";
 
-            bookmarks.forEach((bookmark) => {
-                const bookmark_element = document.createElement("div");
-                bookmark_element.setAttribute("onclick", `storyDetail(${bookmark.story_id})`);
+      bookmarks.forEach((bookmark) => {
+        const bookmark_element = document.createElement("div");
+        bookmark_element.setAttribute("onclick", `storyDetail(${bookmark.story_id})`);
 
-                bookmark_element.innerHTML = `
+        bookmark_element.innerHTML = `
                 <div class="bookmark-card">
                   <img class="card-img" src="${backend_base_url}${bookmark.content.story_image}" />
                   <div class="card-text">
@@ -63,20 +63,20 @@ function getMyPage() {
                 </div>
                 `;
 
-                bookmark_list.appendChild(bookmark_element);
-            });
+        bookmark_list.appendChild(bookmark_element);
+      });
 
-            // 내가 작성한 동화 목록 불러오기
-            const stories = data.my_story_list;
-            stories.reverse()
-            const story_list = document.getElementById("my-story");
-            story_list.innerHTML = "";
+      // 내가 작성한 동화 목록 불러오기
+      const stories = data.my_story_list;
+      stories.reverse();
+      const story_list = document.getElementById("my-story");
+      story_list.innerHTML = "";
 
-            stories.forEach((story) => {
-                const story_element = document.createElement("div");
-                story_element.setAttribute("onclick", `storyDetail(${story.story_id})`);
+      stories.forEach((story) => {
+        const story_element = document.createElement("div");
+        story_element.setAttribute("onclick", `storyDetail(${story.story_id})`);
 
-                story_element.innerHTML = `
+        story_element.innerHTML = `
                 <div class="my-story-card">
                           <img class="card-img" src="${backend_base_url}${story.content.story_image}" />
                           <div class="card-text">
@@ -95,20 +95,20 @@ function getMyPage() {
                       </div>
                   </div>
               `;
-              story_list.appendChild(story_element);
-            });
+        story_list.appendChild(story_element);
+      });
 
-            // 최근 조회한 글 목록 불러오기
-            const story_timestamps = data.story_timestamps;
+      // 최근 조회한 글 목록 불러오기
+      const story_timestamps = data.story_timestamps;
 
-            const recent_story_list = document.getElementById("recently-story");
-            recent_story_list.innerHTML = "";
+      const recent_story_list = document.getElementById("recently-story");
+      recent_story_list.innerHTML = "";
 
-            story_timestamps.forEach((recent_story) => {
-                const recent_story_element = document.createElement("div");
-                recent_story_element.setAttribute("onclick", `storyDetail(${recent_story.story_id})`);
+      story_timestamps.forEach((recent_story) => {
+        const recent_story_element = document.createElement("div");
+        recent_story_element.setAttribute("onclick", `storyDetail(${recent_story.story_id})`);
 
-                recent_story_element.innerHTML = `
+        recent_story_element.innerHTML = `
                 <div class="recently-card">
                           <img class="card-img" src="${backend_base_url}${recent_story.content.story_image}" />
                           <div class="card-text">
@@ -128,17 +128,20 @@ function getMyPage() {
                   </div>
               `;
 
-              recent_story_list.appendChild(recent_story_element);
-            });
-        });
+        recent_story_list.appendChild(recent_story_element);
+      });
+    });
 }
 
-window.addEventListener("load", getMyPage)
-window.onpageshow = function(event) {
-    if ( event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0]['type']=='back_forward')) {
-        location.replace(location.href);
-    }
-}
+window.addEventListener("load", getMyPage);
+window.onpageshow = function (event) {
+  if (
+    event.persisted ||
+    (window.performance && window.performance.getEntriesByType("navigation")[0]["type"] == "back_forward")
+  ) {
+    location.replace(location.href);
+  }
+};
 function getInfoPage() {
-    window.location.href = `${frontend_base_url}/user/user-info-update.html`;
+  window.location.href = `${frontend_base_url}/user/user-info-update.html`;
 }
