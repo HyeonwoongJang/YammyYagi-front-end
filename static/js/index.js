@@ -157,7 +157,6 @@ async function getlikestories() {
       const stories = response_json.story_list;
       const paginationbutton = document.getElementById("pagination-box");
       paginationbutton.style.display = "none";
-      console.log(stories);
       const story_list = document.getElementById("story-list");
       story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
       stories.forEach((story) => {
@@ -244,7 +243,7 @@ async function getlikestories() {
 async function getcountrystories() {
   try {
     const selectcountry = document.getElementById("select-country").value;
-    console.log(selectcountry);
+
     const response = await fetch(`${backend_base_url}/story/country_sorted/${selectcountry}/`);
     if (response.status == 200) {
       const response_json = await response.json();

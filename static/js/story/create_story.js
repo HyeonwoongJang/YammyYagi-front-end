@@ -61,7 +61,6 @@ async function getMessage() {
     first_spinner.style.display = "block";
     const response = await fetch(`${backend_base_url}/story/fairytail_gpt/`, options);
     const data = await response.json();
-    console.log(data);
     if (response.status == 400) {
       alert(data.error);
       window.location.reload();
@@ -323,7 +322,6 @@ async function createStory() {
       third_spinner.style.display = "none";
       const id = res_json.story_id;
       if (res_json.status == 201) {
-        console.log(id);
         window.alert(res_json.success);
         window.location.href = `${frontend_base_url}/story/detail.html?story_id=${id}`;
       } else {
