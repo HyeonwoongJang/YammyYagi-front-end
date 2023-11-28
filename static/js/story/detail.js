@@ -279,7 +279,7 @@ async function toggleComments() {
       const single_comment = document.createElement("div");
       const author_info = document.createElement("div");
       const author_profile = document.createElement("img");
-      const author_nickname = document.createElement("p");
+      const author_nickname = document.createElement("div");
       const delete_button = document.createElement("button");
       const content = document.createElement("p");
 
@@ -290,6 +290,7 @@ async function toggleComments() {
       author_profile.src = `${backend_base_url}${comment["author_image"]}`;
       author_profile.classList.add("comment_author_profile");
       author_nickname.innerText = comment["author_nickname"];
+      author_nickname.setAttribute("class", "comment-nickname");
 
       delete_button.classList.add("btn-close");
       delete_button.onclick = function () {
