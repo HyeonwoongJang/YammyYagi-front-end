@@ -78,7 +78,7 @@ async function getMessage() {
       const scriptParagraphs = script.split("<br><br>");
       for (let i = 0; i < scriptParagraphs.length; i += 2) {
         const pair = scriptParagraphs.slice(i, i + 2);
-        paragraphs.push(pair.join("<br><br>"));
+        paragraphs.push(pair.join("\n\n"));
       }
 
       const defaultMessage = document.getElementById("information");
@@ -136,7 +136,7 @@ function renderPage(page) {
   if (editPage[page - 1] == paragraphs[page - 1]) {
     editableText.style.display = "block";
     scriptText.style.display = "none";
-    editableText.value = paragraphs[page - 1].replace(/<br><br>/g, "\n\n");
+    editableText.value = paragraphs[page - 1];
 
     // 이미지 생성 버튼 클릭 이벤트 설정
     imagegenButton.onclick = function () {
@@ -217,7 +217,7 @@ async function getImage(script, imageId) {
 
   // 이미지 생성 실패로 인해 사용자에 의해 수정된 스크립트가 있을 경우
   if (editPage[imageId]) {
-    script = editableText.value.replace(/\n\n/g, "<br><br>");
+    script = editableText.value;
   }
 
   console.log("image generated...");
@@ -333,7 +333,7 @@ async function createStory() {
         console.error(error);
       }
     } catch (error) {
-      alert(`동화 작성 실패 : ${res_json["error"]}`);
+      alert('동화 작성 실패');
       console.error(error);
     }
   }
