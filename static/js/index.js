@@ -340,8 +340,22 @@ window.onload = async function () {
   const totalPages = stories.page_info.total_pages;
   renderPagination(initialPage, totalPages);
 
-  startSocialLogin()
+  startSocialLogin();
 };
+
+async function startSocialLogin() {
+  if (location.href.split("=")[1]) {
+    // 현재 URL에서 쿼리스트링 파라미터 추출
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get("code");
+
+    if (code) {
+      localStorage.setItem("code", code);
+      socialLoginAPI(code);
+    }
+  }
+}
 
 // 소셜 로그인
 const currentUrl = location.href;
@@ -437,21 +451,4 @@ async function saveToken(response_json) {
   );
   localStorage.setItem("payload", jsonPayload);
   window.location.href = `${frontend_base_url}`;
-}
-
-async function startSocialLogin() {
-  if (location.href.split("=")[1]) {
-    // 현재 URL에서 쿼리스트링 파라미터 추출
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    // 로그인을 위한 인가 코드 추출
-    const code = urlParams.get("code");
-
-
-    if (code) {
-      localStorage.setItem("code", code);
-      socialLoginAPI(code);
-    }
-  }
 }
