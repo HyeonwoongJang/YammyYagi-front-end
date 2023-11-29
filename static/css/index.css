@@ -35,6 +35,7 @@
   background-color: #fff7f7;
   overflow: hidden;
   margin-top: 10px;
+  position: relative;
 }
 
 .index-container {
@@ -65,6 +66,7 @@
 .card {
   margin: 10px;
   padding: 15px 15px 0px 15px;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -136,10 +138,6 @@
   font-size: 33px;
 }
 
-select option[value=""][disabled] {
-  display: none;
-}
-
 .bi {
   float: right;
   display: flex;
@@ -158,4 +156,24 @@ select option[value=""][disabled] {
   font-size: 18px;
   width: 16px;
   height: 16px;
+}
+
+.main-img-text1 {
+  font-size: 23px;
+  font-weight: 600;
+  position: absolute;
+  width: 560px;
+  top: 34%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main-img-text2 {
+  font-size: 23px;
+  font-weight: 600;
+  position: absolute;
+  width: 590px;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
