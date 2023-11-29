@@ -36,7 +36,7 @@ body {
   text-align: center;
   align-items: center;
   font-size: 3vw;
-  margin: 8% auto auto 12%;
+  margin: 3% auto auto 12%;
 }
 
 #tools {
@@ -61,7 +61,6 @@ body {
 }
 
 #content {
-  border: 1px solid rgb(253, 203, 224);
   width: 100%;
   height: 950px;
   overflow-y: auto;
@@ -81,10 +80,11 @@ body {
 }
 
 .content-img {
-  margin: 8% auto 0% auto;
+  margin: 6% auto 0% auto;
   width: 60%;
   max-width: 500px;
   height: auto;
+  border-radius: 3%;
 }
 
 .content-text {
@@ -95,7 +95,7 @@ body {
 
 .pagebutton {
   background-color: white;
-  border: 1px solid rgb(190, 120, 149);
+  border: 1px solid rgb(253, 203, 224);
   color: rgb(190, 120, 149);
 }
 
@@ -120,7 +120,7 @@ body {
   overflow-y: auto;
   border: 1px solid rgb(253, 203, 224);
   width: 40%;
-  padding-top: 40px;
+  padding-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,9 +136,8 @@ body {
 .single_comment {
   position: relative;
   display: flex;
-  margin: 20px;
+  margin: 20px 0px 20px 10px;
   width: 250px;
-  height: 100px;
   background: #f8dbdb;
   border-radius: 10px;
   flex-direction: column;
@@ -160,7 +159,7 @@ body {
   display: flex;
   justify-content: flex-star;
   align-items: center;
-  margin-left: 15px;
+  margin: 15px 0px 0px 15px;
 }
 
 .comment_author_profile {
@@ -173,7 +172,7 @@ body {
 .comment_content {
   overflow: hidden;
   text-align: left;
-  margin-left: 25px;
+  margin: 15px 25px 15px 25px;
 }
 
 #bottom-button {
@@ -232,9 +231,24 @@ body {
 }
 
 .btn-close {
-  margin-left: 120px;
+  text-align: right;
+  float: right;
+  margin: 0px 15px 0px 15px;
 }
 
 .container {
   padding-bottom: 50px;
+}
+
+.comment-nickname {
+  margin: 0;
+  font-weight: 600;
+  min-width: 145px;
+  text-align: left;
+}
+
+.create_comment {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0px 30px 0px;
 }

@@ -45,21 +45,11 @@ async function handleSignin() {
       formData.append("profile_img", profileImageInput.files[0]);
     }
 
-    const social_code = localStorage.getItem("code");
-
-    if (social_code) {
-      const response = await fetch(`${backend_base_url}/user/social-register/`, {
-        method: "POST",
-        body: formData,
-      });
-      return response;
-    } else {
-      const response = await fetch(`${backend_base_url}/user/register/`, {
-        method: "POST",
-        body: formData,
-      });
-      return response;
-    }
+    const response = await fetch(`${backend_base_url}/user/register/`, {
+      method: "POST",
+      body: formData,
+    });
+    return response;
   } catch (error) {
     alert("잘못된 접근입니다.");
   }
@@ -67,7 +57,6 @@ async function handleSignin() {
 
 // 회원가입 버튼
 async function handleSigninButton() {
-  const code = localStorage.getItem("code");
   const response = await handleSignin();
   response_json = await response.json();
 
@@ -87,59 +76,8 @@ async function handleSigninButton() {
     alert(response_json["error"]);
     return;
   } else if (response.status == 201) {
-    if (code) {
-      alert("회원가입이 완료되었습니다. 소셜 로그인과 연동되었습니다.");
-      window.location.replace(`${frontend_base_url}/user/login.html`);
-      return;
-    } else {
-      alert("가입한 이메일로 인증 이메일이 발송되었습니다. 이메일을 확인해주세요.");
-      window.location.replace(`${frontend_base_url}/user/login.html`);
-      return;
-    }
+    alert("가입한 이메일로 인증 이메일이 발송되었습니다. 이메일을 확인해주세요.");
+    window.location.replace(`${frontend_base_url}/user/login.html`);
+    return;
   }
-}
-
-startSocialLogin();
-
-
-// 카카오 로그인 페이지로 이동
-async function kakaoLogin() {
-  const response = await fetch(`${backend_base_url}/user/social/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ social: "kakao" }),
-  });
-  const data_url = await response.json();
-  const response_url = data_url.url;
-  window.location.href = response_url;
-}
-
-// 구글 로그인 페이지로 이동
-async function googleLogin() {
-  const response = await fetch(`${backend_base_url}/user/social/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ social: "google" }),
-  });
-  const data_url = await response.json();
-  const response_url = data_url.url;
-  window.location.href = response_url;
-}
-
-// 네이버 로그인 페이지로 이동
-async function naverLogin() {
-  const response = await fetch(`${backend_base_url}/user/social/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ social: "naver" }),
-  });
-  const data_url = await response.json();
-  const response_url = data_url.url;
-  window.location.href = response_url;
 }

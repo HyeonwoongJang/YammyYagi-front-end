@@ -202,6 +202,10 @@ async function handleUpdate() {
     return;
   }
 
+  if (country == "") {
+    alert("Please Select Your Country")
+    return
+  }
   const data = new FormData();
   data.append("nickname", nickname);
   data.append("country", country);
@@ -228,13 +232,16 @@ async function handleUpdate() {
 
 async function updateButton() {
   const response = await handleUpdate();
-  const response_json = await response.json();
-  const status = response_json["status"];
 
-  if (status == "200" && response.status == 200) {
-    alert(`${response_json["success"]}`);
-    window.location.replace(`${frontend_base_url}/user/user-info-update.html`);
-  } else if (status == "400" && response.status == 400 && response_json["error"]["nickname"]) {
-    alert(`${response_json["error"]["nickname"]}`);
+  if (response) {
+    const response_json = await response.json();
+    const status = response_json["status"];
+  
+    if (status == "200" && response.status == 200) {
+      alert(`${response_json["success"]}`);
+      window.location.replace(`${frontend_base_url}/user/user-info-update.html`);
+    } else if (status == "400" && response.status == 400 && response_json["error"]["nickname"]) {
+      alert(`${response_json["error"]["nickname"]}`);
+    }
   }
 }

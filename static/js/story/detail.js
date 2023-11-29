@@ -57,9 +57,11 @@ async function storyPage(story_data, current_page, total_content_count) {
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload);
     const story_author_id = payload_parse.user_id;
-    
+
     const story_delete_button = document.getElementById("story-delete");
-    if (story_data["author_id"] != story_author_id) {
+    if (story_data["author_id"] == story_author_id) {
+      story_delete_button.style.display = "";
+    } else {
       story_delete_button.style.display = "none";
     }
   }
@@ -279,7 +281,7 @@ async function toggleComments() {
       const single_comment = document.createElement("div");
       const author_info = document.createElement("div");
       const author_profile = document.createElement("img");
-      const author_nickname = document.createElement("p");
+      const author_nickname = document.createElement("div");
       const delete_button = document.createElement("button");
       const content = document.createElement("p");
 
@@ -290,6 +292,7 @@ async function toggleComments() {
       author_profile.src = `${backend_base_url}${comment["author_image"]}`;
       author_profile.classList.add("comment_author_profile");
       author_nickname.innerText = comment["author_nickname"];
+      author_nickname.setAttribute("class", "comment-nickname");
 
       delete_button.classList.add("btn-close");
       delete_button.onclick = function () {
@@ -342,7 +345,7 @@ async function loadComments() {
       const single_comment = document.createElement("div");
       const author_info = document.createElement("div");
       const author_profile = document.createElement("img");
-      const author_nickname = document.createElement("p");
+      const author_nickname = document.createElement("div");
       const delete_button = document.createElement("button");
       const content = document.createElement("p");
 
@@ -353,6 +356,7 @@ async function loadComments() {
       author_profile.src = `${backend_base_url}${comment["author_image"]}`;
       author_profile.classList.add("comment_author_profile");
       author_nickname.innerText = comment["author_nickname"];
+      author_nickname.setAttribute("class", "comment-nickname");
 
       delete_button.classList.add("btn-close");
       delete_button.onclick = function () {
@@ -477,7 +481,7 @@ async function deleteStory() {
 
       if (status == "204") {
         alert(`${response_json["success"]}`);
-        window.location.href = `${frontend_base_url}/story/`; // 동화 삭제 후 메인페이지로 이동
+        window.location.href = `${frontend_base_url}`; // 동화 삭제 후 메인페이지로 이동
         return;
       } else if (status == "401" && response.status == 401) {
         alert(`${response_json["error"]}`); // 권한이 없는 경우
