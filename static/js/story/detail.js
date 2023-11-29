@@ -135,7 +135,10 @@ async function createPage(story_data, current_page, total_content_count) {
   page_content.className = "content-text";
 
   // 이미지와 내용에 데이터 설정
-  page_img.src = `${backend_base_url}${page_data["story_image"]}`;
+  if (page_data["story_image"] != null) {
+    page_img.src = `${backend_base_url}${page_data["story_image"]}`;
+  }
+  
   page_content.innerText = page_data["paragraph"];
 
   // 요소들을 조립하여 동화책 페이지에 추가

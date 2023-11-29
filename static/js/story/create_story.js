@@ -325,10 +325,19 @@ async function createStory() {
   if (!titleInput.value) {
     alert("동화책 출판 실패. 제목을 입력해주세요.");
     return;
-  } else if (paragraphs.length != imageUrls.length) {
-    alert("동화 이미지가 누락된 페이지가 있습니다. 이미지를 생성해주세요");
+  } else if (imageUrls.length == 0) {
+    // 이미지를 최소 1개 이상 생성하도록 유도
+    alert("동화 이미지는 최소 1개 이상 생성해주세요.");
     return;
   } else {
+
+    // 문단과 해당 문단의 이미지를 한 컨텐츠 객체로 저장하기 위해 문단 배열과 이미지 배열을 맞춰줍니다.
+    for (let i = 0; i < paragraphs.length; i++) {
+      if (imageUrls[i] === null || imageUrls[i] === undefined) {
+        imageUrls[i] = 'None';
+      }
+    }
+
     // 로딩 스피너 표시
     third_spinner.style.display = "block";
     const access_token = localStorage.getItem("access");
