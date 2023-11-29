@@ -59,7 +59,9 @@ async function storyPage(story_data, current_page, total_content_count) {
     const story_author_id = payload_parse.user_id;
     
     const story_delete_button = document.getElementById("story-delete");
-    if (story_data["author_id"] != story_author_id) {
+    if (story_data["author_id"] == story_author_id) {
+      story_delete_button.style.display = "";
+    } else {
       story_delete_button.style.display = "none";
     }
   }
@@ -478,7 +480,7 @@ async function deleteStory() {
 
       if (status == "204") {
         alert(`${response_json["success"]}`);
-        window.location.href = `${frontend_base_url}/story/`; // 동화 삭제 후 메인페이지로 이동
+        window.location.href = `${frontend_base_url}`; // 동화 삭제 후 메인페이지로 이동
         return;
       } else if (status == "401" && response.status == 401) {
         alert(`${response_json["error"]}`); // 권한이 없는 경우
