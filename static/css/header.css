@@ -81,10 +81,6 @@ body {
   min-height: 106px;
 }
 
-.collapse {
-  float: right;
-}
-
 .nav-right-login {
   font-size: 30px;
   float: right;
@@ -110,4 +106,8 @@ body {
 
 body {
   min-width: 1300px;
+}
+
+#navbar-right {
+  float: right;
 }

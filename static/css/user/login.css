@@ -175,3 +175,7 @@ input {
   flex-shrink: 0;
   margin-left: 52rem;
 }
+
+body {
+  min-width: 1900px;
+}
