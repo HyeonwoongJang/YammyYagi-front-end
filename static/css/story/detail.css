@@ -250,5 +250,5 @@ body {
 .create_comment {
   display: flex;
   justify-content: center;
-  margin: 30px 0px 30px 20px;
+  margin: 30px 0px 30px 0px;
 }
