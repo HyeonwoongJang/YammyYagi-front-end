@@ -247,6 +247,7 @@ async function getImage(script, imageId) {
 
       // 이미지 생성에 실패한 페이지의 내용을 수정된 내용으로 갱신하고 해당 페이지를 다시 렌더링
       paragraphs[imageId] = script;
+      editPage[imageId] = script;
       renderPage(imageId + 1);
     }
 
