@@ -543,7 +543,9 @@ async function shareKakao() {
     const kakao_api_key = response_json.kakao_api_key;
 
     // Kakao Link 공유
-    window.Kakao.init(kakao_api_key);
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(kakao_api_key);
+    }
     window.Kakao.Link.sendDefault({
       objectType: "feed",
       content: {
@@ -564,7 +566,7 @@ async function shareKakao() {
       ],
     });
   } catch (error) {
-    alert("카카오 공유 실패");
+    alert("카카오 공유 실패: " + error);
   }
 }
 
