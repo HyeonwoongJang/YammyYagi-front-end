@@ -50,8 +50,8 @@ async function tempRender() {
   }
 }
 
-// 페이지의 기본 정보를 랜더링하는 비동기 함수
-async function storyPage(story_data, current_page, total_content_count) {
+// 페이지의 기본 정보를 랜더링하는 함수
+function storyPage(story_data, current_page, total_content_count) {
   // 로그인 한 Story 작성자만 댓글 삭제 버튼이 보이도록 설정
   if (localStorage.getItem("access")) {
     const payload = localStorage.getItem("payload");
@@ -115,8 +115,8 @@ async function storyPage(story_data, current_page, total_content_count) {
   };
 }
 
-// 페이지의 동화 내용을 랜더링하는 비동기 함수
-async function createPage(story_data, current_page, total_content_count) {
+// 페이지의 동화 내용을 랜더링하는 함수
+function createPage(story_data, current_page, total_content_count) {
   // 현재 페이지에 해당하는 데이터 가져오기
   const page_data = story_data.story_paragraph_list[parseInt(current_page) - 1];
 
@@ -207,13 +207,13 @@ async function createPage(story_data, current_page, total_content_count) {
   }
 }
 
-// 다음 버튼에 연결된 비동기 함수
-async function nextPage(data, current_page, total_content_count) {
+// 다음 버튼에 연결된 함수
+function nextPage(data, current_page, total_content_count) {
   createPage(data, current_page, total_content_count);
 }
 
-// 이전 버튼에 연결된 비동기 함수
-async function prePage(data, current_page, total_content_count) {
+// 이전 버튼에 연결된 함수
+function prePage(data, current_page, total_content_count) {
   createPage(data, current_page, total_content_count);
 }
 
@@ -507,21 +507,19 @@ async function copyLink() {
   try {
     // 현재 페이지 URL을 클립보드에 복사
     await navigator.clipboard.writeText(window.location.href);
-    alert("링크 복사 성공");
   } catch (error) {
     alert("링크 복사 실패");
   }
 }
 
-// 페이스북 공유 링크를 새 창으로 열어주는 비동기 함수
-async function shareFacebook() {
+// 페이스북 공유 링크를 새 창으로 열어주는 함수
+function shareFacebook() {
   try {
     // 현재 페이지 URL을 인코딩
     const url = encodeURI(window.location.href);
 
     // 페이스북 공유 링크를 새 창으로 열기
     window.open("http://www.facebook.com/sharer/sharer.php?u=" + url);
-    alert("페이스북 공유 성공");
   } catch (error) {
     alert("페이스북 공유 실패");
   }
@@ -573,8 +571,8 @@ async function shareKakao() {
   }
 }
 
-// 트위터 공유 링크를 새 창으로 열어주는 비동기 함수
-async function shareTwitter() {
+// 트위터 공유 링크를 새 창으로 열어주는 함수
+function shareTwitter() {
   try {
     window.open(
       "https://X.com/intent/tweet" +
@@ -608,12 +606,10 @@ async function bookmarkStory() {
 
       // 북마크 상태에 따라 아이콘 표시 변경
       if (status == "200" && response_json["success"] == "북마크") {
-        alert(`${response_json["success"]}`);
         bookmarked_icon.style.display = "";
         not_bookmarked_icon.style.display = "none";
         return;
       } else if (status == "200" && response_json["success"] == "북마크 취소") {
-        alert(`${response_json["success"]}`);
         bookmarked_icon.style.display = "none";
         not_bookmarked_icon.style.display = "";
         return;
@@ -650,7 +646,6 @@ async function likeStory() {
 
       // 좋아요 성공 시 좋아요 수 업데이트
       if (status == "200" && response.status == 200) {
-        alert(`${response_json["success"]}`);
         like_count.innerText = response_json["like_count"] + " likes"; // 좋아요 수 업데이트
         return;
       } else if (status == "404" && response.status == 404) {
@@ -686,7 +681,6 @@ async function hateStory() {
 
       // 싫어요 성공 시 싫어요 수 업데이트
       if (status == "200" && response.status == 200) {
-        alert(`${response_json["success"]}`);
         hate_count.innerText = response_json["hate_count"] + " hates"; // 싫어요 수 업데이트
         return;
       } else if (status == "404" && response.status == 404) {
