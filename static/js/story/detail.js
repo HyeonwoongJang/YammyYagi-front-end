@@ -59,7 +59,9 @@ async function storyPage(story_data, current_page, total_content_count) {
     const story_author_id = payload_parse.user_id;
     
     const story_delete_button = document.getElementById("story-delete");
-    if (story_data["author_id"] != story_author_id) {
+    if (story_data["author_id"] == story_author_id) {
+      story_delete_button.style.display = "";
+    } else {
       story_delete_button.style.display = "none";
     }
   }
