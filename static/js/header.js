@@ -9,7 +9,7 @@ async function injectHeader() {
       document.querySelector("header").innerHTML = data;
 
       const loginButton = document.getElementById("login-hamburger-button");
-      const logoutButton = document.getElementById("logout-hamburger-button");
+      const logoutButton = document.getElementById("nav-right-logout");
       const payload = localStorage.getItem("payload");
       if (payload) {
         // 로그인 상태일 때
@@ -24,11 +24,6 @@ async function injectHeader() {
         // 로그인시 모달
         updateLoginModal();
         $("#myLoginModal").modal("show");
-      });
-
-      logoutButton.addEventListener("click", function () {
-        // 로그아웃시 모달
-        $("#myLogoutModal").modal("show");
       });
     })
     .catch((error) => {
