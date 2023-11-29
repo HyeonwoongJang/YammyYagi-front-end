@@ -188,3 +188,7 @@ select option[value=""][disabled] {
   flex-shrink: 0;
   margin-left: 52rem;
 }
+
+body {
+  min-width: 2050px;
+}
