@@ -219,13 +219,25 @@ function prePage(data, current_page, total_content_count) {
 
 // 번역 버튼에 연결된 비동기 함수
 async function translateStory(story_data, current_page, total_content_count) {
+
+  // 선택된 언어 가져오기
+  const target_language = document.getElementById("language").value;
+
+  if (!target_language) {
+    alert("번역할 언어를 선택해주세요.")
+    return
+  }
+
+  const translating = document.getElementById("translating")
+  const translate = document.getElementById("translate")
+
+  translate.style.display = "none"
+  translating.style.display = ""
+
   try {
     // 스토리 데이터에서 스토리 스크립트 및 제목 추출
     const story_script = story_data["story_paragraph_list"];
     const story_title = story_data["story_title"];
-
-    // 선택된 언어 가져오기
-    const target_language = document.getElementById("language").value;
 
     const response = await fetch(`${backend_base_url}/story/translation/`, {
       headers: {
@@ -250,11 +262,12 @@ async function translateStory(story_data, current_page, total_content_count) {
     if (response.status == 200) {
       document.getElementById("title").innerText = response_json["translated_title"];
       createPage(story_data, current_page, total_content_count);
-    } else if (response.status == 400) {
-      alert(response_json["error"]);
-      return;
+      translate.style.display = ""
+      translating.style.display = "none"
     }
   } catch (error) {
+    translate.style.display = ""
+    translating.style.display = "none"
     alert("번역 요청 실패");
   }
 }
