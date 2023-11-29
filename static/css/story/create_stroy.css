@@ -1,7 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
-* {
-  color: #000000;
-}
 .body-container {
   margin: 0;
   padding: 50px;
@@ -97,12 +94,21 @@ input:focus {
   float: right;
 }
 
-button {
-  border: solid 0.5px #000000;
+.pagination-button {
+  border: none;
   background-color: transparent;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 10px;
-  margin: 10px;
+  margin: 25px 10px 0px 10px;
+}
+
+.pagination-button:hover {
+  border-bottom: solid #ce3eaf 1px;
+  background-color: transparent;
+  color: #ce3eaf;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 25px 10px 0px 10px;
 }
 
 .output-container {

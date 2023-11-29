@@ -31,7 +31,6 @@
   height: 100%;
   width: auto;
   object-fit: cover;
-  position: relative;
   text-align: center;
   background-color: #fff7f7;
   overflow: hidden;
@@ -65,7 +64,7 @@
 
 .card {
   margin: 10px;
-  padding: 20px 20px 0px 20px;
+  padding: 15px 15px 0px 15px;
 }
 
 .card:hover {
@@ -93,8 +92,8 @@
 }
 
 .card-title {
-  font-size: 24px;
-  margin: 0px 10px 15px 0px;
+  font-size: 21px;
+  margin: 0px 0px 10px 0px;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;

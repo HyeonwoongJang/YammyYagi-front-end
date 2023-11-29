@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEB56YBWDJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MEB56YBWDJ');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원정보 수정 페이지</title>
@@ -89,7 +97,7 @@
           <div class="mb-3">
             <label for="country" class="form-label">국가선택</label>
             <select type="country" name="country" id="country" class="form-control">
-              <option class="dropdown-item" disabled selected>국가를 선택해주세요.</option>
+              <option class="dropdown-item" value="" disabled selected>국가를 선택해주세요.</option>
               <option class="dropdown-item" value="대한민국">대한민국</option>
               <option class="dropdown-item" value="미국">미국</option>
               <option class="dropdown-item" value="프랑스">프랑스</option>

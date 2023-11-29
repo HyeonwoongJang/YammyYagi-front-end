@@ -57,12 +57,10 @@ async function storyPage(story_data, current_page, total_content_count) {
     const payload = localStorage.getItem("payload");
     const payload_parse = JSON.parse(payload);
     const story_author_id = payload_parse.user_id;
-
+    
     const story_delete_button = document.getElementById("story-delete");
     if (story_data["author_id"] != story_author_id) {
       story_delete_button.style.display = "none";
-    } else {
-      story_delete_button.style.display = "";
     }
   }
 
@@ -128,8 +126,11 @@ async function createPage(story_data, current_page, total_content_count) {
 
   // 페이지의 이미지와 내용을 담을 요소들 생성
   const page_div = document.createElement("div");
+  page_div.className = "content-div";
   const page_img = document.createElement("img");
+  page_img.className = "content-img";
   const page_content = document.createElement("p");
+  page_content.className = "content-text";
 
   // 이미지와 내용에 데이터 설정
   page_img.src = `${backend_base_url}${page_data["story_image"]}`;
@@ -176,6 +177,7 @@ async function createPage(story_data, current_page, total_content_count) {
 
     const next_button = document.createElement("button");
     next_button.type = "button";
+    next_button.className = "pagebutton";
     next_button.innerText = ">>";
     next_button.id = parseInt(current_page) + 1;
     next_button.onclick = function () {
@@ -277,7 +279,7 @@ async function toggleComments() {
       const single_comment = document.createElement("div");
       const author_info = document.createElement("div");
       const author_profile = document.createElement("img");
-      const author_nickname = document.createElement("p");
+      const author_nickname = document.createElement("div");
       const delete_button = document.createElement("button");
       const content = document.createElement("p");
 
@@ -288,6 +290,7 @@ async function toggleComments() {
       author_profile.src = `${backend_base_url}${comment["author_image"]}`;
       author_profile.classList.add("comment_author_profile");
       author_nickname.innerText = comment["author_nickname"];
+      author_nickname.setAttribute("class", "comment-nickname");
 
       delete_button.classList.add("btn-close");
       delete_button.onclick = function () {

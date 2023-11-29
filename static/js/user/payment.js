@@ -16,8 +16,6 @@ async function orderData(amount, name) {
   });
   const response_json = await response.json();
 
-  console.log(response_json);
-
   // 응답 데이터로 결제 페이지 표시
   if (response_json.status === "200") {
     const data = response_json.order_data;
@@ -68,7 +66,6 @@ function showPayment(data) {
 
 // 카카오페이 결제 함수
 function kakaoPay(data) {
-  console.log(data);
   const IMP = window.IMP;
   IMP.init(data["pg_cid"]);
   IMP.request_pay(
@@ -82,10 +79,8 @@ function kakaoPay(data) {
     },
     function (rsp) {
       if (rsp.success === true) {
-        console.log(rsp);
         sendPaymentResult(rsp);
       } else {
-        console.log(rsp);
         sendPaymentResult(rsp);
         return;
       }
@@ -95,7 +90,6 @@ function kakaoPay(data) {
 
 // 토스페이 결제 함수
 function tossPay(data) {
-  console.log(data);
   const IMP = window.IMP;
   IMP.init(data["pg_cid"]);
   IMP.request_pay(
@@ -109,10 +103,8 @@ function tossPay(data) {
     },
     function (rsp) {
       if (rsp.success) {
-        console.log(rsp);
         sendPaymentResult(rsp);
       } else {
-        console.log(rsp);
         sendPaymentResult(rsp);
       }
     }
@@ -158,7 +150,6 @@ async function buyTicket() {
 
   const name = `G${golden_cnt}_S${silver_cnt}_P${pink_cnt}`;
 
-  console.log(name);
   await orderData(amount, name);
 }
 

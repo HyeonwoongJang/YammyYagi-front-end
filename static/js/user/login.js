@@ -32,7 +32,6 @@ async function handleLogin() {
     });
 
     const response_json = await response.json();
-    console.log(response_json);
     if (response_json["status"] == "404") {
       alert(`${response_json["error"]}`);
       return;
@@ -88,7 +87,6 @@ async function sendEmail() {
     }),
   });
   const response_json = await response.json();
-  console.log(response_json);
   if (response_json["status"] == "400") {
     alert(`${response_json["error"]}`);
     return;

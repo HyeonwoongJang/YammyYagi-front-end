@@ -95,3 +95,11 @@ function checkLogin() {
   }
 }
 checkLogin();
+
+function ticketPurchasing() {
+  window.open(
+    "../user/payment.html",
+    "티켓 결제 페이지",
+    "width=700, height=500, top=50%, left=50%, transform=translate(-50%, -50%)"
+  );
+}
