@@ -7,12 +7,6 @@ body {
   font-family: "Gowun Dodum", sans-serif;
 }
 
-.nav-item {
-  float: left;
-  text-align: left;
-  justify-content: left;
-}
-
 .nav-link {
   float: right;
   font-size: 60px;
@@ -85,4 +79,34 @@ body {
 
 .head-navbar {
   min-height: 106px;
+}
+
+.collapse {
+  float: right;
+}
+
+.nav-right-login {
+  font-size: 30px;
+  float: right;
+  text-align: center;
+  margin: 30px 20px 0px 60px;
+  text-decoration: none;
+  color: #000000;
+}
+
+.nav-right-register {
+  font-size: 30px;
+  float: left;
+  text-align: center;
+  margin-top: 30px;
+  text-decoration: none;
+  color: #000000;
+}
+
+.header-div {
+  min-width: 1300px;
+}
+
+body {
+  min-width: 1300px;
 }
