@@ -112,11 +112,22 @@ body {
 }
 
 .content-text {
-  margin: 4% auto 5% auto;
+  margin: 4% auto 3% auto;
   text-align: center;
   width: 50%;
   line-height: 1.8;
   font-size: 20px;
+}
+
+.content-pagination {
+  color: #000000;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 auto 3% auto;
+  background-color: #ffe8e8;
+  width: 70px;
+  padding: 10px;
+  border-radius: 50%;
 }
 
 .pagebutton {
