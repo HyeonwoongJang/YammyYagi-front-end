@@ -2,7 +2,8 @@
   display: flex;
   position: relative;
   justify-content: center;
-  padding: 0px 0px 0px 0px;
+  padding: 0px;
+  margin-left: 55px;
 }
 
 .category-container > button {
@@ -176,4 +177,8 @@
   top: 58%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+select option[value=""][disabled] {
+  display: none;
 }
