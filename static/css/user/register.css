@@ -197,3 +197,10 @@ select option[value=""][disabled] {
 body {
   min-width: 2050px;
 }
+
+@media only screen and (min-width: 2050px) {
+  body {
+    width: 2050px;
+    margin: 0 auto;
+  }
+}

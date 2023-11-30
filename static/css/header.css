@@ -93,9 +93,8 @@ body {
 }
 
 .nav-right-login:hover {
-  background-color: rgb(253, 203, 224);
-  border-radius: 10px;
-  color: #000000;
+  border-bottom: 1px solid rgb(238, 157, 191);
+  color: rgb(238, 157, 191);
 }
 
 .nav-right-register {
@@ -109,9 +108,8 @@ body {
 }
 
 .nav-right-register:hover {
-  background-color: rgb(253, 203, 224);
-  border-radius: 10px;
-  color: #000000;
+  border-bottom: 1px solid rgb(238, 157, 191);
+  color: rgb(238, 157, 191);
 }
 
 #create-story-button {
@@ -125,9 +123,8 @@ body {
 }
 
 #create-story-button:hover {
-  background-color: rgb(253, 203, 224);
-  border-radius: 10px;
-  color: #000000;
+  border-bottom: 2px solid rgb(238, 157, 191);
+  color: rgb(238, 157, 191);
 }
 
 .header-div {
@@ -199,4 +196,11 @@ body {
 
 .ticket-box {
   text-align: left;
+}
+
+@media only screen and (min-width: 1340px) {
+  body {
+    width: 1340px;
+    margin: 0 auto;
+  }
 }
