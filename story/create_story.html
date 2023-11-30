@@ -46,6 +46,7 @@
           <div class="script-box" id="script-text"></div>
           <textarea id="editable-text" style="display: none"></textarea>
         </div>
+        <button id="edit-button" onclick="editText()" style="display: none;">수정하기</button>
         <div class="bottom-section">
           <div class="input-container" id="first-input-container">
             <select class="info" id="language" required>
@@ -113,7 +114,7 @@
             <button class="pagination-button" id="prev-button" onclick="prePage()" style="display: none">이전</button>
             <button class="pagination-button" id="next-button" onclick="nextPage()" style="display: none">다음</button>
           </div>
-          <button id="temp-save-button" onclick="saveTemporary()">임시 저장</button>
+          <button id="temp-save-button" onclick="saveTemporary()" style="display: none;">임시 저장</button>
           <div id="my_modal" style="display:none;">
             <div style="font-size: 18px;">
               작성 중인 동화책이 있습니다. <br> 이어서 작성하시겠습니까?
