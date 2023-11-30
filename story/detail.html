@@ -28,7 +28,7 @@
   <body>
     <header></header>
     <div id="title_div">
-      <h1 id="title" style="width: 100%">제목</h1>
+      <h1 id="title">제목</h1>
     </div>
     <hr id="hr" />
     <div class="first-line">
@@ -175,6 +175,10 @@
             />
           </svg>
         </button>
+        
+        <div class="spinner-border" id="translating" style="width: 1.6rem; height: 1.5rem; margin:5px 0px 0px 5px; display:none;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
       <div id="bottom-button">
         <button type="button" id="story-delete" class="btn btn-link" onclick="deleteStory()" style="display: none">

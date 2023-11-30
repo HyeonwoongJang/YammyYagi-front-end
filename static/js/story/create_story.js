@@ -117,6 +117,7 @@ function renderPage(page) {
 
   // 티켓 선택란 초기화
   imageType.value = "";
+  getTicketCount();
 
   // 이미지 초기화
   scriptImage.src = "";
@@ -206,6 +207,34 @@ function nextPage(page) {
 // GPT 제출 버튼 클릭 이벤트 리스너
 submitButton.addEventListener("click", getMessage);
 
+//티켓 수량을 불러오는 함수
+async function getTicketCount() {
+  try {
+    fetch(`${backend_base_url}/user/usertickets/`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("access"),
+      },
+    })
+      .then((response) => response.json())
+      .then((ticketData) => {
+        const goldenTicketCount = ticketData.golden_ticket_count;
+        const silverTicketCount = ticketData.silver_ticket_count;
+        const pinkTicketCount = ticketData.pink_ticket_count;
+        console.log(goldenTicketCount);
+        console.log(silverTicketCount);
+        console.log(pinkTicketCount);
+
+        document.getElementById("golden-ticket-create").innerText = "Golden Ticket : " + goldenTicketCount;
+        document.getElementById("silver-ticket-create").innerText = "Silver Ticket : " + silverTicketCount;
+        document.getElementById("pink-ticket-create").innerText = "Pink Ticket : " + pinkTicketCount;
+      })
+      .catch((error) => console.error("Error:", error));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // 이미지를 가져오는 비동기 함수
 async function getImage(script, imageId) {
   // 티켓이 선택되지 않은 경우 경고 메시지를 표시하고 함수 종료
@@ -242,7 +271,7 @@ async function getImage(script, imageId) {
 
     if (response.status == 500 || response.status == 400) {
       // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
-      alert(res_json["error"])
+      alert(res_json["error"]);
       second_spinner.style.display = "none";
 
       // 이미지 생성에 실패한 페이지의 내용을 수정된 내용으로 갱신하고 해당 페이지를 다시 렌더링
@@ -296,10 +325,19 @@ async function createStory() {
   if (!titleInput.value) {
     alert("동화책 출판 실패. 제목을 입력해주세요.");
     return;
-  } else if (paragraphs.length != imageUrls.length) {
-    alert("동화 이미지가 누락된 페이지가 있습니다. 이미지를 생성해주세요");
+  } else if (imageUrls.length == 0) {
+    // 이미지를 최소 1개 이상 생성하도록 유도
+    alert("동화 이미지는 최소 1개 이상 생성해주세요.");
     return;
   } else {
+
+    // 문단과 해당 문단의 이미지를 한 컨텐츠 객체로 저장하기 위해 문단 배열과 이미지 배열을 맞춰줍니다.
+    for (let i = 0; i < paragraphs.length; i++) {
+      if (imageUrls[i] === null || imageUrls[i] === undefined) {
+        imageUrls[i] = 'None';
+      }
+    }
+
     // 로딩 스피너 표시
     third_spinner.style.display = "block";
     const access_token = localStorage.getItem("access");
@@ -330,7 +368,7 @@ async function createStory() {
         console.error(error);
       }
     } catch (error) {
-      alert('동화 작성 실패');
+      alert("동화 작성 실패");
       console.error(error);
     }
   }

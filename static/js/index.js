@@ -28,6 +28,7 @@ async function loadstories(page) {
       const paginationbutton = document.getElementById("pagination-box");
       paginationbutton.style.display = "block";
       story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
+      console.log(stories);
       stories.forEach((story) => {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col");
@@ -42,7 +43,7 @@ async function loadstories(page) {
         const storyImage = document.createElement("img");
         storyImage.setAttribute("class", "card-img-top");
 
-        if (story.content.story_image) {
+        if (story.content.story_image != null) {
           storyImage.setAttribute("src", `${backend_base_url}/${story.content.story_image}`);
         } else {
           storyImage.setAttribute(
@@ -65,7 +66,7 @@ async function loadstories(page) {
         const newCardParagraph = document.createElement("p");
         newCardParagraph.setAttribute("class", "card-text");
         newCardParagraph.setAttribute("style", "min-height: 72px;");
-        newCardParagraph.innerText = story.content.story_first_paragraph;
+        newCardParagraph.innerText = story.content.story_paragraph;
         newCardBody.appendChild(newCardParagraph);
         // hr
         const newCardHr = document.createElement("hr");
@@ -159,6 +160,7 @@ async function getlikestories() {
       paginationbutton.style.display = "none";
       const story_list = document.getElementById("story-list");
       story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
+      console.log(stories);
       stories.forEach((story) => {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col");
@@ -173,7 +175,7 @@ async function getlikestories() {
         const storyImage = document.createElement("img");
         storyImage.setAttribute("class", "card-img-top");
 
-        if (story.content.story_image) {
+        if (story.content.story_image != null) {
           storyImage.setAttribute("src", `${backend_base_url}/${story.content.story_image}`);
         } else {
           storyImage.setAttribute(
@@ -196,7 +198,7 @@ async function getlikestories() {
         const newCardParagraph = document.createElement("p");
         newCardParagraph.setAttribute("class", "card-text");
         newCardParagraph.setAttribute("style", "min-height: 72px;");
-        newCardParagraph.innerText = story.content.story_first_paragraph;
+        newCardParagraph.innerText = story.content.story_paragraph;
         newCardBody.appendChild(newCardParagraph);
         // hr
         const newCardHr = document.createElement("hr");
@@ -252,6 +254,7 @@ async function getcountrystories() {
       paginationbutton.style.display = "none";
       const story_list = document.getElementById("story-list");
       story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
+      console.log(stories);
       stories.forEach((story) => {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col");
@@ -266,7 +269,7 @@ async function getcountrystories() {
         const storyImage = document.createElement("img");
         storyImage.setAttribute("class", "card-img-top");
 
-        if (story.content.story_image) {
+        if (story.content.story_image != null) {
           storyImage.setAttribute("src", `${backend_base_url}/${story.content.story_image}`);
         } else {
           storyImage.setAttribute(
@@ -289,7 +292,7 @@ async function getcountrystories() {
         const newCardParagraph = document.createElement("p");
         newCardParagraph.setAttribute("class", "card-text");
         newCardParagraph.setAttribute("style", "min-height: 72px;");
-        newCardParagraph.innerText = story.content.story_first_paragraph;
+        newCardParagraph.innerText = story.content.story_paragraph;
         newCardBody.appendChild(newCardParagraph);
         // hr
         const newCardHr = document.createElement("hr");
