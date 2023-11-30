@@ -18,10 +18,11 @@ const imageTypeContainer = document.querySelector("#image-type-container");
 const imageType = document.querySelector("#image-type");
 const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
+const myModal = document.getElementById("my_modal")
 
 // 각 페이지의 이미지 URL 및 문단 데이터를 저장하는 배열
-const imageUrls = [];
-const paragraphs = [];
+let imageUrls = [];
+let paragraphs = [];
 const editPage = []; // 각 페이지의 수정된 내용을 저장하는 배열
 
 // 페이지네이션을 위한 변수
@@ -32,8 +33,82 @@ window.onload = () => {
   if (!localStorage.getItem("access")) {
     alert("잘못된 접근입니다.");
     window.location.href = `${frontend_base_url}`;
+    return
   }
+
+  // 로컬 스토리지에 임시 저장된 페이지 정보가 있으면 '이어쓰기'/'삭제' 모달을 띄워줌
+  if (localStorage.getItem("paragraphs")) {
+    myModal.style.display="block"
+  }
+
+  // 일정 시간 간격으로 자동 저장
+  setInterval(saveTempContent, 10000); // 10초마다 저장 (단위: 밀리초)
+
 };
+
+// 임시 저장 버튼에 연결된 함수
+function saveTemporary() {
+  if (paragraphs.length == 0) {
+    alert('빈 페이지입니다.')
+    return
+  } else {
+    saveTempContent()
+    alert("임시 저장 완료. 임시 저장은 한 개의 동화책만 가능합니다.")
+  }
+}
+
+// 임시 저장할 데이터가 있으면 localstorage에 저장
+function saveTempContent() {
+  if (paragraphs.length != 0) {
+    if (editPage.length != 0) {
+      for (let i = 0; i < editPage.length; i++) {
+        paragraphs[i] = editPage[i]
+      }
+    }
+    localStorage.setItem("paragraphs", JSON.stringify(paragraphs))
+
+    if (imageUrls.length != 0) {
+      localStorage.setItem("imageUrls", JSON.stringify(imageUrls))
+    }
+    
+  }
+}
+
+// localStorage에서 임시 콘텐츠를 로드
+function loadTemp() {
+  let temp_paragraphs = localStorage.getItem("paragraphs");
+  let temp_imageUrls = localStorage.getItem("imageUrls");
+
+  if (temp_paragraphs) {
+    paragraphs = JSON.parse(temp_paragraphs);
+  }
+
+  if (temp_imageUrls) {
+    imageUrls = JSON.parse(temp_imageUrls);
+    titleInput.style.display = "block";
+    storygenButton.style.display = "block";
+  }
+  myModal.style.display="none"
+  imageTypeContainer.style.display = "block";
+  imagegenButton.style.display = "block";
+  first_input_container.style.display = "none";
+  outPutElement.style.display = "block";
+
+  total_page = paragraphs.length;
+  renderPage(1);
+}
+
+// localStorage에서 임시 콘텐츠를 삭제yyyy
+function deleteTemp() {
+  if (localStorage.getItem("paragraphs")) {
+    localStorage.removeItem("paragraphs")
+  }
+  if (localStorage.getItem("imageUrls")) {
+    localStorage.removeItem("imageUrls")
+  }
+
+  myModal.style.display="none"
+}
 
 // 입력 값을 변경하는 함수
 function changeInput(value) {
@@ -43,6 +118,16 @@ function changeInput(value) {
 // 백엔드에서 GPT 동화를 가져오기 위한 비동기 함수
 async function getMessage() {
   console.log("clicked");
+
+  if (!inputElement.value) {
+    alert('생성할 동화의 주제를 입력해주세요.')
+    return
+  }
+
+  if (!targetLanguage.value) {
+    alert('생성할 동화의 언어를 선택해주세요.')
+    return
+  }
 
   const access_token = localStorage.getItem("access");
   const options = {
@@ -320,7 +405,7 @@ async function createStory() {
   console.log("You are going to make a fairytale...");
 
   if (!titleInput.value) {
-    alert("동화책 출판 실패. 제목을 입력해주세요.");
+    alert("동화책 제목을 입력해주세요.");
     return;
   } else if (imageUrls.length == 0) {
     // 이미지를 최소 1개 이상 생성하도록 유도
@@ -357,6 +442,12 @@ async function createStory() {
       third_spinner.style.display = "none";
       const id = res_json.story_id;
       if (res_json.status == 201) {
+        if (localStorage.getItem("paragraphs")) {
+          localStorage.removeItem("paragraphs")
+        }
+        if (localStorage.getItem("imageUrls")) {
+          localStorage.removeItem("imageUrls")
+        }
         window.alert(res_json.success);
         window.location.href = `${frontend_base_url}/story/detail.html?story_id=${id}`;
       } else {
