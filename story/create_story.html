@@ -64,7 +64,7 @@
               <option value="ZH">中国人</option>
               <option value="hr" disabled></option>
             </select>
-            <input id="prompt" placeholder="예시 : 주제를 입력하세요" />
+            <input id="prompt" placeholder="예시 : 고양이의 모험" />
             <div id="submit-theme">📨</div>
           </div>
           <div class="first-spinner" id="first-spinner">
@@ -112,6 +112,16 @@
           <div style="display: flex">
             <button class="pagination-button" id="prev-button" onclick="prePage()" style="display: none">이전</button>
             <button class="pagination-button" id="next-button" onclick="nextPage()" style="display: none">다음</button>
+          </div>
+          <button id="temp-save-button" onclick="saveTemporary()">임시 저장</button>
+          <div id="my_modal" style="display:none;">
+            <div style="font-size: 18px;">
+              작성 중인 동화책이 있습니다. <br> 이어서 작성하시겠습니까?
+            </div>
+            <div id="temp-buttons">
+              <button id="load-temp" onclick="loadTemp()">불러오기</button>
+              <button id="delete-temp" onclick="deleteTemp()">삭제</button>
+            </div>
           </div>
         </div>
         <p class="info-footer">Yummy-Yagi</p>

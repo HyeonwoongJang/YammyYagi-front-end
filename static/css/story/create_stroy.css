@@ -111,6 +111,73 @@ input:focus {
   margin: 25px 10px 0px 10px;
 }
 
+#temp-save-button {
+  border: none;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 25px 10px 0px 10px;
+}
+
+#temp-save-button:hover {
+  border-bottom: solid #ce3eaf 1px;
+  background-color: transparent;
+  color: #ce3eaf;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 25px 10px 0px 10px;
+}
+
+#my_modal {
+  width: 400px;
+  padding: 20px 60px;
+  background-color:#fff7fd;
+  border: 5px solid rgb(253, 203, 224);
+  border-radius: 10px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#temp-buttons {
+  margin: 10px;
+}
+
+#load-temp {
+  border: none;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 25px 10px 0px 10px;
+}
+
+#delete-temp {
+  border: none;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 25px 10px 0px 10px;
+}
+
+#load-temp:hover {
+  border-bottom: solid #ce3eaf 1px;
+  background-color: transparent;
+  color: #ce3eaf;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 25px 10px 0px 10px;
+}
+#delete-temp:hover {
+  border-bottom: solid #ce3eaf 1px;
+  background-color: transparent;
+  color: #ce3eaf;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 25px 10px 0px 10px;
+}
+
 .output-container {
   max-width: 600px;
   background-color: #fff6fd;
