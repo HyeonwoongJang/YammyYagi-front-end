@@ -141,7 +141,7 @@ function createPage(story_data, current_page, total_content_count) {
     page_img.src = `${backend_base_url}${page_data["story_image"]}`;
   }
   page_content.innerText = page_data["paragraph"];
-  pagenation_count.innerText = page_data["content_id"] + " / " + story_data.story_paragraph_list.length;
+  pagenation_count.innerText = current_page + " / " + story_data.story_paragraph_list.length;
 
   // 요소들을 조립하여 동화책 페이지에 추가
   page_div.appendChild(page_img);
