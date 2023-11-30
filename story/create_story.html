@@ -5,9 +5,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEB56YBWDJ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-MEB56YBWDJ');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-MEB56YBWDJ");
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -75,9 +77,9 @@
           <div class="input-container" id="image-type-container" style="display: none">
             <select class="info" id="image-type" required>
               <option value="" disabled selected>-- Select Ticket Type --</option>
-              <option value="golden_ticket">Golden Ticket</option>
-              <option value="silver_ticket">Silver Ticket</option>
-              <option value="pink_ticket">Pink Ticket</option>
+              <option value="golden_ticket" id="golden-ticket-create"></option>
+              <option value="silver_ticket" id="silver-ticket-create"></option>
+              <option value="pink_ticket" id="pink-ticket-create"></option>
             </select>
           </div>
           <div class="create-btn" id="image-gen" onclick="getImage()">
