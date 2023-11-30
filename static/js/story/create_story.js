@@ -286,7 +286,7 @@ async function getImage(script, imageId) {
       window.open(
         "../user/payment.html",
         "티켓 결제 페이지",
-        "width=700, height=500, top=50%, left=50%, transform=translate(-50%, -50%)"
+        "width=700, height=550, top=50%, left=50%, transform=translate(-50%, -50%)"
       );
 
       // 해당 티켓 소진 시에는 해당 페이지를 다시 렌더링

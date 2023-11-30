@@ -30,7 +30,6 @@ async function loadstories(page) {
       const paginationbutton = document.getElementById("pagination-box");
       paginationbutton.style.display = "block";
       story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
-      console.log(stories);
       stories.forEach((story) => {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col");
@@ -163,7 +162,6 @@ async function getlikestories() {
       paginationbutton.style.display = "none";
       const story_list = document.getElementById("story-list");
       story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
-      console.log(stories);
       stories.forEach((story) => {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col");
@@ -258,7 +256,6 @@ async function getcountrystories() {
       paginationbutton.style.display = "none";
       const story_list = document.getElementById("story-list");
       story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
-      console.log(stories);
       stories.forEach((story) => {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col");

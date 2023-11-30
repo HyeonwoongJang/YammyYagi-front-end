@@ -88,7 +88,7 @@ select option[value=""][disabled] {
   display: flex;
   column-gap: 4.6rem;
   align-items: flex-start;
-  margin: 140px 0px 0px 40px;
+  margin: 140px 0px 0px 47px;
 }
 
 .icon {
@@ -129,6 +129,11 @@ select option[value=""][disabled] {
   border: solid 0.1rem #dfdfdf;
 }
 
+.button-register:hover {
+  border: 3px solid rgb(253, 203, 224);
+  border-radius: 8px;
+}
+
 .logo-img {
   width: 17.8rem;
   height: 17.4rem;
@@ -154,7 +159,7 @@ select option[value=""][disabled] {
   color: #8b8b8b;
   font-family: Inter, "Source Sans Pro";
   white-space: nowrap;
-  margin: 150px 0px 0px 60px;
+  margin: 150px 0px 0px 57px;
   float: right;
   text-decoration-line: none;
 }

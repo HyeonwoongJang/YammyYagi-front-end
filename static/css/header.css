@@ -52,6 +52,7 @@ body {
 .modal-useremail {
   font-size: 18px;
   color: rgb(150, 176, 201);
+  margin-bottom: 10px;
 }
 
 .modal-body-content {
@@ -85,8 +86,15 @@ body {
   font-size: 30px;
   float: right;
   text-align: center;
-  margin: 30px 20px 0px 60px;
+  margin: 20px 20px 0px 60px;
+  padding: 10px;
   text-decoration: none;
+  color: #000000;
+}
+
+.nav-right-login:hover {
+  background-color: rgb(253, 203, 224);
+  border-radius: 10px;
   color: #000000;
 }
 
@@ -94,8 +102,31 @@ body {
   font-size: 30px;
   float: left;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px;
+  padding: 10px;
   text-decoration: none;
+  color: #000000;
+}
+
+.nav-right-register:hover {
+  background-color: rgb(253, 203, 224);
+  border-radius: 10px;
+  color: #000000;
+}
+
+#create-story-button {
+  font-size: 35px;
+  float: left;
+  text-align: center;
+  margin: 20px 60px 0px 0px;
+  padding: 10px;
+  text-decoration: none;
+  color: #000000;
+}
+
+#create-story-button:hover {
+  background-color: rgb(253, 203, 224);
+  border-radius: 10px;
   color: #000000;
 }
 
@@ -110,4 +141,62 @@ body {
 
 #navbar-right {
   float: right;
+}
+
+#golden-ticket {
+  border: 1px solid rgb(225, 192, 0);
+  background-color: gold;
+  font-size: 15px;
+  text-align: right;
+  margin: 10px 6px 0px 0px;
+  border-radius: 8px;
+  padding: 6px;
+  display: inline-block;
+}
+
+#golden-ticket-count {
+  background-color: rgb(255, 236, 130);
+  border-radius: 15px;
+  padding: 0px 4px 0px 4px;
+  font-weight: 600;
+}
+
+#silver-ticket {
+  border: 1px solid rgb(157, 157, 157);
+  background-color: silver;
+  font-size: 15px;
+  text-align: right;
+  margin: 10px 6px 0px 0px;
+  border-radius: 8px;
+  padding: 6px;
+  display: inline-block;
+}
+
+#silverticket-count {
+  background-color: rgb(212, 212, 212);
+  border-radius: 15px;
+  padding: 0px 4px 0px 4px;
+  font-weight: 600;
+}
+
+#pink-ticket {
+  border: 1px solid rgb(255, 163, 178);
+  background-color: pink;
+  font-size: 15px;
+  text-align: right;
+  margin-top: 10px;
+  border-radius: 8px;
+  padding: 6px;
+  display: inline-block;
+}
+
+#pink-ticket-count {
+  background-color: rgb(255, 223, 228);
+  border-radius: 15px;
+  padding: 0px 4px 0px 4px;
+  font-weight: 600;
+}
+
+.ticket-box {
+  text-align: left;
 }

@@ -116,6 +116,11 @@ input {
   border: solid 0.1rem #dfdfdf;
 }
 
+.button-login:hover {
+  border: 3px solid rgb(253, 203, 224);
+  border-radius: 8px;
+}
+
 .logo-img {
   width: 17.8rem;
   height: 17.4rem;
