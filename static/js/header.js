@@ -90,20 +90,23 @@ function ticketPurchasing() {
 }
 
 //티켓 수량을 불러오는 함수
-fetch(`${backend_base_url}/user/usertickets/`, {
-  method: "GET",
-  headers: {
-    Authorization: "Bearer " + localStorage.getItem("access"),
-  },
-})
-  .then((response) => response.json())
-  .then((ticketData) => {
-    const goldenTicketCount = ticketData.golden_ticket_count;
-    const silverTicketCount = ticketData.silver_ticket_count;
-    const pinkTicketCount = ticketData.pink_ticket_count;
-
-    document.getElementById("golden-ticket-count").innerText = goldenTicketCount;
-    document.getElementById("silverticket-count").innerText = silverTicketCount;
-    document.getElementById("pink-ticket-count").innerText = pinkTicketCount;
+const payload = localStorage.getItem("payload");
+if (payload) {
+  fetch(`${backend_base_url}/user/usertickets/`, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("access"),
+    },
   })
-  .catch((error) => console.error("Error:", error));
+    .then((response) => response.json())
+    .then((ticketData) => {
+      const goldenTicketCount = ticketData.golden_ticket_count;
+      const silverTicketCount = ticketData.silver_ticket_count;
+      const pinkTicketCount = ticketData.pink_ticket_count;
+
+      document.getElementById("golden-ticket-count").innerText = goldenTicketCount;
+      document.getElementById("silverticket-count").innerText = silverTicketCount;
+      document.getElementById("pink-ticket-count").innerText = pinkTicketCount;
+    })
+    .catch((error) => console.error("Error:", error));
+}
