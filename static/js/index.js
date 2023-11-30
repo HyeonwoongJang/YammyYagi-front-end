@@ -2,6 +2,7 @@ function storyDetail(story_id) {
   window.location.href = `${frontend_base_url}/story/detail.html?story_id=${story_id}`;
 }
 
+const selectcountry = document.getElementById("select-country");
 // 게시글 리스트 get api
 async function getstories() {
   try {
@@ -19,6 +20,7 @@ async function getstories() {
 
 // 게시글 리스트 가져오기
 async function loadstories(page) {
+  selectcountry.value = "";
   try {
     const response = await fetch(`${backend_base_url}/story/?page=${page}`);
     if (response.status == 200) {
@@ -151,6 +153,7 @@ window.addEventListener("popstate", function (event) {
 
 // 좋아요 순 게시글 가져오기
 async function getlikestories() {
+  selectcountry.value = "";
   try {
     const response = await fetch(`${backend_base_url}/story/like_sorted/`);
     if (response.status == 200) {
@@ -243,10 +246,11 @@ async function getlikestories() {
 
 // 국가별 게시글 리스트 get api
 async function getcountrystories() {
+  if (selectcountry.value === "") {
+    return;
+  }
   try {
-    const selectcountry = document.getElementById("select-country").value;
-
-    const response = await fetch(`${backend_base_url}/story/country_sorted/${selectcountry}/`);
+    const response = await fetch(`${backend_base_url}/story/country_sorted/${selectcountry.value}/`);
     if (response.status == 200) {
       const response_json = await response.json();
       const stories = response_json.story_list;
