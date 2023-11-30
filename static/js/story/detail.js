@@ -423,7 +423,6 @@ async function deleteComment(comment_id) {
     const status = response_json["status"];
 
     if (status == "204") {
-      alert(`${response_json["success"]}`);
       loadComments(); // 댓글이 삭제되면 업데이트된 댓글 목록을 로드
       return;
     } else if (status == "401" && response.status == 401) {
@@ -463,7 +462,6 @@ async function postComment() {
       const status = response_json["status"];
 
       if (status == "201" && response.status == 201) {
-        alert(`${response_json["success"]}`);
         loadComments(); // 댓글이 성공적으로 생성되면 업데이트된 댓글 목록을 로드
         return;
       } else if (status == "401" && response.status == 401) {
