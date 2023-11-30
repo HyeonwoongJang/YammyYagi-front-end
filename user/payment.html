@@ -64,16 +64,17 @@
         <p class="ticket-count">현재 수량: <span id="pink-count">0</span></p>
         <p id="pink-p">0 Won</p>
       </div>
+      <p>총 결제 예정 금액: <span id="total-payment"></span></p>
       <button id="3-ticket" onclick="buyTicket()">구매</button>
     </div>
     <div id="payment-page" style="display: none">
       <button id="back-btn" onclick="backButton()">뒤로가기</button>
       <hr />
-      <p id="merchant-uid"></p>
+      <p>주문번호: <span id="merchant-uid"></span></p>
       <p>결제 예정 금액: <span id="amount"></span></p>
-      <p id="name"></p>
-      <p id="buyer-email"></p>
-      <p id="buyer-name"></p>
+      <p>티켓 주문수량: <span id="name"></span></p>
+      <p>아이디: <span id="buyer-email"></span></p>
+      <p>닉네임: <span id="buyer-name"></span></p>
       <button id="kakaopay">KakaoPay</button>
       <button id="tosspay">TossPay</button>
     </div>
