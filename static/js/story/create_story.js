@@ -221,9 +221,6 @@ async function getTicketCount() {
         const goldenTicketCount = ticketData.golden_ticket_count;
         const silverTicketCount = ticketData.silver_ticket_count;
         const pinkTicketCount = ticketData.pink_ticket_count;
-        console.log(goldenTicketCount);
-        console.log(silverTicketCount);
-        console.log(pinkTicketCount);
 
         document.getElementById("golden-ticket-create").innerText = "Golden Ticket : " + goldenTicketCount;
         document.getElementById("silver-ticket-create").innerText = "Silver Ticket : " + silverTicketCount;
@@ -330,11 +327,10 @@ async function createStory() {
     alert("동화 이미지는 최소 1개 이상 생성해주세요.");
     return;
   } else {
-
     // 문단과 해당 문단의 이미지를 한 컨텐츠 객체로 저장하기 위해 문단 배열과 이미지 배열을 맞춰줍니다.
     for (let i = 0; i < paragraphs.length; i++) {
       if (imageUrls[i] === null || imageUrls[i] === undefined) {
-        imageUrls[i] = 'None';
+        imageUrls[i] = "None";
       }
     }
 
