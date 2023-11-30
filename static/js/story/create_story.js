@@ -49,7 +49,7 @@ window.onload = () => {
 // 임시 저장 버튼에 연결된 함수
 function saveTemporary() {
   if (paragraphs.length == 0) {
-    alert('빈 내용입니다.')
+    alert('빈 페이지입니다.')
     return
   } else {
     saveTempContent()
@@ -118,6 +118,16 @@ function changeInput(value) {
 // 백엔드에서 GPT 동화를 가져오기 위한 비동기 함수
 async function getMessage() {
   console.log("clicked");
+
+  if (!inputElement.value) {
+    alert('생성할 동화의 주제를 입력해주세요.')
+    return
+  }
+
+  if (!targetLanguage.value) {
+    alert('생성할 동화의 언어를 선택해주세요.')
+    return
+  }
 
   const access_token = localStorage.getItem("access");
   const options = {
@@ -395,7 +405,7 @@ async function createStory() {
   console.log("You are going to make a fairytale...");
 
   if (!titleInput.value) {
-    alert("동화책 출판 실패. 제목을 입력해주세요.");
+    alert("동화책 제목을 입력해주세요.");
     return;
   } else if (imageUrls.length == 0) {
     // 이미지를 최소 1개 이상 생성하도록 유도
