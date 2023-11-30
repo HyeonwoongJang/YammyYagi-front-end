@@ -140,8 +140,6 @@ function createPage(story_data, current_page, total_content_count) {
   if (page_data["story_image"] != null) {
     page_img.src = `${backend_base_url}${page_data["story_image"]}`;
   }
-  console.log(story_data.story_paragraph_list.length);
-  console.log(page_data);
   page_content.innerText = page_data["paragraph"];
   pagenation_count.innerText = page_data["content_id"] + " / " + story_data.story_paragraph_list.length;
 
