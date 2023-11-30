@@ -169,13 +169,6 @@ function goldenCheckBox() {
   }
 }
 
-// 골든 티켓 수량 변경에 따른 가격 업데이트
-function updateGoldenP() {
-  const golden_p = document.getElementById("golden-p");
-  const golden_input = document.getElementById("golden-input");
-  golden_p.innerText = golden_input.value * 500 + " Won";
-}
-
 // 실버 티켓 체크박스 상태 변경에 따른 처리
 function silverCheckBox() {
   const silver_check_box = document.getElementById("silver-check-box");
@@ -189,13 +182,6 @@ function silverCheckBox() {
     silver_input.value = "0";
     silver_p.innerText = "0 Won";
   }
-}
-
-// 실버 티켓 체크박스 상태 변경에 따른 처리
-function updateSilverP() {
-  const silver_p = document.getElementById("silver-p");
-  const silver_input = document.getElementById("silver-input");
-  silver_p.innerText = silver_input.value * 300 + " Won";
 }
 
 // 핑크 티켓 체크박스 상태 변경에 따른 처리
@@ -213,11 +199,43 @@ function pinkCheckBox() {
   }
 }
 
+let golden_total_payment = 0;
+let silver_total_payment = 0;
+let pink_total_payment = 0;
+
+// 골든 티켓 수량 변경에 따른 가격 업데이트
+function updateGoldenP() {
+  const golden_p = document.getElementById("golden-p");
+  const golden_input = document.getElementById("golden-input");
+  golden_total_payment = golden_input.value * 500;
+  golden_p.innerText = golden_total_payment + " Won";
+  updateTotalPayment();
+}
+
+// 실버 티켓 체크박스 상태 변경에 따른 처리
+function updateSilverP() {
+  const silver_p = document.getElementById("silver-p");
+  const silver_input = document.getElementById("silver-input");
+  silver_total_payment = silver_input.value * 300;
+  silver_p.innerText = silver_total_payment + " Won";
+  updateTotalPayment();
+}
+
 // 핑크 티켓 체크박스 상태 변경에 따른 처리
 function updatePinkP() {
   const pink_p = document.getElementById("pink-p");
   const pink_input = document.getElementById("pink-input");
-  pink_p.innerText = pink_input.value * 200 + " Won";
+  pink_total_payment = pink_input.value * 200;
+  pink_p.innerText = pink_total_payment + " Won";
+  updateTotalPayment();
+}
+
+// 총 결제 예정 금액
+function updateTotalPayment() {
+  const total_payment = document.getElementById("total-payment");
+  const ticker_total_payment = golden_total_payment + silver_total_payment + pink_total_payment + " Won";
+  console.log(golden_total_payment);
+  total_payment.innerText = ticker_total_payment;
 }
 
 // 결제 페이지에서 뒤로 가기 버튼
