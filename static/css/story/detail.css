@@ -4,30 +4,35 @@ body {
   height: 100%;
 }
 
-.title_div {
-  width: 100%;
-  margin: 50px auto 50px auto;
+#title_div {
+  margin: 20px auto 20px auto;
+  width: 1250px;
 }
 
 .first-line {
   display: flex;
   width: 70%;
-  margin: 30px auto 30px auto;
+  margin: 50px auto 0px auto;
   justify-content: flex-start;
-  min-width: 1000px;
+  width: 1300px;
 }
 
 .second-line {
-  border-color: #fff7f7;
-  background-color: #fff7f7;
   display: flex;
   height: 100%;
-  width: 90%;
-  margin: 5% auto 5px auto;
+  width: 100%;
+}
+
+.book {
+  border: 2px solid rgb(253, 203, 224);
+  background-color: #fff7f7;
+  margin: 5% auto 3% auto;
+  width: 100%;
+  border-radius: 2%;
 }
 
 #hr {
-  width: 78%;
+  width: 1300px;
   border: 1px solid #000;
   margin: 20px auto;
 }
@@ -36,19 +41,34 @@ body {
   display: flex;
   text-align: center;
   align-items: center;
-  font-size: 3vw;
-  margin: 3% auto auto 12%;
+  font-size: 60px;
 }
 
 #tools {
   width: 35%;
-  margin: 0% 5% auto 0px;
   justify-content: flex-start;
+  margin-right: 5%;
+}
+
+#copy-link,
+#share-on-facebook,
+#share-on-kakao,
+#share-on-instagram,
+#bookmark,
+#like,
+#hate {
+  padding: 0 15px 0 10px;
+}
+
+#translate {
+  padding: 0 0 0 15px;
 }
 
 #counts {
   width: 15%;
   display: flex;
+  font-size: 22px;
+  margin-right: 5%;
 }
 
 #counts p {
@@ -58,7 +78,7 @@ body {
 #translator {
   width: 23%;
   display: flex;
-  margin: auto 0% auto 7%;
+  margin-right: 2%;
 }
 
 #content {
@@ -78,6 +98,9 @@ body {
   position: relative;
   margin: 5% auto 5% auto;
   margin-top: 0px;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+  height: 100%;
 }
 
 .content-img {
@@ -91,26 +114,33 @@ body {
 .content-text {
   margin: 4% auto 5% auto;
   text-align: center;
-  width: 45%;
+  width: 50%;
   line-height: 1.8;
   font-size: 20px;
 }
 
 .pagebutton {
-  background-color: white;
-  border: 1px solid rgb(253, 203, 224);
-  color: rgb(190, 120, 149);
+  font-size: 25px;
+  font-weight: 600;
+  background-color: #ffe8e8;
+  border: none;
+  color: rgb(144, 133, 133);
+  width: 60px;
+  height: 60px;
+  margin: auto 0px auto 0px;
+  border-radius: 50%;
+}
+
+#pre-page-button {
+  margin-left: 20px;
+}
+
+#next-page-button {
+  margin-right: 20px;
 }
 
 #content-box::-webkit-scrollbar {
   display: none; /* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
-}
-
-#content-box {
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
-  border: 1px solid rgb(253, 203, 224);
-  height: 100%;
 }
 
 .page-img {
@@ -119,11 +149,12 @@ body {
 }
 
 #comment {
-  height: 950px;
+  height: 920px;
   overflow-y: auto;
-  border: 1px solid rgb(253, 203, 224);
-  width: 40%;
-  padding-top: 20px;
+  border-left: 2px solid rgb(253, 203, 224);
+  width: 100%;
+  padding: 20px 20px 0px 0px;
+  margin-top: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -253,5 +284,10 @@ body {
 .create_comment {
   display: flex;
   justify-content: center;
-  margin: 30px 0px 30px 0px;
+  margin: 30px 0px 30px 30px;
+}
+
+#language {
+  width: 230px;
+  font-size: 22px;
 }
