@@ -169,6 +169,7 @@ input:focus {
   padding: 10px;
   margin: 25px 10px 0px 10px;
 }
+
 #delete-temp:hover {
   border-bottom: solid #ce3eaf 1px;
   background-color: transparent;
@@ -178,10 +179,26 @@ input:focus {
   margin: 25px 10px 0px 10px;
 }
 
+#edit-button{
+  border: none;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 15px 10px 10px 10px;
+}
+
+#edit-button:hover {
+  border-bottom: solid #ce3eaf 1px;
+  background-color: transparent;
+  color: #ce3eaf;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 15px 10px 10px 10px;
+}
+
 .output-container {
   max-width: 600px;
   background-color: #fff6fd;
-  margin-bottom: 30px;
   padding: 20px;
   display: none;
 }
