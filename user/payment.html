@@ -30,19 +30,38 @@
       <div>
         <input type="checkbox" id="golden-check-box" onchange="goldenCheckBox()" />
         <label>Golden Ticket : </label>
-        <input type="number" id="golden-input" value="0" min="0" disabled oninput="updateGoldenP()" />
+        <input
+          type="number"
+          class="payment-input"
+          id="golden-input"
+          value="0"
+          min="0"
+          disabled
+          oninput="updateGoldenP()"
+        />
+        <p class="ticket-count">현재 수량: <span id="golden-count">0</span></p>
         <p id="golden-p">0 Won</p>
       </div>
       <div>
         <input type="checkbox" id="silver-check-box" onchange="silverCheckBox()" />
         <label>Silver Ticket : </label>
-        <input type="number" id="silver-input" value="0" min="0" disabled oninput="updateSilverP()" />
+        <input
+          type="number"
+          class="payment-input"
+          id="silver-input"
+          value="0"
+          min="0"
+          disabled
+          oninput="updateSilverP()"
+        />
+        <p class="ticket-count">현재 수량: <span id="silver-count">0</span></p>
         <p id="silver-p">0 Won</p>
       </div>
       <div>
         <input type="checkbox" id="pink-check-box" onchange="pinkCheckBox()" />
         <label>Pink Ticket : </label>
-        <input type="number" id="pink-input" value="0" min="0" disabled oninput="updatePinkP()" />
+        <input type="number" class="payment-input" id="pink-input" value="0" min="0" disabled oninput="updatePinkP()" />
+        <p class="ticket-count">현재 수량: <span id="pink-count">0</span></p>
         <p id="pink-p">0 Won</p>
       </div>
       <button id="3-ticket" onclick="buyTicket()">구매</button>
@@ -51,7 +70,7 @@
       <button id="back-btn" onclick="backButton()">뒤로가기</button>
       <hr />
       <p id="merchant-uid"></p>
-      <p id="amount"></p>
+      <p>결제 예정 금액: <span id="amount"></span></p>
       <p id="name"></p>
       <p id="buyer-email"></p>
       <p id="buyer-name"></p>

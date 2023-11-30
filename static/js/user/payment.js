@@ -225,3 +225,25 @@ function backButton() {
   document.getElementById("payment-page").style.display = "none";
   document.getElementById("ticket-page").style.display = "";
 }
+
+//티켓 수량을 불러오는 함수
+const payload = localStorage.getItem("payload");
+if (payload) {
+  fetch(`${backend_base_url}/user/usertickets/`, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("access"),
+    },
+  })
+    .then((response) => response.json())
+    .then((ticketData) => {
+      const goldenTicketCount = ticketData.golden_ticket_count;
+      const silverTicketCount = ticketData.silver_ticket_count;
+      const pinkTicketCount = ticketData.pink_ticket_count;
+
+      document.getElementById("golden-count").innerText = goldenTicketCount;
+      document.getElementById("silver-count").innerText = silverTicketCount;
+      document.getElementById("pink-count").innerText = pinkTicketCount;
+    })
+    .catch((error) => console.error("Error:", error));
+}
