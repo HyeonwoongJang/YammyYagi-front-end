@@ -546,10 +546,6 @@ async function shareKakao() {
     // 데이터를 가져오기 위한 fetch 요청
     const response = await fetch(`${backend_base_url}/story/kakao/`, {
       method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("access"),
-      },
     });
 
     // fetch의 결과를 처리하고 필요한 데이터 추출
