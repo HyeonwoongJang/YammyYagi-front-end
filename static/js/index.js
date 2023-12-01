@@ -2,14 +2,14 @@ function storyDetail(story_id) {
   window.location.href = `${frontendBaseUrl}/story/detail.html?story_id=${story_id}`;
 }
 
-const selectcountry = document.getElementById("select-country");
+const selectCountry = document.getElementById("select-country");
 // 게시글 리스트 get api
-async function getstories() {
+async function getStories() {
   try {
     const response = await fetch(`${backendBaseUrl}/story/`);
     if (response.status == 200) {
-      const response_json = await response.json();
-      return response_json;
+      const responseJson = await response.json();
+      return responseJson;
     } else {
       alert("불러오는데 실패했습니다");
     }
@@ -19,16 +19,16 @@ async function getstories() {
 }
 
 // 게시글 리스트 가져오기
-async function loadstories(page) {
-  selectcountry.value = "";
+async function loadStories(page) {
+  selectCountry.value = "";
   try {
     const response = await fetch(`${backendBaseUrl}/story/?page=${page}`);
     if (response.status == 200) {
-      const response_json = await response.json();
-      const stories = response_json.story_list;
+      const responseJson = await response.json();
+      const stories = responseJson.story_list;
       const story_list = document.getElementById("story-list");
-      const paginationbutton = document.getElementById("pagination-box");
-      paginationbutton.style.display = "block";
+      const paginationButton = document.getElementById("pagination-box");
+      paginationButton.style.display = "block";
       story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
       stories.forEach((story) => {
         const newCol = document.createElement("div");
@@ -102,7 +102,7 @@ async function loadstories(page) {
 
         story_list.appendChild(newCol);
       });
-      renderPagination(response_json.page_info.current_page, response_json.page_info.total_pages);
+      renderPagination(responseJson.page_info.current_page, responseJson.page_info.total_pages);
     } else {
       alert("불러오는데 실패했습니다");
     }
@@ -138,7 +138,7 @@ function renderPagination(currentPage, totalPages) {
 
 // 페이지 변경 함수
 function changePage(page) {
-  loadstories(page);
+  loadStories(page);
   const newUrl = `${frontendBaseUrl}/story/?page=${page}`;
   history.pushState({ page: page }, null, newUrl);
   // { page: page }는 현재 페이지를 나타냄. 바로아래 함수에서 쓸 때 필요함.
@@ -147,17 +147,17 @@ function changePage(page) {
 // 인터넷 뒤로가기나 앞으로 가기 버튼 눌렀을때 적용시키기
 window.addEventListener("popstate", function (event) {
   const page = event.state && event.state.page ? event.state.page : 1;
-  loadstories(page);
+  loadStories(page);
 });
 
 // 좋아요 순 게시글 가져오기
 async function getlikestories() {
-  selectcountry.value = "";
+  selectCountry.value = "";
   try {
     const response = await fetch(`${backendBaseUrl}/story/like_sorted/`);
     if (response.status == 200) {
-      const response_json = await response.json();
-      const stories = response_json.story_list;
+      const responseJson = await response.json();
+      const stories = responseJson.story_list;
       const paginationbutton = document.getElementById("pagination-box");
       paginationbutton.style.display = "none";
       const story_list = document.getElementById("story-list");
@@ -244,14 +244,14 @@ async function getlikestories() {
 
 // 국가별 게시글 리스트 get api
 async function getcountrystories() {
-  if (selectcountry.value === "") {
+  if (selectCountry.value === "") {
     return;
   }
   try {
-    const response = await fetch(`${backendBaseUrl}/story/country_sorted/${selectcountry.value}/`);
+    const response = await fetch(`${backendBaseUrl}/story/country_sorted/${selectCountry.value}/`);
     if (response.status == 200) {
-      const response_json = await response.json();
-      const stories = response_json.story_list;
+      const responseJson = await response.json();
+      const stories = responseJson.story_list;
       const paginationbutton = document.getElementById("pagination-box");
       paginationbutton.style.display = "none";
       const story_list = document.getElementById("story-list");
@@ -339,8 +339,8 @@ async function getcountrystories() {
 // 게시글 리스트 가져오기
 window.onload = async function () {
   const initialPage = 1;
-  loadstories(initialPage);
-  const stories = await getstories();
+  loadStories(initialPage);
+  const stories = await getStories();
   const totalPages = stories.page_info.total_pages;
   renderPagination(initialPage, totalPages);
 
@@ -383,13 +383,13 @@ async function kakaoLoginApi(code) {
       },
       body: JSON.stringify({ code: code }),
     });
-    response_json = await response.json();
+    responseJson = await response.json();
     if (!response.ok) {
-      alert(response_json["error"]);
+      alert(responseJson["error"]);
       window.location.href = `${frontendBaseUrl}`;
       return;
     }
-    saveToken(response_json);
+    saveToken(responseJson);
   } catch (error) {
     console.log(error);
   }
@@ -405,13 +405,13 @@ async function naverLoginApi(code) {
       },
       body: JSON.stringify({ code: code }),
     });
-    response_json = await response.json();
+    responseJson = await response.json();
     if (!response.ok) {
-      alert(response_json["error"]);
+      alert(responseJson["error"]);
       window.location.href = `${frontendBaseUrl}`;
       return;
     }
-    saveToken(response_json);
+    saveToken(responseJson);
   } catch (error) {
     console.log(error);
   }
@@ -427,23 +427,23 @@ async function googleLoginApi(code) {
       },
       body: JSON.stringify({ code: code }),
     });
-    response_json = await response.json();
+    responseJson = await response.json();
     if (!response.ok) {
-      alert(response_json["error"]);
+      alert(responseJson["error"]);
       window.location.href = `${frontendBaseUrl}`;
       return;
     }
-    saveToken(response_json);
+    saveToken(responseJson);
   } catch (error) {
     console.log(error);
   }
 }
 
 // access, refresh, payload localstorage에 저장
-async function saveToken(response_json) {
-  localStorage.setItem("access", response_json.access);
-  localStorage.setItem("refresh", response_json.refresh);
-  const base64Url = response_json.access.split(".")[1];
+async function saveToken(responseJson) {
+  localStorage.setItem("access", responseJson.access);
+  localStorage.setItem("refresh", responseJson.refresh);
+  const base64Url = responseJson.access.split(".")[1];
   const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   const jsonPayload = decodeURIComponent(
     atob(base64)

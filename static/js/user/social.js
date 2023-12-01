@@ -7,9 +7,9 @@ async function kakaoLogin() {
       },
       body: JSON.stringify({ social: "kakao" }),
     });
-    const data_url = await response.json();
-    const response_url = data_url.url;
-    window.location.href = response_url;
+    const dataUrl = await response.json();
+    const responseUrl = dataUrl.url;
+    window.location.href = responseUrl;
   }
   
   // 구글 로그인 페이지로 이동
@@ -21,9 +21,9 @@ async function kakaoLogin() {
       },
       body: JSON.stringify({ social: "google" }),
     });
-    const data_url = await response.json();
-    const response_url = data_url.url;
-    window.location.href = response_url;
+    const dataUrl = await response.json();
+    const responseUrl = dataUrl.url;
+    window.location.href = responseUrl;
   }
   
   // 네이버 로그인 페이지로 이동
@@ -35,8 +35,8 @@ async function kakaoLogin() {
       },
       body: JSON.stringify({ social: "naver" }),
     });
-    const data_url = await response.json();
-    const response_url = data_url.url;
-    window.location.href = response_url;
+    const dataUrl = await response.json();
+    const responseUrl = dataUrl.url;
+    window.location.href = responseUrl;
   }
   

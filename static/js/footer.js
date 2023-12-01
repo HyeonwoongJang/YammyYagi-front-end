@@ -1,4 +1,4 @@
-async function injectfooter() {
+async function injectFooter() {
   fetch("./footer.html")
     .then((response) => {
       return response.text();
@@ -12,4 +12,4 @@ async function injectfooter() {
   document.querySelector("footer").innerHTML = data;
 }
 
-injectfooter();
+injectFooter();

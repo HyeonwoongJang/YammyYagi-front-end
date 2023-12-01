@@ -8,8 +8,8 @@ async function renderPage() {
     // 로그인 체크
     if (localStorage.getItem("access")) {
       const payload = localStorage.getItem("payload");
-      const payload_parse = JSON.parse(payload);
-      const request_user_email = payload_parse.email;
+      const payloadParse = JSON.parse(payload);
+      const requestUserEmail = payloadParse.email;
 
       const response = await fetch(`${backendBaseUrl}/user/info/`, {
         method: "GET",
@@ -18,19 +18,19 @@ async function renderPage() {
         },
       });
 
-      const response_json = await response.json();
-      const data = response_json.user_info;
+      const responseJson = await response.json();
+      const data = responseJson.user_info;
 
       document.getElementById("current-profile-img").src = `${backendBaseUrl}/${data["profile_img"]}`;
-      document.getElementById("email").value = request_user_email;
+      document.getElementById("email").value = requestUserEmail;
       document.getElementById("nickname").value = data["nickname"];
 
-      const my_country = data["country"];
-      const country_select = document.getElementById("country");
+      const myCountry = data["country"];
+      const countrySelect = document.getElementById("country");
 
-      for (let i = 0; i < country_select.options.length; i++) {
-        if (country_select.options[i].value === my_country) {
-          country_select.options[i].selected = true;
+      for (let i = 0; i < countrySelect.options.length; i++) {
+        if (countrySelect.options[i].value === myCountry) {
+          countrySelect.options[i].selected = true;
           break;
         }
       }
@@ -39,8 +39,8 @@ async function renderPage() {
       window.location.href = `${frontendBaseUrl}/index.html`;
     }
     // 프로필사진 미리보기
-    const profile_img_input = document.getElementById("profile-img");
-    profile_img_input.addEventListener("change", handleImagePreview);
+    const profileImgInput = document.getElementById("profile-img");
+    profileImgInput.addEventListener("change", handleImagePreview);
   } catch (error) {
     alert("잘못된 접근입니다.");
   }
@@ -48,32 +48,32 @@ async function renderPage() {
 
 // 프로필사진 미리보기
 function handleImagePreview() {
-  const profile_img_input = document.getElementById("profile-img");
-  const preview_img = document.getElementById("current-profile-img");
+  const profileImgInput = document.getElementById("profile-img");
+  const previewImg = document.getElementById("current-profile-img");
   const payload = localStorage.getItem("payload");
-  const payload_parse = JSON.parse(payload);
+  const payloadParse = JSON.parse(payload);
 
-  if (profile_img_input.files && profile_img_input.files[0]) {
+  if (profileImgInput.files && profileImgInput.files[0]) {
     const reader = new FileReader();
     reader.onload = ({ target }) => {
-      preview_img.src = target.result;
+      previewImg.src = target.result;
     };
-    reader.readAsDataURL(profile_img_input.files[0]);
+    reader.readAsDataURL(profileImgInput.files[0]);
   }
   // '선택된 파일 없음'일 때, 현재 프로필사진
   else {
-    preview_img.src = `${backendBaseUrl}` + payload_parse.profile_img;
+    previewImg.src = `${backendBaseUrl}` + payloadParse.profile_img;
   }
 }
 
 // 비밀번호 수정 모달
 function openPasswordUpdateModal() {
-  const password_modal = document.getElementById("password-modal");
+  const passwordModal = document.getElementById("password-modal");
 
-  if (password_modal.style.display == "none") {
-    password_modal.style.display = "block";
-  } else if (password_modal.style.display == "block") {
-    password_modal.style.display = "none";
+  if (passwordModal.style.display == "none") {
+    passwordModal.style.display = "block";
+  } else if (passwordModal.style.display == "block") {
+    passwordModal.style.display = "none";
 
     document.getElementById("current-password").value = "";
     document.getElementById("new-password").value = "";
@@ -113,21 +113,21 @@ async function updatePasswordButton() {
         new_password_check: new_password_check,
       }),
     });
-    const response_json = await response.json();
-    const status = response_json["status"];
+    const responseJson = await response.json();
+    const status = responseJson["status"];
 
     if (status == "200" && response.status == 200) {
-      alert(`${response_json["success"]}`);
+      alert(`${responseJson["success"]}`);
       openPasswordUpdateModal(); // 수정 성공 시에만 모달 닫기
       return;
-    } else if (status == "400" && response.status == 400 && response_json["error"]["password"]) {
-      alert(`${response_json["error"]["password"]}`);
+    } else if (status == "400" && response.status == 400 && responseJson["error"]["password"]) {
+      alert(`${responseJson["error"]["password"]}`);
       return;
     } else if (status == "400" && response.status == 400) {
-      alert(`${response_json["error"]}`);
+      alert(`${responseJson["error"]}`);
       return;
     } else if (status == "401" && response.status == 401) {
-      alert(`${response_json["error"]}`);
+      alert(`${responseJson["error"]}`);
       return;
     }
   } catch (error) {
@@ -137,13 +137,13 @@ async function updatePasswordButton() {
 
 // 회원 탈퇴 모달
 function openUserDeleteModal() {
-  const delete_modal = document.getElementById("delete-modal");
+  const deldetModal = document.getElementById("delete-modal");
 
-  if (delete_modal.style.display == "none") {
-    delete_modal.style.display = "block";
+  if (deldetModal.style.display == "none") {
+    deldetModal.style.display = "block";
     return;
-  } else if (delete_modal.style.display == "block") {
-    delete_modal.style.display = "none";
+  } else if (deldetModal.style.display == "block") {
+    deldetModal.style.display = "none";
 
     document.getElementById("password").value = "";
     return;
@@ -165,11 +165,11 @@ async function userDeleteButton() {
         body: JSON.stringify({ password: password }),
       });
 
-      const response_json = await response.json();
-      const status = response_json["status"];
+      const responseJson = await response.json();
+      const status = responseJson["status"];
 
       if (status == "204") {
-        alert(`${response_json["success"]}`);
+        alert(`${responseJson["success"]}`);
         localStorage.removeItem("access");
         localStorage.removeItem("refresh");
         localStorage.removeItem("payload");
@@ -177,10 +177,10 @@ async function userDeleteButton() {
         window.location.replace(`${frontendBaseUrl}/`);
         return;
       } else if (status == "400" && response.status == 400) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       } else if (status == "401" && response.status == 401) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       }
     } else {
@@ -234,14 +234,14 @@ async function updateButton() {
   const response = await handleUpdate();
 
   if (response) {
-    const response_json = await response.json();
-    const status = response_json["status"];
+    const responseJson = await response.json();
+    const status = responseJson["status"];
 
     if (status == "200" && response.status == 200) {
-      alert(`${response_json["success"]}`);
+      alert(`${responseJson["success"]}`);
       window.location.replace(`${frontendBaseUrl}/user/user-info-update.html`);
-    } else if (status == "400" && response.status == 400 && response_json["error"]["nickname"]) {
-      alert(`${response_json["error"]["nickname"]}`);
+    } else if (status == "400" && response.status == 400 && responseJson["error"]["nickname"]) {
+      alert(`${responseJson["error"]["nickname"]}`);
     }
   }
 }
