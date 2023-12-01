@@ -1,5 +1,5 @@
 async function injectFooter() {
-  fetch("./footer.html")
+  fetch("/footer.html")
     .then((response) => {
       return response.text();
     })
