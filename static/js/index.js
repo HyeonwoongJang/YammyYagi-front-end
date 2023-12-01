@@ -151,7 +151,7 @@ window.addEventListener("popstate", function (event) {
 });
 
 // 좋아요 순 게시글 가져오기
-async function getlikestories() {
+async function getLikeStories() {
   selectCountry.value = "";
   try {
     const response = await fetch(`${backendBaseUrl}/story/like_sorted/`);
@@ -243,7 +243,7 @@ async function getlikestories() {
 }
 
 // 국가별 게시글 리스트 get api
-async function getcountrystories() {
+async function getCountryStories() {
   if (selectCountry.value === "") {
     return;
   }

@@ -2,7 +2,7 @@ async function createQnA() {
   const content = document.getElementById("content").value;
 
   try {
-    const response = await fetch(`${backend_base_url}/user/qna/`, {
+    const response = await fetch(`${backendBaseUrl}/user/qna/`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("access"),
