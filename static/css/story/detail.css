@@ -317,3 +317,8 @@ body {
   width: 230px;
   font-size: 22px;
 }
+
+#header {
+  width: 1400px;
+  margin: auto;
+}

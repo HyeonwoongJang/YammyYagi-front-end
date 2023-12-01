@@ -26,3 +26,8 @@
   width: 20%;
   margin-top: 10px;
 }
+
+#header {
+  width: 1400px;
+  margin: auto;
+}

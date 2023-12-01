@@ -88,7 +88,7 @@ function ticketPurchasing() {
   window.open(
     "../user/payment.html",
     "티켓 결제 페이지",
-    "width=700, height=550, top=50%, left=50%, transform=translate(-50%, -50%)"
+    "width=700, height=700, top=50%, left=50%, transform=translate(-50%, -50%)"
   );
 }
 

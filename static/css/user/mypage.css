@@ -2,7 +2,7 @@
   width: 55%;
   min-width: 1340px;
   height: 100%;
-  margin: 60px auto 20px auto;
+  margin: 60px auto 120px auto;
   overflow: hidden;
 }
 
@@ -210,4 +210,9 @@
 
 .bi {
   margin-right: 3px;
+}
+
+#header {
+  width: 1400px;
+  margin: auto;
 }

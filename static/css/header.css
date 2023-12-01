@@ -75,7 +75,7 @@ body {
 
 .modal-dialog {
   float: right;
-  margin: 140px 70px 0px 0px;
+  margin: 140px 0px 0px 0px;
 }
 
 .head-navbar {
@@ -86,8 +86,7 @@ body {
   font-size: 30px;
   float: right;
   text-align: center;
-  margin: 20px 20px 0px 60px;
-  padding: 10px;
+  margin: 35px 20px 0px 60px;
   text-decoration: none;
   color: #000000;
 }
@@ -101,8 +100,7 @@ body {
   font-size: 30px;
   float: left;
   text-align: center;
-  margin-top: 20px;
-  padding: 10px;
+  margin-top: 35px;
   text-decoration: none;
   color: #000000;
 }
@@ -113,17 +111,16 @@ body {
 }
 
 #create-story-button {
-  font-size: 35px;
+  font-size: 30px;
   float: left;
   text-align: center;
-  margin: 20px 60px 0px 0px;
-  padding: 10px;
+  margin: 35px 60px 0px 0px;
   text-decoration: none;
   color: #000000;
 }
 
 #create-story-button:hover {
-  border-bottom: 2px solid rgb(238, 157, 191);
+  border-bottom: 1px solid rgb(238, 157, 191);
   color: rgb(238, 157, 191);
 }
 
@@ -198,9 +195,19 @@ body {
   text-align: left;
 }
 
+#footer {
+  width: 1400px;
+  margin: auto;
+}
+
 @media only screen and (max-width: 1341px) {
   body {
     min-width: 1340px;
     margin: 0 auto;
   }
+}
+
+#myLoginModal {
+  width: 50%;
+  margin-left: 695px;
 }
