@@ -39,6 +39,7 @@ function getMyPage() {
       const bookmarks = data.bookmark_story_list;
       bookmarks.reverse();
       const bookmark_list = document.getElementById("bookmark-story");
+      console.log(bookmark_list)
       bookmark_list.innerHTML = "";
 
       bookmarks.forEach((bookmark) => {
@@ -50,7 +51,7 @@ function getMyPage() {
                   <img class="card-img" src="${backendBaseUrl}${bookmark.content.story_image}" />
                   <div class="card-text">
                   <p class="title">${bookmark.story_title}</p>
-                  <p class="content">${bookmark.content.story_first_paragraph}</p>
+                  <p class="content">${bookmark.content.story_paragraph}</p>
                   <hr class="card-hr">
                   <div class="card_bottom">
                     <p class="country">${bookmark.author_country}
@@ -81,7 +82,7 @@ function getMyPage() {
                           <img class="card-img" src="${backendBaseUrl}${story.content.story_image}" />
                           <div class="card-text">
                             <p class="title">${story.story_title}</p>
-                            <p class="content">${story.content.story_first_paragraph}</p>
+                            <p class="content">${story.content.story_paragraph}</p>
                             <hr class="card-hr">
                             <div class="card_bottom">
                                 <p class="country">${story.author_country}
@@ -113,7 +114,7 @@ function getMyPage() {
                           <img class="card-img" src="${backendBaseUrl}${recent_story.content.story_image}" />
                           <div class="card-text">
                             <p class="title">${recent_story.story_title}</p>
-                            <p class="content">${recent_story.content.story_first_paragraph}</p>
+                            <p class="content">${recent_story.content.story_paragraph}</p>
                             <hr class="card-hr">
                             <div class="card_bottom">
                                 <p class="country">${recent_story.author_country}
