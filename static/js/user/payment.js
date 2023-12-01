@@ -75,8 +75,8 @@ function kakaoPay(data) {
       merchantUid: "IMP" + data["merchant_uid"],
       name: data["name"],
       amount: data["amount"],
-      buyerEmail: data["buyer_email"],
-      buyerName: data["buyer_name"],
+      buyer_email: data["buyer_email"],
+      buyer_name: data["buyer_name"],
     },
     function (rsp) {
       if (rsp.success === true) {
@@ -99,8 +99,8 @@ function tossPay(data) {
       merchantUid: "IMP" + data["merchant_uid"],
       name: data["name"],
       amount: data["amount"],
-      buyerEmail: data["buyer_email"],
-      buyerName: data["buyer_name"],
+      buyer_email: data["buyer_email"],
+      buyer_name: data["buyer_name"],
     },
     function (rsp) {
       if (rsp.success) {
