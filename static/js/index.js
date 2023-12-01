@@ -1,12 +1,12 @@
 function storyDetail(story_id) {
-  window.location.href = `${frontend_base_url}/story/detail.html?story_id=${story_id}`;
+  window.location.href = `${frontendBaseUrl}/story/detail.html?story_id=${story_id}`;
 }
 
 const selectcountry = document.getElementById("select-country");
 // 게시글 리스트 get api
 async function getstories() {
   try {
-    const response = await fetch(`${backend_base_url}/story/`);
+    const response = await fetch(`${backendBaseUrl}/story/`);
     if (response.status == 200) {
       const response_json = await response.json();
       return response_json;
@@ -22,7 +22,7 @@ async function getstories() {
 async function loadstories(page) {
   selectcountry.value = "";
   try {
-    const response = await fetch(`${backend_base_url}/story/?page=${page}`);
+    const response = await fetch(`${backendBaseUrl}/story/?page=${page}`);
     if (response.status == 200) {
       const response_json = await response.json();
       const stories = response_json.story_list;
@@ -45,7 +45,7 @@ async function loadstories(page) {
         storyImage.setAttribute("class", "card-img-top");
 
         if (story.content.story_image != null) {
-          storyImage.setAttribute("src", `${backend_base_url}/${story.content.story_image}`);
+          storyImage.setAttribute("src", `${backendBaseUrl}/${story.content.story_image}`);
         } else {
           storyImage.setAttribute(
             "src",
@@ -139,7 +139,7 @@ function renderPagination(currentPage, totalPages) {
 // 페이지 변경 함수
 function changePage(page) {
   loadstories(page);
-  const newUrl = `${frontend_base_url}/story/?page=${page}`;
+  const newUrl = `${frontendBaseUrl}/story/?page=${page}`;
   history.pushState({ page: page }, null, newUrl);
   // { page: page }는 현재 페이지를 나타냄. 바로아래 함수에서 쓸 때 필요함.
 }
@@ -154,7 +154,7 @@ window.addEventListener("popstate", function (event) {
 async function getlikestories() {
   selectcountry.value = "";
   try {
-    const response = await fetch(`${backend_base_url}/story/like_sorted/`);
+    const response = await fetch(`${backendBaseUrl}/story/like_sorted/`);
     if (response.status == 200) {
       const response_json = await response.json();
       const stories = response_json.story_list;
@@ -177,7 +177,7 @@ async function getlikestories() {
         storyImage.setAttribute("class", "card-img-top");
 
         if (story.content.story_image != null) {
-          storyImage.setAttribute("src", `${backend_base_url}/${story.content.story_image}`);
+          storyImage.setAttribute("src", `${backendBaseUrl}/${story.content.story_image}`);
         } else {
           storyImage.setAttribute(
             "src",
@@ -248,7 +248,7 @@ async function getcountrystories() {
     return;
   }
   try {
-    const response = await fetch(`${backend_base_url}/story/country_sorted/${selectcountry.value}/`);
+    const response = await fetch(`${backendBaseUrl}/story/country_sorted/${selectcountry.value}/`);
     if (response.status == 200) {
       const response_json = await response.json();
       const stories = response_json.story_list;
@@ -271,7 +271,7 @@ async function getcountrystories() {
         storyImage.setAttribute("class", "card-img-top");
 
         if (story.content.story_image != null) {
-          storyImage.setAttribute("src", `${backend_base_url}/${story.content.story_image}`);
+          storyImage.setAttribute("src", `${backendBaseUrl}/${story.content.story_image}`);
         } else {
           storyImage.setAttribute(
             "src",
@@ -376,7 +376,7 @@ async function socialLoginAPI(code) {
 // 카카오 로그인 데이터 서버로 전송
 async function kakaoLoginApi(code) {
   try {
-    const response = await fetch(`${backend_base_url}/user/kakao/`, {
+    const response = await fetch(`${backendBaseUrl}/user/kakao/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -386,7 +386,7 @@ async function kakaoLoginApi(code) {
     response_json = await response.json();
     if (!response.ok) {
       alert(response_json["error"]);
-      window.location.href = `${frontend_base_url}`;
+      window.location.href = `${frontendBaseUrl}`;
       return;
     }
     saveToken(response_json);
@@ -398,7 +398,7 @@ async function kakaoLoginApi(code) {
 // 네이버 로그인 데이터 서버로 전송
 async function naverLoginApi(code) {
   try {
-    const response = await fetch(`${backend_base_url}/user/naver/`, {
+    const response = await fetch(`${backendBaseUrl}/user/naver/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -408,7 +408,7 @@ async function naverLoginApi(code) {
     response_json = await response.json();
     if (!response.ok) {
       alert(response_json["error"]);
-      window.location.href = `${frontend_base_url}`;
+      window.location.href = `${frontendBaseUrl}`;
       return;
     }
     saveToken(response_json);
@@ -420,7 +420,7 @@ async function naverLoginApi(code) {
 // 구글 로그인 데이터 서버로 전송
 async function googleLoginApi(code) {
   try {
-    const response = await fetch(`${backend_base_url}/user/google/`, {
+    const response = await fetch(`${backendBaseUrl}/user/google/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -430,7 +430,7 @@ async function googleLoginApi(code) {
     response_json = await response.json();
     if (!response.ok) {
       alert(response_json["error"]);
-      window.location.href = `${frontend_base_url}`;
+      window.location.href = `${frontendBaseUrl}`;
       return;
     }
     saveToken(response_json);
@@ -454,5 +454,5 @@ async function saveToken(response_json) {
       .join("")
   );
   localStorage.setItem("payload", jsonPayload);
-  window.location.href = `${frontend_base_url}`;
+  window.location.href = `${frontendBaseUrl}`;
 }

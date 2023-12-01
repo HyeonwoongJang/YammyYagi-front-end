@@ -1,6 +1,6 @@
 // 카카오 로그인 페이지로 이동
 async function kakaoLogin() {
-    const response = await fetch(`${backend_base_url}/user/social/`, {
+    const response = await fetch(`${backendBaseUrl}/user/social/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,7 +14,7 @@ async function kakaoLogin() {
   
   // 구글 로그인 페이지로 이동
   async function googleLogin() {
-    const response = await fetch(`${backend_base_url}/user/social/`, {
+    const response = await fetch(`${backendBaseUrl}/user/social/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +28,7 @@ async function kakaoLogin() {
   
   // 네이버 로그인 페이지로 이동
   async function naverLogin() {
-    const response = await fetch(`${backend_base_url}/user/social/`, {
+    const response = await fetch(`${backendBaseUrl}/user/social/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

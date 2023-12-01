@@ -1,16 +1,15 @@
 const submitButton = document.querySelector("#submit-theme");
 const outPutElement = document.querySelector(".output-container");
 const inputElement = document.querySelector("input#prompt");
-const bottomSection = document.querySelector(".bottom-section");
 const imagegenButton = document.querySelector("#image-gen");
 const storygenButton = document.querySelector("#submit-title");
 const titleInput = document.querySelector("#title");
 const targetLanguage = document.getElementById("language");
-const first_input_container = document.getElementById("first-input-container");
-const first_spinner = document.getElementById("first-spinner");
-const second_spinner = document.getElementById("second-spinner");
-const third_spinner = document.getElementById("third-spinner");
-const create_btn_msg = document.getElementById("create-btn-msg");
+const firstInputContainer = document.getElementById("first-input-container");
+const firstSpinner = document.getElementById("first-spinner");
+const secondSpinner = document.getElementById("second-spinner");
+const thirdSpinner = document.getElementById("third-spinner");
+const createBtnMsg = document.getElementById("create-btn-msg");
 const scriptImage = document.querySelector("#script-img");
 const scriptText = document.querySelector("#script-text");
 const editableText = document.querySelector("#editable-text");
@@ -28,8 +27,8 @@ let paragraphs = [];
 const editPage = []; // 각 페이지의 수정된 내용을 저장하는 배열
 
 // 페이지네이션을 위한 변수
-let current_page = 1;
-let total_page = paragraphs.length;
+let currentPage = 1;
+let totalPage = paragraphs.length;
 
 // 페이지 내용 수정 텍스트 박스의 상태를 저장하는 변수
 let isEditButtonActive = false;
@@ -37,7 +36,7 @@ let isEditButtonActive = false;
 window.onload = () => {
   if (!localStorage.getItem("access")) {
     alert("잘못된 접근입니다.");
-    window.location.href = `${frontend_base_url}`;
+    window.location.href = `${frontendBaseUrl}`;
     return;
   }
 
@@ -94,10 +93,10 @@ function loadTemp() {
   myModal.style.display = "none";
   imageTypeContainer.style.display = "block";
   imagegenButton.style.display = "block";
-  first_input_container.style.display = "none";
+  firstInputContainer.style.display = "none";
   outPutElement.style.display = "block";
 
-  total_page = paragraphs.length;
+  totalPage = paragraphs.length;
   renderPage(1);
 }
 
@@ -146,8 +145,8 @@ async function getMessage() {
   };
   try {
     // 로딩 스피너 표시
-    first_spinner.style.display = "block";
-    const response = await fetch(`${backend_base_url}/story/fairytail_gpt/`, options);
+    firstSpinner.style.display = "block";
+    const response = await fetch(`${backendBaseUrl}/story/fairytail_gpt/`, options);
     const data = await response.json();
     if (response.status == 400) {
       alert(data.error);
@@ -172,14 +171,14 @@ async function getMessage() {
       defaultMessage.style.display = "none";
 
       // 전체 페이지 수 설정 및 현재 페이지 렌더링
-      total_page = paragraphs.length;
-      renderPage(current_page);
+      totalPage = paragraphs.length;
+      renderPage(currentPage);
 
       // 로딩 스피너 숨기고 이미지 생성 버튼 표시
-      first_spinner.style.display = "none";
+      firstSpinner.style.display = "none";
       imageTypeContainer.style.display = "block";
       imagegenButton.style.display = "block";
-      first_input_container.style.display = "none";
+      firstInputContainer.style.display = "none";
       outPutElement.style.display = "block";
 
       // 번역 및 입력 값이 있는 경우 클릭 가능한 단락 생성
@@ -201,7 +200,7 @@ function clearInput() {
 
 // 페이지를 렌더링하는 함수
 function renderPage(page) {
-  console.log(`${page}/${total_page} 페이지 입니다.`);
+  console.log(`${page}/${totalPage} 페이지 입니다.`);
 
   tempSaveButton.style.display = "block";
   editButton.style.display = "block";
@@ -218,9 +217,9 @@ function renderPage(page) {
   // 이미지가 있는 경우 이미지 설정
   if (imageUrls[page - 1]) {
     scriptImage.src = imageUrls[page - 1];
-    create_btn_msg.style.display = "block";
+    createBtnMsg.style.display = "block";
   } else {
-    create_btn_msg.style.display = "";
+    createBtnMsg.style.display = "";
   }
 
   // 페이지에 대한 수정된 내용이 있다면 editableText로 표시
@@ -258,7 +257,7 @@ function renderPage(page) {
   }
 
   // 첫 페이지 및 총 페이지가 1이 아닌 경우
-  if (page == 1 && total_page != 1) {
+  if (page == 1 && totalPage != 1) {
     prevButton.style.display = "none";
     nextButton.style.display = "";
     nextButton.onclick = function () {
@@ -267,7 +266,7 @@ function renderPage(page) {
   }
 
   // 페이지가 1보다 크고 총 페이지보다 작은 경우
-  if (1 < page && page < total_page) {
+  if (1 < page && page < totalPage) {
     prevButton.style.display = "";
     nextButton.style.display = "";
 
@@ -297,7 +296,7 @@ function renderPage(page) {
   }
 
   // 페이지가 1보다 크고 페이지가 총 페이지인 경우
-  if (1 < page && page == total_page) {
+  if (1 < page && page == totalPage) {
     prevButton.style.display = "";
     nextButton.style.display = "none";
     prevButton.onclick = function () {
@@ -314,7 +313,7 @@ function prevPage(page) {
 
 // 다음 페이지로 이동하는 함수
 function nextPage(page) {
-  if (page < total_page) {
+  if (page < totalPage) {
     page += 1;
     renderPage(page);
   }
@@ -326,7 +325,7 @@ submitButton.addEventListener("click", getMessage);
 //티켓 수량을 불러오는 함수
 async function getTicketCount() {
   try {
-    fetch(`${backend_base_url}/user/usertickets/`, {
+    fetch(`${backendBaseUrl}/user/usertickets/`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("access"),
@@ -364,7 +363,7 @@ async function getImage(script, imageId) {
   console.log("image generated...");
 
   // 로딩 스피너 표시
-  second_spinner.style.display = "block";
+  secondSpinner.style.display = "block";
 
   const access_token = localStorage.getItem("access");
   const options = {
@@ -379,7 +378,7 @@ async function getImage(script, imageId) {
     }),
   };
   try {
-    const response = await fetch(`${backend_base_url}/story/image_dall-e/`, options);
+    const response = await fetch(`${backendBaseUrl}/story/image_dall-e/`, options);
     const res_json = await response.json();
 
     // 티켓 선택란 초기화
@@ -387,11 +386,11 @@ async function getImage(script, imageId) {
     getTicketCount();
 
     // 로딩 스피너 숨김
-    second_spinner.style.display = "none";
+    secondSpinner.style.display = "none";
     if (response.status == 500 || response.status == 400) {
       // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
       alert(res_json["error"]);
-      second_spinner.style.display = "none";
+      secondSpinner.style.display = "none";
 
       // 이미지 생성에 실패한 페이지의 내용을 수정된 내용으로 갱신하고 해당 페이지를 다시 렌더링
       paragraphs[imageId] = script;
@@ -402,7 +401,7 @@ async function getImage(script, imageId) {
     if (response.status == 402) {
       // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
       alert(res_json["error"]);
-      second_spinner.style.display = "none";
+      secondSpinner.style.display = "none";
 
       // 해당 티켓 소진 시, 티켓 결제 페이지를 새 창으로 띄움
       window.open(
@@ -429,7 +428,7 @@ async function getImage(script, imageId) {
       // 제목 입력란과 이야기 생성 버튼 표시
       titleInput.style.display = "block";
       storygenButton.style.display = "block";
-      create_btn_msg.style.display = "block";
+      createBtnMsg.style.display = "block";
     }
   } catch (error) {
     console.error(error);
@@ -456,7 +455,7 @@ async function createStory() {
     }
 
     // 로딩 스피너 표시
-    third_spinner.style.display = "block";
+    thirdSpinner.style.display = "block";
     const access_token = localStorage.getItem("access");
     const options = {
       method: "POST",
@@ -471,11 +470,11 @@ async function createStory() {
       }),
     };
     try {
-      const response = await fetch(`${backend_base_url}/story/`, options);
+      const response = await fetch(`${backendBaseUrl}/story/`, options);
       const res_json = await response.json();
 
       // 로딩 스피너 숨기기
-      third_spinner.style.display = "none";
+      thirdSpinner.style.display = "none";
       const id = res_json.story_id;
       if (res_json.status == 201) {
         if (localStorage.getItem("paragraphs")) {
@@ -485,7 +484,7 @@ async function createStory() {
           localStorage.removeItem("imageUrls");
         }
         window.alert(res_json.success);
-        window.location.href = `${frontend_base_url}/story/detail.html?story_id=${id}`;
+        window.location.href = `${frontendBaseUrl}/story/detail.html?story_id=${id}`;
       } else {
         alert(`동화 작성 실패 : ${res_json["error"]}`);
         console.error(error);
