@@ -12,11 +12,11 @@ function storyDetail(story_id) {
 
 // 마이페이지 get api
 function getMyPage() {
-  const access_token = localStorage.getItem("access");
+  const accessToken = localStorage.getItem("access");
   fetch(`${backendBaseUrl}/user/mypage/`, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${access_token}`,
+      Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
   })
@@ -28,25 +28,24 @@ function getMyPage() {
       document.getElementById("email").textContent = data.email;
       document.getElementById("country").textContent = data.country;
 
-      const user_image = document.getElementById("user-profile");
+      const userImage = document.getElementById("user-profile");
       if (data.profile_img) {
-        user_image.setAttribute("src", `${backendBaseUrl}${data.profile_img}`);
+        userImage.setAttribute("src", `${backendBaseUrl}${data.profile_img}`);
       } else {
-        user_image.setAttribute("src", `${backendBaseUrl}/media/user/default_profile.jpg`);
+        userImage.setAttribute("src", `${backendBaseUrl}/media/user/default-profile.jpg`);
       }
 
       // 북마크 목록 불러오기
       const bookmarks = data.bookmark_story_list;
       bookmarks.reverse();
-      const bookmark_list = document.getElementById("bookmark-story");
-      console.log(bookmark_list)
-      bookmark_list.innerHTML = "";
+      const bookmarkList = document.getElementById("bookmark-story");
+      bookmarkList.innerHTML = "";
 
       bookmarks.forEach((bookmark) => {
-        const bookmark_element = document.createElement("div");
-        bookmark_element.setAttribute("onclick", `storyDetail(${bookmark.story_id})`);
+        const bookmarkElement = document.createElement("div");
+        bookmarkElement.setAttribute("onclick", `storyDetail(${bookmark.story_id})`);
 
-        bookmark_element.innerHTML = `
+        bookmarkElement.innerHTML = `
                 <div class="bookmark-card">
                   <img class="card-img" src="${backendBaseUrl}${bookmark.content.story_image}" />
                   <div class="card-text">
@@ -64,20 +63,20 @@ function getMyPage() {
                 </div>
                 `;
 
-        bookmark_list.appendChild(bookmark_element);
+        bookmarkList.appendChild(bookmarkElement);
       });
 
       // 내가 작성한 동화 목록 불러오기
       const stories = data.my_story_list;
       stories.reverse();
-      const story_list = document.getElementById("my-story");
-      story_list.innerHTML = "";
+      const storyList = document.getElementById("my-story");
+      storyList.innerHTML = "";
 
       stories.forEach((story) => {
-        const story_element = document.createElement("div");
-        story_element.setAttribute("onclick", `storyDetail(${story.story_id})`);
+        const storyElement = document.createElement("div");
+        storyElement.setAttribute("onclick", `storyDetail(${story.story_id})`);
 
-        story_element.innerHTML = `
+        storyElement.innerHTML = `
                 <div class="my-story-card">
                           <img class="card-img" src="${backendBaseUrl}${story.content.story_image}" />
                           <div class="card-text">
@@ -96,20 +95,20 @@ function getMyPage() {
                       </div>
                   </div>
               `;
-        story_list.appendChild(story_element);
+        storyList.appendChild(storyElement);
       });
 
       // 최근 조회한 글 목록 불러오기
-      const story_timestamps = data.story_timestamps;
+      const storyTimestamps = data.story_timestamps;
 
-      const recent_story_list = document.getElementById("recently-story");
-      recent_story_list.innerHTML = "";
+      const recentStoryList = document.getElementById("recently-story");
+      recentStoryList.innerHTML = "";
 
-      story_timestamps.forEach((recent_story) => {
-        const recent_story_element = document.createElement("div");
-        recent_story_element.setAttribute("onclick", `storyDetail(${recent_story.story_id})`);
+      storyTimestamps.forEach((recent_story) => {
+        const recentStoryElement = document.createElement("div");
+        recentStoryElement.setAttribute("onclick", `storyDetail(${recent_story.story_id})`);
 
-        recent_story_element.innerHTML = `
+        recentStoryElement.innerHTML = `
                 <div class="recently-card">
                           <img class="card-img" src="${backendBaseUrl}${recent_story.content.story_image}" />
                           <div class="card-text">
@@ -129,7 +128,7 @@ function getMyPage() {
                   </div>
               `;
 
-        recent_story_list.appendChild(recent_story_element);
+        recentStoryList.appendChild(recentStoryElement);
       });
     });
 }
