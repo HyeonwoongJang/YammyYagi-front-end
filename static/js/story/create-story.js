@@ -78,15 +78,15 @@ function saveTempContent() {
 
 // localStorage에서 임시 콘텐츠를 로드
 function loadTemp() {
-  let temp_paragraphs = localStorage.getItem("paragraphs");
-  let temp_imageUrls = localStorage.getItem("imageUrls");
+  let tempParagraphs = localStorage.getItem("paragraphs");
+  let tempImageUrls = localStorage.getItem("imageUrls");
 
-  if (temp_paragraphs) {
-    paragraphs = JSON.parse(temp_paragraphs);
+  if (tempParagraphs) {
+    paragraphs = JSON.parse(tempParagraphs);
   }
 
-  if (temp_imageUrls) {
-    imageUrls = JSON.parse(temp_imageUrls);
+  if (tempImageUrls) {
+    imageUrls = JSON.parse(tempImageUrls);
     titleInput.style.display = "block";
     storygenButton.style.display = "block";
   }
@@ -119,8 +119,6 @@ function changeInput(value) {
 
 // 백엔드에서 GPT 동화를 가져오기 위한 비동기 함수
 async function getMessage() {
-  console.log("clicked");
-
   if (!inputElement.value) {
     alert("생성할 동화의 주제를 입력해주세요.");
     return;
@@ -131,11 +129,11 @@ async function getMessage() {
     return;
   }
 
-  const access_token = localStorage.getItem("access");
+  const accessToken = localStorage.getItem("access");
   const options = {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${access_token}`,
+      Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -200,8 +198,6 @@ function clearInput() {
 
 // 페이지를 렌더링하는 함수
 function renderPage(page) {
-  console.log(`${page}/${totalPage} 페이지 입니다.`);
-
   tempSaveButton.style.display = "block";
   editButton.style.display = "block";
 
@@ -365,11 +361,11 @@ async function getImage(script, imageId) {
   // 로딩 스피너 표시
   secondSpinner.style.display = "block";
 
-  const access_token = localStorage.getItem("access");
+  const accessToken = localStorage.getItem("access");
   const options = {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${access_token}`,
+      Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -379,7 +375,7 @@ async function getImage(script, imageId) {
   };
   try {
     const response = await fetch(`${backendBaseUrl}/story/image_dall-e/`, options);
-    const res_json = await response.json();
+    const responseJson = await response.json();
 
     // 티켓 선택란 초기화
     imageType.value = "";
@@ -389,7 +385,7 @@ async function getImage(script, imageId) {
     secondSpinner.style.display = "none";
     if (response.status == 500 || response.status == 400) {
       // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
-      alert(res_json["error"]);
+      alert(responseJson["error"]);
       secondSpinner.style.display = "none";
 
       // 이미지 생성에 실패한 페이지의 내용을 수정된 내용으로 갱신하고 해당 페이지를 다시 렌더링
@@ -400,7 +396,7 @@ async function getImage(script, imageId) {
 
     if (response.status == 402) {
       // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
-      alert(res_json["error"]);
+      alert(responseJson["error"]);
       secondSpinner.style.display = "none";
 
       // 해당 티켓 소진 시, 티켓 결제 페이지를 새 창으로 띄움
@@ -417,10 +413,10 @@ async function getImage(script, imageId) {
 
     if (response.status == 201) {
       // 이미지 URL 가져오기
-      const image_url = res_json.image_url;
+      const imageUrl = responseJson.image_url;
 
       // imageUrls 배열에 이미지 URL 저장
-      imageUrls[imageId] = image_url;
+      imageUrls[imageId] = imageUrl;
 
       // 이미지 엘리먼트의 소스 설정
       scriptImage.src = imageUrls[imageId];
@@ -456,11 +452,11 @@ async function createStory() {
 
     // 로딩 스피너 표시
     thirdSpinner.style.display = "block";
-    const access_token = localStorage.getItem("access");
+    const accessToken = localStorage.getItem("access");
     const options = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${access_token}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -471,22 +467,22 @@ async function createStory() {
     };
     try {
       const response = await fetch(`${backendBaseUrl}/story/`, options);
-      const res_json = await response.json();
+      const responseJson = await response.json();
 
       // 로딩 스피너 숨기기
       thirdSpinner.style.display = "none";
-      const id = res_json.story_id;
-      if (res_json.status == 201) {
+      const id = responseJson.story_id;
+      if (responseJson.status == 201) {
         if (localStorage.getItem("paragraphs")) {
           localStorage.removeItem("paragraphs");
         }
         if (localStorage.getItem("imageUrls")) {
           localStorage.removeItem("imageUrls");
         }
-        window.alert(res_json.success);
+        window.alert(responseJson.success);
         window.location.href = `${frontendBaseUrl}/story/detail.html?story_id=${id}`;
       } else {
-        alert(`동화 작성 실패 : ${res_json["error"]}`);
+        alert(`동화 작성 실패 : ${responseJson["error"]}`);
         console.error(error);
       }
     } catch (error) {
