@@ -26,38 +26,41 @@ body {
 
 .modal-header {
   border-bottom: none;
+  padding-bottom: 0;
 }
 
 .modal-body {
   text-align: center;
   border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+  padding-top: 0;
 }
 
 .modal-footer {
   text-align: center;
   justify-content: center;
   border-top: none;
+  padding: 10px;
 }
 
 .modal-img {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
 }
 
 .modal-nickname {
-  font-size: 35px;
+  font-size: 30px;
+  padding-top: 5px;
 }
 
 .modal-useremail {
   font-size: 18px;
   color: rgb(150, 176, 201);
-  margin-bottom: 10px;
 }
 
 .modal-body-content {
-  font-size: 28px;
-  margin: 15px 0px 15px 0px;
+  font-size: 25px;
+  margin: 10px 0px 10px 0px;
 }
 
 .modal-body-content > a {
@@ -66,7 +69,8 @@ body {
 }
 
 .modal-footer-content {
-  font-size: 28px;
+  font-size: 25px;
+  margin: 0;
 }
 
 .modal-content {
@@ -193,6 +197,7 @@ body {
 
 .ticket-box {
   text-align: left;
+  margin: auto;
 }
 
 #footer {
