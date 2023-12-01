@@ -411,6 +411,7 @@ async function getImage(script, imageId) {
       storyPostElements.style.display = "block"
       pageButtons.style.display = "block"
       imagegenButton.style.display = "block"
+      titleInput.style.display = "block"
 
       // 이미지 생성에 실패한 페이지의 내용을 수정된 내용으로 갱신하고 해당 페이지를 다시 렌더링
       paragraphs[imageId] = script;
@@ -427,7 +428,7 @@ async function getImage(script, imageId) {
       pageButtons.style.display = "block"
       imagegenButton.style.display = "block"
       titleInput.style.display = "block"
-      
+
       // 해당 티켓 소진 시, 티켓 결제 페이지를 새 창으로 띄움
       window.open(
         "../user/payment.html",
@@ -454,6 +455,7 @@ async function getImage(script, imageId) {
       createBtnMsg.style.display = "block";
       storyPostElements.style.display = "block"
       pageButtons.style.display = "block"
+      titleInput.style.display = "block"
     }
   } catch (error) {
     console.error(error);
