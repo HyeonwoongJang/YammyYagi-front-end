@@ -216,7 +216,7 @@ function updateGoldenP() {
 function updateSilverP() {
   const silverP = document.getElementById("silver-p");
   const silverInput = document.getElementById("silver-input");
-  silverTotalPayment = silverInput.value * 300;ckerTotalPayment
+  silverTotalPayment = silverInput.value * 300;
   silverP.innerText = silverTotalPayment + " Won";
   updateTotalPayment();
 }
