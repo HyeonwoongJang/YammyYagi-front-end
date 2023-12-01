@@ -20,6 +20,8 @@ const nextButton = document.getElementById("next-button");
 const myModal = document.getElementById("my-modal");
 const tempSaveButton = document.getElementById("temp-save-button");
 const editButton = document.getElementById("edit-button");
+const pageButtons = document.getElementById("page-buttons")
+const storyPostElements = document.getElementById("story-post")
 
 // 각 페이지의 이미지 URL 및 문단 데이터를 저장하는 배열
 let imageUrls = [];
@@ -207,6 +209,7 @@ function renderPage(page) {
 
   // 이미지가 있는 경우 이미지 설정
   if (imageUrls[page - 1]) {
+    if (imageUrls[page - 1] != "None")
     scriptImage.src = imageUrls[page - 1];
     createBtnMsg.style.display = "block";
   } else {
@@ -277,11 +280,11 @@ function editText(script) {
     editableText.style.display = "block";
     editableText.value = script;
     editButton.innerText = "완료";
-    prevButton.style.display="none"
-    nextButton.style.display="none"
+    pageButtons.style.display = "none";
     imageTypeContainer.style.display = "none";
     imagegenButton.style.display = "none";
     tempSaveButton.style.display = "none";
+    storyPostElements.style.display = "none"
   } else {
     if (editableText.value == ""){
       alert('빈 내용으로는 수정할 수 없습니다.')
@@ -289,19 +292,19 @@ function editText(script) {
       editableText.style.display = "block";
       editableText.value = script;
       editButton.innerText = "완료";
-      prevButton.style.display="none"
-      nextButton.style.display="none"
+      pageButtons.style.display = "none";
+      storyPostElements.style.display = "none"
     }
     scriptText.style.display = "block";
     editableText.style.display = "none";
     scriptText.innerText = editableText.value;
     editButton.innerText = "내용 수정하기";
     paragraphs[page - 1] = editableText.value;
-    prevButton.style.display=""
-    nextButton.style.display=""
+    pageButtons.style.display = "block";
     imageTypeContainer.style.display = "block";
     imagegenButton.style.display = "block";
     tempSaveButton.style.display = "block";
+    storyPostElements.style.display = "block"
   }
 }
 
@@ -364,7 +367,10 @@ async function getImage(script, imageId) {
     alert("이미지 타입을 위한 티켓을 선택해주세요.");
     return;
   }
-
+  storyPostElements.style.display = "none"
+  pageButtons.style.display = "none"
+  imagegenButton.style.display = "none"
+  
   // 이미지 생성 실패로 인해 사용자에 의해 수정된 스크립트가 있을 경우
   if (editPage[imageId]) {
     script = editableText.value;
@@ -402,6 +408,10 @@ async function getImage(script, imageId) {
       alert(responseJson["error"]);
       secondSpinner.style.display = "none";
 
+      storyPostElements.style.display = "block"
+      pageButtons.style.display = "block"
+      imagegenButton.style.display = "block"
+
       // 이미지 생성에 실패한 페이지의 내용을 수정된 내용으로 갱신하고 해당 페이지를 다시 렌더링
       paragraphs[imageId] = script;
       editPage[imageId] = script;
@@ -413,6 +423,11 @@ async function getImage(script, imageId) {
       alert(responseJson["error"]);
       secondSpinner.style.display = "none";
 
+      storyPostElements.style.display = "block"
+      pageButtons.style.display = "block"
+      imagegenButton.style.display = "block"
+      titleInput.style.display = "block"
+      
       // 해당 티켓 소진 시, 티켓 결제 페이지를 새 창으로 띄움
       window.open(
         "../user/payment.html",
@@ -428,7 +443,6 @@ async function getImage(script, imageId) {
     if (response.status == 201) {
       // 이미지 URL 가져오기
       const imageUrl = responseJson.image_url;
-
       // imageUrls 배열에 이미지 URL 저장
       imageUrls[imageId] = imageUrl;
 
@@ -436,9 +450,10 @@ async function getImage(script, imageId) {
       scriptImage.src = imageUrls[imageId];
 
       // 제목 입력란과 이야기 생성 버튼 표시
-      titleInput.style.display = "block";
-      storygenButton.style.display = "block";
+      imagegenButton.style.display = "block"
       createBtnMsg.style.display = "block";
+      storyPostElements.style.display = "block"
+      pageButtons.style.display = "block"
     }
   } catch (error) {
     console.error(error);
@@ -487,10 +502,10 @@ async function createStory() {
       thirdSpinner.style.display = "none";
       const id = responseJson.story_id;
       if (responseJson.status == 201) {
-        if (localStorage.getItem("paragraphs")) {
+        if (localStorage.getItem("paragraphs") !== null) {
           localStorage.removeItem("paragraphs");
         }
-        if (localStorage.getItem("imageUrls")) {
+        if (localStorage.getItem("imageUrls") !== null) {
           localStorage.removeItem("imageUrls");
         }
         window.alert(responseJson.success);
