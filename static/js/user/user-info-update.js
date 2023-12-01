@@ -11,7 +11,7 @@ async function renderPage() {
       const payload_parse = JSON.parse(payload);
       const request_user_email = payload_parse.email;
 
-      const response = await fetch(`${backend_base_url}/user/info/`, {
+      const response = await fetch(`${backendBaseUrl}/user/info/`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access"),
@@ -21,7 +21,7 @@ async function renderPage() {
       const response_json = await response.json();
       const data = response_json.user_info;
 
-      document.getElementById("current-profile-img").src = `${backend_base_url}/${data["profile_img"]}`;
+      document.getElementById("current-profile-img").src = `${backendBaseUrl}/${data["profile_img"]}`;
       document.getElementById("email").value = request_user_email;
       document.getElementById("nickname").value = data["nickname"];
 
@@ -36,7 +36,7 @@ async function renderPage() {
       }
     } else {
       alert("잘못된 접근입니다.");
-      window.location.href = `${frontend_base_url}/index.html`;
+      window.location.href = `${frontendBaseUrl}/index.html`;
     }
     // 프로필사진 미리보기
     const profile_img_input = document.getElementById("profile-img");
@@ -62,7 +62,7 @@ function handleImagePreview() {
   }
   // '선택된 파일 없음'일 때, 현재 프로필사진
   else {
-    preview_img.src = `${backend_base_url}` + payload_parse.profile_img;
+    preview_img.src = `${backendBaseUrl}` + payload_parse.profile_img;
   }
 }
 
@@ -101,7 +101,7 @@ async function updatePasswordButton() {
     return;
   }
   try {
-    const response = await fetch(`${backend_base_url}/user/info/`, {
+    const response = await fetch(`${backendBaseUrl}/user/info/`, {
       method: "PATCH",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("access"),
@@ -156,7 +156,7 @@ async function userDeleteButton() {
 
   try {
     if (password != "") {
-      const response = await fetch(`${backend_base_url}/user/info/`, {
+      const response = await fetch(`${backendBaseUrl}/user/info/`, {
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access"),
@@ -174,7 +174,7 @@ async function userDeleteButton() {
         localStorage.removeItem("refresh");
         localStorage.removeItem("payload");
         localStorage.removeItem("code");
-        window.location.replace(`${frontend_base_url}/`);
+        window.location.replace(`${frontendBaseUrl}/`);
         return;
       } else if (status == "400" && response.status == 400) {
         alert(`${response_json["error"]}`);
@@ -216,7 +216,7 @@ async function handleUpdate() {
   }
 
   try {
-    const response = await fetch(`${backend_base_url}/user/info/`, {
+    const response = await fetch(`${backendBaseUrl}/user/info/`, {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("access"),
@@ -239,7 +239,7 @@ async function updateButton() {
 
     if (status == "200" && response.status == 200) {
       alert(`${response_json["success"]}`);
-      window.location.replace(`${frontend_base_url}/user/user-info-update.html`);
+      window.location.replace(`${frontendBaseUrl}/user/user-info-update.html`);
     } else if (status == "400" && response.status == 400 && response_json["error"]["nickname"]) {
       alert(`${response_json["error"]["nickname"]}`);
     }
