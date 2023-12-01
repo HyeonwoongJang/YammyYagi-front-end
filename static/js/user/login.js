@@ -31,21 +31,21 @@ async function handleLogin() {
       }),
     });
 
-    const response_json = await response.json();
-    if (response_json["status"] == "404") {
-      alert(`${response_json["error"]}`);
+    const responseJson = await response.json();
+    if (responseJson["status"] == "404") {
+      alert(`${responseJson["error"]}`);
       return;
-    } else if (response_json["status"] == "401") {
-      alert(`${response_json["error"]}`);
+    } else if (responseJson["status"] == "401") {
+      alert(`${responseJson["error"]}`);
       return;
-    } else if (response_json["status"] == "403") {
-      alert(`${response_json["error"]}`);
+    } else if (responseJson["status"] == "403") {
+      alert(`${responseJson["error"]}`);
       return;
     } else if (response.status == 200) {
-      localStorage.setItem("access", response_json.access);
-      localStorage.setItem("refresh", response_json.refresh);
+      localStorage.setItem("access", responseJson.access);
+      localStorage.setItem("refresh", responseJson.refresh);
 
-      const base64Url = response_json.access.split(".")[1];
+      const base64Url = responseJson.access.split(".")[1];
       const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
       const jsonPayload = decodeURIComponent(
         atob(base64)
@@ -86,12 +86,12 @@ async function sendEmail() {
       email: email,
     }),
   });
-  const response_json = await response.json();
-  if (response_json["status"] == "400") {
-    alert(`${response_json["error"]}`);
+  const responseJson = await response.json();
+  if (responseJson["status"] == "400") {
+    alert(`${responseJson["error"]}`);
     return;
-  } else if (response_json["status"] == "200") {
-    alert(`${response_json["success"]}`);
+  } else if (responseJson["status"] == "200") {
+    alert(`${responseJson["success"]}`);
     return;
   }
 }
