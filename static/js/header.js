@@ -1,5 +1,5 @@
-const frontend_base_url = "http://127.0.0.1:5501";
-const backend_base_url = "http://127.0.0.1:8000";
+const frontendBaseUrl = "http://127.0.0.1:5501";
+const backendBaseUrl = "http://127.0.0.1:8000";
 
 // header 적용
 async function injectHeader() {
@@ -38,7 +38,7 @@ injectHeader();
 // 로그인 모달 값 가져오기
 async function updateLoginModal() {
   try {
-    const response = await fetch(`${backend_base_url}/user/mypage/`, {
+    const response = await fetch(`${backendBaseUrl}/user/mypage/`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("access"),
@@ -52,7 +52,7 @@ async function updateLoginModal() {
       const modalNickname = document.querySelector(".modal-nickname");
       const modalUserEmail = document.querySelector(".modal-useremail");
 
-      modalProfileImg.src = `${backend_base_url}` + response_json.my_data.profile_img;
+      modalProfileImg.src = `${backendBaseUrl}` + response_json.my_data.profile_img;
       modalNickname.textContent = response_json.my_data.nickname;
       modalUserEmail.textContent = response_json.my_data.email;
 
@@ -72,7 +72,7 @@ function handleLogout() {
   localStorage.removeItem("payload");
   localStorage.removeItem("code");
   location.reload();
-  window.location.replace(`${frontend_base_url}/`);
+  window.location.replace(`${frontendBaseUrl}/`);
 }
 
 // 1시간 후 자동 로그아웃 설정
@@ -95,7 +95,7 @@ function ticketPurchasing() {
 //티켓 수량을 불러오는 함수
 const payload = localStorage.getItem("payload");
 if (payload) {
-  fetch(`${backend_base_url}/user/usertickets/`, {
+  fetch(`${backendBaseUrl}/user/usertickets/`, {
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("access"),

@@ -1,11 +1,11 @@
-const frontend_base_url = "http://127.0.0.1:5501";
-const backend_base_url = "http://127.0.0.1:8000";
+const frontendBaseUrl = "http://127.0.0.1:5501";
+const backendBaseUrl = "http://127.0.0.1:8000";
 
 // 로그인 체크
 function checkLogin() {
   const payload = localStorage.getItem("payload");
   if (payload) {
-    window.location.replace(`${frontend_base_url}/`);
+    window.location.replace(`${frontendBaseUrl}/`);
   }
 }
 checkLogin();
@@ -45,7 +45,7 @@ async function handleSignin() {
       formData.append("profile_img", profileImageInput.files[0]);
     }
 
-    const response = await fetch(`${backend_base_url}/user/register/`, {
+    const response = await fetch(`${backendBaseUrl}/user/register/`, {
       method: "POST",
       body: formData,
     });
@@ -77,7 +77,7 @@ async function handleSigninButton() {
     return;
   } else if (response.status == 201) {
     alert("가입한 이메일로 인증 이메일이 발송되었습니다. 이메일을 확인해주세요.");
-    window.location.replace(`${frontend_base_url}/user/login.html`);
+    window.location.replace(`${frontendBaseUrl}/user/login.html`);
     return;
   }
 }

@@ -2,18 +2,18 @@
 window.onload = () => {
   if (!localStorage.getItem("access")) {
     alert("잘못된 접근입니다.");
-    window.location.href = `${frontend_base_url}`;
+    window.location.href = `${frontendBaseUrl}`;
   }
 };
 
 function storyDetail(story_id) {
-  window.location.href = `${frontend_base_url}/story/detail.html?story_id=${story_id}`;
+  window.location.href = `${frontendBaseUrl}/story/detail.html?story_id=${story_id}`;
 }
 
 // 마이페이지 get api
 function getMyPage() {
   const access_token = localStorage.getItem("access");
-  fetch(`${backend_base_url}/user/mypage/`, {
+  fetch(`${backendBaseUrl}/user/mypage/`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -30,9 +30,9 @@ function getMyPage() {
 
       const user_image = document.getElementById("user-profile");
       if (data.profile_img) {
-        user_image.setAttribute("src", `${backend_base_url}${data.profile_img}`);
+        user_image.setAttribute("src", `${backendBaseUrl}${data.profile_img}`);
       } else {
-        user_image.setAttribute("src", `${backend_base_url}/media/user/default_profile.jpg`);
+        user_image.setAttribute("src", `${backendBaseUrl}/media/user/default_profile.jpg`);
       }
 
       // 북마크 목록 불러오기
@@ -47,7 +47,7 @@ function getMyPage() {
 
         bookmark_element.innerHTML = `
                 <div class="bookmark-card">
-                  <img class="card-img" src="${backend_base_url}${bookmark.content.story_image}" />
+                  <img class="card-img" src="${backendBaseUrl}${bookmark.content.story_image}" />
                   <div class="card-text">
                   <p class="title">${bookmark.story_title}</p>
                   <p class="content">${bookmark.content.story_first_paragraph}</p>
@@ -78,7 +78,7 @@ function getMyPage() {
 
         story_element.innerHTML = `
                 <div class="my-story-card">
-                          <img class="card-img" src="${backend_base_url}${story.content.story_image}" />
+                          <img class="card-img" src="${backendBaseUrl}${story.content.story_image}" />
                           <div class="card-text">
                             <p class="title">${story.story_title}</p>
                             <p class="content">${story.content.story_first_paragraph}</p>
@@ -110,7 +110,7 @@ function getMyPage() {
 
         recent_story_element.innerHTML = `
                 <div class="recently-card">
-                          <img class="card-img" src="${backend_base_url}${recent_story.content.story_image}" />
+                          <img class="card-img" src="${backendBaseUrl}${recent_story.content.story_image}" />
                           <div class="card-text">
                             <p class="title">${recent_story.story_title}</p>
                             <p class="content">${recent_story.content.story_first_paragraph}</p>
@@ -143,5 +143,5 @@ window.onpageshow = function (event) {
   }
 };
 function getInfoPage() {
-  window.location.href = `${frontend_base_url}/user/user-info-update.html`;
+  window.location.href = `${frontendBaseUrl}/user/user-info-update.html`;
 }

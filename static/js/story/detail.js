@@ -32,7 +32,7 @@ async function tempRender() {
 
   try {
     const storyId = storyIdSearch();
-    const response = await fetch(`${backend_base_url}/story/${storyId}/`, {
+    const response = await fetch(`${backendBaseUrl}/story/${storyId}/`, {
       method: "GET",
       headers: headers, // 로그인되어 있는 경우에만 헤더에"Authorization" 필드가 추가됨.
     });
@@ -138,7 +138,7 @@ function createPage(storyData, currentPage, totalContentCount) {
 
   // 이미지와 내용에 데이터 설정
   if (pageData["story_image"] != null) {
-    pageImg.src = `${backend_base_url}${pageData["story_image"]}`;
+    pageImg.src = `${backendBaseUrl}${pageData["story_image"]}`;
   }
   pageContent.innerText = pageData["paragraph"];
   pagenationCount.innerText = currentPage + " / " + storyData.story_paragraph_list.length;
@@ -241,7 +241,7 @@ async function translateStory(storyData, currentPage, totalContentCount) {
     const storyScript = storyData["story_paragraph_list"];
     const storyTitle = storyData["story_title"];
 
-    const response = await fetch(`${backend_base_url}/story/translation/`, {
+    const response = await fetch(`${backendBaseUrl}/story/translation/`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -282,7 +282,7 @@ async function toggleComments() {
 
   try {
     const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
-    const response = await fetch(`${backend_base_url}/story/${storyId}/comment/`, {
+    const response = await fetch(`${backendBaseUrl}/story/${storyId}/comment/`, {
       method: "GET",
     });
 
@@ -306,7 +306,7 @@ async function toggleComments() {
 
       authorInfo.classList.add("comment-author-info");
 
-      authorProfile.src = `${backend_base_url}${comment["author_image"]}`;
+      authorProfile.src = `${backendBaseUrl}${comment["author_image"]}`;
       authorProfile.classList.add("comment-author-profile");
       authorNickname.innerText = comment["author_nickname"];
       authorNickname.setAttribute("class", "comment-nickname");
@@ -346,7 +346,7 @@ async function toggleComments() {
 async function loadComments() {
   try {
     const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
-    const response = await fetch(`${backend_base_url}/story/${storyId}/comment/`, {
+    const response = await fetch(`${backendBaseUrl}/story/${storyId}/comment/`, {
       method: "GET",
     });
 
@@ -370,7 +370,7 @@ async function loadComments() {
 
       authorInfo.classList.add("comment-author-info");
 
-      authorProfile.src = `${backend_base_url}${comment["author_image"]}`;
+      authorProfile.src = `${backendBaseUrl}${comment["author_image"]}`;
       authorProfile.classList.add("comment-author-profile");
       authorNickname.innerText = comment["author_nickname"];
       authorNickname.setAttribute("class", "comment-nickname");
@@ -410,7 +410,7 @@ async function loadComments() {
 async function deleteComment(comment_id) {
   try {
     const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
-    const response = await fetch(`${backend_base_url}/story/${storyId}/comment/${comment_id}/`, {
+    const response = await fetch(`${backendBaseUrl}/story/${storyId}/comment/${comment_id}/`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -446,7 +446,7 @@ async function postComment() {
       const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
       const commentContent = document.getElementById("comment-input").value;
 
-      const response = await fetch(`${backend_base_url}/story/${storyId}/comment/`, {
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/comment/`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -483,7 +483,7 @@ async function deleteStory() {
   try {
     if (localStorage.getItem("access")) {
       const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
-      const response = await fetch(`${backend_base_url}/story/${storyId}/`, {
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
@@ -496,7 +496,7 @@ async function deleteStory() {
 
       if (status == "204") {
         alert(`${responseJson["success"]}`);
-        window.location.href = `${frontend_base_url}`; // 동화 삭제 후 메인페이지로 이동
+        window.location.href = `${frontendBaseUrl}`; // 동화 삭제 후 메인페이지로 이동
         return;
       } else if (status == "401" && response.status == 401) {
         alert(`${responseJson["error"]}`); // 권한이 없는 경우
@@ -541,7 +541,7 @@ function shareFacebook() {
 async function shareKakao() {
   try {
     // 데이터를 가져오기 위한 fetch 요청
-    const response = await fetch(`${backend_base_url}/story/kakao/`, {
+    const response = await fetch(`${backendBaseUrl}/story/kakao/`, {
       method: "GET",
     });
 
@@ -560,7 +560,7 @@ async function shareKakao() {
       content: {
         title: "YummyYagi", // 공유할 콘텐츠의 제목
         description: "동화책을 공유합니다.", // 공유할 콘텐츠의 설명
-        imageUrl: frontend_base_url + "/static/img/yummy_yagi_logo.jpg", // 썸네일 이미지 URL
+        imageUrl: frontendBaseUrl + "/static/img/yummy_yagi_logo.jpg", // 썸네일 이미지 URL
         link: {
           webUrl: window.location.href, // 웹 URL
         },
@@ -599,7 +599,7 @@ async function bookmarkStory() {
   try {
     if (localStorage.getItem("access")) {
       const storyId = storyIdSearch();
-      const response = await fetch(`${backend_base_url}/story/${storyId}/bookmark/`, {
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/bookmark/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access"),
@@ -641,7 +641,7 @@ async function likeStory() {
   try {
     if (localStorage.getItem("access")) {
       const storyId = storyIdSearch();
-      const response = await fetch(`${backend_base_url}/story/${storyId}/like/`, {
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/like/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access"),
@@ -676,7 +676,7 @@ async function hateStory() {
   try {
     if (localStorage.getItem("access")) {
       const storyId = storyIdSearch();
-      const response = await fetch(`${backend_base_url}/story/${storyId}/hate/`, {
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/hate/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access"),

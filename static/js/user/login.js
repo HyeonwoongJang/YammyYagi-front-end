@@ -1,11 +1,11 @@
-const frontend_base_url = "http://127.0.0.1:5501";
-const backend_base_url = "http://127.0.0.1:8000";
+const frontendBaseUrl = "http://127.0.0.1:5501";
+const backendBaseUrl = "http://127.0.0.1:8000";
 
 // 로그인 체크
 function checkLogin() {
   const payload = localStorage.getItem("payload");
   if (payload) {
-    window.location.replace(`${frontend_base_url}/`);
+    window.location.replace(`${frontendBaseUrl}/`);
   }
 }
 checkLogin();
@@ -20,7 +20,7 @@ async function handleLogin() {
   }
 
   try {
-    const response = await fetch(`${backend_base_url}/user/login/`, {
+    const response = await fetch(`${backendBaseUrl}/user/login/`, {
       headers: {
         "content-type": "application/json",
       },
@@ -58,7 +58,7 @@ async function handleLogin() {
 
       localStorage.setItem("payload", jsonPayload);
       alert("환영합니다.");
-      window.location.replace(`${frontend_base_url}`);
+      window.location.replace(`${frontendBaseUrl}`);
       return;
     }
   } catch (error) {
@@ -77,7 +77,7 @@ async function sendEmail() {
   // 이메일 입력 필드에서 이메일 값 가져오기
   const email = document.getElementById("email-for-pw").value;
 
-  const response = await fetch(`${backend_base_url}/user/pwd-reset/`, {
+  const response = await fetch(`${backendBaseUrl}/user/pwd-reset/`, {
     headers: {
       "content-type": "application/json",
     },
