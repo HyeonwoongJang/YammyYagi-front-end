@@ -180,7 +180,7 @@
   height: 800px;
 }
 
-.short_scroll-container {
+.short-scroll-container {
   overflow-y: auto;
   height: 335px;
 }

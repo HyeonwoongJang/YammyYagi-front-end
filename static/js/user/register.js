@@ -15,28 +15,28 @@ async function handleSignin() {
   try {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const password_check = document.getElementById("password_check").value;
+    const passwordCheck = document.getElementById("password-check").value;
     const nickname = document.getElementById("nickname").value;
     const country = document.getElementById("country").value;
-    const password_pattern = /^(?=.*\d)(?=.*[~!@#$%^&amp;*]).{8,20}$/;
+    const passwordPattern = /^(?=.*\d)(?=.*[~!@#$%^&amp;*]).{8,20}$/;
 
     const formData = new FormData();
 
-    if (email == "" || password == "" || password_check == "" || nickname == "" || country == "") {
+    if (email == "" || password == "" || passwordCheck == "" || nickname == "" || country == "") {
       alert("모든 필수 정보를 입력해주세요.");
       return;
     }
-    if (password != password_check) {
+    if (password != passwordCheck) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    if (!password_pattern.test(password)) {
+    if (!passwordPattern.test(password)) {
       alert("비밀번호는 8자 이상 20자 이하 및 숫자와 특수 문자(#?!@$~%^&*-)를 하나씩 포함시켜야 합니다.");
       return;
     }
     formData.append("email", email);
     formData.append("password", password);
-    formData.append("password_check", password_check);
+    formData.append("password_check", passwordCheck);
     formData.append("nickname", nickname);
     formData.append("country", country);
 
@@ -58,22 +58,22 @@ async function handleSignin() {
 // 회원가입 버튼
 async function handleSigninButton() {
   const response = await handleSignin();
-  response_json = await response.json();
+  const responseJson = await response.json();
 
-  if (response.status == 400 && response_json["error"]["email"]) {
-    alert(`이메일 에러 : ${response_json["error"]["email"]}`);
+  if (response.status == 400 && responseJson["error"]["email"]) {
+    alert(`이메일 에러 : ${responseJson["error"]["email"]}`);
     return;
-  } else if (response.status == 400 && response_json["error"]["nickname"]) {
-    alert(`닉네임 에러 : ${response_json["error"]["nickname"]}`);
+  } else if (response.status == 400 && responseJson["error"]["nickname"]) {
+    alert(`닉네임 에러 : ${responseJson["error"]["nickname"]}`);
     return;
-  } else if (response.status == 400 && response_json["error"]["password"]) {
-    alert(`패스워드 에러 : ${response_json["error"]["password"]}`);
+  } else if (response.status == 400 && responseJson["error"]["password"]) {
+    alert(`패스워드 에러 : ${responseJson["error"]["password"]}`);
     return;
-  } else if (response.status == 400 && response_json["error"]["country"]) {
-    alert(`국가 선택 에러 : ${response_json["error"]["country"]}`);
+  } else if (response.status == 400 && responseJson["error"]["country"]) {
+    alert(`국가 선택 에러 : ${responseJson["error"]["country"]}`);
     return;
   } else if (response.status == 400) {
-    alert(response_json["error"]);
+    alert(responseJson["error"]);
     return;
   } else if (response.status == 201) {
     alert("가입한 이메일로 인증 이메일이 발송되었습니다. 이메일을 확인해주세요.");

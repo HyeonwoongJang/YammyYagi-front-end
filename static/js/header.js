@@ -10,18 +10,18 @@ async function injectHeader() {
 
       const loginButton = document.getElementById("login-hamburger-button");
       const logoutButton = document.getElementById("nav-right-logout");
-      const create_story_button = document.getElementById("create-story-button");
+      const createStoryButton = document.getElementById("create-story-button");
       const payload = localStorage.getItem("payload");
       if (payload) {
         // 로그인 상태일 때
         loginButton.style.display = "block";
         logoutButton.style.display = "none";
-        create_story_button.style.display = "block";
+        createStoryButton.style.display = "block";
       } else {
         // 로그아웃 상태일 때
         loginButton.style.display = "none";
         logoutButton.style.display = "block";
-        create_story_button.style.display = "none";
+        createStoryButton.style.display = "none";
       }
       loginButton.addEventListener("click", function () {
         // 로그인시 모달

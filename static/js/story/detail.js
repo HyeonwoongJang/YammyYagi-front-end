@@ -1,9 +1,9 @@
-// URL 매개변수에서 story_id를 추출하는 함수
+// URL 매개변수에서 storyId를 추출하는 함수
 function storyIdSearch() {
-  const url_params = new URLSearchParams(window.location.search);
-  const story_id = url_params.get("story_id");
+  const urlParams = new URLSearchParams(window.location.search);
+  const storyId = urlParams.get("story_id");
 
-  return story_id;
+  return storyId;
 }
 
 // HTTP 요청 헤더를 설정하는 객체를 초기화
@@ -13,14 +13,14 @@ let headers = {
 
 window.onload = async function () {
   const data = await tempRender();
-  const story_data = data["detail"];
+  const storyData = data["detail"];
 
   // 초기 화면에는 첫 번째 컨텐츠 랜더링
-  const current_page = 1;
-  const total_content_count = story_data.story_paragraph_list.length;
+  const currentPage = 1;
+  const totalContentCount = storyData.story_paragraph_list.length;
 
-  storyPage(story_data, current_page, total_content_count);
-  createPage(story_data, current_page, total_content_count);
+  storyPage(storyData, currentPage, totalContentCount);
+  createPage(storyData, currentPage, totalContentCount);
 };
 
 // 페이지 GET 요청하는 비동기 함수
@@ -31,18 +31,18 @@ async function tempRender() {
   }
 
   try {
-    const story_id = storyIdSearch();
-    const response = await fetch(`${backendBaseUrl}/story/${story_id}/`, {
+    const storyId = storyIdSearch();
+    const response = await fetch(`${backendBaseUrl}/story/${storyId}/`, {
       method: "GET",
       headers: headers, // 로그인되어 있는 경우에만 헤더에"Authorization" 필드가 추가됨.
     });
-    const response_json = await response.json();
+    const responseJson = await response.json();
 
     // 서버 응답이 성공인 경우 데이터 반환
     if (response.status == 200) {
-      return response_json;
+      return responseJson;
     } else if (response.status == 403) {
-      alert(response_json["error"]);
+      alert(responseJson["error"]);
       return;
     }
   } catch (error) {
@@ -51,181 +51,181 @@ async function tempRender() {
 }
 
 // 페이지의 기본 정보를 랜더링하는 함수
-function storyPage(story_data, current_page, total_content_count) {
+function storyPage(storyData, currentPage, totalContentCount) {
   // 로그인 한 Story 작성자만 댓글 삭제 버튼이 보이도록 설정
   if (localStorage.getItem("access")) {
     const payload = localStorage.getItem("payload");
-    const payload_parse = JSON.parse(payload);
-    const story_author_id = payload_parse.user_id;
+    const payloadParse = JSON.parse(payload);
+    const storyAuthorId = payloadParse.user_id;
 
-    const story_delete_button = document.getElementById("story-delete");
-    if (story_data["author_id"] == story_author_id) {
-      story_delete_button.style.display = "";
+    const storyDeleteButton = document.getElementById("story-delete");
+    if (storyData["author_id"] == storyAuthorId) {
+      storyDeleteButton.style.display = "";
     } else {
-      story_delete_button.style.display = "none";
+      storyDeleteButton.style.display = "none";
     }
   }
 
   // Story 제목 설정
-  document.getElementById("title").innerText = story_data.story_title;
+  document.getElementById("title").innerText = storyData.story_title;
 
   // 북마크 상태를 업데이트하고, 현재 사용자의 북마크 여부에 따라 아이콘 표시를 변경
-  const bookmarked_icon = document.getElementById("bookmarked-icon");
-  const not_bookmarked_icon = document.getElementById("not-bookmarked-icon");
+  const bookmarkedIcon = document.getElementById("bookmarked-icon");
+  const notBookmarkedIcon = document.getElementById("not-bookmarked-icon");
 
   if (localStorage.getItem("access")) {
     const payload = localStorage.getItem("payload");
-    const payload_parse = JSON.parse(payload);
-    const user_id = payload_parse.user_id;
+    const payloadParse = JSON.parse(payload);
+    const userId = payloadParse.user_id;
 
     // 스토리의 북마크된 사용자 목록을 가져와서 사용자 ID 리스트 생성
-    const b_user_list = story_data.bookmark_user_list;
-    const b_user_id_list = [];
+    const bookmarkUserList = storyData.bookmark_user_list;
+    const bookmarkUserIdList = [];
 
-    b_user_list.forEach((user) => {
-      b_user_id_list.push(user["id"]);
+    bookmarkUserList.forEach((user) => {
+      bookmarkUserIdList.push(user["id"]);
     });
 
     // 현재 사용자의 ID가 북마크된 사용자 리스트에 포함되어 있으면 북마크된 상태로 표시
-    if (b_user_id_list.includes(user_id)) {
-      bookmarked_icon.style.display = "";
-      not_bookmarked_icon.style.display = "none";
+    if (bookmarkUserIdList.includes(userId)) {
+      bookmarkedIcon.style.display = "";
+      notBookmarkedIcon.style.display = "none";
     } else {
       // 그렇지 않으면 북마크되지 않은 상태로 표시
-      bookmarked_icon.style.display = "none";
-      not_bookmarked_icon.style.display = "";
+      bookmarkedIcon.style.display = "none";
+      notBookmarkedIcon.style.display = "";
     }
   } else {
     // 로그인하지 않은 경우 북마크되지 않은 상태로 표시
-    bookmarked_icon.style.display = "none";
-    not_bookmarked_icon.style.display = "";
+    bookmarkedIcon.style.display = "none";
+    notBookmarkedIcon.style.display = "";
   }
 
   // 좋아요 수 업데이트
-  const like_count = document.getElementById("like-count");
-  like_count.innerText = story_data.like_count + " likes";
+  const likCount = document.getElementById("like-count");
+  likCount.innerText = storyData.like_count + " likes";
 
   // 싫어요 수 업데이트
-  const hate_count = document.getElementById("hate-count");
-  hate_count.innerText = story_data.hate_count + " hates";
+  const hateCount = document.getElementById("hate-count");
+  hateCount.innerText = storyData.hate_count + " hates";
 
   const translator = document.getElementById("translate");
   translator.onclick = function () {
-    translateStory(story_data, current_page, total_content_count);
+    translateStory(storyData, currentPage, totalContentCount);
   };
 }
 
 // 페이지의 동화 내용을 랜더링하는 함수
-function createPage(story_data, current_page, total_content_count) {
+function createPage(storyData, currentPage, totalContentCount) {
   // 현재 페이지에 해당하는 데이터 가져오기
-  const page_data = story_data.story_paragraph_list[parseInt(current_page) - 1];
+  const pageData = storyData.story_paragraph_list[parseInt(currentPage) - 1];
 
   // 동화책 페이지 랜더링을 위한 요소
-  const story_content = document.getElementById("content-box");
+  const storyContent = document.getElementById("content-box");
 
   // 랜더링 전에 내용 비워주기
-  story_content.innerHTML = "";
+  storyContent.innerHTML = "";
 
   // 페이지의 이미지와 내용을 담을 요소들 생성
-  const page_div = document.createElement("div");
-  page_div.className = "content-div";
-  const page_img = document.createElement("img");
-  page_img.className = "content-img";
-  const page_content = document.createElement("p");
-  page_content.className = "content-text";
-  const pagenation_count = document.createElement("div");
-  pagenation_count.className = "content-pagination";
+  const pageDiv = document.createElement("div");
+  pageDiv.className = "content-div";
+  const pageImg = document.createElement("img");
+  pageImg.className = "content-img";
+  const pageContent = document.createElement("p");
+  pageContent.className = "content-text";
+  const pagenationCount = document.createElement("div");
+  pagenationCount.className = "content-pagination";
 
   // 이미지와 내용에 데이터 설정
-  if (page_data["story_image"] != null) {
-    page_img.src = `${backendBaseUrl}${page_data["story_image"]}`;
+  if (pageData["story_image"] != null) {
+    pageImg.src = `${backendBaseUrl}${pageData["story_image"]}`;
   }
-  page_content.innerText = page_data["paragraph"];
-  pagenation_count.innerText = current_page + " / " + story_data.story_paragraph_list.length;
+  pageContent.innerText = pageData["paragraph"];
+  pagenationCount.innerText = currentPage + " / " + storyData.story_paragraph_list.length;
 
   // 요소들을 조립하여 동화책 페이지에 추가
-  page_div.appendChild(page_img);
-  page_div.appendChild(page_content);
-  story_content.appendChild(page_div);
-  story_content.appendChild(pagenation_count);
+  pageDiv.appendChild(pageImg);
+  pageDiv.appendChild(pageContent);
+  storyContent.appendChild(pageDiv);
+  storyContent.appendChild(pagenationCount);
 
-  page_img.classList.add("page-img");
+  pageImg.classList.add("page-img");
 
   // 페이지 이동 버튼에 현재 페이지 번호를 id 값으로 부여
-  const pre_page_button = document.getElementById("pre-page-button");
-  const next_page_button = document.getElementById("next-page-button");
+  const prePageButton = document.getElementById("pre-page-button");
+  const nextPageButton = document.getElementById("next-page-button");
 
-  pre_page_button.innerHTML = "";
-  next_page_button.innerHTML = "";
+  prePageButton.innerHTML = "";
+  nextPageButton.innerHTML = "";
 
-  if (current_page == 1 && total_content_count != 1) {
+  if (currentPage == 1 && totalContentCount != 1) {
     // 첫 번째 페이지이면서 총 컨텐츠 개수가 1개 이상일 때 다음 버튼 생성
 
-    const next_button = document.createElement("button");
-    next_button.type = "button";
-    next_button.className = "pagebutton";
-    next_button.innerText = ">>";
-    next_button.id = parseInt(current_page) + 1;
-    next_button.onclick = function () {
-      nextPage(story_data, next_button.id, total_content_count);
+    const nextButton = document.createElement("button");
+    nextButton.type = "button";
+    nextButton.className = "pagebutton";
+    nextButton.innerText = ">>";
+    nextButton.id = parseInt(currentPage) + 1;
+    nextButton.onclick = function () {
+      nextPage(storyData, nextButton.id, totalContentCount);
     };
 
-    next_page_button.appendChild(next_button);
-  } else if (1 < parseInt(current_page) && parseInt(current_page) < total_content_count) {
+    nextPageButton.appendChild(nextButton);
+  } else if (1 < parseInt(currentPage) && parseInt(currentPage) < totalContentCount) {
     // 첫 번째 페이지가 아니면서 중간 페이지일 때 이전, 다음 버튼 생성
 
-    const pre_button = document.createElement("button");
-    pre_button.type = "button";
-    pre_button.className = "pagebutton";
-    pre_button.innerText = "<<";
-    pre_button.id = parseInt(current_page) - 1;
-    pre_button.onclick = function () {
-      prePage(story_data, pre_button.id, total_content_count);
+    const preButton = document.createElement("button");
+    preButton.type = "button";
+    preButton.className = "pagebutton";
+    preButton.innerText = "<<";
+    preButton.id = parseInt(currentPage) - 1;
+    preButton.onclick = function () {
+      prePage(storyData, preButton.id, totalContentCount);
     };
 
-    const next_button = document.createElement("button");
-    next_button.type = "button";
-    next_button.className = "pagebutton";
-    next_button.innerText = ">>";
-    next_button.id = parseInt(current_page) + 1;
-    next_button.onclick = function () {
-      nextPage(story_data, next_button.id, total_content_count);
+    const nextButton = document.createElement("button");
+    nextButton.type = "button";
+    nextButton.className = "pagebutton";
+    nextButton.innerText = ">>";
+    nextButton.id = parseInt(currentPage) + 1;
+    nextButton.onclick = function () {
+      nextPage(storyData, nextButton.id, totalContentCount);
     };
 
-    pre_page_button.appendChild(pre_button);
-    next_page_button.appendChild(next_button);
-  } else if (1 < parseInt(current_page) && parseInt(current_page) === total_content_count) {
+    prePageButton.appendChild(preButton);
+    nextPageButton.appendChild(nextButton);
+  } else if (1 < parseInt(currentPage) && parseInt(currentPage) === totalContentCount) {
     // 마지막 페이지일 때 이전 버튼 생성
 
-    const pre_button = document.createElement("button");
-    pre_button.type = "button";
-    pre_button.className = "pagebutton";
-    pre_button.innerText = "<<";
-    pre_button.id = parseInt(current_page) - 1;
-    pre_button.onclick = function () {
-      prePage(story_data, pre_button.id, total_content_count);
+    const preButton = document.createElement("button");
+    preButton.type = "button";
+    preButton.className = "pagebutton";
+    preButton.innerText = "<<";
+    preButton.id = parseInt(currentPage) - 1;
+    preButton.onclick = function () {
+      prePage(storyData, preButton.id, totalContentCount);
     };
 
-    pre_page_button.appendChild(pre_button);
+    prePageButton.appendChild(preButton);
   }
 }
 
 // 다음 버튼에 연결된 함수
-function nextPage(data, current_page, total_content_count) {
-  createPage(data, current_page, total_content_count);
+function nextPage(data, currentPage, totalContentCount) {
+  createPage(data, currentPage, totalContentCount);
 }
 
 // 이전 버튼에 연결된 함수
-function prePage(data, current_page, total_content_count) {
-  createPage(data, current_page, total_content_count);
+function prePage(data, currentPage, totalContentCount) {
+  createPage(data, currentPage, totalContentCount);
 }
 
 // 번역 버튼에 연결된 비동기 함수
-async function translateStory(story_data, current_page, total_content_count) {
+async function translateStory(storyData, currentPage, totalContentCount) {
   // 선택된 언어 가져오기
-  const target_language = document.getElementById("language").value;
+  const targetLanguage = document.getElementById("language").value;
 
-  if (!target_language) {
+  if (!targetLanguage) {
     alert("번역할 언어를 선택해주세요.");
     return;
   }
@@ -238,8 +238,8 @@ async function translateStory(story_data, current_page, total_content_count) {
 
   try {
     // 스토리 데이터에서 스토리 스크립트 및 제목 추출
-    const story_script = story_data["story_paragraph_list"];
-    const story_title = story_data["story_title"];
+    const storyScript = storyData["story_paragraph_list"];
+    const storyTitle = storyData["story_title"];
 
     const response = await fetch(`${backendBaseUrl}/story/translation/`, {
       headers: {
@@ -247,23 +247,23 @@ async function translateStory(story_data, current_page, total_content_count) {
       },
       method: "POST",
       body: JSON.stringify({
-        story_script: story_script,
-        target_language: target_language,
-        story_title: story_title,
+        story_script: storyScript,
+        target_language: targetLanguage,
+        story_title: storyTitle,
       }),
     });
 
-    const response_json = await response.json();
+    const responseJson = await response.json();
 
     // 각 문단에 번역된 내용 적용
-    for (let i = 0; i < story_script.length; i++) {
-      story_script[i]["paragraph"] = response_json["translated_scripts"][i];
+    for (let i = 0; i < storyScript.length; i++) {
+      storyScript[i]["paragraph"] = responseJson["translated_scripts"][i];
     }
 
     // 서버 응답이 성공인 경우 번역된 제목 적용 및 번역 페이지 생성
     if (response.status == 200) {
-      document.getElementById("title").innerText = response_json["translated_title"];
-      createPage(story_data, current_page, total_content_count);
+      document.getElementById("title").innerText = responseJson["translated_title"];
+      createPage(storyData, currentPage, totalContentCount);
       translate.style.display = "";
       translating.style.display = "none";
     }
@@ -277,66 +277,65 @@ async function translateStory(story_data, current_page, total_content_count) {
 // 댓글창을 열고 닫는 비동기 함수
 async function toggleComments() {
   // 댓글 창의 현재 표시 상태를 확인하고, 토글하여 보이게 하거나 숨김
-  const comment_box = document.getElementById("comment");
-  comment_box.style.display =
-    comment_box.style.display === "none" || comment_box.style.display === "" ? "block" : "none";
+  const commentBox = document.getElementById("comment");
+  commentBox.style.display = commentBox.style.display === "none" || commentBox.style.display === "" ? "block" : "none";
 
   try {
-    const story_id = storyIdSearch(); // 현재 스토리의 ID를 가져옴
-    const response = await fetch(`${backendBaseUrl}/story/${story_id}/comment/`, {
+    const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
+    const response = await fetch(`${backendBaseUrl}/story/${storyId}/comment/`, {
       method: "GET",
     });
 
-    const response_json = await response.json();
+    const responseJson = await response.json();
 
-    const comment_data = response_json["comments"];
+    const commentData = responseJson["comments"];
 
-    const comment_list = document.getElementById("comment-list");
-    comment_list.innerHTML = "";
+    const commentList = document.getElementById("comment-list");
+    commentList.innerHTML = "";
 
     // 각 댓글을 렌더링
-    comment_data.forEach((comment) => {
-      const single_comment = document.createElement("div");
-      const author_info = document.createElement("div");
-      const author_profile = document.createElement("img");
-      const author_nickname = document.createElement("div");
-      const delete_button = document.createElement("button");
+    commentData.forEach((comment) => {
+      const singleComment = document.createElement("div");
+      const authorInfo = document.createElement("div");
+      const authorProfile = document.createElement("img");
+      const authorNickname = document.createElement("div");
+      const deleteButton = document.createElement("button");
       const content = document.createElement("p");
 
-      single_comment.classList.add("single_comment");
+      singleComment.classList.add("single-comment");
 
-      author_info.classList.add("comment_author_info");
+      authorInfo.classList.add("comment-author-info");
 
-      author_profile.src = `${backendBaseUrl}${comment["author_image"]}`;
-      author_profile.classList.add("comment_author_profile");
-      author_nickname.innerText = comment["author_nickname"];
-      author_nickname.setAttribute("class", "comment-nickname");
+      authorProfile.src = `${backendBaseUrl}${comment["author_image"]}`;
+      authorProfile.classList.add("comment-author-profile");
+      authorNickname.innerText = comment["author_nickname"];
+      authorNickname.setAttribute("class", "comment-nickname");
 
-      delete_button.classList.add("btn-close");
-      delete_button.onclick = function () {
+      deleteButton.classList.add("btn-close");
+      deleteButton.onclick = function () {
         deleteComment(comment["comment_id"]);
       };
 
       content.innerText = comment["content"];
-      content.classList.add("comment_content");
+      content.classList.add("comment-content");
 
-      author_info.appendChild(author_profile);
-      author_info.appendChild(author_nickname);
+      authorInfo.appendChild(authorProfile);
+      authorInfo.appendChild(authorNickname);
 
       // 현재 사용자가 로그인되어 있고, 댓글 작성자가 현재 사용자인 경우 삭제 버튼 추가
       if (localStorage.getItem("access")) {
         const payload = localStorage.getItem("payload");
-        const payload_parse = JSON.parse(payload);
-        const comment_author = payload_parse.user_id;
-        if (comment["author_id"] == comment_author) {
-          author_info.appendChild(delete_button);
+        const payloadParse = JSON.parse(payload);
+        const commentAuthor = payloadParse.user_id;
+        if (comment["author_id"] == commentAuthor) {
+          authorInfo.appendChild(deleteButton);
         }
       }
 
-      single_comment.appendChild(author_info);
-      single_comment.appendChild(content);
+      singleComment.appendChild(authorInfo);
+      singleComment.appendChild(content);
 
-      comment_list.appendChild(single_comment);
+      commentList.appendChild(singleComment);
     });
   } catch (error) {
     alert("댓글 로드 실패");
@@ -346,61 +345,61 @@ async function toggleComments() {
 // 댓글을 로드하는 비동기 함수
 async function loadComments() {
   try {
-    const story_id = storyIdSearch(); // 현재 스토리의 ID를 가져옴
-    const response = await fetch(`${backendBaseUrl}/story/${story_id}/comment/`, {
+    const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
+    const response = await fetch(`${backendBaseUrl}/story/${storyId}/comment/`, {
       method: "GET",
     });
 
-    const response_json = await response.json();
+    const responseJson = await response.json();
 
-    const comment_data = response_json["comments"];
+    const commentData = responseJson["comments"];
 
-    const comment_list = document.getElementById("comment-list");
-    comment_list.innerHTML = "";
+    const commentList = document.getElementById("comment-list");
+    commentList.innerHTML = "";
 
     // 각 댓글을 렌더링
-    comment_data.forEach((comment) => {
-      const single_comment = document.createElement("div");
-      const author_info = document.createElement("div");
-      const author_profile = document.createElement("img");
-      const author_nickname = document.createElement("div");
-      const delete_button = document.createElement("button");
+    commentData.forEach((comment) => {
+      const singleComment = document.createElement("div");
+      const authorInfo = document.createElement("div");
+      const authorProfile = document.createElement("img");
+      const authorNickname = document.createElement("div");
+      const deleteButton = document.createElement("button");
       const content = document.createElement("p");
 
-      single_comment.classList.add("single_comment");
+      singleComment.classList.add("single-comment");
 
-      author_info.classList.add("comment_author_info");
+      authorInfo.classList.add("comment-author-info");
 
-      author_profile.src = `${backendBaseUrl}${comment["author_image"]}`;
-      author_profile.classList.add("comment_author_profile");
-      author_nickname.innerText = comment["author_nickname"];
-      author_nickname.setAttribute("class", "comment-nickname");
+      authorProfile.src = `${backendBaseUrl}${comment["author_image"]}`;
+      authorProfile.classList.add("comment-author-profile");
+      authorNickname.innerText = comment["author_nickname"];
+      authorNickname.setAttribute("class", "comment-nickname");
 
-      delete_button.classList.add("btn-close");
-      delete_button.onclick = function () {
+      deleteButton.classList.add("btn-close");
+      deleteButton.onclick = function () {
         deleteComment(comment["comment_id"]);
       };
 
       content.innerText = comment["content"];
-      content.classList.add("comment_content");
+      content.classList.add("comment-content");
 
-      author_info.appendChild(author_profile);
-      author_info.appendChild(author_nickname);
+      authorInfo.appendChild(authorProfile);
+      authorInfo.appendChild(authorNickname);
 
       // 현재 사용자가 로그인되어 있고, 댓글 작성자가 현재 사용자인 경우 삭제 버튼 추가
       if (localStorage.getItem("access")) {
         const payload = localStorage.getItem("payload");
-        const payload_parse = JSON.parse(payload);
-        const comment_author = payload_parse.user_id;
-        if (comment["author_id"] == comment_author) {
-          author_info.appendChild(delete_button);
+        const payloadParse = JSON.parse(payload);
+        const commentAuthor = payloadParse.user_id;
+        if (comment["author_id"] == commentAuthor) {
+          authorInfo.appendChild(deleteButton);
         }
       }
 
-      single_comment.appendChild(author_info);
-      single_comment.appendChild(content);
+      singleComment.appendChild(authorInfo);
+      singleComment.appendChild(content);
 
-      comment_list.appendChild(single_comment);
+      commentList.appendChild(singleComment);
     });
   } catch (error) {
     alert("댓글 로드 실패");
@@ -410,8 +409,8 @@ async function loadComments() {
 // 댓글을 삭제하는 비동기 함수
 async function deleteComment(comment_id) {
   try {
-    const story_id = storyIdSearch(); // 현재 스토리의 ID를 가져옴
-    const response = await fetch(`${backendBaseUrl}/story/${story_id}/comment/${comment_id}/`, {
+    const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
+    const response = await fetch(`${backendBaseUrl}/story/${storyId}/comment/${comment_id}/`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -419,18 +418,18 @@ async function deleteComment(comment_id) {
       },
     });
 
-    const response_json = await response.json();
-    const status = response_json["status"];
+    const responseJson = await response.json();
+    const status = responseJson["status"];
 
     if (status == "204") {
       loadComments(); // 댓글이 삭제되면 업데이트된 댓글 목록을 로드
       return;
     } else if (status == "401" && response.status == 401) {
-      alert(`${response_json["error"]}`); // 권한이 없는 경우
+      alert(`${responseJson["error"]}`); // 권한이 없는 경우
       return;
     } else if (status == "403" && response.status == 403) {
       // 금지된 요청인 경우
-      alert(`${response_json["error"]}`);
+      alert(`${responseJson["error"]}`);
       return;
     }
   } catch (error) {
@@ -444,31 +443,31 @@ async function postComment() {
     if (localStorage.getItem("access")) {
       // 로그인되어 있는 경우에만 댓글을 작성할 수 있도록 확인
 
-      const story_id = storyIdSearch(); // 현재 스토리의 ID를 가져옴
-      const comment_content = document.getElementById("comment-input").value;
+      const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
+      const commentContent = document.getElementById("comment-input").value;
 
-      const response = await fetch(`${backendBaseUrl}/story/${story_id}/comment/`, {
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/comment/`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access"),
         },
-        body: JSON.stringify({ content: comment_content }),
+        body: JSON.stringify({ content: commentContent }),
       });
 
       document.getElementById("comment-input").value = ""; // 댓글 작성 후 입력란 비우기
 
-      const response_json = await response.json();
-      const status = response_json["status"];
+      const responseJson = await response.json();
+      const status = responseJson["status"];
 
       if (status == "201" && response.status == 201) {
         loadComments(); // 댓글이 성공적으로 생성되면 업데이트된 댓글 목록을 로드
         return;
       } else if (status == "401" && response.status == 401) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       } else if (status == "403" && response.status == 403) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       }
     } else {
@@ -483,8 +482,8 @@ async function postComment() {
 async function deleteStory() {
   try {
     if (localStorage.getItem("access")) {
-      const story_id = storyIdSearch(); // 현재 스토리의 ID를 가져옴
-      const response = await fetch(`${backendBaseUrl}/story/${story_id}/`, {
+      const storyId = storyIdSearch(); // 현재 스토리의 ID를 가져옴
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
@@ -492,19 +491,19 @@ async function deleteStory() {
         },
       });
 
-      const response_json = await response.json();
-      const status = response_json["status"];
+      const responseJson = await response.json();
+      const status = responseJson["status"];
 
       if (status == "204") {
-        alert(`${response_json["success"]}`);
+        alert(`${responseJson["success"]}`);
         window.location.href = `${frontendBaseUrl}`; // 동화 삭제 후 메인페이지로 이동
         return;
       } else if (status == "401" && response.status == 401) {
-        alert(`${response_json["error"]}`); // 권한이 없는 경우
+        alert(`${responseJson["error"]}`); // 권한이 없는 경우
         return;
       } else if (status == "403" && response.status == 403) {
         // 금지된 요청인 경우
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       }
     } else {
@@ -547,14 +546,14 @@ async function shareKakao() {
     });
 
     // fetch의 결과를 처리하고 필요한 데이터 추출
-    const response_json = await response.json();
+    const responseJson = await response.json();
 
     // kakao api key 가져오기
-    const kakao_api_key = response_json.kakao_api_key;
+    const kakaoApiKey = responseJson.kakao_api_key;
 
     // Kakao Link 공유
     if (!window.Kakao.isInitialized()) {
-      window.Kakao.init(kakao_api_key);
+      window.Kakao.init(kakaoApiKey);
     }
     window.Kakao.Link.sendDefault({
       objectType: "feed",
@@ -599,34 +598,34 @@ function shareTwitter() {
 async function bookmarkStory() {
   try {
     if (localStorage.getItem("access")) {
-      const story_id = storyIdSearch();
-      const response = await fetch(`${backendBaseUrl}/story/${story_id}/bookmark/`, {
+      const storyId = storyIdSearch();
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/bookmark/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access"),
           "Content-Type": "application/json",
         },
       });
-      const response_json = await response.json();
-      const status = response_json["status"];
+      const responseJson = await response.json();
+      const status = responseJson["status"];
 
-      const bookmarked_icon = document.getElementById("bookmarked-icon"); // 북마크된 아이콘
-      const not_bookmarked_icon = document.getElementById("not-bookmarked-icon"); // 북마크되지 않은 아이콘
+      const bookmarkedIcon = document.getElementById("bookmarked-icon"); // 북마크된 아이콘
+      const notBookmarkedIcon = document.getElementById("not-bookmarked-icon"); // 북마크되지 않은 아이콘
 
       // 북마크 상태에 따라 아이콘 표시 변경
-      if (status == "200" && response_json["success"] == "북마크") {
-        bookmarked_icon.style.display = "";
-        not_bookmarked_icon.style.display = "none";
+      if (status == "200" && responseJson["success"] == "북마크") {
+        bookmarkedIcon.style.display = "";
+        notBookmarkedIcon.style.display = "none";
         return;
-      } else if (status == "200" && response_json["success"] == "북마크 취소") {
-        bookmarked_icon.style.display = "none";
-        not_bookmarked_icon.style.display = "";
+      } else if (status == "200" && responseJson["success"] == "북마크 취소") {
+        bookmarkedIcon.style.display = "none";
+        notBookmarkedIcon.style.display = "";
         return;
       } else if (status == "404" && response.status == 404) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       } else if (status == "401" && response.status == 401) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       }
     } else {
@@ -641,27 +640,27 @@ async function bookmarkStory() {
 async function likeStory() {
   try {
     if (localStorage.getItem("access")) {
-      const story_id = storyIdSearch();
-      const response = await fetch(`${backendBaseUrl}/story/${story_id}/like/`, {
+      const storyId = storyIdSearch();
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/like/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access"),
           "Content-Type": "application/json",
         },
       });
-      const response_json = await response.json();
-      const status = response_json["status"];
-      const like_count = document.getElementById("like-count"); // 좋아요 수를 나타내는 엘리먼트
+      const responseJson = await response.json();
+      const status = responseJson["status"];
+      const likeCount = document.getElementById("like-count"); // 좋아요 수를 나타내는 엘리먼트
 
       // 좋아요 성공 시 좋아요 수 업데이트
       if (status == "200" && response.status == 200) {
-        like_count.innerText = response_json["like_count"] + " likes"; // 좋아요 수 업데이트
+        likeCount.innerText = responseJson["like_count"] + " likes"; // 좋아요 수 업데이트
         return;
       } else if (status == "404" && response.status == 404) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       } else if (status == "401" && response.status == 401) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       }
     } else {
@@ -676,27 +675,27 @@ async function likeStory() {
 async function hateStory() {
   try {
     if (localStorage.getItem("access")) {
-      const story_id = storyIdSearch();
-      const response = await fetch(`${backendBaseUrl}/story/${story_id}/hate/`, {
+      const storyId = storyIdSearch();
+      const response = await fetch(`${backendBaseUrl}/story/${storyId}/hate/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access"),
           "Content-Type": "application/json",
         },
       });
-      const response_json = await response.json();
-      const status = response_json["status"];
-      const hate_count = document.getElementById("hate-count"); // 싫어요 수를 나타내는 엘리먼트
+      const responseJson = await response.json();
+      const status = responseJson["status"];
+      const hateCount = document.getElementById("hate-count"); // 싫어요 수를 나타내는 엘리먼트
 
       // 싫어요 성공 시 싫어요 수 업데이트
       if (status == "200" && response.status == 200) {
-        hate_count.innerText = response_json["hate_count"] + " hates"; // 싫어요 수 업데이트
+        hateCount.innerText = responseJson["hate_count"] + " hates"; // 싫어요 수 업데이트
         return;
       } else if (status == "404" && response.status == 404) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       } else if (status == "401" && response.status == 401) {
-        alert(`${response_json["error"]}`);
+        alert(`${responseJson["error"]}`);
         return;
       }
     } else {
