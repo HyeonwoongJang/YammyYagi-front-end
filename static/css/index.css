@@ -31,9 +31,10 @@
 }
 
 .main-img {
-  max-height: 400px;
+  max-height: 300px;
   height: 100%;
-  width: auto;
+  width: 1400px;
+  margin: auto;
   object-fit: cover;
   text-align: center;
   background-color: #fff7f7;
@@ -46,6 +47,9 @@
   background-color: #fff7f7;
   margin-top: 20px;
   padding-bottom: 30px;
+  width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .index-card-container {
@@ -59,7 +63,7 @@
   width: 40%;
   text-align: center;
   justify-content: center;
-  margin: 50px auto 50px auto;
+  margin: 40px auto 40px auto;
 }
 
 .col {
@@ -166,7 +170,7 @@
   font-size: 23px;
   font-weight: 600;
   position: absolute;
-  width: 550px;
+  width: 580px;
   top: 34%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -177,11 +181,16 @@
   font-weight: 600;
   position: absolute;
   width: 590px;
-  top: 58%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 select option[value=""][disabled] {
   display: none;
+}
+
+#header {
+  width: 1400px;
+  margin: auto;
 }

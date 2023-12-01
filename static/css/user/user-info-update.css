@@ -8,7 +8,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 50px;
+  margin-bottom: 100px;
 }
 
 .password-modal {
@@ -65,4 +66,9 @@ body {
 
 #current-profile-img {
   border-radius: 100%;
+}
+
+#header {
+  width: 1400px;
+  margin: auto;
 }
