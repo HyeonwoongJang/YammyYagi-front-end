@@ -165,9 +165,6 @@ async function getMessage() {
         paragraphs.push(pair.join("\n\n"));
       }
 
-      const defaultMessage = document.getElementById("information");
-      defaultMessage.style.display = "none";
-
       // 전체 페이지 수 설정 및 현재 페이지 렌더링
       totalPage = paragraphs.length;
       renderPage(currentPage);
@@ -207,8 +204,6 @@ function renderPage(page) {
 
   // 이미지 초기화
   scriptImage.src = "";
-  scriptImage.style.width = "300px"; // 가로 크기 고정
-  scriptImage.style.height = "auto"; // 세로 크기 자동 조정
 
   // 이미지가 있는 경우 이미지 설정
   if (imageUrls[page - 1]) {

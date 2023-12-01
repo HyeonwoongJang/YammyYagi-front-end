@@ -36,8 +36,15 @@
     <div class="body-container">
       <section class="main">
         <div class="information" id="information">
-          <h3>동심에 위배되는 키워드로는 동화가 제작되지 않습니다</h3>
-          <h3>언어 선택 후 키워드를 입력하고 버튼을 누르면 동화가 생성됩니다</h3>
+          <div>❗동심에 위배되는 주제는 안돼요.</div>
+          <div>❗[ 핑크티켓 ➜ 실버티켓 ➜ 골드티켓 ] 순서대로 더 멋있는 그림을 그려줘요.</div>
+          <div>❗임시 저장은 로그아웃하면 사라지니 조심 !</div>
+          <hr />
+          <div>❕언어 선택 후 주제를 입력하고, 버튼을 눌러 동화를 만들어 봐요.</div>
+          <div>❕동화를 직접 만들다 보니 시간이 오래 걸릴 수 있어요. 조금만 기다려주세요 !</div>
+          <div>❕페이지마다 그림을 만들어 보세요 !</div>
+          <hr />
+          <div class="third-info">언어선택 ➜ 주제입력 ➜ 내용생성 ➜ 티켓선택 ➜ 그림생성 ➜ 제목입력 ➜ 동화생성</div>
         </div>
         <div class="output-container">
           <img id="script-img" />
@@ -46,7 +53,7 @@
           <div class="script-box" id="script-text"></div>
           <textarea id="editable-text" style="display: none"></textarea>
         </div>
-        <button id="edit-button" onclick="editText()" style="display: none">수정하기</button>
+        <button id="edit-button" onclick="editText()" style="display: none">내용 수정하기</button>
         <div class="bottom-section">
           <div class="input-container" id="first-input-container">
             <select class="info" id="language" required>

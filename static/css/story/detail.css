@@ -171,6 +171,7 @@ body {
 .page-img {
   width: 50%;
   height: 50%;
+  box-shadow: rgb(0, 0, 0, 0.05) 0 54px 55px, rgb(0, 0, 0, 0.05) 0 -12px 30px, rgb(0, 0, 0, 0.05) 0 4px 6px;
 }
 
 #comment {

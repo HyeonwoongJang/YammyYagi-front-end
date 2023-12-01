@@ -71,7 +71,8 @@ function handleLogout() {
   localStorage.removeItem("refresh");
   localStorage.removeItem("payload");
   localStorage.removeItem("code");
-  location.reload();
+  localStorage.removeItem("paragraphs");
+  localStorage.removeItem("imageUrls");
   window.location.replace(`${frontendBaseUrl}/`);
 }
 
@@ -84,6 +85,7 @@ function setAutoLogout() {
 }
 setAutoLogout();
 
+// 티켓 구매 페이지
 function ticketPurchasing() {
   window.open(
     "../user/payment.html",
