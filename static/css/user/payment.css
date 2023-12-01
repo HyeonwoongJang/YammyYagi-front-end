@@ -11,6 +11,7 @@ html {
 #payment-page {
   text-align: center;
   margin: 20px;
+  color: #e054d9;
 }
 
 button {
@@ -88,4 +89,8 @@ hr {
     width: 100%;
     box-sizing: border-box;
   }
+}
+
+.payment-input {
+  width: 8%;
 }

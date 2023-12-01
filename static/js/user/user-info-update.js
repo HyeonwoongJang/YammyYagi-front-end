@@ -174,7 +174,7 @@ async function userDeleteButton() {
         localStorage.removeItem("refresh");
         localStorage.removeItem("payload");
         localStorage.removeItem("code");
-        window.location.replace(`${frontend_base_url}/index.html`);
+        window.location.replace(`${frontend_base_url}/`);
         return;
       } else if (status == "400" && response.status == 400) {
         alert(`${response_json["error"]}`);
@@ -203,8 +203,8 @@ async function handleUpdate() {
   }
 
   if (country == "") {
-    alert("Please Select Your Country")
-    return
+    alert("Please Select Your Country");
+    return;
   }
   const data = new FormData();
   data.append("nickname", nickname);
@@ -236,7 +236,7 @@ async function updateButton() {
   if (response) {
     const response_json = await response.json();
     const status = response_json["status"];
-  
+
     if (status == "200" && response.status == 200) {
       alert(`${response_json["success"]}`);
       window.location.replace(`${frontend_base_url}/user/user-info-update.html`);

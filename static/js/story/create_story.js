@@ -18,22 +18,102 @@ const imageTypeContainer = document.querySelector("#image-type-container");
 const imageType = document.querySelector("#image-type");
 const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
+const myModal = document.getElementById("my_modal")
+const tempSaveButton = document.getElementById("temp-save-button")
+const editButton = document.getElementById("edit-button")
 
 // 각 페이지의 이미지 URL 및 문단 데이터를 저장하는 배열
-const imageUrls = [];
-const paragraphs = [];
+let imageUrls = [];
+let paragraphs = [];
 const editPage = []; // 각 페이지의 수정된 내용을 저장하는 배열
 
 // 페이지네이션을 위한 변수
 let current_page = 1;
 let total_page = paragraphs.length;
 
+// 페이지 내용 수정 텍스트 박스의 상태를 저장하는 변수
+let isEditButtonActive = false;
+
 window.onload = () => {
   if (!localStorage.getItem("access")) {
     alert("잘못된 접근입니다.");
     window.location.href = `${frontend_base_url}`;
+    return
   }
+
+  // 로컬 스토리지에 임시 저장된 페이지 정보가 있으면 '이어쓰기'/'삭제' 모달을 띄워줌
+  if (localStorage.getItem("paragraphs")) {
+    myModal.style.display="block"
+  }
+
+  // 일정 시간 간격으로 자동 저장
+  setInterval(saveTempContent, 10000); // 10초마다 저장 (단위: 밀리초)
+
 };
+
+// 임시 저장 버튼에 연결된 함수
+function saveTemporary() {
+  if (paragraphs.length == 0) {
+    alert('빈 페이지입니다.')
+    return
+  } else {
+    saveTempContent()
+    alert("임시 저장 완료. 임시 저장은 한 개의 동화책만 가능합니다.")
+  }
+}
+
+// 임시 저장할 데이터가 있으면 localstorage에 저장
+function saveTempContent() {
+  if (paragraphs.length != 0) {
+    if (editPage.length != 0) {
+      for (let i = 0; i < editPage.length; i++) {
+        paragraphs[i] = editPage[i]
+      }
+    }
+    localStorage.setItem("paragraphs", JSON.stringify(paragraphs))
+
+    if (imageUrls.length != 0) {
+      localStorage.setItem("imageUrls", JSON.stringify(imageUrls))
+    }
+    
+  }
+}
+
+// localStorage에서 임시 콘텐츠를 로드
+function loadTemp() {
+  let temp_paragraphs = localStorage.getItem("paragraphs");
+  let temp_imageUrls = localStorage.getItem("imageUrls");
+
+  if (temp_paragraphs) {
+    paragraphs = JSON.parse(temp_paragraphs);
+  }
+
+  if (temp_imageUrls) {
+    imageUrls = JSON.parse(temp_imageUrls);
+    titleInput.style.display = "block";
+    storygenButton.style.display = "block";
+  }
+  myModal.style.display="none"
+  imageTypeContainer.style.display = "block";
+  imagegenButton.style.display = "block";
+  first_input_container.style.display = "none";
+  outPutElement.style.display = "block";
+
+  total_page = paragraphs.length;
+  renderPage(1);
+}
+
+// localStorage에서 임시 콘텐츠를 삭제
+function deleteTemp() {
+  if (localStorage.getItem("paragraphs")) {
+    localStorage.removeItem("paragraphs")
+  }
+  if (localStorage.getItem("imageUrls")) {
+    localStorage.removeItem("imageUrls")
+  }
+
+  myModal.style.display="none"
+}
 
 // 입력 값을 변경하는 함수
 function changeInput(value) {
@@ -43,6 +123,16 @@ function changeInput(value) {
 // 백엔드에서 GPT 동화를 가져오기 위한 비동기 함수
 async function getMessage() {
   console.log("clicked");
+
+  if (!inputElement.value) {
+    alert('생성할 동화의 주제를 입력해주세요.')
+    return
+  }
+
+  if (!targetLanguage.value) {
+    alert('생성할 동화의 언어를 선택해주세요.')
+    return
+  }
 
   const access_token = localStorage.getItem("access");
   const options = {
@@ -115,6 +205,9 @@ function clearInput() {
 function renderPage(page) {
   console.log(`${page}/${total_page} 페이지 입니다.`);
 
+  tempSaveButton.style.display="block"
+  editButton.style.display="block"
+
   // 티켓 선택란 초기화
   imageType.value = "";
   getTicketCount();
@@ -148,12 +241,21 @@ function renderPage(page) {
     scriptText.style.display = "block";
 
     // 텍스트 초기화 및 현재 페이지의 단락 설정
-    scriptText.innerHTML = "";
-    scriptText.innerHTML = paragraphs[page - 1];
+    scriptText.innerText = "";
+    scriptText.innerText = paragraphs[page - 1];
 
     // 이미지 생성 버튼 클릭 이벤트 설정
     imagegenButton.onclick = function () {
       getImage(paragraphs[page - 1], page - 1);
+    };
+
+    // 수정하기 or 완료 버튼을 클릭할 때 editText 함수 호출
+    editButton.onclick = function () {
+      // 버튼 상태
+      isEditButtonActive = !isEditButtonActive;
+
+      // editText 함수 호출
+      editText(scriptText.innerText);
     };
   }
 
@@ -179,6 +281,24 @@ function renderPage(page) {
       nextPage(page);
     };
   }
+
+// 텍스트를 편집하거나 표시하는 함수
+function editText(script) {
+  
+  if (isEditButtonActive) {
+    scriptText.style.display = "none"; 
+    editableText.style.display = "block"; 
+    editableText.value = script; 
+    editButton.innerText = "완료"
+
+  } else {
+    scriptText.style.display = "block"; 
+    editableText.style.display = "none"; 
+    scriptText.innerText = editableText.value;
+    editButton.innerText = "수정하기"
+    paragraphs[page - 1] = editableText.value;
+  }
+}
 
   // 페이지가 1보다 크고 페이지가 총 페이지인 경우
   if (1 < page && page == total_page) {
@@ -266,6 +386,12 @@ async function getImage(script, imageId) {
     const response = await fetch(`${backend_base_url}/story/image_dall-e/`, options);
     const res_json = await response.json();
 
+      // 티켓 선택란 초기화
+      imageType.value = "";
+      getTicketCount();
+
+      // 로딩 스피너 숨김
+      second_spinner.style.display = "none";
     if (response.status == 500 || response.status == 400) {
       // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
       alert(res_json["error"]);
@@ -286,7 +412,7 @@ async function getImage(script, imageId) {
       window.open(
         "../user/payment.html",
         "티켓 결제 페이지",
-        "width=700, height=500, top=50%, left=50%, transform=translate(-50%, -50%)"
+        "width=700, height=550, top=50%, left=50%, transform=translate(-50%, -50%)"
       );
 
       // 해당 티켓 소진 시에는 해당 페이지를 다시 렌더링
@@ -304,8 +430,7 @@ async function getImage(script, imageId) {
       // 이미지 엘리먼트의 소스 설정
       scriptImage.src = imageUrls[imageId];
 
-      // 로딩 스피너 숨기고 제목 입력란과 이야기 생성 버튼 표시
-      second_spinner.style.display = "none";
+      // 제목 입력란과 이야기 생성 버튼 표시
       titleInput.style.display = "block";
       storygenButton.style.display = "block";
       create_btn_msg.style.display = "block";
@@ -320,7 +445,7 @@ async function createStory() {
   console.log("You are going to make a fairytale...");
 
   if (!titleInput.value) {
-    alert("동화책 출판 실패. 제목을 입력해주세요.");
+    alert("동화책 제목을 입력해주세요.");
     return;
   } else if (imageUrls.length == 0) {
     // 이미지를 최소 1개 이상 생성하도록 유도
@@ -357,6 +482,12 @@ async function createStory() {
       third_spinner.style.display = "none";
       const id = res_json.story_id;
       if (res_json.status == 201) {
+        if (localStorage.getItem("paragraphs")) {
+          localStorage.removeItem("paragraphs")
+        }
+        if (localStorage.getItem("imageUrls")) {
+          localStorage.removeItem("imageUrls")
+        }
         window.alert(res_json.success);
         window.location.href = `${frontend_base_url}/story/detail.html?story_id=${id}`;
       } else {

@@ -30,31 +30,51 @@
       <div>
         <input type="checkbox" id="golden-check-box" onchange="goldenCheckBox()" />
         <label>Golden Ticket : </label>
-        <input type="number" id="golden-input" value="0" min="0" disabled oninput="updateGoldenP()" />
+        <input
+          type="number"
+          class="payment-input"
+          id="golden-input"
+          value="0"
+          min="0"
+          disabled
+          oninput="updateGoldenP()"
+        />
+        <p class="ticket-count">현재 수량: <span id="golden-count">0</span></p>
         <p id="golden-p">0 Won</p>
       </div>
       <div>
         <input type="checkbox" id="silver-check-box" onchange="silverCheckBox()" />
         <label>Silver Ticket : </label>
-        <input type="number" id="silver-input" value="0" min="0" disabled oninput="updateSilverP()" />
+        <input
+          type="number"
+          class="payment-input"
+          id="silver-input"
+          value="0"
+          min="0"
+          disabled
+          oninput="updateSilverP()"
+        />
+        <p class="ticket-count">현재 수량: <span id="silver-count">0</span></p>
         <p id="silver-p">0 Won</p>
       </div>
       <div>
         <input type="checkbox" id="pink-check-box" onchange="pinkCheckBox()" />
         <label>Pink Ticket : </label>
-        <input type="number" id="pink-input" value="0" min="0" disabled oninput="updatePinkP()" />
+        <input type="number" class="payment-input" id="pink-input" value="0" min="0" disabled oninput="updatePinkP()" />
+        <p class="ticket-count">현재 수량: <span id="pink-count">0</span></p>
         <p id="pink-p">0 Won</p>
       </div>
+      <p>총 결제 예정 금액: <span id="total-payment"></span></p>
       <button id="3-ticket" onclick="buyTicket()">구매</button>
     </div>
     <div id="payment-page" style="display: none">
       <button id="back-btn" onclick="backButton()">뒤로가기</button>
       <hr />
-      <p id="merchant-uid"></p>
-      <p id="amount"></p>
-      <p id="name"></p>
-      <p id="buyer-email"></p>
-      <p id="buyer-name"></p>
+      <p>주문번호: <span id="merchant-uid"></span></p>
+      <p>결제 예정 금액: <span id="amount"></span></p>
+      <p>티켓 주문수량: <span id="name"></span></p>
+      <p>아이디: <span id="buyer-email"></span></p>
+      <p>닉네임: <span id="buyer-name"></span></p>
       <button id="kakaopay">KakaoPay</button>
       <button id="tosspay">TossPay</button>
     </div>

@@ -133,18 +133,21 @@ function createPage(story_data, current_page, total_content_count) {
   page_img.className = "content-img";
   const page_content = document.createElement("p");
   page_content.className = "content-text";
+  const pagenation_count = document.createElement("div");
+  pagenation_count.className = "content-pagination";
 
   // 이미지와 내용에 데이터 설정
   if (page_data["story_image"] != null) {
     page_img.src = `${backend_base_url}${page_data["story_image"]}`;
   }
-  
   page_content.innerText = page_data["paragraph"];
+  pagenation_count.innerText = current_page + " / " + story_data.story_paragraph_list.length;
 
   // 요소들을 조립하여 동화책 페이지에 추가
   page_div.appendChild(page_img);
   page_div.appendChild(page_content);
   story_content.appendChild(page_div);
+  story_content.appendChild(pagenation_count);
 
   page_img.classList.add("page-img");
 
@@ -219,20 +222,19 @@ function prePage(data, current_page, total_content_count) {
 
 // 번역 버튼에 연결된 비동기 함수
 async function translateStory(story_data, current_page, total_content_count) {
-
   // 선택된 언어 가져오기
   const target_language = document.getElementById("language").value;
 
   if (!target_language) {
-    alert("번역할 언어를 선택해주세요.")
-    return
+    alert("번역할 언어를 선택해주세요.");
+    return;
   }
 
-  const translating = document.getElementById("translating")
-  const translate = document.getElementById("translate")
+  const translating = document.getElementById("translating");
+  const translate = document.getElementById("translate");
 
-  translate.style.display = "none"
-  translating.style.display = ""
+  translate.style.display = "none";
+  translating.style.display = "";
 
   try {
     // 스토리 데이터에서 스토리 스크립트 및 제목 추출
@@ -262,12 +264,12 @@ async function translateStory(story_data, current_page, total_content_count) {
     if (response.status == 200) {
       document.getElementById("title").innerText = response_json["translated_title"];
       createPage(story_data, current_page, total_content_count);
-      translate.style.display = ""
-      translating.style.display = "none"
+      translate.style.display = "";
+      translating.style.display = "none";
     }
   } catch (error) {
-    translate.style.display = ""
-    translating.style.display = "none"
+    translate.style.display = "";
+    translating.style.display = "none";
     alert("번역 요청 실패");
   }
 }
@@ -421,7 +423,6 @@ async function deleteComment(comment_id) {
     const status = response_json["status"];
 
     if (status == "204") {
-      alert(`${response_json["success"]}`);
       loadComments(); // 댓글이 삭제되면 업데이트된 댓글 목록을 로드
       return;
     } else if (status == "401" && response.status == 401) {
@@ -461,7 +462,6 @@ async function postComment() {
       const status = response_json["status"];
 
       if (status == "201" && response.status == 201) {
-        alert(`${response_json["success"]}`);
         loadComments(); // 댓글이 성공적으로 생성되면 업데이트된 댓글 목록을 로드
         return;
       } else if (status == "401" && response.status == 401) {
@@ -544,10 +544,6 @@ async function shareKakao() {
     // 데이터를 가져오기 위한 fetch 요청
     const response = await fetch(`${backend_base_url}/story/kakao/`, {
       method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("access"),
-      },
     });
 
     // fetch의 결과를 처리하고 필요한 데이터 추출

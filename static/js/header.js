@@ -10,15 +10,18 @@ async function injectHeader() {
 
       const loginButton = document.getElementById("login-hamburger-button");
       const logoutButton = document.getElementById("nav-right-logout");
+      const create_story_button = document.getElementById("create-story-button");
       const payload = localStorage.getItem("payload");
       if (payload) {
         // 로그인 상태일 때
         loginButton.style.display = "block";
         logoutButton.style.display = "none";
+        create_story_button.style.display = "block";
       } else {
         // 로그아웃 상태일 때
         loginButton.style.display = "none";
         logoutButton.style.display = "block";
+        create_story_button.style.display = "none";
       }
       loginButton.addEventListener("click", function () {
         // 로그인시 모달
@@ -85,25 +88,28 @@ function ticketPurchasing() {
   window.open(
     "../user/payment.html",
     "티켓 결제 페이지",
-    "width=700, height=500, top=50%, left=50%, transform=translate(-50%, -50%)"
+    "width=700, height=550, top=50%, left=50%, transform=translate(-50%, -50%)"
   );
 }
 
 //티켓 수량을 불러오는 함수
-fetch(`${backend_base_url}/user/usertickets/`, {
-  method: "GET",
-  headers: {
-    Authorization: "Bearer " + localStorage.getItem("access"),
-  },
-})
-  .then((response) => response.json())
-  .then((ticketData) => {
-    const goldenTicketCount = ticketData.golden_ticket_count;
-    const silverTicketCount = ticketData.silver_ticket_count;
-    const pinkTicketCount = ticketData.pink_ticket_count;
-
-    document.getElementById("golden-ticket-count").innerText = goldenTicketCount;
-    document.getElementById("silverticket-count").innerText = silverTicketCount;
-    document.getElementById("pink-ticket-count").innerText = pinkTicketCount;
+const payload = localStorage.getItem("payload");
+if (payload) {
+  fetch(`${backend_base_url}/user/usertickets/`, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("access"),
+    },
   })
-  .catch((error) => console.error("Error:", error));
+    .then((response) => response.json())
+    .then((ticketData) => {
+      const goldenTicketCount = ticketData.golden_ticket_count;
+      const silverTicketCount = ticketData.silver_ticket_count;
+      const pinkTicketCount = ticketData.pink_ticket_count;
+
+      document.getElementById("golden-ticket-count").innerText = goldenTicketCount;
+      document.getElementById("silverticket-count").innerText = silverTicketCount;
+      document.getElementById("pink-ticket-count").innerText = pinkTicketCount;
+    })
+    .catch((error) => console.error("Error:", error));
+}
