@@ -3,11 +3,11 @@ const backendBaseUrl = "http://127.0.0.1:8000";
 
 // 결제 페이지 로드에 필요한 데이터를 Response 받는 함수
 async function orderData(amount, name) {
-  const access_token = localStorage.getItem("access");
-  const response = await fetch(`${backend_base_url}/user/payment-page/`, {
+  const accessToken = localStorage.getItem("access");
+  const response = await fetch(`${backendBaseUrl}/user/payment-page/`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${access_token}`,
+      Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -15,11 +15,11 @@ async function orderData(amount, name) {
       name: name,
     }),
   });
-  const response_json = await response.json();
+  const responseJson = await response.json();
 
   // 응답 데이터로 결제 페이지 표시
-  if (response_json.status === "200") {
-    const data = response_json.order_data;
+  if (responseJson.status === "200") {
+    const data = responseJson.order_data;
     showPayment(data);
     return;
   }
@@ -30,7 +30,7 @@ async function orderData(amount, name) {
   }
 
   if (response.status == 400) {
-    alert(response_json["error"]);
+    alert(responseJson["error"]);
     return;
   }
 }
@@ -41,17 +41,17 @@ function showPayment(data) {
   document.getElementById("payment-page").style.display = "";
 
   // 결제 정보 채우기
-  const merchant_uid = document.getElementById("merchant-uid");
+  const merchantUid = document.getElementById("merchant-uid");
   const amount = document.getElementById("amount");
   const name = document.getElementById("name");
-  const buyer_email = document.getElementById("buyer-email");
-  const buyer_name = document.getElementById("buyer-name");
+  const buyerEmail = document.getElementById("buyer-email");
+  const buyerName = document.getElementById("buyer-name");
 
-  merchant_uid.innerText = data["merchant_uid"];
+  merchantUid.innerText = data["merchant_uid"];
   amount.innerText = data["amount"];
   name.innerText = data["name"];
-  buyer_email.innerText = data["buyer_email"];
-  buyer_name.innerText = data["buyer_name"];
+  buyerEmail.innerText = data["buyer_email"];
+  buyerName.innerText = data["buyer_name"];
 
   // 각 결제 수단에 대한 이벤트 핸들러 등록
   const kakaopay = document.getElementById("kakaopay");
@@ -72,11 +72,11 @@ function kakaoPay(data) {
   IMP.request_pay(
     {
       pg: "kakaopay",
-      merchant_uid: "IMP" + data["merchant_uid"],
+      merchantUid: "IMP" + data["merchant_uid"],
       name: data["name"],
       amount: data["amount"],
-      buyer_email: data["buyer_email"],
-      buyer_name: data["buyer_name"],
+      buyerEmail: data["buyer_email"],
+      buyerName: data["buyer_name"],
     },
     function (rsp) {
       if (rsp.success === true) {
@@ -96,11 +96,11 @@ function tossPay(data) {
   IMP.request_pay(
     {
       pg: "tosspay",
-      merchant_uid: "IMP" + data["merchant_uid"],
+      merchantUid: "IMP" + data["merchant_uid"],
       name: data["name"],
       amount: data["amount"],
-      buyer_email: data["buyer_email"],
-      buyer_name: data["buyer_name"],
+      buyerEmail: data["buyer_email"],
+      buyerName: data["buyer_name"],
     },
     function (rsp) {
       if (rsp.success) {
@@ -114,11 +114,11 @@ function tossPay(data) {
 
 // 결제 결과를 백엔드로 전송하는 함수
 async function sendPaymentResult(rsp) {
-  const access_token = localStorage.getItem("access");
-  const response = await fetch(`${backend_base_url}/user/payment-result/`, {
+  const accessToken = localStorage.getItem("access");
+  const response = await fetch(`${backendBaseUrl}/user/payment-result/`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${access_token}`,
+      Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -126,12 +126,12 @@ async function sendPaymentResult(rsp) {
     }),
   });
 
-  const response_json = await response.json();
+  const responseJson = await response.json();
 
-  if (response_json["success"]) {
-    alert(response_json["success"]);
-  } else if (response_json["error"]) {
-    alert(response_json["error"]);
+  if (responseJson["success"]) {
+    alert(responseJson["success"]);
+  } else if (responseJson["error"]) {
+    alert(responseJson["error"]);
   }
 
   location.reload();
@@ -139,103 +139,102 @@ async function sendPaymentResult(rsp) {
 
 // 티켓 구매 함수
 async function buyTicket() {
-  const golden_total = document.getElementById("golden-p").innerText.split(" ")[0];
-  const silver_total = document.getElementById("silver-p").innerText.split(" ")[0];
-  const pink_total = document.getElementById("pink-p").innerText.split(" ")[0];
+  const goldenTotal = document.getElementById("golden-p").innerText.split(" ")[0];
+  const silverTotal = document.getElementById("silver-p").innerText.split(" ")[0];
+  const pinkTotal = document.getElementById("pink-p").innerText.split(" ")[0];
 
-  const amount = parseInt(golden_total) + parseInt(silver_total) + parseInt(pink_total) + " Won";
+  const amount = parseInt(goldenTotal) + parseInt(silverTotal) + parseInt(pinkTotal) + " Won";
 
-  const golden_cnt = document.getElementById("golden-input").value;
-  const silver_cnt = document.getElementById("silver-input").value;
-  const pink_cnt = document.getElementById("pink-input").value;
+  const goldenCnt = document.getElementById("golden-input").value;
+  const silverCnt = document.getElementById("silver-input").value;
+  const pinkCnt = document.getElementById("pink-input").value;
 
-  const name = `G${golden_cnt}_S${silver_cnt}_P${pink_cnt}`;
+  const name = `G${goldenCnt}_S${silverCnt}_P${pinkCnt}`;
 
   await orderData(amount, name);
 }
 
 // 골든 티켓 체크박스 상태 변경에 따른 처리
 function goldenCheckBox() {
-  const golden_check_box = document.getElementById("golden-check-box");
-  const golden_input = document.getElementById("golden-input");
-  const golden_p = document.getElementById("golden-p");
+  const goldenCheckBox = document.getElementById("golden-check-box");
+  const goldenInput = document.getElementById("golden-input");
+  const goldenP = document.getElementById("golden-p");
 
-  if (golden_check_box.checked) {
-    golden_input.disabled = false;
+  if (goldenCheckBox.checked) {
+    goldenInput.disabled = false;
   } else {
-    golden_input.disabled = true;
-    golden_input.value = "0";
-    golden_p.innerText = "0 Won";
+    goldenInput.disabled = true;
+    goldenInput.value = "0";
+    goldenP.innerText = "0 Won";
   }
 }
 
 // 실버 티켓 체크박스 상태 변경에 따른 처리
 function silverCheckBox() {
-  const silver_check_box = document.getElementById("silver-check-box");
-  const silver_input = document.getElementById("silver-input");
-  const silver_p = document.getElementById("silver-p");
+  const silverCheckBox = document.getElementById("silver-check-box");
+  const silverInput = document.getElementById("silver-input");
+  const silverP = document.getElementById("silver-p");
 
-  if (silver_check_box.checked) {
-    silver_input.disabled = false;
+  if (silverCheckBox.checked) {
+    silverInput.disabled = false;
   } else {
-    silver_input.disabled = true;
-    silver_input.value = "0";
-    silver_p.innerText = "0 Won";
+    silverInput.disabled = true;
+    silverInput.value = "0";
+    silverP.innerText = "0 Won";
   }
 }
 
 // 핑크 티켓 체크박스 상태 변경에 따른 처리
 function pinkCheckBox() {
-  const pink_check_box = document.getElementById("pink-check-box");
-  const pink_input = document.getElementById("pink-input");
-  const pink_p = document.getElementById("pink-p");
+  const pinkCheckBox = document.getElementById("pink-check-box");
+  const pinkInput = document.getElementById("pink-input");
+  const pinkP = document.getElementById("pink-p");
 
-  if (pink_check_box.checked) {
-    pink_input.disabled = false;
+  if (pinkCheckBox.checked) {
+    pinkInput.disabled = false;
   } else {
-    pink_input.disabled = true;
-    pink_input.value = "0";
-    pink_p.innerText = "0 Won";
+    pinkInput.disabled = true;
+    pinkInput.value = "0";
+    pinkP.innerText = "0 Won";
   }
 }
 
-let golden_total_payment = 0;
-let silver_total_payment = 0;
-let pink_total_payment = 0;
+let goldenTotalPayment = 0;
+let silverTotalPayment = 0;
+let pinkTotalPayment = 0;
 
 // 골든 티켓 수량 변경에 따른 가격 업데이트
 function updateGoldenP() {
-  const golden_p = document.getElementById("golden-p");
-  const golden_input = document.getElementById("golden-input");
-  golden_total_payment = golden_input.value * 500;
-  golden_p.innerText = golden_total_payment + " Won";
+  const goldenP = document.getElementById("golden-p");
+  const goldenInput = document.getElementById("golden-input");
+  goldenTotalPayment = goldenInput.value * 500;
+  goldenP.innerText = goldenTotalPayment + " Won";
   updateTotalPayment();
 }
 
 // 실버 티켓 체크박스 상태 변경에 따른 처리
 function updateSilverP() {
-  const silver_p = document.getElementById("silver-p");
-  const silver_input = document.getElementById("silver-input");
-  silver_total_payment = silver_input.value * 300;
-  silver_p.innerText = silver_total_payment + " Won";
+  const silverP = document.getElementById("silver-p");
+  const silverInput = document.getElementById("silver-input");
+  silverTotalPayment = silverInput.value * 300;ckerTotalPayment
+  silverP.innerText = silverTotalPayment + " Won";
   updateTotalPayment();
 }
 
 // 핑크 티켓 체크박스 상태 변경에 따른 처리
 function updatePinkP() {
-  const pink_p = document.getElementById("pink-p");
-  const pink_input = document.getElementById("pink-input");
-  pink_total_payment = pink_input.value * 200;
-  pink_p.innerText = pink_total_payment + " Won";
+  const pinkP = document.getElementById("pink-p");
+  const pinkInput = document.getElementById("pink-input");
+  pinkTotalPayment = pinkInput.value * 200;
+  pinkP.innerText = pinkTotalPayment + " Won";
   updateTotalPayment();
 }
 
 // 총 결제 예정 금액
 function updateTotalPayment() {
-  const total_payment = document.getElementById("total-payment");
-  const ticker_total_payment = golden_total_payment + silver_total_payment + pink_total_payment + " Won";
-  console.log(golden_total_payment);
-  total_payment.innerText = ticker_total_payment;
+  const totalPayment = document.getElementById("total-payment");
+  const tickerTotalPayment = goldenTotalPayment + silverTotalPayment + pinkTotalPayment + " Won";
+  totalPayment.innerText = tickerTotalPayment;
 }
 
 // 결제 페이지에서 뒤로 가기 버튼
@@ -247,7 +246,7 @@ function backButton() {
 //티켓 수량을 불러오는 함수
 const payload = localStorage.getItem("payload");
 if (payload) {
-  fetch(`${backend_base_url}/user/usertickets/`, {
+  fetch(`${backendBaseUrl}/user/usertickets/`, {
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("access"),
