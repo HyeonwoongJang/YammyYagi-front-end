@@ -146,10 +146,7 @@ async function getMessage() {
     firstSpinner.style.display = "block";
     const response = await fetch(`${backendBaseUrl}/story/fairytail_gpt/`, options);
     const data = await response.json();
-    if (response.status == 400) {
-      alert(data.error);
-      window.location.reload();
-    } else if (response.status == 201) {
+    if (response.status == 201) {
       alert(data.success);
 
       const script = data.script.replace(/\n\n/g, "<br><br>");
@@ -182,6 +179,9 @@ async function getMessage() {
         pElement.textContent = inputElement.value;
         pElement.addEventListener("click", () => changeInput(pElement.textContent));
       }
+    } else {
+      alert(data.error);
+      window.location.reload();
     }
   } catch (error) {
     console.error(error);
@@ -270,21 +270,40 @@ function renderPage(page) {
     };
   }
 
-  // 텍스트를 편집하거나 표시하는 함수
-  function editText(script) {
-    if (isEditButtonActive) {
+// 텍스트를 편집하거나 표시하는 함수
+function editText(script) {
+  if (isEditButtonActive) {
+    scriptText.style.display = "none";
+    editableText.style.display = "block";
+    editableText.value = script;
+    editButton.innerText = "완료";
+    prevButton.style.display="none"
+    nextButton.style.display="none"
+    imageTypeContainer.style.display = "none";
+    imagegenButton.style.display = "none";
+    tempSaveButton.style.display = "none";
+  } else {
+    if (editableText.value == ""){
+      alert('빈 내용으로는 수정할 수 없습니다.')
       scriptText.style.display = "none";
       editableText.style.display = "block";
       editableText.value = script;
       editButton.innerText = "완료";
-    } else {
-      scriptText.style.display = "block";
-      editableText.style.display = "none";
-      scriptText.innerText = editableText.value;
-      editButton.innerText = "수정하기";
-      paragraphs[page - 1] = editableText.value;
+      prevButton.style.display="none"
+      nextButton.style.display="none"
     }
+    scriptText.style.display = "block";
+    editableText.style.display = "none";
+    scriptText.innerText = editableText.value;
+    editButton.innerText = "내용 수정하기";
+    paragraphs[page - 1] = editableText.value;
+    prevButton.style.display=""
+    nextButton.style.display=""
+    imageTypeContainer.style.display = "block";
+    imagegenButton.style.display = "block";
+    tempSaveButton.style.display = "block";
   }
+}
 
   // 페이지가 1보다 크고 페이지가 총 페이지인 경우
   if (1 < page && page == totalPage) {
@@ -351,7 +370,7 @@ async function getImage(script, imageId) {
     script = editableText.value;
   }
 
-  console.log("image generated...");
+  console.log("image generating...");
 
   // 로딩 스피너 표시
   secondSpinner.style.display = "block";
@@ -378,7 +397,7 @@ async function getImage(script, imageId) {
 
     // 로딩 스피너 숨김
     secondSpinner.style.display = "none";
-    if (response.status == 500 || response.status == 400) {
+    if (response.status == 500 || response.status == 400 || response.status == 429) {
       // 이미지 생성에 실패한 경우 에러 메시지를 표시하고 로딩 스피너 숨김
       alert(responseJson["error"]);
       secondSpinner.style.display = "none";
