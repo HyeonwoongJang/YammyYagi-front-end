@@ -26,10 +26,10 @@ async function loadStories(page) {
     if (response.status == 200) {
       const responseJson = await response.json();
       const stories = responseJson.story_list;
-      const story_list = document.getElementById("story-list");
+      const storyList = document.getElementById("story-list");
       const paginationButton = document.getElementById("pagination-box");
       paginationButton.style.display = "block";
-      story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
+      storyList.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
       stories.forEach((story) => {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col");
@@ -100,7 +100,7 @@ async function loadStories(page) {
         newCardCountry.appendChild(newCardLikeCountDiv);
         newCardLikeCountDiv.outerHTML = newHTML;
 
-        story_list.appendChild(newCol);
+        storyList.appendChild(newCol);
       });
       renderPagination(responseJson.page_info.current_page, responseJson.page_info.total_pages);
     } else {
@@ -160,8 +160,8 @@ async function getlikestories() {
       const stories = responseJson.story_list;
       const paginationbutton = document.getElementById("pagination-box");
       paginationbutton.style.display = "none";
-      const story_list = document.getElementById("story-list");
-      story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
+      const storyList = document.getElementById("story-list");
+      storyList.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
       stories.forEach((story) => {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col");
@@ -232,7 +232,7 @@ async function getlikestories() {
         newCardCountry.appendChild(newCardLikeCountDiv);
         newCardLikeCountDiv.outerHTML = newHTML;
 
-        story_list.appendChild(newCol);
+        storyList.appendChild(newCol);
       });
     } else {
       alert("불러오는데 실패했습니다");
@@ -254,8 +254,8 @@ async function getcountrystories() {
       const stories = responseJson.story_list;
       const paginationbutton = document.getElementById("pagination-box");
       paginationbutton.style.display = "none";
-      const story_list = document.getElementById("story-list");
-      story_list.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
+      const storyList = document.getElementById("story-list");
+      storyList.innerHTML = ""; // 페이지 번호 누르면 기존 리스트 삭제
       stories.forEach((story) => {
         const newCol = document.createElement("div");
         newCol.setAttribute("class", "col");
@@ -326,7 +326,7 @@ async function getcountrystories() {
         newCardCountry.appendChild(newCardLikeCountDiv);
         newCardLikeCountDiv.outerHTML = newHTML;
 
-        story_list.appendChild(newCol);
+        storyList.appendChild(newCol);
       });
     } else {
       alert("불러오는데 실패했습니다");
