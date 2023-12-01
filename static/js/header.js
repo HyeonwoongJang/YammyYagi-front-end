@@ -85,6 +85,30 @@ function setAutoLogout() {
 }
 setAutoLogout();
 
+// access토큰 만료 시 자동 로그아웃
+async function accessAutoLogout() {
+  console.log(1);
+  try {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const response = await fetch(`${backendBaseUrl}/user/login-check/`, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      });
+
+      if (!response.ok) {
+        alert("자동 로그아웃 됐습니다.");
+        handleLogout();
+      }
+    }
+  } catch (error) {
+    console.log("access 토큰 만료 후 자동 로그아웃 실패", error);
+  }
+}
+accessAutoLogout();
+
 // 티켓 구매 페이지
 function ticketPurchasing() {
   window.open(
