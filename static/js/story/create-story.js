@@ -507,10 +507,10 @@ async function createStory() {
       thirdSpinner.style.display = "none";
       const id = responseJson.story_id;
       if (responseJson.status == 201) {
-        if (localStorage.getItem("paragraphs") !== null) {
+        if (localStorage.getItem("paragraphs")) {
           localStorage.removeItem("paragraphs");
         }
-        if (localStorage.getItem("imageUrls") !== null) {
+        if (localStorage.getItem("imageUrls")) {
           localStorage.removeItem("imageUrls");
         }
         window.alert(responseJson.success);
