@@ -87,7 +87,6 @@ setAutoLogout();
 
 // access토큰 만료 시 자동 로그아웃
 async function accessAutoLogout() {
-  console.log(1);
   try {
     const accessToken = localStorage.getItem("access");
     if (accessToken) {
