@@ -1,7 +1,6 @@
 // 로그인 여부 체크
 window.onload = () => {
   if (!localStorage.getItem("access")) {
-    alert("잘못된 접근입니다.");
     window.location.href = `${frontendBaseUrl}`;
   }
 };

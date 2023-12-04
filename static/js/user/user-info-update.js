@@ -35,8 +35,7 @@ async function renderPage() {
         }
       }
     } else {
-      alert("잘못된 접근입니다.");
-      window.location.href = `${frontendBaseUrl}/index.html`;
+      window.location.href = `${frontendBaseUrl}`;
     }
     // 프로필사진 미리보기
     const profileImgInput = document.getElementById("profile-img");
