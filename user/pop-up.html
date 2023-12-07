@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEB56YBWDJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-MEB56YBWDJ");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>비밀번호 찾기</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="/static/js/user/login.js"></script>
+    <link rel="shortcut icon" href="/yumyum.ico" />
+  </head>
+  <body>
+    <form>
+      <div style="width: 80%; margin: 30px 0px 0px 30px">
+        <label>이메일</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email-for-pw"
+          placeholder="이메일을 입력해주세요."
+          style="margin-top: 10px"
+        />
+        <button type="button" onclick="sendEmail()" style="float: right; margin: 10px 0px 0px 0px">전송</button>
+      </div>
+    </form>
+  </body>
+</html>

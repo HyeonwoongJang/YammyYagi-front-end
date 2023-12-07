@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEB56YBWDJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-MEB56YBWDJ");
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400%2C700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C700" />
+    <link rel="stylesheet" href="/static/css/user/login.css" />
+    <script src="/static/js/user/login.js"></script>
+    <script src="/static/js/user/social.js"></script>
+    <link rel="shortcut icon" href="/yumyum.ico" />
+  </head>
+  <body>
+    <div class="login-box">
+      <form>
+        <div class="login-content">
+          <a href="/"><img class="logo-img" src="/static/img/user/logo.png" /></a>
+          <div class="about-page">로그인</div>
+
+          <div class="div-input-list">
+            <label class="label">이메일</label>
+            <input class="info" id="email" type="email" placeholder="example@example.com" />
+          </div>
+          <div class="div-input-list">
+            <label class="label">비밀번호</label>
+            <input class="info" id="password" type="password" placeholder="비밀번호 입력" />
+          </div>
+        </div>
+        <div><button type="button" class="button-login" onclick="handleLogin()">로그인</button></div>
+      </form>
+      <div class="social-login">
+        <button type="button" class="social" onclick="kakaoLogin()">
+          <img class="icon" src="/static/img/user/kakao-icon.png" />
+        </button>
+        <button type="button" class="social" onclick="naverLogin()">
+          <img class="icon" src="/static/img/user/naver-icon.png" />
+        </button>
+        <button type="button" class="social" onclick="googleLogin()">
+          <img class="icon" src="/static/img/user/google-icon.png" />
+        </button>
+      </div>
+      <div>
+        <a class="register" href="/user/register.html">회원가입</a>
+        <button class="reset-password" onclick="resetPassword()" style="background-color: transparent; border: none">
+          비밀번호 찾기
+        </button>
+      </div>
+    </div>
+    <div class="page-img"></div>
+  </body>
+</html>

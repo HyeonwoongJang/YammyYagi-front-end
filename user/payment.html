@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEB56YBWDJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-MEB56YBWDJ");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>멤버쉽 구매 페이지</title>
+    <link rel="stylesheet" href="/static/css/user/payment.css" />
+    <script src="/static/js/user/payment.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <link rel="shortcut icon" href="/yumyum.ico" />
+  </head>
+  <body>
+    <div id="ticket-page">
+      <h2>티켓 결제 페이지</h2>
+      <hr />
+      <div>
+        <input type="checkbox" id="golden-check-box" onchange="goldenCheckBox()" />
+        <label>Golden Ticket : </label>
+        <input
+          type="number"
+          class="payment-input"
+          id="golden-input"
+          value="0"
+          min="0"
+          disabled
+          oninput="updateGoldenP()"
+        />
+        <p class="ticket-count">현재 수량: <span id="golden-count">0</span></p>
+        <p id="golden-p">0 Won</p>
+      </div>
+      <div>
+        <input type="checkbox" id="silver-check-box" onchange="silverCheckBox()" />
+        <label>Silver Ticket : </label>
+        <input
+          type="number"
+          class="payment-input"
+          id="silver-input"
+          value="0"
+          min="0"
+          disabled
+          oninput="updateSilverP()"
+        />
+        <p class="ticket-count">현재 수량: <span id="silver-count">0</span></p>
+        <p id="silver-p">0 Won</p>
+      </div>
+      <div>
+        <input type="checkbox" id="pink-check-box" onchange="pinkCheckBox()" />
+        <label>Pink Ticket : </label>
+        <input type="number" class="payment-input" id="pink-input" value="0" min="0" disabled oninput="updatePinkP()" />
+        <p class="ticket-count">현재 수량: <span id="pink-count">0</span></p>
+        <p id="pink-p">0 Won</p>
+      </div>
+      <p>총 결제 예정 금액: <span id="total-payment"></span></p>
+      <button id="3-ticket" onclick="buyTicket()">구매</button>
+    </div>
+    <div id="payment-page" style="display: none">
+      <button id="back-btn" onclick="backButton()">뒤로가기</button>
+      <hr />
+      <p>주문번호: <span id="merchant-uid"></span></p>
+      <p>결제 예정 금액: <span id="amount"></span></p>
+      <p>티켓 주문수량: <span id="name"></span></p>
+      <p>아이디: <span id="buyer-email"></span></p>
+      <p>닉네임: <span id="buyer-name"></span></p>
+      <button id="kakaopay">KakaoPay</button>
+      <button id="tosspay">TossPay</button>
+    </div>
+  </body>
+</html>

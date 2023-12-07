@@ -1,0 +1,33 @@
+.button-container {
+  color: gray;
+  text-align: right;
+  margin-top: 50px;
+  text-align: right;
+}
+
+.custom-card {
+  background-color: rgb(196, 195, 195);
+  margin-bottom: 10px;
+}
+
+.info-card {
+  height: 90px;
+  background-color: #f8f9fa;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: 0.25rem;
+  color: rgb(94, 101, 107);
+}
+
+.btn-block {
+  width: 20%;
+  margin-top: 10px;
+}
+
+#header {
+  width: 1400px;
+  margin: auto;
+}

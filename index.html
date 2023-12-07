@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEB56YBWDJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-MEB56YBWDJ");
+    </script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X_UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yummy Yagi</title>
+    <link rel="shortcut icon" href="/yumyum.ico" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="shortcut icon" href="/yumyum.ico" />
+  </head>
+  <body>
+    <header id="header"></header>
+    <div class="main-img">
+      <div>
+        <img src="/static/img/main-page-img.jpg" />
+        <p class="main-img-text1">
+          이 공간에서 아이들은 다양한 동화를 만들고 읽을 수 있어요. 원하는 언어로 번역해서 읽을 수 있습니다.
+        </p>
+        <p class="main-img-text2">
+          아이들과 부모님들은 세계 각지의 동화를 탐험할 수 있습니다. 카드를 눌러서 멋진 동화를 읽어보세요 !!!
+        </p>
+      </div>
+    </div>
+    <div class="category-container">
+      <button
+        type="button"
+        class="btn btn-outline-danger"
+        id="hot-category"
+        style="margin: auto 0px auto 0px"
+        onclick="getLikeStories()"
+      >
+        전체 Top 8
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        id="new-category"
+        style="margin: auto 130px auto 130px"
+        onclick="loadStories()"
+      >
+        전체 글
+      </button>
+      <form class="form-container" style="margin: auto 0px auto 0px">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="country-category"
+          style="margin: 0px 0px 0px 0px"
+          onclick="getCountryStories()"
+        >
+          <select class="info" id="select-country" required>
+            <option value="" disabled selected>국가선택</option>
+            <option value="대한민국">대한민국</option>
+            <option value="미국">미국</option>
+            <option value="프랑스">프랑스</option>
+            <option value="스페인">스페인</option>
+            <option value="일본">일본</option>
+            <option value="중국">중국</option>
+          </select>
+          Top 8
+        </button>
+      </form>
+    </div>
+    <div class="index-container">
+      <div class="index-card-container">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="story-list"></div>
+      </div>
+      <nav class="index-pagination" aria-label="Page navigation example" id="pagination-box">
+        <ul class="pagination pagination-lg" id="pagination"></ul>
+      </nav>
+    </div>
+    <div class="main-info">
+      <div class="main-info-content">
+        <div style="font-size: 17px">
+          <p>YummyYagi는 상상력을 자극하고 다양한 문화를 즐길 수 있는 곳입니다.</p>
+          <div>언어와 국가의 경계를 넘어 다양한 동화를 제공하고,</div>
+          <div>아이들은 부모님과 함께 신비로운 동화의 세계에 빠져듭니다.</div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer"></footer>
+    <link rel="stylesheet" href="/static/css/index.css" />
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/header.js"></script>
+    <script src="/static/js/footer.js"></script>
+  </body>
+</html>
