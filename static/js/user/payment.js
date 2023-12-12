@@ -82,6 +82,12 @@ function kakaoPay(data) {
       if (rsp.success === true) {
         sendPaymentResult(rsp);
       } else {
+        alert(rsp['error_msg'])
+        rsp['name'] = data["name"]
+        rsp['buyer_email'] = data["buyer_email"]
+        rsp['buyer_name'] = data["buyer_name"]
+        rsp['paid_amount'] = data["amount"].split('W')[0]
+        rsp['status'] = rsp['error_msg'].substring(rsp['error_msg'].indexOf('[') + 1, rsp['error_msg'].indexOf(']'));
         sendPaymentResult(rsp);
         return;
       }
